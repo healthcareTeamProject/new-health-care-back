@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.example.healthcare_back.entity.BoardEntity;
 import com.example.healthcare_back.entity.CommentEntity;
 
 @Repository
@@ -29,4 +30,5 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
     List<CommentEntity> findCommentsByBoardNumber(Integer boardNumber); // 댓글 목록 반환
     List<CommentEntity> findByBoardNumber(Integer boardNumber);
     CommentEntity findByCommentNumber(Integer commentNumber);
+    BoardEntity deleteByBoardNumber(Integer boardNumber);
 }

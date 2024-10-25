@@ -2,14 +2,15 @@ package com.example.healthcare_back.entity;
 
 import java.time.LocalDateTime;
 
+import com.example.healthcare_back.dto.request.board.PatchBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -66,7 +67,19 @@ public class BoardEntity {
         this.boardLikeCount--;
     }
 
-    
-
-
+    public void update(PatchBoardRequestDto dto) {
+        // 수정된 내용으로 게시물 내용 변경
+        if (dto.getBoardTitle() != null && !dto.getBoardTitle().isEmpty()) {
+            this.boardTitle = dto.getBoardTitle();
+        }
+        if (dto.getBoardContents() != null && !dto.getBoardContents().isEmpty()) {
+            this.boardContents = dto.getBoardContents();
+        }
+        if (dto.getYoutubeVideoLink() != null && !dto.getYoutubeVideoLink().isEmpty()) {
+            this.youtubeVideoLink = dto.getYoutubeVideoLink();
+        }
+        if (dto.getBoardFileContents() != null && !dto.getBoardFileContents().isEmpty()) {
+            this.boardFileContents = dto.getBoardFileContents();
+        }
+    }
 }
