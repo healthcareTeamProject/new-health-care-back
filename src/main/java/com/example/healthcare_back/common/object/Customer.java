@@ -29,13 +29,4 @@ public class Customer {
         this.height = customerEntity.getHeight();
     }
 
-    /**
-     * CustomerEntity를 기반으로 Customer 객체를 생성하는 팩토리 메서드입니다.
-     *
-     * @param customerEntity 생성할 Customer 객체의 정보가 포함된 CustomerEntity
-     * @return Customer 객체
-     */
-    public static Customer fromEntity(CustomerEntity customerEntity) {
-        return new Customer(customerEntity);
-    }
 }

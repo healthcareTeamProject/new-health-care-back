@@ -8,7 +8,6 @@ import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.Getter;

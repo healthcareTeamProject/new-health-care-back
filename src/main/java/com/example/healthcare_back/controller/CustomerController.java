@@ -13,6 +13,7 @@ import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetCustomerResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetSignInResponseDto;
+import com.example.healthcare_back.dto.response.customer.GetUserMuscleFatListResponseDto;
 import com.example.healthcare_back.service.CustomerService;
 
 import jakarta.validation.Valid;
@@ -38,32 +39,31 @@ public class CustomerController {
         return customerService.getSignIn(userId);
     }
 
-    // /**
-    //  * 고객의 기본 정보를 가져옵니다.
-    //  * 
-    //  * @param userId 고객의 ID
-    //  * @return 고객의 정보
-    //  */
-    // @GetMapping("/{userId}")
-    // public ResponseEntity<? super GetCustomerResponseDto> getCustomer(
-    //     @PathVariable("userId") String userId
-    // ) {
-    //     return customerService.getCustomer(userId);
-    // }
+    /**
+     * 고객의 기본 정보를 가져옵니다.
+     * 
+     * @param userId 고객의 ID
+     * @return 고객의 정보
+     */
+    @GetMapping("/{userId}")
+    public ResponseEntity<? super GetCustomerResponseDto> getCustomer(
+        @PathVariable("userId") String userId
+    ) {
+        return customerService.getCustomer(userId);
+    }
 
-    // /**
-    //  * 고객의 신체 정보 리스트를 가져옵니다.
-    //  * 
-    //  * @param userId 고객의 ID
-    //  * @return 고객의 정보
-    //  */
+    /**
+     * 고객의 신체 정보 리스트를 가져옵니다.
+     * 
+     * @param userId 고객의 ID
+     * @return 고객의 정보
+     */
 
-    // @GetMapping("/{userId}/user-muscle-fat")
-    // public ResponseEntity<? super GetCustomerResponseDto> getCustomer(
-    //     @PathVariable("userId") String userId
-    // ) {
-    //     return customerService.getCustomer(userId);
-    // }
+    @GetMapping("/{userId}/user-muscle-fat")
+    public ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList() {
+        ResponseEntity<? super GetUserMuscleFatListResponseDto> response = customerService.getUserMuscleFatList();
+        return response;
+    }
 
     // /**
     //  * 고객의 3대 측정 정보 리스트를 가져옵니다.

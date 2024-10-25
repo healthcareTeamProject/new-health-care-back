@@ -36,15 +36,8 @@ public class SignUpRequestDto {
     @Pattern(regexp="^(home|kakao|naver)$")
     private String joinPath;
     private String snsId;
-    @NotNull
-    private Double weight;
     @NotNull 
     private Double height;
-    private Double skeletalMuscleMass;
-    private Double bodyFatMass;
-    private Double deadlift;
-    private Double benchPress;
-    private Double squat;
     private String profileImage;
     private String personalGoals;
    
