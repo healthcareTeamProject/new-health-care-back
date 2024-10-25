@@ -1,6 +1,10 @@
 package com.example.healthcare_back.dto.request.auth;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.http.ResponseEntity;
+
+import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
+import com.example.healthcare_back.dto.response.ResponseDto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

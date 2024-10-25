@@ -12,9 +12,12 @@ import com.example.healthcare_back.dto.request.auth.SignInRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthRequestDto;
+import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.auth.SignInResponseDto;
+import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftResponseDto;
 import com.example.healthcare_back.service.AuthService;
+import com.example.healthcare_back.service.CustomerService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthController {
 
     private final AuthService authService;
+    private final CustomerService customerService;
 
     // 아이디 중복 체크
     @PostMapping("/id-check")
@@ -69,6 +73,26 @@ public class AuthController {
         @RequestBody @Valid SignUpRequestDto requestBody
     ) {
         ResponseEntity<ResponseDto> response = authService.signUp(requestBody);
+        return response;
+
+    } 
+
+    // 회원가입 (신체 정보)
+    @PostMapping("/sign-up")
+    public ResponseEntity<ResponseDto> getUserMuscleFat(
+        @RequestBody @Valid PostUserMuscleFatRequestDto requestBody
+    ) {
+        ResponseEntity<ResponseDto> response = customerService.signUpUserMuscleFat(requestBody);
+        return response;
+
+    }
+
+    // 회원가입 (3대 측정)
+    @PostMapping("/sign-up")
+    public ResponseEntity<ResponseDto> getUserThreeMajorLift(
+        @RequestBody @Valid GetUserThreeMajorLiftResponseDto requestBody
+    ) {
+        ResponseEntity<ResponseDto> response = customerService.signUpUserThreeMajorLift(requestBody);
         return response;
 
     } 

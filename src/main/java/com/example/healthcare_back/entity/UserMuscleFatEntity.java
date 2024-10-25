@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name="userMuscleFat")
-@Table(name="user-muscle-fat")
+@Table(name="user_muscle_fat")
 public class UserMuscleFatEntity {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +28,9 @@ public class UserMuscleFatEntity {
     private String userId;
     @NotNull @Column(precision = 5, scale = 0)
     private Double weight;
-    @Column(precision = 5, scale = 0)
+    @Column(precision = 5, scale = 1)
     private Double skeletalMuscleMass;
-    @Column(precision = 5, scale = 0)
+    @Column(precision = 5, scale = 1)
     private Double bodyFatMass;
     // private LocalDate userMuscleFatDate;
 

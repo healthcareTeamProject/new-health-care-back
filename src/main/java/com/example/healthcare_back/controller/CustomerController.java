@@ -59,7 +59,7 @@ public class CustomerController {
      * @return 고객의 정보
      */
 
-    @GetMapping("/{userId}/user-muscle-fat")
+    @GetMapping("/{userId}/user_muscle_fat")
     public ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList() {
         ResponseEntity<? super GetUserMuscleFatListResponseDto> response = customerService.getUserMuscleFatList();
         return response;

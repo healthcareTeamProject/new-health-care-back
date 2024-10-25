@@ -3,6 +3,7 @@ package com.example.healthcare_back.dto.response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -14,6 +15,11 @@ public class ResponseDto {
     private String message;
 
     public static ResponseEntity<ResponseDto> success() {
+        ResponseDto responseBody = new ResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    }
+
+    public static ResponseEntity<ResponseDto> success(Integer integer, LocalDateTime localDateTime) {
         ResponseDto responseBody = new ResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
