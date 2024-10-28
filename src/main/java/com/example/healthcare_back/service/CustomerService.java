@@ -25,6 +25,6 @@ public interface CustomerService {
     ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLiftList();
 
     ResponseEntity<ResponseDto> patchCustomer(PatchCustomerRequestDto dto, String userId);
-    ResponseEntity<ResponseDto> signUpUserMuscleFat(@Valid PostUserMuscleFatRequestDto requestBody);
-    ResponseEntity<ResponseDto> signUpUserThreeMajorLift(@Valid GetUserThreeMajorLiftResponseDto requestBody);
+    ResponseEntity<ResponseDto> signUpUserMuscleFat(@Valid PostUserMuscleFatRequestDto dto);
+    ResponseEntity<ResponseDto> signUpUserThreeMajorLift(@Valid PostUserThreeMajorLiftRequestDto dto);
 }

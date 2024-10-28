@@ -9,6 +9,7 @@ import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.entity.UserMuscleFatEntity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Getter;
 
@@ -33,8 +34,8 @@ public class GetUserMuscleFatResponseDto extends ResponseDto {
         this.userMuscleFatDate = userMuscleFatEntity.getUserMuscleFatDate();
     }
 
-    public static ResponseEntity<GetUserMuscleFatResponseDto> success(UserMuscleFatEntity userMuscleFatEntity) {
-        GetUserMuscleFatResponseDto responseBody = new GetUserMuscleFatResponseDto(userMuscleFatEntity);
+    public static ResponseEntity<GetUserMuscleFatResponseDto> success(List<UserMuscleFatEntity> userMuscleFatEntities) {
+        GetUserMuscleFatResponseDto responseBody = new GetUserMuscleFatResponseDto((UserMuscleFatEntity) userMuscleFatEntities);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
     

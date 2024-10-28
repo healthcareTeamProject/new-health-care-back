@@ -21,6 +21,7 @@ import com.example.healthcare_back.entity.UserMuscleFatEntity;
 import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
 import com.example.healthcare_back.repository.CustomerRepository;
 import com.example.healthcare_back.repository.UserMuscleFatRepository;
+import com.example.healthcare_back.repository.UserThreeMajorLiftRepository;
 import com.example.healthcare_back.service.CustomerService;
 
 import jakarta.validation.Valid;
@@ -32,14 +33,12 @@ public class CustomerServiceImplement implements CustomerService{
 
     private final CustomerRepository customerRepository;
     private final UserMuscleFatRepository userMuscleFatRepository;
-    private final UserMuscleFatEntity userMuscleFatEntity;
-    private final UserThreeMajorLiftEntity userThreeMajorLiftEntity;
-    
+    private final UserThreeMajorLiftRepository userThreeMajorLiftRepository;
 
     @Override
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(String userId) {
         
-        CustomerEntity customerEntity = null;
+        CustomerEntity customerEntity;
 
         try {
 
@@ -77,7 +76,7 @@ public class CustomerServiceImplement implements CustomerService{
     @Override
     public ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId) {
        
-        CustomerEntity customerEntity = null;
+        CustomerEntity customerEntity;
 
         try {
             
@@ -96,14 +95,34 @@ public class CustomerServiceImplement implements CustomerService{
 
     @Override
     public ResponseEntity<? super GetUserMuscleFatResponseDto> getUserMuscleFat(String userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserMuscleFat'");
+        try {
+            // 사용자의 신체 정보 불러오기
+            List<UserMuscleFatEntity> userMuscleFatEntities = userMuscleFatRepository.findByUserId(userId);
+            if (userMuscleFatEntities.isEmpty()) return ResponseDto.validationFail();
+
+        // 결과 반환
+            return GetUserMuscleFatResponseDto.success(userMuscleFatEntities);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
     }
 
     @Override
     public ResponseEntity<? super GetUserThreeMajorLiftResponseDto> getUserThreeMajorLift(String userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserThreeMajorLift'");
+        try {
+            // 사용자의 3대측정 정보 불러오기
+            List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities = userThreeMajorLiftRepository.findByUserId(userId);
+            if (userThreeMajorLiftEntities.isEmpty()) return ResponseDto.validationFail();
+    
+            // 결과 반환
+            return GetUserThreeMajorLiftResponseDto.success(userThreeMajorLiftEntities);
+    
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
     }
 
     @Override
@@ -125,36 +144,46 @@ public class CustomerServiceImplement implements CustomerService{
 
     @Override
     public ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLiftList() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserThreeMajorLiftList'");
+
+        List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities = new ArrayList<>();
+
+        try {
+
+            userThreeMajorLiftEntities = userThreeMajorLiftRepository.findByOrderByUserThreeMajorLiftNumberDesc();
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return GetUserThreeMajorLiftListResponseDto.success(userThreeMajorLiftEntities);
     }
 
     @Override
     public ResponseEntity<ResponseDto> signUpUserMuscleFat(@Valid PostUserMuscleFatRequestDto dto) {
-        
         Double weight = dto.getWeight();
         Double skeletalMuscleMass = dto.getSkeletalMuscleMass();
         Double bodyFatMass = dto.getBodyFatMass();
 
         // 유효성 검사: 체중, 골격근량, 체지방량이 음수인지 확인
         if (weight < 0 || skeletalMuscleMass < 0 || bodyFatMass < 0) {
-        return ResponseDto.databaseError();
-    }
+            return ResponseDto.validationFail();
+        }
 
         try {
-            // CustomerEntity 객체 생성 및 등록 날짜 설정
-            CustomerEntity customerEntity = new CustomerEntity(dto);
+            // UserMuscleFatEntity 객체 생성 및 등록 날짜 설정
+            UserMuscleFatEntity userMuscleFatEntity = new UserMuscleFatEntity();
             
-            // customerEntity에 등록 번호는 JPA가 자동으로 생성
-            customerRepository.save(customerEntity);
+            // UserMuscleFatEntity에 등록 번호는 JPA가 자동으로 생성
+            userMuscleFatRepository.save(userMuscleFatEntity);
+
+            // 성공 시 등록 번호와 등록 날짜를 포함한 응답 생성
+            return ResponseDto.success(userMuscleFatEntity.getUserMuscleFatNumber(), userMuscleFatEntity.getUserMuscleFatDate());
             
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
-        // 성공 시 등록 번호와 등록 날짜를 포함한 응답 생성
-        return ResponseDto.success(userMuscleFatEntity.getUserMuscleFatNumber(), userMuscleFatEntity.getUserMuscleFatDate());
     }
 
     @Override
@@ -164,27 +193,25 @@ public class CustomerServiceImplement implements CustomerService{
         Double benchPress = dto.getBenchPress();
         Double squat = dto.getSquat();
 
+        // 유효성 검사: 데드리프트, 벤치프레스, 스쿼트가 음수인지 확인
+        if (deadlift < 0 || benchPress < 0 || squat < 0) {
+            return ResponseDto.validationFail();
+        }
+
         try {
 
-            // CustomerEntity 객체 생성 및 등록 날짜 설정
-            CustomerEntity customerEntity = new CustomerEntity(dto);
+            // UserThreeMajorLiftEntity 객체 생성 및 등록 날짜 설정
+            UserThreeMajorLiftEntity userThreeMajorLiftEntity = new UserThreeMajorLiftEntity();
             
-            // customerEntity에 등록 번호는 JPA가 자동으로 생성
-            customerRepository.save(customerEntity);
+            // UserThreeMajorLiftEntity에 등록 번호는 JPA가 자동으로 생성
+            userThreeMajorLiftRepository.save(userThreeMajorLiftEntity);
 
-            // 유효성 검사: 데드리프트, 벤치프레스, 스쿼트가 음수인지 확인
-            if (deadlift < 0 || benchPress < 0 || squat < 0) {
-            return ResponseDto.databaseError();
-        
+            // 성공 시 등록 번호와 등록 날짜를 포함한 응답 생성
+            return ResponseDto.success(userThreeMajorLiftEntity.getThreeMajorLiftNumber(), userThreeMajorLiftEntity.getThreeMajorLiftDate());
+
         }   catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-        
-        // 성공 시 등록 번호와 등록 날짜를 포함한 응답 생성
-        return ResponseDto.success(userThreeMajorLiftEntity.getThreeMajorLiftNumber(), userThreeMajorLiftEntity.getThreeMajorLiftDate());
-        
-
-        
     }
 }

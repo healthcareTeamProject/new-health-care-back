@@ -9,6 +9,7 @@ import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Getter;
 
@@ -33,8 +34,8 @@ public class GetUserThreeMajorLiftResponseDto extends ResponseDto {
         this.threeMajorLiftDate = userThreeMajorLiftEntity.getThreeMajorLiftDate();
     }
 
-    public static ResponseEntity<GetUserThreeMajorLiftResponseDto> success(UserThreeMajorLiftEntity userThreeMajorLiftEntity) {
-        GetUserThreeMajorLiftResponseDto responseBody = new GetUserThreeMajorLiftResponseDto(userThreeMajorLiftEntity);
+    public static ResponseEntity<GetUserThreeMajorLiftResponseDto> success(List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities) {
+        GetUserThreeMajorLiftResponseDto responseBody = new GetUserThreeMajorLiftResponseDto((UserThreeMajorLiftEntity) userThreeMajorLiftEntities);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
     
