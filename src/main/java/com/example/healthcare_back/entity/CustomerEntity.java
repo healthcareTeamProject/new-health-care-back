@@ -1,15 +1,17 @@
 package com.example.healthcare_back.entity;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
-import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
-import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
+// import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
+// import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 
+import java.math.BigDecimal;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +25,7 @@ import lombok.NoArgsConstructor;
 public class CustomerEntity {
     
     @Id 
+    @Column(name = "user_id")
     private String userId;
     @Column(nullable = false)
     private String name;
@@ -37,24 +40,12 @@ public class CustomerEntity {
     private String snsId;
     private String profileImage;
     private String personalGoals;
+    @Positive
     @Column(precision = 5, scale = 1)
-    private Double height;
-    @Column(precision = 5, scale = 1)
-    private Double weight;
-    @Column(precision = 5, scale = 1)
-    private Double skeletalMuscleMass;
-    @Column(precision = 5, scale = 1)
-    private Double bodyFatMass;
-    @Column(precision = 5, scale = 1)
-    private Double deadlift;
-    @Column(precision = 5, scale = 1)
-    private Double benchPress;
-    @Column(precision = 5, scale = 1)
-    private Double squat;
+    private BigDecimal height;
 
 
     public CustomerEntity(SignUpRequestDto dto) {
-        this.userId = dto.getUserId();
         this.name = dto.getName();
         this.nickname = dto.getNickname();
         this.password = dto.getPassword();
@@ -63,19 +54,7 @@ public class CustomerEntity {
         this.snsId = dto.getSnsId();
         this.profileImage = dto.getProfileImage();
         this.personalGoals = dto.getPersonalGoals();
-        this.height = dto.getHeight();
-        
-    }
+        this.height = dto.getHeight(); 
 
-    public CustomerEntity(@Valid PostUserMuscleFatRequestDto dto) {
-        this.weight = dto.getWeight();
-        this.skeletalMuscleMass = dto.getSkeletalMuscleMass();
-        this.bodyFatMass = dto.getBodyFatMass();
-    }
-
-    public CustomerEntity(@Valid PostUserThreeMajorLiftRequestDto dto) {
-        this.deadlift = dto.getDeadlift();
-        this.benchPress = dto.getBenchPress();
-        this.squat = dto.getSquat();
     }
 }

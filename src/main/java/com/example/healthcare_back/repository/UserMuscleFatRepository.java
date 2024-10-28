@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.example.healthcare_back.entity.UserMuscleFatEntity;
 
 @Repository
-public interface UserMuscleFatRepository extends JpaRepository<UserMuscleFatEntity, Double> {
+public interface UserMuscleFatRepository extends JpaRepository<UserMuscleFatEntity, Integer> {
     
     List<UserMuscleFatEntity> findByOrderByUserMuscleFatNumberDesc();
+    UserMuscleFatEntity findByCustomerEntityUserId(String userId);
 
 }

@@ -8,6 +8,7 @@ import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.entity.CustomerEntity;
 
+import java.math.BigDecimal;
 import lombok.Getter;
 
 @Getter
@@ -19,7 +20,7 @@ public class GetCustomerResponseDto extends ResponseDto {
     private String telNumber;
     private String profileImage;
     private String personalGoals;
-    private Double height;
+    private BigDecimal height;
 
     private GetCustomerResponseDto(CustomerEntity customerEntity) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

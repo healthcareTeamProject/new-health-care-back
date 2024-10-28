@@ -1,10 +1,12 @@
 package com.example.healthcare_back.dto.request.auth;
 
 import org.hibernate.validator.constraints.Length;
-import org.springframework.http.ResponseEntity;
 
 import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
-import com.example.healthcare_back.dto.response.ResponseDto;
+import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
+
+
+import java.math.BigDecimal;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -41,9 +43,11 @@ public class SignUpRequestDto {
     private String joinPath;
     private String snsId;
     @NotNull 
-    private Double height;
+    private BigDecimal height;
     private String profileImage;
     private String personalGoals;
-   
+
+    private PostUserMuscleFatRequestDto postUserMuscleFatRequestDto;
+    private PostUserThreeMajorLiftRequestDto postUserThreeMajorLiftRequestDto;
 
 }

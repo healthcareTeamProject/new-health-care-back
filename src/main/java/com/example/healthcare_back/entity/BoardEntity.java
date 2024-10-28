@@ -25,7 +25,7 @@ public class BoardEntity {
     private Integer boardNumber;
     @Column(nullable = false, length = 80)
     private String boardTitle;
-    @Column(name = "nickname")
+    @Column
     private String nickname; // userId로 초기화
     private LocalDateTime boardUploadDate; 
     private String boardContents;

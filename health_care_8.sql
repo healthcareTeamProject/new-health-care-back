@@ -5,6 +5,9 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
 -- Schema health_care
 -- -----------------------------------------------------
 
@@ -38,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `health_care`.`customer` (
   `tel_number` VARCHAR(11) NOT NULL COMMENT '전화번호',
   `join_path` VARCHAR(5) NOT NULL COMMENT '가입경로',
   `sns_id` VARCHAR(255) NULL DEFAULT NULL COMMENT 'snsID',
-  `height` FLOAT NOT NULL COMMENT '키(cm)',
+  `height` DECIMAL(5,1) NOT NULL COMMENT '키(cm)',
   `profile_image` TEXT NULL DEFAULT NULL COMMENT '프로필이미지',
   `personal_goals` TEXT NULL DEFAULT NULL COMMENT '개인 목표',
   PRIMARY KEY (`user_id`),
@@ -101,8 +104,8 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `health_care`.`board_health_map` (
   `board_number` INT NOT NULL COMMENT '게시물 번호',
-  `map_lat` FLOAT NOT NULL COMMENT '위도',
-  `map_lng` FLOAT NOT NULL COMMENT '경도',
+  `map_lat` DECIMAL(9,6) NOT NULL COMMENT '위도',
+  `map_lng` DECIMAL(9,6) NOT NULL COMMENT '경도',
   PRIMARY KEY (`board_number`),
   UNIQUE INDEX `board_number_UNIQUE` (`board_number` ASC) VISIBLE,
   CONSTRAINT `user_board_board_health_map`
@@ -188,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `health_care`.`meal_schedule_detail` (
   `meal_schedule_detail_number` INT NOT NULL AUTO_INCREMENT COMMENT '식품정보 번호',
   `meal_schedule_number` INT NOT NULL COMMENT '식단 스케줄 번호',
   `meal_name` VARCHAR(30) NOT NULL COMMENT '식품명',
-  `meal_kcal` FLOAT NOT NULL COMMENT '칼로리',
+  `meal_kcal` DECIMAL(5,1) NOT NULL COMMENT '칼로리',
   `meal_count` INT NOT NULL COMMENT '식품 갯수',
   PRIMARY KEY (`meal_schedule_detail_number`),
   UNIQUE INDEX `meal_schedule_detail_number_UNIQUE` (`meal_schedule_detail_number` ASC) VISIBLE,
@@ -207,9 +210,9 @@ COMMENT = '사용자 식단 식품정보(일정내용)';
 CREATE TABLE IF NOT EXISTS `health_care`.`three_major_lift` (
   `three_major_lift_number` INT NOT NULL AUTO_INCREMENT COMMENT '사용자 3대 측정 정보 번호',
   `user_id` VARCHAR(20) NOT NULL COMMENT '아이디',
-  `deadlift` FLOAT NULL DEFAULT NULL COMMENT '데드리프트(kg)',
-  `bench_press` FLOAT NULL DEFAULT NULL COMMENT '벤치프레스(kg)',
-  `squat` FLOAT NULL DEFAULT NULL COMMENT '스쿼트(kg)',
+  `deadlift` DECIMAL(5,1) NULL DEFAULT NULL COMMENT '데드리프트(kg)',
+  `bench_press` DECIMAL(5,1) NULL DEFAULT NULL COMMENT '벤치프레스(kg)',
+  `squat` DECIMAL(5,1) NULL DEFAULT NULL COMMENT '스쿼트(kg)',
   `three_major_lift_date` DATE NOT NULL COMMENT '사용자 3대 측정 정보 등록 날짜',
   PRIMARY KEY (`three_major_lift_number`),
   UNIQUE INDEX `user_id_UNIQUE` (`three_major_lift_number` ASC) VISIBLE,
@@ -228,9 +231,9 @@ COMMENT = '사용자 3대 측정 정보';
 CREATE TABLE IF NOT EXISTS `health_care`.`user_muscle_fat` (
   `user_muscle_fat_number` INT NOT NULL AUTO_INCREMENT COMMENT '사용자 신체 정보 번호',
   `user_id` VARCHAR(20) NOT NULL COMMENT '아이디',
-  `weight` FLOAT NOT NULL COMMENT '몸무게(kg)',
-  `skeletal_muscle_mass` FLOAT NULL DEFAULT NULL COMMENT '골격근량(kg)',
-  `body_fat_mass` FLOAT NULL DEFAULT NULL COMMENT '체지방량(kg)',
+  `weight` DECIMAL(5,1) NOT NULL COMMENT '몸무게(kg)',
+  `skeletal_muscle_mass` DECIMAL(5,1) NULL DEFAULT NULL COMMENT '골격근량(kg)',
+  `body_fat_mass` DECIMAL(5,1) NULL DEFAULT NULL COMMENT '체지방량(kg)',
   `user_muscle_fat_date` DATE NOT NULL COMMENT '사용자 신체 정보 등록 날짜',
   PRIMARY KEY (`user_muscle_fat_number`),
   UNIQUE INDEX `user_muscle_fat_number_UNIQUE` (`user_muscle_fat_number` ASC) VISIBLE,

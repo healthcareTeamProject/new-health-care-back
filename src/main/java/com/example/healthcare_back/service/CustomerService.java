@@ -2,6 +2,7 @@ package com.example.healthcare_back.service;
 
 import org.springframework.http.ResponseEntity;
 
+import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
@@ -13,8 +14,6 @@ import com.example.healthcare_back.dto.response.customer.GetUserMuscleFatRespons
 import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftListResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftResponseDto;
 
-import jakarta.validation.Valid;
-
 public interface CustomerService {
 
     ResponseEntity<? super GetSignInResponseDto> getSignIn(String userId);
@@ -25,6 +24,6 @@ public interface CustomerService {
     ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLiftList();
 
     ResponseEntity<ResponseDto> patchCustomer(PatchCustomerRequestDto dto, String userId);
-    ResponseEntity<ResponseDto> signUpUserMuscleFat(@Valid PostUserMuscleFatRequestDto requestBody);
-    ResponseEntity<ResponseDto> signUpUserThreeMajorLift(@Valid GetUserThreeMajorLiftResponseDto requestBody);
+    ResponseEntity<ResponseDto> postUserMuscleFat(PostUserMuscleFatRequestDto dto);
+    ResponseEntity<ResponseDto> postUserThreeMajorLift(PostUserThreeMajorLiftRequestDto dto);
 }

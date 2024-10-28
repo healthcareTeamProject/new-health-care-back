@@ -8,6 +8,7 @@ import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import lombok.Getter;
@@ -17,16 +18,16 @@ public class GetUserThreeMajorLiftResponseDto extends ResponseDto {
 
     private Integer threeMajorLiftNumber;
     private String userId;
-    private Double deadlift;
-    private Double benchPress;
-    private Double squat;
+    private BigDecimal deadlift;
+    private BigDecimal benchPress;
+    private BigDecimal squat;
     private LocalDateTime threeMajorLiftDate;
     
     public GetUserThreeMajorLiftResponseDto(UserThreeMajorLiftEntity userThreeMajorLiftEntity) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
 
         this.threeMajorLiftNumber = userThreeMajorLiftEntity.getThreeMajorLiftNumber();
-        this.userId = userThreeMajorLiftEntity.getUserId();
+        this.userId = userThreeMajorLiftEntity.getCustomerEntity().getUserId(); 
         this.deadlift = userThreeMajorLiftEntity.getDeadlift();
         this.benchPress = userThreeMajorLiftEntity.getBenchPress();
         this.squat = userThreeMajorLiftEntity.getSquat();

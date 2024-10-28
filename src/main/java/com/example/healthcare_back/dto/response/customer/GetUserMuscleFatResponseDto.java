@@ -8,6 +8,7 @@ import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.entity.UserMuscleFatEntity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import lombok.Getter;
@@ -17,16 +18,16 @@ public class GetUserMuscleFatResponseDto extends ResponseDto {
 
     private Integer userMuscleFatNumber;
     private String userId;
-    private Double weight;
-    private Double skeletalMuscleMass;
-    private Double bodyFatMass;
+    private BigDecimal weight;
+    private BigDecimal skeletalMuscleMass;
+    private BigDecimal bodyFatMass;
     private LocalDateTime userMuscleFatDate;
 
 
     public GetUserMuscleFatResponseDto(UserMuscleFatEntity userMuscleFatEntity) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
         this.userMuscleFatNumber = userMuscleFatEntity.getUserMuscleFatNumber();
-        this.userId = userMuscleFatEntity.getUserId();
+        this.userId = userMuscleFatEntity.getCustomerEntity().getUserId(); 
         this.weight = userMuscleFatEntity.getWeight();
         this.skeletalMuscleMass = userMuscleFatEntity.getSkeletalMuscleMass();
         this.bodyFatMass = userMuscleFatEntity.getBodyFatMass();

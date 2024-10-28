@@ -14,6 +14,8 @@ import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetCustomerResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetSignInResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetUserMuscleFatListResponseDto;
+import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftListResponseDto;
+import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftResponseDto;
 import com.example.healthcare_back.service.CustomerService;
 
 import jakarta.validation.Valid;
@@ -54,29 +56,26 @@ public class CustomerController {
 
     /**
      * 고객의 신체 정보 리스트를 가져옵니다.
-     * 
-     * @param userId 고객의 ID
-     * @return 고객의 정보
      */
 
     @GetMapping("/{userId}/user_muscle_fat")
-    public ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList() {
+    public ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList(
+        @PathVariable("userId") String userId
+    ) {
         ResponseEntity<? super GetUserMuscleFatListResponseDto> response = customerService.getUserMuscleFatList();
         return response;
     }
 
-    // /**
-    //  * 고객의 3대 측정 정보 리스트를 가져옵니다.
-    //  * 
-    //  * @param userId 고객의 ID
-    //  * @return 고객의 정보
-    //  */
-    // @GetMapping("/{userId}/user-three-major-lift")
-    // public ResponseEntity<? super GetCustomerResponseDto> getCustomer(
-    //     @PathVariable("userId") String userId
-    // ) {
-    //     return customerService.getCustomer(userId);
-    // }
+    /**
+     * 고객의 3대 측정 정보 리스트를 가져옵니다.
+     */
+    @GetMapping("/{userId}/user-three-major-lift")
+    public ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLift(
+        @PathVariable("userId") String userId
+    ) {
+        ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> response = customerService.getUserThreeMajorLiftList();
+        return response;
+    }
 
     /**
      * 고객 정보를 업데이트합니다.

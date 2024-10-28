@@ -2,6 +2,8 @@ package com.example.healthcare_back.common.object;
 
 import com.example.healthcare_back.entity.CustomerEntity;
 
+import java.math.BigDecimal;
+
 import lombok.Getter;
 
 /**
@@ -16,7 +18,7 @@ public class Customer {
     private final String telNumber;
     private final String profileImage;
     private final String personalGoals;
-    private final Double height;
+    private final BigDecimal height;
   
 
     private Customer(CustomerEntity customerEntity) {
