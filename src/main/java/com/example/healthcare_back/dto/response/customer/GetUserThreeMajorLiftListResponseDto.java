@@ -13,10 +13,12 @@ import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
 
 import lombok.Getter;
 
+// 회원 3대측정 기록 조회 Response DTO
+
 @Getter
 public class GetUserThreeMajorLiftListResponseDto extends ResponseDto {
 
-    private List<UserThreeMajorLiftList> userThreeMajorLiftLists;
+    private final List<UserThreeMajorLiftList> userThreeMajorLiftLists;
 
     public GetUserThreeMajorLiftListResponseDto(List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

@@ -9,11 +9,13 @@ import com.example.healthcare_back.dto.response.ResponseMessage;
 
 import lombok.Getter;
 
+// 로그인 Response DTO
+
 @Getter
 public class SignInResponseDto extends ResponseDto {
     
-    private String accessToken;
-    private Integer expiration;
+    private final String accessToken;
+    private final Integer expiration;
 
     private SignInResponseDto(String accessToken) {
         

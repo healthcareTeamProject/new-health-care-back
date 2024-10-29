@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// 회원 엔터티
 
 @Getter
 @Setter
@@ -21,7 +22,6 @@ import lombok.Setter;
 @Entity(name="customer")
 @Table(name="customer")
 public class CustomerEntity {
-    
     @Id 
     private String userId;
     @Column(nullable = false)
@@ -41,7 +41,6 @@ public class CustomerEntity {
     @Column(precision = 5, scale = 1)
     private BigDecimal height;
 
-
     public CustomerEntity(SignUpRequestDto dto) {
         this.userId = dto.getUserId();
         this.name = dto.getName();
@@ -53,6 +52,5 @@ public class CustomerEntity {
         this.profileImage = dto.getProfileImage();
         this.personalGoals = dto.getPersonalGoals();
         this.height = dto.getHeight(); 
-
     }
 }

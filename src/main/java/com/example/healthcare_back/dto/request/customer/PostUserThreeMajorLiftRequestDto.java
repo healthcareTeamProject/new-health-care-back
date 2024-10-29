@@ -11,6 +11,8 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
+// 회원 3대측정 정보 조회 Request Body DTO
+
 @Getter
 @Setter
 @NoArgsConstructor

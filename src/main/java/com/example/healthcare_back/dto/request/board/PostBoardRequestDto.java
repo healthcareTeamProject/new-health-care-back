@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// 게시물 작성 Request Body DTO
+
 @Getter
 @Setter
 @NoArgsConstructor

@@ -13,10 +13,12 @@ import com.example.healthcare_back.repository.resultSet.CommentListResultSet;
 
 import lombok.Getter;
 
+// 댓글 목록 불러오기 Response DTO
+
 @Getter
 public class GetCommentListResponseDto extends ResponseDto {
     
-    private List<CommentList> commentList;
+    private final List<CommentList> commentList;
 
     private GetCommentListResponseDto(List<CommentListResultSet> resultSets) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

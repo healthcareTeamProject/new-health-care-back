@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
+// 회원 신체정보 수정 Request Body DTO
+
 @Getter
 @Setter
 @NoArgsConstructor

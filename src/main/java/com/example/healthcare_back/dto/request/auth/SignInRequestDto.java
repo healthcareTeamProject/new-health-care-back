@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// 로그인 Request Body DTO
+
 @Getter
 @Setter
 @NoArgsConstructor
