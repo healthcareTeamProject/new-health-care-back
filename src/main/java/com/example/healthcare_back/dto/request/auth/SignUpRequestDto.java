@@ -2,10 +2,6 @@ package com.example.healthcare_back.dto.request.auth;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
-import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
-
-
 import java.math.BigDecimal;
 
 import jakarta.persistence.Column;

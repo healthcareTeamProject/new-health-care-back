@@ -1,21 +1,16 @@
 package com.example.healthcare_back.entity;
 
-import com.example.healthcare_back.common.object.Customer;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
-import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
+import com.example.healthcare_back.dto.request.auth.SignUpUserThreeMajorLiftRequestDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -60,7 +55,7 @@ public class UserThreeMajorLiftEntity {
         this.squat = dto.getSquat();
     }
 
-    public UserThreeMajorLiftEntity(PostUserThreeMajorLiftRequestDto dto) {
+    public UserThreeMajorLiftEntity(SignUpUserThreeMajorLiftRequestDto dto) {
 
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();

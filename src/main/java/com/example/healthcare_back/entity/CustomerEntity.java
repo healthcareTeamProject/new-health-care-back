@@ -1,6 +1,7 @@
 package com.example.healthcare_back.entity;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
+import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
 
 import java.math.BigDecimal;
 import jakarta.persistence.Column;
@@ -55,4 +56,14 @@ public class CustomerEntity {
         this.height = dto.getHeight(); 
 
     }
+
+    public void patchCustomer(PatchCustomerRequestDto dto) {
+        this.name = dto.getName();
+        this.nickname = dto.getNickname();
+        this.profileImage = dto.getProfileImage();
+        this.personalGoals = dto.getPersonalGoals();
+        this.height = dto.getHeight();
+    }
+
+
 }
