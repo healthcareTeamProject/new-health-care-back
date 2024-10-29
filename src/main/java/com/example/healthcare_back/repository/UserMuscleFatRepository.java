@@ -11,6 +11,6 @@ import com.example.healthcare_back.entity.UserMuscleFatEntity;
 public interface UserMuscleFatRepository extends JpaRepository<UserMuscleFatEntity, Integer> {
     
     List<UserMuscleFatEntity> findByOrderByUserMuscleFatNumberDesc();
-    UserMuscleFatEntity findByCustomerEntityUserId(String userId);
+    UserMuscleFatEntity findByUserId(String userId);
 
 }

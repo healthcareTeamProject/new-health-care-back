@@ -7,8 +7,6 @@ import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import java.math.BigDecimal;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Positive;
@@ -25,7 +23,6 @@ import lombok.NoArgsConstructor;
 public class CustomerEntity {
     
     @Id 
-    @Column(name = "user_id")
     private String userId;
     @Column(nullable = false)
     private String name;
@@ -46,6 +43,7 @@ public class CustomerEntity {
 
 
     public CustomerEntity(SignUpRequestDto dto) {
+        this.userId = dto.getUserId();
         this.name = dto.getName();
         this.nickname = dto.getNickname();
         this.password = dto.getPassword();

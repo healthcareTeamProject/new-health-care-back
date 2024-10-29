@@ -8,9 +8,11 @@ import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRe
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -47,7 +49,24 @@ public class SignUpRequestDto {
     private String profileImage;
     private String personalGoals;
 
-    private PostUserMuscleFatRequestDto postUserMuscleFatRequestDto;
-    private PostUserThreeMajorLiftRequestDto postUserThreeMajorLiftRequestDto;
+    @Positive
+    @Column(precision = 5, scale = 1)
+    private BigDecimal deadlift;
+    @Positive
+    @Column(precision = 5, scale = 1)
+    private BigDecimal benchPress;
+    @Positive
+    @Column(precision = 5, scale = 1)
+    private BigDecimal squat;
+    @Positive
+    @Column(precision = 5, scale = 1)
+    private BigDecimal weight;
+    @Positive
+    @Column(precision = 5, scale = 1)
+    private BigDecimal skeletalMuscleMass;
+    @Positive
+    @Column(precision = 5, scale = 1)
+    private BigDecimal bodyFatMass;
+    
 
 }

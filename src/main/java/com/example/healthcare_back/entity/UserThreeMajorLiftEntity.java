@@ -28,15 +28,10 @@ import lombok.NoArgsConstructor;
 @Entity(name="userThreeMajorLift")
 @Table(name="user-three-major-lift")
 public class UserThreeMajorLiftEntity {
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private CustomerEntity customerEntity;
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer threeMajorLiftNumber;
     @NotBlank
-    @Column(name = "user_id", insertable = false, updatable = false) // DB와의 충돌 방지를 위해 설정
     private String userId;
     @Positive
     @Column(precision = 5, scale = 1)
@@ -56,6 +51,7 @@ public class UserThreeMajorLiftEntity {
 
     @PrePersist
     protected void onCreate() {
+        this.threeMajorLiftDate = LocalDateTime.now(); 
         threeMajorLiftDate = LocalDateTime.now(); // 현재 시간으로 설정
         updatedAt = LocalDateTime.now(); // 현재 시간으로 설정
     }
@@ -65,19 +61,18 @@ public class UserThreeMajorLiftEntity {
         updatedAt = LocalDateTime.now(); // 현재 시간으로 업데이트
     }
 
+    public UserThreeMajorLiftEntity(SignUpRequestDto dto) {
+
+        this.deadlift = dto.getDeadlift();
+        this.benchPress = dto.getBenchPress();
+        this.squat = dto.getSquat();
+    }
+
     public UserThreeMajorLiftEntity(PostUserThreeMajorLiftRequestDto dto) {
 
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
-        this.threeMajorLiftDate = LocalDateTime.now(); 
-    }
-
-     // CustomerEntity 설정 메서드
-     public void setCustomerEntity(CustomerEntity customerEntity) {
-        this.customerEntity = customerEntity;
-        // customerEntity가 설정되면 userId를 자동으로 업데이트
-        this.userId = customerEntity.getUserId(); // userId 업데이트
     }
 
 }

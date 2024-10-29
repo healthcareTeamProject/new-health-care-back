@@ -27,7 +27,7 @@ public class GetUserMuscleFatResponseDto extends ResponseDto {
     public GetUserMuscleFatResponseDto(UserMuscleFatEntity userMuscleFatEntity) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
         this.userMuscleFatNumber = userMuscleFatEntity.getUserMuscleFatNumber();
-        this.userId = userMuscleFatEntity.getCustomerEntity().getUserId(); 
+        this.userId = userMuscleFatEntity.getUserId(); 
         this.weight = userMuscleFatEntity.getWeight();
         this.skeletalMuscleMass = userMuscleFatEntity.getSkeletalMuscleMass();
         this.bodyFatMass = userMuscleFatEntity.getBodyFatMass();

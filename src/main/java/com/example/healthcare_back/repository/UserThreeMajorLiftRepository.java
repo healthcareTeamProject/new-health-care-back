@@ -12,7 +12,7 @@ import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
 public interface UserThreeMajorLiftRepository extends JpaRepository<UserThreeMajorLiftEntity, Integer>  {
     
     List<UserThreeMajorLiftEntity> findByOrderByThreeMajorLiftNumberDesc();
-    UserThreeMajorLiftEntity findByCustomerEntityUserId(String userId);
+    UserThreeMajorLiftEntity findByUserId(String userId);
 
 }
 

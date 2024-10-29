@@ -100,7 +100,7 @@ public class CustomerServiceImplement implements CustomerService{
 
         try {
             // 사용자 ID로 UserMuscleFatEntity 찾기
-            userMuscleFatEntity = userMuscleFatRepository.findByCustomerEntityUserId(userId);
+            userMuscleFatEntity = userMuscleFatRepository.findByUserId(userId);
             if (userMuscleFatEntity == null) {
                 return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않을 때
             }
@@ -119,7 +119,7 @@ public class CustomerServiceImplement implements CustomerService{
 
         try {
             // 사용자 ID로 UserThreeMajorLiftEntity 찾기
-            userThreeMajorLiftEntity = userThreeMajorLiftRepository.findByCustomerEntityUserId(userId);
+            userThreeMajorLiftEntity = userThreeMajorLiftRepository.findByUserId(userId);
             if (userThreeMajorLiftEntity == null) {
                 return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않을 때
             }
@@ -167,16 +167,15 @@ public class CustomerServiceImplement implements CustomerService{
     }
 
    @Override
-    public ResponseEntity<ResponseDto> postUserMuscleFat(PostUserMuscleFatRequestDto dto) {
+    public ResponseEntity<ResponseDto> postUserMuscleFat(PostUserMuscleFatRequestDto dto, String userId) {
         // 1. CustomerEntity 조회
         CustomerEntity customerEntity = customerRepository.findByUserId(dto.getUserId());
         if (customerEntity == null) {
             return ResponseDto.noExistUserId(); // 사용자 미존재 에러 처리
         }
 
-        // 2. UserMuscleFatEntity 생성 및 설정
+        // 2. UserMuscleFatEntity 생성
         UserMuscleFatEntity userMuscleFatEntity = new UserMuscleFatEntity(dto);
-        userMuscleFatEntity.setCustomerEntity(customerEntity); // 연관 관계 설정
 
         // 3. 저장
         userMuscleFatRepository.save(userMuscleFatEntity);
@@ -185,7 +184,7 @@ public class CustomerServiceImplement implements CustomerService{
     }
 
     @Override
-    public ResponseEntity<ResponseDto> postUserThreeMajorLift(PostUserThreeMajorLiftRequestDto dto) {
+    public ResponseEntity<ResponseDto> postUserThreeMajorLift(PostUserThreeMajorLiftRequestDto dto, String userId) {
         // 1. CustomerEntity 조회
         // 전달된 UserId를 통해 데이터베이스에서 해당 사용자의 CustomerEntity를 조회합니다.
         CustomerEntity customerEntity = customerRepository.findByUserId(dto.getUserId());
@@ -195,13 +194,9 @@ public class CustomerServiceImplement implements CustomerService{
         return ResponseDto.noExistUserId(); // 사용자 미존재 에러 처리
     }
 
-        // 2. UserThreeMajorLiftEntity 생성 및 설정
+        // 2. UserThreeMajorLiftEntity 생성
         // 요청 DTO에서 ThreeMajorLift 정보를 추출하여 UserThreeMajorLiftEntity 객체를 생성합니다.
         UserThreeMajorLiftEntity userThreeMajorLiftEntity = new UserThreeMajorLiftEntity(dto);
-        userThreeMajorLiftEntity.setCustomerEntity(customerEntity); // 연관 관계 설정
-
-        // 생성된 UserThreeMajorLiftEntity 객체에 CustomerEntity를 연관 관계로 설정합니다.
-        userThreeMajorLiftEntity.setCustomerEntity(customerEntity); // 연관 관계 설정
 
         // 3. 저장
         // 설정이 완료된 UserThreeMajorLiftEntity를 데이터베이스에 저장합니다.

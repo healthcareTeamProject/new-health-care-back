@@ -10,7 +10,6 @@ import com.example.healthcare_back.common.util.AuthNumberCreator;
 import com.example.healthcare_back.dto.request.auth.IdCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.NicknameCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignInRequestDto;
-import com.example.healthcare_back.dto.request.auth.SignUpDataRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthRequestDto;
@@ -102,65 +101,46 @@ public class AuthServiceImplement implements AuthService {
 
     }
 
-    @Transactional
     @Override
-    public ResponseEntity<ResponseDto> signUp(@Valid @RequestBody SignUpDataRequestDto signUpDataRequestDto) {
+    public ResponseEntity<ResponseDto> signUp(SignUpRequestDto dto) {
 
-        // Dto에서 필요한 정보 가져오기
-        SignUpRequestDto signUpRequestDto = signUpDataRequestDto.getSignUpRequestDto();
-        PostUserMuscleFatRequestDto postUserMuscleFatRequestDto = signUpDataRequestDto.getPostUserMuscleFatRequestDto();
-        PostUserThreeMajorLiftRequestDto postUserThreeMajorLiftRequestDto = signUpDataRequestDto.getPostUserThreeMajorLiftRequestDto();
+    String userId = dto.getUserId();
+    String telNumber = dto.getTelNumber();
+    String authNumber = dto.getAuthNumber(); 
+    String password = dto.getPassword();
 
-        String userId = signUpRequestDto.getUserId();
-        String telNumber = signUpRequestDto.getTelNumber();
-        String authNumber = signUpRequestDto.getAuthNumber();
-        String password = signUpRequestDto.getPassword();
-    
-        try {
-            // 1. 사용자 ID 중복 체크
-            if (customerRepository.existsByUserId(userId)) {
-                return ResponseDto.duplicatedUserId();
-            }
-    
-            // 2. 전화번호 중복 체크
-            if (customerRepository.existsByTelNumber(telNumber)) {
-                return ResponseDto.duplicatedUserTelNumber();
-            }
-    
-            // 3. 인증번호 확인
-            if (!telAuthNumberRepository.existsByTelNumberAndAuthNumber(telNumber, authNumber)) {
-                return ResponseDto.telAuthFail();
-            }
-    
-            // 4. 비밀번호 인코딩
-            String encodedPassword = passwordEncoder.encode(password);
-            signUpRequestDto.setPassword(encodedPassword);
-    
-            // 5. CustomerEntity 생성 및 저장
-            CustomerEntity customerEntity = new CustomerEntity(signUpRequestDto); // Dto로 엔티티 생성자 호출
-            customerRepository.save(customerEntity);
-    
-            // 6. UserThreeMajorLiftEntity 생성 및 저장
-            if (postUserThreeMajorLiftRequestDto != null) {
-                UserThreeMajorLiftEntity userThreeMajorLiftEntity = new UserThreeMajorLiftEntity(postUserThreeMajorLiftRequestDto);
-                userThreeMajorLiftEntity.setCustomerEntity(customerEntity); // 연관 관계 설정
-                userThreeMajorLiftRepository.save(userThreeMajorLiftEntity);
-            }
-    
-            // 7. UserMuscleFatEntity 생성 및 저장
-            if (postUserMuscleFatRequestDto != null) {
-                UserMuscleFatEntity userMuscleFatEntity = new UserMuscleFatEntity(postUserMuscleFatRequestDto);
-                userMuscleFatEntity.setCustomerEntity(customerEntity); // 연관 관계 설정
-                userMuscleFatRepository.save(userMuscleFatEntity);
-            }
-            
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError(); // 데이터베이스 에러 응답
+    try {
+        // 1. 사용자 ID 중복 체크
+        if (customerRepository.existsByUserId(userId)) {
+            return ResponseDto.duplicatedUserId(); // 중복된 사용자 ID일 경우 응답
         }
-    
-        return ResponseDto.success(); // 성공 응답
+
+        // 2. 전화번호 중복 체크
+        if (customerRepository.existsByTelNumber(telNumber)) {
+            return ResponseDto.duplicatedUserTelNumber(); // 중복된 전화번호일 경우 응답
+        }
+
+        // 3. 인증번호 확인
+        if (!telAuthNumberRepository.existsByTelNumberAndAuthNumber(telNumber, authNumber)) {
+            return ResponseDto.telAuthFail(); // 인증번호 불일치일 경우 응답
+        }
+
+        // 4. 비밀번호 인코딩
+        String encodedPassword = passwordEncoder.encode(password); // 비밀번호 인코딩
+        dto.setPassword(encodedPassword); // 인코딩된 비밀번호 설정
+
+        // 5. CustomerEntity 생성 및 저장
+        CustomerEntity customerEntity = new CustomerEntity(dto); // Dto를 사용하여 CustomerEntity 생성
+        customerRepository.save(customerEntity); // 고객 정보 저장
+        
+    } catch (Exception exception) {
+        exception.printStackTrace(); // 예외 발생 시 스택 트레이스 출력
+        return ResponseDto.databaseError(); // 데이터베이스 에러 응답
     }
+
+    return ResponseDto.success(); // 성공 응답
+}
+
 
     @Override
     public ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto dto) {
@@ -225,40 +205,5 @@ public class AuthServiceImplement implements AuthService {
 
         return ResponseDto.success();
     }
-
-    @Override
-    public ResponseEntity<ResponseDto> signUp(SignUpRequestDto dto) {
-        
-        String userId = dto.getUserId();
-        String telNumber = dto.getTelNumber();
-        String authNumber = dto.getAuthNumber();
-        String password = dto.getPassword();
-
-        try {
-
-            boolean isExistedId = customerRepository.existsByUserId(userId);
-            if (isExistedId) return ResponseDto.duplicatedUserId();
-
-            boolean isExistedTelNumber = customerRepository.existsByTelNumber(telNumber);
-            if (isExistedTelNumber) return ResponseDto.duplicatedUserTelNumber();
-            
-            boolean isMatched = telAuthNumberRepository.existsByTelNumberAndAuthNumber(telNumber, authNumber);
-            if (!isMatched) return ResponseDto.telAuthFail();
-
-            String encodedPassword = passwordEncoder.encode(password);
-            dto.setPassword(encodedPassword);
-
-            CustomerEntity customerEntity = new CustomerEntity(dto);
-            customerRepository.save(customerEntity);
-
-            
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError();
-        }
-        
-        return ResponseDto.success();
-
-    }
-
+ 
 }

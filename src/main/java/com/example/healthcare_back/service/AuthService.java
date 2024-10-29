@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import com.example.healthcare_back.dto.request.auth.IdCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.NicknameCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignInRequestDto;
-import com.example.healthcare_back.dto.request.auth.SignUpDataRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthRequestDto;
@@ -35,14 +34,11 @@ public interface AuthService {
    ResponseEntity<ResponseDto> telAuthCheck(TelAuthCheckRequestDto requestBody);
 
    /**
-    * 주어진 회원가입 추가 정보를 사용하여 새로운 사용자를 등록합니다.
-    */
-   ResponseEntity<ResponseDto> signUp(SignUpDataRequestDto requestBody);
-   
-   /**
-    * 주어진 회원가입 기본 정보를 사용하여 새로운 사용자를 등록합니다.
+    * 주어진 회원가입 정보를 사용하여 새로운 사용자를 등록합니다.
     */
    ResponseEntity<ResponseDto> signUp(SignUpRequestDto requestBody);
+   
+
 
    /**s
     * 사용자의 로그인 정보를 기반으로 인증합니다.

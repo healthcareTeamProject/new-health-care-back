@@ -15,7 +15,6 @@ import com.example.healthcare_back.dto.response.customer.GetCustomerResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetSignInResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetUserMuscleFatListResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftListResponseDto;
-import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftResponseDto;
 import com.example.healthcare_back.service.CustomerService;
 
 import jakarta.validation.Valid;
@@ -30,9 +29,6 @@ public class CustomerController {
 
     /**
      * 로그인한 고객의 정보를 가져옵니다.
-     * 
-     * @param userId 인증된 사용자의 ID
-     * @return 고객의 로그인 정보
      */
     @GetMapping(value = {"", "/"})
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(
@@ -43,9 +39,6 @@ public class CustomerController {
 
     /**
      * 고객의 기본 정보를 가져옵니다.
-     * 
-     * @param userId 고객의 ID
-     * @return 고객의 정보
      */
     @GetMapping("/{userId}")
     public ResponseEntity<? super GetCustomerResponseDto> getCustomer(
@@ -79,10 +72,6 @@ public class CustomerController {
 
     /**
      * 고객 정보를 업데이트합니다.
-     * 
-     * @param requestBody 업데이트할 고객 정보
-     * @param userId 인증된 사용자의 ID
-     * @return 업데이트 결과
      */
     @PatchMapping(value = {"", " "})
     public ResponseEntity<ResponseDto> patchCustomer(

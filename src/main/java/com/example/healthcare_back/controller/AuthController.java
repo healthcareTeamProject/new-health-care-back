@@ -1,6 +1,5 @@
 package com.example.healthcare_back.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,12 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.healthcare_back.dto.request.auth.IdCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.NicknameCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignInRequestDto;
-import com.example.healthcare_back.dto.request.auth.SignUpDataRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthRequestDto;
-import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
-import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.auth.SignInResponseDto;
 import com.example.healthcare_back.service.AuthService;
@@ -30,7 +26,6 @@ import lombok.RequiredArgsConstructor;
 public class AuthController {
 
     private final AuthService authService;
-    private final CustomerService customerService;
 
     // 아이디 중복 체크
     @PostMapping("/id-check")
@@ -71,34 +66,12 @@ public class AuthController {
     // 회원가입
     @PostMapping("/sign-up")
     public ResponseEntity<ResponseDto> signUp(
-        @RequestBody @Valid SignUpDataRequestDto requestBody
+        @RequestBody @Valid SignUpRequestDto requestBody
     ) {
-        SignUpRequestDto signUpRequestDto = requestBody.getSignUpRequestDto();
-        PostUserMuscleFatRequestDto postUserMuscleFatRequestDto = requestBody.getPostUserMuscleFatRequestDto();
-        PostUserThreeMajorLiftRequestDto postUserThreeMajorLiftRequestDto = requestBody.getPostUserThreeMajorLiftRequestDto();
+        ResponseEntity<ResponseDto> response = authService.signUp(requestBody);
+        return response;
 
-        try {
-        // 사용자 정보 저장
-        authService.signUp(signUpRequestDto);
-        // 사용자 신체 정보 저장
-        customerService.postUserMuscleFat(postUserMuscleFatRequestDto);
-        // 사용자 운동 기록 저장
-        customerService.postUserThreeMajorLift(postUserThreeMajorLiftRequestDto);
-        
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError();
-        }
-        
-        return ResponseDto.success();
-
-    } 
-
-    // @PostMapping("/signup")
-    // public ResponseEntity<?> signUp(@RequestBody SignUpDataRequestDto signUpDataRequestDto) {
-    //     authService.signUp(signUpDataRequestDto);
-    //     return ResponseEntity.ok("User signed up successfully");
-    // }
+    }
 
 
     // 로그인

@@ -27,7 +27,7 @@ public class GetUserThreeMajorLiftResponseDto extends ResponseDto {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
 
         this.threeMajorLiftNumber = userThreeMajorLiftEntity.getThreeMajorLiftNumber();
-        this.userId = userThreeMajorLiftEntity.getCustomerEntity().getUserId(); 
+        this.userId = userThreeMajorLiftEntity.getUserId(); 
         this.deadlift = userThreeMajorLiftEntity.getDeadlift();
         this.benchPress = userThreeMajorLiftEntity.getBenchPress();
         this.squat = userThreeMajorLiftEntity.getSquat();
