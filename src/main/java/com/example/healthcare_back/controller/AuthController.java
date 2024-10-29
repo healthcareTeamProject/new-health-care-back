@@ -15,7 +15,6 @@ import com.example.healthcare_back.dto.request.auth.TelAuthRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.auth.SignInResponseDto;
 import com.example.healthcare_back.service.AuthService;
-import com.example.healthcare_back.service.CustomerService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

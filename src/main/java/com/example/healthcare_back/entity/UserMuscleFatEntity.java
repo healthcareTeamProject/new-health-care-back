@@ -1,5 +1,6 @@
 package com.example.healthcare_back.entity;
 
+import com.example.healthcare_back.common.object.Customer;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
 
@@ -22,8 +23,10 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name="userMuscleFat")
@@ -35,33 +38,22 @@ public class UserMuscleFatEntity {
     @NotBlank
     private String userId;
     @NotNull 
-    @Positive
     @Column(precision = 5, scale = 1)
     private BigDecimal weight;
-    @Positive
     @Column(precision = 5, scale = 1)
     private BigDecimal skeletalMuscleMass;
-    @Positive
     @Column(precision = 5, scale = 1)
     private BigDecimal bodyFatMass;
 
     @Column(updatable = false)
     private LocalDateTime userMuscleFatDate;
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
 
     @PrePersist
     protected void onCreate() {
         this.userMuscleFatDate = LocalDateTime.now(); 
         userMuscleFatDate = LocalDateTime.now(); // 현재 시간으로 설정
-        updatedAt = LocalDateTime.now(); // 현재 시간으로 설정
     }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now(); // 현재 시간으로 업데이트
-    }
-
+    
     public UserMuscleFatEntity(SignUpRequestDto dto) {
         this.weight = dto.getWeight();
         this.skeletalMuscleMass = dto.getSkeletalMuscleMass();

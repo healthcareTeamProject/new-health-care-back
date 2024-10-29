@@ -23,7 +23,8 @@ import lombok.NoArgsConstructor;
 @Table(name="comment")
 public class CommentEntity {
 
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id 
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer commentNumber;
     private Integer boardNumber;
     private String commentContents;

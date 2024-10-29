@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -27,5 +28,7 @@ public class PostUserMuscleFatRequestDto {
     @Positive
     @Column(precision = 5, scale = 1)
     private BigDecimal bodyFatMass;
+    @NotBlank
+    private LocalDateTime userMuscleFatDate;
 
 }

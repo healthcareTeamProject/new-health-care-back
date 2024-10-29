@@ -16,22 +16,22 @@ import lombok.Getter;
 @Getter
 public class GetUserThreeMajorLiftResponseDto extends ResponseDto {
 
-    private Integer threeMajorLiftNumber;
+    private Integer userThreeMajorLiftNumber;
     private String userId;
     private BigDecimal deadlift;
     private BigDecimal benchPress;
     private BigDecimal squat;
-    private LocalDateTime threeMajorLiftDate;
+    private LocalDateTime userThreeMajorLiftDate;
     
     public GetUserThreeMajorLiftResponseDto(UserThreeMajorLiftEntity userThreeMajorLiftEntity) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
 
-        this.threeMajorLiftNumber = userThreeMajorLiftEntity.getThreeMajorLiftNumber();
+        this.userThreeMajorLiftNumber = userThreeMajorLiftEntity.getUserThreeMajorLiftNumber();
         this.userId = userThreeMajorLiftEntity.getUserId(); 
         this.deadlift = userThreeMajorLiftEntity.getDeadlift();
         this.benchPress = userThreeMajorLiftEntity.getBenchPress();
         this.squat = userThreeMajorLiftEntity.getSquat();
-        this.threeMajorLiftDate = userThreeMajorLiftEntity.getThreeMajorLiftDate();
+        this.userThreeMajorLiftDate = userThreeMajorLiftEntity.getUserThreeMajorLiftDate();
     }
 
     public static ResponseEntity<GetUserThreeMajorLiftResponseDto> success(UserThreeMajorLiftEntity userThreeMajorLiftEntity) {

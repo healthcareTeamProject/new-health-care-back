@@ -13,27 +13,26 @@ import lombok.Getter;
 @Getter
 public class UserThreeMajorLiftList {
     
-    private Integer threeMajorLiftNumber;
+    private Integer userThreeMajorLiftNumber;
     private String userId;
     private BigDecimal deadlift;
     private BigDecimal benchPress;
     private BigDecimal squat;
-    private LocalDateTime threeMajorLiftDate;
+    private LocalDateTime userThreeMajorLiftDate;
 
     public UserThreeMajorLiftList(UserThreeMajorLiftEntity userThreeMajorLiftEntity) {
-        this.threeMajorLiftNumber = userThreeMajorLiftEntity.getThreeMajorLiftNumber();
+        this.userThreeMajorLiftNumber = userThreeMajorLiftEntity.getUserThreeMajorLiftNumber();
         this.deadlift = userThreeMajorLiftEntity.getDeadlift();
         this.benchPress = userThreeMajorLiftEntity.getBenchPress();
         this.squat = userThreeMajorLiftEntity.getSquat();
-        this.threeMajorLiftDate = userThreeMajorLiftEntity.getThreeMajorLiftDate();
+        this.userThreeMajorLiftDate = userThreeMajorLiftEntity.getUserThreeMajorLiftDate();
     }
 
     public static List<UserThreeMajorLiftList> getList(List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities) {
-        List<UserThreeMajorLiftList> threeMajorLiftList = new ArrayList<>();
+        List<UserThreeMajorLiftList> userThreeMajorLiftList = new ArrayList<>();
         for (UserThreeMajorLiftEntity entity : userThreeMajorLiftEntities) {
-            threeMajorLiftList.add(new UserThreeMajorLiftList(entity));
+            userThreeMajorLiftList.add(new UserThreeMajorLiftList(entity));
         }
-        return threeMajorLiftList;
+        return userThreeMajorLiftList;
     }
 }
-

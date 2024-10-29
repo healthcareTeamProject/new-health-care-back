@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import com.example.healthcare_back.dto.request.board.PatchBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,12 +21,11 @@ import lombok.NoArgsConstructor;
 @Table(name="board")
 public class BoardEntity {
     
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer boardNumber;
-    @Column(nullable = false, length = 80)
     private String boardTitle;
-    @Column
-    private String nickname; // userId로 초기화
+    private String nickname;
     private LocalDateTime boardUploadDate; 
     private String boardContents;
     private String youtubeVideoLink;

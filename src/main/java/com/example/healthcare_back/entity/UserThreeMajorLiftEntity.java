@@ -1,5 +1,6 @@
 package com.example.healthcare_back.entity;
 
+import com.example.healthcare_back.common.object.Customer;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 
@@ -21,44 +22,35 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name="userThreeMajorLift")
-@Table(name="user-three-major-lift")
+@Table(name="user_three_major_lift")
 public class UserThreeMajorLiftEntity {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    private Integer threeMajorLiftNumber;
+    private Integer userThreeMajorLiftNumber;
     @NotBlank
     private String userId;
-    @Positive
     @Column(precision = 5, scale = 1)
     private BigDecimal deadlift;
-    @Positive
     @Column(precision = 5, scale = 1)
     private BigDecimal benchPress;
-    @Positive
     @Column(precision = 5, scale = 1)
     private BigDecimal squat;
 
     @Column(updatable = false)
-    private LocalDateTime threeMajorLiftDate;
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
+    private LocalDateTime userThreeMajorLiftDate;
 
 
     @PrePersist
     protected void onCreate() {
-        this.threeMajorLiftDate = LocalDateTime.now(); 
-        threeMajorLiftDate = LocalDateTime.now(); // 현재 시간으로 설정
-        updatedAt = LocalDateTime.now(); // 현재 시간으로 설정
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now(); // 현재 시간으로 업데이트
+        this.userThreeMajorLiftDate = LocalDateTime.now(); 
+        userThreeMajorLiftDate = LocalDateTime.now(); // 현재 시간으로 설정
     }
 
     public UserThreeMajorLiftEntity(SignUpRequestDto dto) {

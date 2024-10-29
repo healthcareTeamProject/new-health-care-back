@@ -1,8 +1,6 @@
 package com.example.healthcare_back.entity;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
-// import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
-// import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 
 import java.math.BigDecimal;
 import jakarta.persistence.Column;
@@ -13,9 +11,11 @@ import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name="customer")

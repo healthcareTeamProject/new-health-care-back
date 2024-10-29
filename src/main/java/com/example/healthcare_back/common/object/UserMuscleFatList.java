@@ -38,4 +38,3 @@ public class UserMuscleFatList {
         return MuscleFatList; 
     }
 }
-

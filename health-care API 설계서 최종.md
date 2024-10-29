@@ -519,25 +519,25 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name               |  type  |                          description                           | required |
-| ------------------ | :----: | :------------------------------------------------------------: | :------: |
-| profileImage       | String |                      사용자 프로필이미지                       |    X     |
-| name               | String |                         사용자의 이름                          |    O     |
-| userId             | String |                        사용자의 아이디                         |    O     |
-| nickname           | String |                        사용자의 닉네임                         |    O     |
-| password           | String |            사용자의 비밀번호 (8~13자의 영문 + 숫자)            |    O     |
-| telNumber          | String |                사용자의 전화번호 (11자의 숫자)                 |    O     |
-| authNumber         | String |                       전화번호 인증번호                        |    O     |
-| joinPath           | String | 회원가입 경로 (기본: 'HOME', 카카오: 'KAKAO', 네이버: 'NAVER') |    O     |
-| snsId              | String |                    SNS 가입시 sns oauth2 ID                    |    X     |
-| height             | Float  |                           사용자 키                            |    O     |
-| weight             | Float  |                         사용자 몸무게                          |    O     |
-| skeletalMuscleMass | Float  |                            골격근량                            |    X     |
-| bodyFatMass        | Float  |                        사용자 체지방량                         |    X     |
-| deadlift           | Float  |                   사용자 3대 측정 데드리프트                   |    X     |
-| benchPress         | Float  |                   사용자 3대 측정 벤치프레스                   |    X     |
-| squat              | Float  |                     사용자 3대 측정 스쿼트                     |    X     |
-| personalGoal       | String |                        사용자 개인목표                         |    X     |
+| name               |    type    |                          description                           | required |
+| ------------------ | :--------: | :------------------------------------------------------------: | :------: |
+| profileImage       |   String   |                      사용자 프로필이미지                       |    X     |
+| name               |   String   |                         사용자의 이름                          |    O     |
+| userId             |   String   |                        사용자의 아이디                         |    O     |
+| nickname           |   String   |                        사용자의 닉네임                         |    O     |
+| password           |   String   |            사용자의 비밀번호 (8~13자의 영문 + 숫자)            |    O     |
+| telNumber          |   String   |                사용자의 전화번호 (11자의 숫자)                 |    O     |
+| authNumber         |   String   |                       전화번호 인증번호                        |    O     |
+| joinPath           |   String   | 회원가입 경로 (기본: 'HOME', 카카오: 'KAKAO', 네이버: 'NAVER') |    O     |
+| snsId              |   String   |                    SNS 가입시 sns oauth2 ID                    |    X     |
+| height             | BigDecimal |                           사용자 키                            |    O     |
+| weight             | BigDecimal |                         사용자 몸무게                          |    O     |
+| skeletalMuscleMass | BigDecimal |                            골격근량                            |    X     |
+| bodyFatMass        | BigDecimal |                        사용자 체지방량                         |    X     |
+| deadlift           | BigDecimal |                   사용자 3대 측정 데드리프트                   |    X     |
+| benchPress         | BigDecimal |                   사용자 3대 측정 벤치프레스                   |    X     |
+| squat              | BigDecimal |                     사용자 3대 측정 스쿼트                     |    X     |
+| personalGoal       |   String   |                        사용자 개인목표                         |    X     |
 
 ###### Example
 
@@ -847,15 +847,15 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 
 ###### Response Body
 
-| name         |  type  |      description      | required |
-| ------------ | :----: | :-------------------: | :------: |
-| code         | String |       결과 코드       |    O     |
-| message      | String | 결과 코드에 대한 설명 |    O     |
-| profileImage | String | 사용자 프로필 이미지  |    X     |
-| name         | String |      사용자 이름      |    O     |
-| nickname     | String |     사용자 닉네임     |    O     |
-| height       | Float  |      사용자의 키      |    O     |
-| personalGoal | String |   사용자의 개인목표   |    X     |
+| name         |    type    |      description      | required |
+| ------------ | :--------: | :-------------------: | :------: |
+| code         |   String   |       결과 코드       |    O     |
+| message      |   String   | 결과 코드에 대한 설명 |    O     |
+| profileImage |   String   | 사용자 프로필 이미지  |    X     |
+| name         |   String   |      사용자 이름      |    O     |
+| nickname     |   String   |     사용자 닉네임     |    O     |
+| height       | BigDecimal |      사용자의 키      |    O     |
+| personalGoal |   String   |   사용자의 개인목표   |    X     |
 
 ###### Example
 
@@ -956,9 +956,9 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-muscle-fat"
 **MuscleFatList**  
 | userMuscleFatNumber | Integer | 사용자 신체 정보 번호 | O |
 | userId | String | 사용자 아이디 | O |
-| weight | Float | 몸무게 | O |
-| skeletalMuscleMass | Float | 골격근량 | X |
-| bodyFatMass | Float | 체지방량 | X |
+| weight | BigDecimal | 몸무게 | O |
+| skeletalMuscleMass | BigDecimal | 골격근량 | X |
+| bodyFatMass | BigDecimal | 체지방량 | X |
 | userMuscleFatDate | String | 사용자 신체 정보 등록 날짜 | O |
 
 ###### Example
@@ -1051,16 +1051,16 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-muscle-fat"
 
 ###### Response Body
 
-| name                |  type   |        description         | required |
-| ------------------- | :-----: | :------------------------: | :------: |
-| code                | String  |         결과 코드          |    O     |
-| message             | String  |   결과 코드에 대한 설명    |    O     |
-| userMuscleFatNumber | Integer |   사용자 신체 정보 번호    |    O     |
-| userId              | String  |       사용자 아이디        |    O     |
-| weight              |  Float  |           몸무게           |    O     |
-| skeletalMuscleMass  |  Float  |          골격근량          |    X     |
-| bodyFatMass         |  Float  |          체지방량          |    X     |
-| userMuscleFatDate   | String  | 사용자 신체 정보 등록 날짜 |    O     |
+| name                |    type    |        description         | required |
+| ------------------- | :--------: | :------------------------: | :------: |
+| code                |   String   |         결과 코드          |    O     |
+| message             |   String   |   결과 코드에 대한 설명    |    O     |
+| userMuscleFatNumber |  Integer   |   사용자 신체 정보 번호    |    O     |
+| userId              |   String   |       사용자 아이디        |    O     |
+| weight              | BigDecimal |           몸무게           |    O     |
+| skeletalMuscleMass  | BigDecimal |          골격근량          |    X     |
+| bodyFatMass         | BigDecimal |          체지방량          |    X     |
+| userMuscleFatDate   |   String   | 사용자 신체 정보 등록 날짜 |    O     |
 
 ###### Example
 
@@ -1160,12 +1160,12 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-three-major-lif
 | threeMajorLift | threeMajorLift[] | 3대 측정 정보 리스트  |    O     |
 
 **ThreeMajorLift**
-| threeMajorLiftNumber | Integer | 사용자 3대 측정 정보 번호 | O |
+| UserthreeMajorLiftNumber | Integer | 사용자 3대 측정 정보 번호 | O |
 | userId | String | 사용자 아이디 | O |
-| deadlift | Float | 데드리프트(kg) | X |
-| benchPress | Float | 벤치프레스(kg) | X |
-| squat | Float | 스쿼트 | X |
-| threeMajorLiftDate | String | 사용자 3대 측정 등록 날짜 | O |
+| deadlift | BigDecimal | 데드리프트(kg) | X |
+| benchPress | BigDecimal | 벤치프레스(kg) | X |
+| squat | BigDecimal | 스쿼트 | X |
+| UserthreeMajorLiftDate | String | 사용자 3대 측정 등록 날짜 | O |
 
 ###### Example
 
@@ -1270,16 +1270,16 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-three-major-lif
 
 ###### Response Body
 
-| name                 |  type   |        description        | required |
-| -------------------- | :-----: | :-----------------------: | :------: |
-| code                 | String  |         결과 코드         |    O     |
-| message              | String  |   결과 코드에 대한 설명   |    O     |
-| threeMajorLiftNumber | Integer | 사용자 3대 측정 정보 번호 |    O     |
-| userId               | String  |       사용자 아이디       |    O     |
-| deadlift             |  Float  |      데드리프트(kg)       |    X     |
-| benchPress           |  Float  |      벤치프레스(kg)       |    X     |
-| squat                |  Float  |          스쿼트           |    X     |
-| threeMajorLiftDate   | String  | 사용자 3대 측정 등록 날짜 |    O     |
+| name                     |    type    |        description        | required |
+| ------------------------ | :--------: | :-----------------------: | :------: |
+| code                     |   String   |         결과 코드         |    O     |
+| message                  |   String   |   결과 코드에 대한 설명   |    O     |
+| UserThreeMajorLiftNumber |  Integer   | 사용자 3대 측정 정보 번호 |    O     |
+| userId                   |   String   |       사용자 아이디       |    O     |
+| deadlift                 | BigDecimal |      데드리프트(kg)       |    X     |
+| benchPress               | BigDecimal |      벤치프레스(kg)       |    X     |
+| squat                    | BigDecimal |          스쿼트           |    X     |
+| UserThreeMajorLiftDate   |   String   | 사용자 3대 측정 등록 날짜 |    O     |
 
 ###### Example
 
@@ -1370,19 +1370,19 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name               |  type  |        description         | required |
-| ------------------ | :----: | :------------------------: | :------: |
-| profileImage       | String |    사용자 프로필이미지     |    X     |
-| name               | String |       사용자의 이름        |    O     |
-| nickname           | String |      사용자의 닉네임       |    O     |
-| height             | Float  |         사용자 키          |    O     |
-| weight             | Float  |       사용자 몸무게        |    O     |
-| skeletalMuscleMass | Float  |          골격근량          |    X     |
-| bodyFatMass        | Float  |      사용자 체지방량       |    X     |
-| deadlift           | Float  | 사용자 3대 측정 데드리프트 |    X     |
-| benchPress         | Float  | 사용자 3대 측정 벤치프레스 |    X     |
-| squat              | Float  |   사용자 3대 측정 스쿼트   |    X     |
-| personalGoal       | String |      사용자 개인목표       |    X     |
+| name               |    type    |        description         | required |
+| ------------------ | :--------: | :------------------------: | :------: |
+| profileImage       |   String   |    사용자 프로필이미지     |    X     |
+| name               |   String   |       사용자의 이름        |    O     |
+| nickname           |   String   |      사용자의 닉네임       |    O     |
+| height             | BigDecimal |         사용자 키          |    O     |
+| weight             | BigDecimal |       사용자 몸무게        |    O     |
+| skeletalMuscleMass | BigDecimal |          골격근량          |    X     |
+| bodyFatMass        | BigDecimal |      사용자 체지방량       |    X     |
+| deadlift           | BigDecimal | 사용자 3대 측정 데드리프트 |    X     |
+| benchPress         | BigDecimal | 사용자 3대 측정 벤치프레스 |    X     |
+| squat              | BigDecimal |   사용자 3대 측정 스쿼트   |    X     |
+| personalGoal       |   String   |      사용자 개인목표       |    X     |
 
 ###### Example
 
@@ -1605,16 +1605,16 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name              |  type  |    description    | required |
-| ----------------- | :----: | :---------------: | :------: |
-| boardTitle        | String |    게시물 제목    |    O     |
-| boardCategory     | String |  게시물 카테고리  |    O     |
-| boardTag          | String |    게시물 태그    |    O     |
-| boardContents     | String |    게시물 내용    |    O     |
-| youtubeVideoLink  | String | 유튜브비디오 링크 |    X     |
-| boardFileContents | String |    게시물 자료    |    X     |
-| mapLat            | Float  |       위도        |    X     |
-| mapLng            | Float  |       경도        |    X     |
+| name              |    type    |    description    | required |
+| ----------------- | :--------: | :---------------: | :------: |
+| boardTitle        |   String   |    게시물 제목    |    O     |
+| boardCategory     |   String   |  게시물 카테고리  |    O     |
+| boardTag          |   String   |    게시물 태그    |    O     |
+| boardContents     |   String   |    게시물 내용    |    O     |
+| youtubeVideoLink  |   String   | 유튜브비디오 링크 |    X     |
+| boardFileContents |   String   |    게시물 자료    |    X     |
+| mapLat            | BigDecimal |       위도        |    X     |
+| mapLng            | BigDecimal |       경도        |    X     |
 
 ###### Example
 
@@ -1848,16 +1848,16 @@ URL에 게시물 번호를 포함하고 게시물 번호, 게시물 제목, 게�
 
 ###### Request Body
 
-| name              |  type  |    description    | required |
-| ----------------- | :----: | :---------------: | :------: |
-| boardTitle        | String |   게시물 타이틀   |    O     |
-| boardCategory     | String |  게시물 카테고리  |    O     |
-| boardTag          | String |    게시물 태그    |    O     |
-| boardContents     | String |    게시물 내용    |    O     |
-| youtubeVideoLink  | String | 유튜브비디오 링크 |    X     |
-| boardFileContents | String |    게시물 자료    |    X     |
-| mapLat            | Float  |       위도        |    X     |
-| mapLng            | Float  |       경도        |    X     |
+| name              |    type    |    description    | required |
+| ----------------- | :--------: | :---------------: | :------: |
+| boardTitle        |   String   |   게시물 타이틀   |    O     |
+| boardCategory     |   String   |  게시물 카테고리  |    O     |
+| boardTag          |   String   |    게시물 태그    |    O     |
+| boardContents     |   String   |    게시물 내용    |    O     |
+| youtubeVideoLink  |   String   | 유튜브비디오 링크 |    X     |
+| boardFileContents |   String   |    게시물 자료    |    X     |
+| mapLat            | BigDecimal |       위도        |    X     |
+| mapLng            | BigDecimal |       경도        |    X     |
 
 ###### Example
 

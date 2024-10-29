@@ -4,7 +4,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.healthcare_back.common.util.AuthNumberCreator;
 import com.example.healthcare_back.dto.request.auth.IdCheckRequestDto;
@@ -13,8 +12,6 @@ import com.example.healthcare_back.dto.request.auth.SignInRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthRequestDto;
-import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
-import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.auth.SignInResponseDto;
 import com.example.healthcare_back.entity.CustomerEntity;
@@ -29,8 +26,6 @@ import com.example.healthcare_back.repository.UserMuscleFatRepository;
 import com.example.healthcare_back.repository.UserThreeMajorLiftRepository;
 import com.example.healthcare_back.service.AuthService;
 
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -132,7 +127,21 @@ public class AuthServiceImplement implements AuthService {
         // 5. CustomerEntity 생성 및 저장
         CustomerEntity customerEntity = new CustomerEntity(dto); // Dto를 사용하여 CustomerEntity 생성
         customerRepository.save(customerEntity); // 고객 정보 저장
-        
+
+        if (dto.getWeight() == null) {
+            throw new IllegalArgumentException("체중은 필수 입력 사항입니다.");
+        }
+
+        // UserMuscleFatEntity 생성 및 저장
+        UserMuscleFatEntity userMuscleFatEntity = new UserMuscleFatEntity(dto);
+        userMuscleFatEntity.setUserId(customerEntity.getUserId());
+        userMuscleFatRepository.save(userMuscleFatEntity);
+
+        // UserThreeMajorLiftEntity 생성 및 저장
+        UserThreeMajorLiftEntity userThreeMajorLiftEntity = new UserThreeMajorLiftEntity(dto);
+        userThreeMajorLiftEntity.setUserId(customerEntity.getUserId());
+        userThreeMajorLiftRepository.save(userThreeMajorLiftEntity);
+
     } catch (Exception exception) {
         exception.printStackTrace(); // 예외 발생 시 스택 트레이스 출력
         return ResponseDto.databaseError(); // 데이터베이스 에러 응답

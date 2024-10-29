@@ -1,7 +1,6 @@
 package com.example.healthcare_back.service.implement;
 
 import java.util.List;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.springframework.http.ResponseEntity;
@@ -156,7 +155,7 @@ public class CustomerServiceImplement implements CustomerService{
 
         try {
 
-            userThreeMajorLiftEntities = userThreeMajorLiftRepository.findByOrderByThreeMajorLiftNumberDesc();
+            userThreeMajorLiftEntities = userThreeMajorLiftRepository.findByOrderByUserThreeMajorLiftNumberDesc();
 
         } catch (Exception exception) {
             exception.printStackTrace();
