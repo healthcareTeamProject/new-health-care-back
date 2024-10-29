@@ -12,6 +12,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
+// 회원 3대측정 정보 수정 Request Body DTO
+
 @Getter
 @Setter
 @NoArgsConstructor

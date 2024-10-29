@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+
+// 회원 3대측정 정보 조회 Request Body DTO
 import kotlinx.datetime.LocalDateTime;
 
 public class PostUserThreeMajorLiftRequestDto {

@@ -1,5 +1,5 @@
 # COOL SMS API KEY, SECRET KEY
-cool-sms.api-key=NCS70ZD67TZSRYGO
-cool-sms.secret-key=RCYFWH08FWR1XJDMWULUQXXYUBZTLXHW
+cool-sms.api-key=NCSFPLFPZPQ6CKVV
+cool-sms.secret-key=KDD4LFYFZ2CI4Z7SDDZHP0XXBRVPAOR1
 cool-sms.domain=https://api.coolsms.co.kr
-cool-sms.from=01085497829
+cool-sms.from=01040734272

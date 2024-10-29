@@ -20,6 +20,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// 회원 신체정보 엔터티
+
 @Getter
 @Setter
 @NoArgsConstructor

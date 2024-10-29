@@ -10,12 +10,14 @@ import com.example.healthcare_back.entity.CustomerEntity;
 
 import lombok.Getter;
 
+// 로그인 정보 불러오기 Response DTO
+
 @Getter
 public class GetSignInResponseDto extends ResponseDto {
     
-    private String userId;
-    private String name;
-    private String nickname;
+    private final String userId;
+    private final String name;
+    private final String nickname;
     
 
     public GetSignInResponseDto(CustomerEntity customerEntity) {

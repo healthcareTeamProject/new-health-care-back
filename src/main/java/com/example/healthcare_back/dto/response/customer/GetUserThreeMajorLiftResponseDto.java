@@ -13,15 +13,16 @@ import java.time.LocalDateTime;
 
 import lombok.Getter;
 
+// 회원 3대측정 정보 조회 Response DTO
+
 @Getter
 public class GetUserThreeMajorLiftResponseDto extends ResponseDto {
-
-    private Integer userThreeMajorLiftNumber;
-    private String userId;
-    private BigDecimal deadlift;
-    private BigDecimal benchPress;
-    private BigDecimal squat;
-    private LocalDateTime userThreeMajorLiftDate;
+    private final Integer userThreeMajorLiftNumber;
+    private final String userId;
+    private final BigDecimal deadlift;
+    private final BigDecimal benchPress;
+    private final BigDecimal squat;
+    private final LocalDateTime userThreeMajorLiftDate;
     
     public GetUserThreeMajorLiftResponseDto(UserThreeMajorLiftEntity userThreeMajorLiftEntity) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
@@ -38,5 +39,4 @@ public class GetUserThreeMajorLiftResponseDto extends ResponseDto {
         GetUserThreeMajorLiftResponseDto responseBody = new GetUserThreeMajorLiftResponseDto(userThreeMajorLiftEntity);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
-    
 }

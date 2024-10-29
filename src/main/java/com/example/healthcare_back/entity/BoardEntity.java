@@ -14,6 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+// 게시판 엔터티
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,7 +38,6 @@ public class BoardEntity {
     
 
     public BoardEntity(PostBoardRequestDto dto, String userId) {
-        
         this.boardTitle = dto.getBoardTitle();
         this.nickname = userId;
         this.boardUploadDate = LocalDateTime.now(); // 업로드 날짜 설정
@@ -46,7 +47,6 @@ public class BoardEntity {
         this.boardViewCount = 0;
         this.boardLikeCount = 0;
         this.commentCount = 0;
-        
     }
 
     public void increaseViewCount() {

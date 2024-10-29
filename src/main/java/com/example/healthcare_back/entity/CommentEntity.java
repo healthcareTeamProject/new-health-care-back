@@ -16,6 +16,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+// 댓글 엔터티
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,7 +32,7 @@ public class CommentEntity {
     private String commentContents;
     private String userId;
     private String commentDate;
-    private Integer commentLikeCount = 0; // Initialize to 0 to avoid null values
+    private Integer commentLikeCount;
 
     public CommentEntity(PostCommentRequestDto dto, Integer boardNumber, String userId) {
         Date now = Date.from(Instant.now());
@@ -49,9 +51,7 @@ public class CommentEntity {
     }
 
     public void decreaseFavoriteCount() {
-        if (this.commentLikeCount > 0) {
-            this.commentLikeCount--;
-        }
+        this.commentLikeCount--;
     }
 
     public void update(PatchCommentRequestDto dto) {
@@ -62,5 +62,4 @@ public class CommentEntity {
         // 수정된 시간으로 업데이트
         this.commentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date.from(Instant.now()));
     }
-
 }

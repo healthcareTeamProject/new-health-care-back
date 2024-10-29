@@ -13,16 +13,17 @@ import java.time.LocalDateTime;
 
 import lombok.Getter;
 
+// 회원 신체정보 조회 Response DTO
+
 @Getter
 public class GetUserMuscleFatResponseDto extends ResponseDto {
 
-    private Integer userMuscleFatNumber;
-    private String userId;
-    private BigDecimal weight;
-    private BigDecimal skeletalMuscleMass;
-    private BigDecimal bodyFatMass;
-    private LocalDateTime userMuscleFatDate;
-
+    private final Integer userMuscleFatNumber;
+    private final String userId;
+    private final BigDecimal weight;
+    private final BigDecimal skeletalMuscleMass;
+    private final BigDecimal bodyFatMass;
+    private final LocalDateTime userMuscleFatDate;
 
     public GetUserMuscleFatResponseDto(UserMuscleFatEntity userMuscleFatEntity) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
@@ -38,5 +39,4 @@ public class GetUserMuscleFatResponseDto extends ResponseDto {
         GetUserMuscleFatResponseDto responseBody = new GetUserMuscleFatResponseDto(userMuscleFatEntity);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
-    
 }

@@ -19,6 +19,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// 회원 3대측정 기록 엔터티
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,7 +28,6 @@ import lombok.Setter;
 @Entity(name="userThreeMajorLift")
 @Table(name="user_three_major_lift")
 public class UserThreeMajorLiftEntity {
-    
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer userThreeMajorLiftNumber;
     @NotBlank
@@ -41,7 +42,6 @@ public class UserThreeMajorLiftEntity {
     @Column(updatable = false)
     private LocalDateTime userThreeMajorLiftDate;
 
-
     @PrePersist
     protected void onCreate() {
         this.userThreeMajorLiftDate = LocalDateTime.now(); 
@@ -49,17 +49,14 @@ public class UserThreeMajorLiftEntity {
     }
 
     public UserThreeMajorLiftEntity(SignUpRequestDto dto) {
-
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
     }
 
-    public UserThreeMajorLiftEntity(SignUpUserThreeMajorLiftRequestDto dto) {
-
+    public UserThreeMajorLiftEntity(PostUserThreeMajorLiftRequestDto dto) {
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
     }
-
 }

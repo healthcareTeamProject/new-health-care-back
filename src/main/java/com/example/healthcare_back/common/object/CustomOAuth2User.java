@@ -10,10 +10,10 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 // 사용자 지정 OAuth2 유저 객체
 public class CustomOAuth2User implements OAuth2User {
 
-    private String name;
-    private Map<String, Object> attributes;
-    private Collection<? extends GrantedAuthority> authorities;
-    private boolean existed;
+    private final String name;
+    private final Map<String, Object> attributes;
+    private final Collection<? extends GrantedAuthority> authorities;
+    private final boolean existed;
 
     public CustomOAuth2User(String userId, Map<String, Object> attributes, boolean existed) {
         this.name = userId;
