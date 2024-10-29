@@ -1,11 +1,16 @@
 package com.example.healthcare_back.service.implement;
 
 import java.util.List;
+import java.util.Optional;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.healthcare_back.dto.request.auth.SignUpUserMuscleFatRequestDto;
+import com.example.healthcare_back.dto.request.auth.SignUpUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
@@ -59,11 +64,21 @@ public class CustomerServiceImplement implements CustomerService{
         
         try {
 
+            String name = dto.getName();
+            String nickname = dto.getNickname();
+            String profileImage = dto.getProfileImage();
+            String personalGoals = dto.getPersonalGoals();
+            BigDecimal height = dto.getHeight();
+
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
             if (customerEntity == null) return ResponseDto.noExistUserId();
-
+            customerEntity.setName(name);
+            customerEntity.setNickname(nickname);
+            customerEntity.setProfileImage(profileImage);
+            customerEntity.setPersonalGoals(personalGoals);
+            customerEntity.setHeight(height);
             customerRepository.save(customerEntity);
-            
+                
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
@@ -166,7 +181,7 @@ public class CustomerServiceImplement implements CustomerService{
     }
 
    @Override
-    public ResponseEntity<ResponseDto> postUserMuscleFat(PostUserMuscleFatRequestDto dto, String userId) {
+    public ResponseEntity<ResponseDto> signUpUserMuscleFat(SignUpUserMuscleFatRequestDto dto, String userId) {
         // 1. CustomerEntity 조회
         CustomerEntity customerEntity = customerRepository.findByUserId(dto.getUserId());
         if (customerEntity == null) {
@@ -183,7 +198,7 @@ public class CustomerServiceImplement implements CustomerService{
     }
 
     @Override
-    public ResponseEntity<ResponseDto> postUserThreeMajorLift(PostUserThreeMajorLiftRequestDto dto, String userId) {
+    public ResponseEntity<ResponseDto> signUpUserThreeMajorLift(SignUpUserThreeMajorLiftRequestDto dto, String userId) {
         // 1. CustomerEntity 조회
         // 전달된 UserId를 통해 데이터베이스에서 해당 사용자의 CustomerEntity를 조회합니다.
         CustomerEntity customerEntity = customerRepository.findByUserId(dto.getUserId());
@@ -203,6 +218,18 @@ public class CustomerServiceImplement implements CustomerService{
 
         // 저장이 완료되면 성공 응답을 반환합니다.
         return ResponseDto.success();
+    }
+
+    @Override
+    public ResponseEntity<ResponseDto> postUserMuscleFat(PostUserMuscleFatRequestDto dto, String userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'postUserMuscleFat'");
+    }
+
+    @Override
+    public ResponseEntity<ResponseDto> postUserThreeMajorLift(PostUserThreeMajorLiftRequestDto dto, String userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'postUserThreeMajorLift'");
     }
 
 }

@@ -5,11 +5,17 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
+import com.example.healthcare_back.dto.request.auth.SignUpUserMuscleFatRequestDto;
+import com.example.healthcare_back.dto.request.auth.SignUpUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
+import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
+import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetCustomerResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetSignInResponseDto;
@@ -78,6 +84,30 @@ public class CustomerController {
         @RequestBody @Valid PatchCustomerRequestDto requestBody,
         @AuthenticationPrincipal String userId
     ) {
-        return customerService.patchCustomer(requestBody, userId);
+         ResponseEntity<ResponseDto> response = customerService.patchCustomer(requestBody, userId);
+        return response;
     }
+
+    // 고객의 신체 정보를 작성합니다.
+    @PostMapping("/user-muscle-fat/")
+    public ResponseEntity<ResponseDto> postUserMuscleFat(
+        @RequestBody @Valid PostUserMuscleFatRequestDto requestBody,
+        @AuthenticationPrincipal String userId
+    ) {
+        ResponseEntity<ResponseDto> response = customerService.postUserMuscleFat(requestBody, userId);
+        return response;
+    }
+
+    // 고객의 3대 측정 정보를 작성합니다.
+    @PostMapping("/user-three-major-lift/")
+    public ResponseEntity<ResponseDto> postUserThreeMajorLift(
+        @RequestBody @Valid PostUserThreeMajorLiftRequestDto requestBody,
+        @AuthenticationPrincipal String userId
+    ) {
+        ResponseEntity<ResponseDto> response = customerService.postUserThreeMajorLift(requestBody, userId);
+        return response;
+    }
+
+
+
 }

@@ -1,9 +1,11 @@
 package com.example.healthcare_back.dto.request.customer;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import kotlinx.datetime.LocalDateTime;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,9 +19,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class PostUserMuscleFatRequestDto {
-
-    @NotBlank
-    private String userId;
+    
     @Positive
     @NotNull 
     @Column(precision = 5, scale = 1)
@@ -30,7 +30,7 @@ public class PostUserMuscleFatRequestDto {
     @Positive
     @Column(precision = 5, scale = 1)
     private BigDecimal bodyFatMass;
-    @NotBlank
+    @NotNull 
     private LocalDateTime userMuscleFatDate;
 
 }
