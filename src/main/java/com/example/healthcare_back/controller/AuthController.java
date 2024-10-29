@@ -13,9 +13,9 @@ import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthCheckRequestDto;
 import com.example.healthcare_back.dto.request.auth.TelAuthRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
+import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.auth.SignInResponseDto;
-import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftResponseDto;
 import com.example.healthcare_back.service.AuthService;
 import com.example.healthcare_back.service.CustomerService;
 
@@ -90,7 +90,7 @@ public class AuthController {
     // 회원가입 (3대 측정)
     @PostMapping("/sign-up")
     public ResponseEntity<ResponseDto> getUserThreeMajorLift(
-        @RequestBody @Valid GetUserThreeMajorLiftResponseDto requestBody
+        @RequestBody @Valid PostUserThreeMajorLiftRequestDto requestBody
     ) {
         ResponseEntity<ResponseDto> response = customerService.signUpUserThreeMajorLift(requestBody);
         return response;

@@ -29,7 +29,7 @@ public class CommentEntity {
     private String commentContents;
     private String userId;
     private String commentDate;
-    private Integer commentLikeCount = 0; // Initialize to 0 to avoid null values
+    private Integer commentLikeCount = 0; // 0으로 초기화
 
     public CommentEntity(PostCommentRequestDto dto, Integer boardNumber, String userId) {
         Date now = Date.from(Instant.now());
@@ -40,7 +40,7 @@ public class CommentEntity {
         this.userId = userId;
         this.commentContents = dto.getCommentContents();
         this.commentDate = commentDate;
-        this.commentLikeCount = 0; // Initialize to 0 for new comments
+        this.commentLikeCount = 0; // 0으로 초기화
     }
 
     public void increaseFavoriteCount() {
