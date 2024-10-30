@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
+import com.example.healthcare_back.repository.resultSet.ThreeMajorLiftResultSet;
 
 import java.time.LocalDateTime;
 
@@ -28,11 +29,12 @@ public class UserThreeMajorLiftList {
         this.userThreeMajorLiftDate = userThreeMajorLiftEntity.getUserThreeMajorLiftDate();
     }
 
-    public static List<UserThreeMajorLiftList> getList(List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities) {
-        List<UserThreeMajorLiftList> userThreeMajorLiftList = new ArrayList<>();
-        for (UserThreeMajorLiftEntity entity : userThreeMajorLiftEntities) {
-            userThreeMajorLiftList.add(new UserThreeMajorLiftList(entity));
+    public static List<UserThreeMajorLiftList> getList(List<ThreeMajorLiftResultSet> resultSets) {
+        List<UserThreeMajorLiftList> userThreeMajorLift = new ArrayList<>();
+        for (ThreeMajorLiftResultSet resultSet: resultSets) {
+            UserThreeMajorLiftList userThreeMajorLiftList = new UserThreeMajorLiftList(resultSet);
+            userThreeMajorLift.add(userThreeMajorLiftList);
         }
-        return userThreeMajorLiftList;
+        return userThreeMajorLift;
     }
 }

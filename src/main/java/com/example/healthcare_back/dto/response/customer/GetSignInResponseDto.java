@@ -27,7 +27,7 @@ public class GetSignInResponseDto extends ResponseDto {
         this.name = customerEntity.getName();
         this.nickname = customerEntity.getNickname();
         this.profileImage = customerEntity.getProfileImage();
-        this.personalGoals = customerEntity.getPersonalGoals();
+        this.personalGoals = customerEntity.getPersonalGoal();
     }
 
     public static ResponseEntity<GetSignInResponseDto> success(CustomerEntity customerEntity) {
