@@ -10,9 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 // 회원 신체정보 조회 Request Body DTO
 
 @Getter

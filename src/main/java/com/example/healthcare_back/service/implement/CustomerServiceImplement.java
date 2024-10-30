@@ -1,11 +1,9 @@
 package com.example.healthcare_back.service.implement;
 
 import java.util.List;
-import java.util.Optional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -222,14 +220,12 @@ public class CustomerServiceImplement implements CustomerService{
 
     @Override
     public ResponseEntity<ResponseDto> postUserMuscleFat(PostUserMuscleFatRequestDto dto, String userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postUserMuscleFat'");
+        return null;
     }
 
     @Override
     public ResponseEntity<ResponseDto> postUserThreeMajorLift(PostUserThreeMajorLiftRequestDto dto, String userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postUserThreeMajorLift'");
+        return null;
     }
 
 }

@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
-import com.example.healthcare_back.dto.request.auth.SignUpUserMuscleFatRequestDto;
-import com.example.healthcare_back.dto.request.auth.SignUpUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
@@ -33,9 +30,7 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-    /**
-     * 로그인한 고객의 정보를 가져옵니다.
-     */
+    // 로그인한 고객의 정보를 가져옵니다.
     @GetMapping(value = {"", "/"})
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(
         @AuthenticationPrincipal String userId
@@ -43,9 +38,7 @@ public class CustomerController {
         return customerService.getSignIn(userId);
     }
 
-    /**
-     * 고객의 기본 정보를 가져옵니다.
-     */
+    // 고객의 기본 정보를 가져옵니다.
     @GetMapping("/{userId}")
     public ResponseEntity<? super GetCustomerResponseDto> getCustomer(
         @PathVariable("userId") String userId
@@ -53,10 +46,7 @@ public class CustomerController {
         return customerService.getCustomer(userId);
     }
 
-    /**
-     * 고객의 신체 정보 리스트를 가져옵니다.
-     */
-
+    // 고객의 신체 정보 리스트를 가져옵니다.
     @GetMapping("/{userId}/user_muscle_fat")
     public ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList(
         @PathVariable("userId") String userId
@@ -65,9 +55,7 @@ public class CustomerController {
         return response;
     }
 
-    /**
-     * 고객의 3대 측정 정보 리스트를 가져옵니다.
-     */
+    // 고객의 3대 측정 정보 리스트를 가져옵니다.
     @GetMapping("/{userId}/user-three-major-lift")
     public ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLift(
         @PathVariable("userId") String userId
@@ -76,15 +64,13 @@ public class CustomerController {
         return response;
     }
 
-    /**
-     * 고객 정보를 업데이트합니다.
-     */
+    // 고객 정보를 업데이트합니다.
     @PatchMapping(value = {"", " "})
     public ResponseEntity<ResponseDto> patchCustomer(
         @RequestBody @Valid PatchCustomerRequestDto requestBody,
         @AuthenticationPrincipal String userId
     ) {
-         ResponseEntity<ResponseDto> response = customerService.patchCustomer(requestBody, userId);
+        ResponseEntity<ResponseDto> response = customerService.patchCustomer(requestBody, userId);
         return response;
     }
 
@@ -107,7 +93,4 @@ public class CustomerController {
         ResponseEntity<ResponseDto> response = customerService.postUserThreeMajorLift(requestBody, userId);
         return response;
     }
-
-
-
 }
