@@ -31,7 +31,7 @@ public class GetCustomerResponseDto extends ResponseDto {
         this.nickname = customerEntity.getNickname();
         this.telNumber = customerEntity.getTelNumber();
         this.profileImage = customerEntity.getProfileImage();
-        this.personalGoals = customerEntity.getPersonalGoals();
+        this.personalGoals = customerEntity.getPersonalGoal();
         this.height = customerEntity.getHeight();
     }
 

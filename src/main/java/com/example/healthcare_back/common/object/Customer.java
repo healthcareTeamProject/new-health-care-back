@@ -15,17 +15,17 @@ public class Customer {
     private final String nickname;
     private final String telNumber;
     private final String profileImage;
-    private final String personalGoals;
+    private final String personalGoal;
     private final BigDecimal height;
 
+    @SuppressWarnings("unused")
     private Customer(CustomerEntity customerEntity) {
         this.userId = customerEntity.getUserId();
         this.name = customerEntity.getName();
         this.nickname = customerEntity.getNickname();
         this.telNumber = customerEntity.getTelNumber();
         this.profileImage = customerEntity.getProfileImage();
-        this.personalGoals = customerEntity.getPersonalGoals();
+        this.personalGoal = customerEntity.getPersonalGoal();
         this.height = customerEntity.getHeight();
     }
-
 }

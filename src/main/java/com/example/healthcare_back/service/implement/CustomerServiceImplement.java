@@ -2,7 +2,6 @@ package com.example.healthcare_back.service.implement;
 
 import java.util.List;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -37,35 +36,29 @@ public class CustomerServiceImplement implements CustomerService{
     private final UserMuscleFatRepository userMuscleFatRepository;
     private final UserThreeMajorLiftRepository userThreeMajorLiftRepository;
 
-
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(String userId) {
-        
-        CustomerEntity customerEntity = null;
+        CustomerEntity customerEntity;
 
         try {
-
             customerEntity = customerRepository.findByUserId(userId);
             if (customerEntity == null) return ResponseDto.authenticationFail();
-
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return GetSignInResponseDto.success(customerEntity);
-        
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> patchCustomer(PatchCustomerRequestDto dto, String userId) {
-        
         try {
-
             String name = dto.getName();
             String nickname = dto.getNickname();
             String profileImage = dto.getProfileImage();
-            String personalGoals = dto.getPersonalGoals();
+            String personalGoal = dto.getPersonalGoal();
             BigDecimal height = dto.getHeight();
 
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
@@ -73,40 +66,33 @@ public class CustomerServiceImplement implements CustomerService{
             customerEntity.setName(name);
             customerEntity.setNickname(nickname);
             customerEntity.setProfileImage(profileImage);
-            customerEntity.setPersonalGoals(personalGoals);
+            customerEntity.setPersonalGoal(personalGoal);
             customerEntity.setHeight(height);
             customerRepository.save(customerEntity);
-                
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return ResponseDto.success();
-
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId) {
-       
-        CustomerEntity customerEntity = null;
+        CustomerEntity customerEntity;
 
         try {
-            
             customerEntity = customerRepository.findByUserId(userId);
             if (customerEntity == null) return ResponseDto.noExistUserId();
-
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
-
         }
-        
         return GetCustomerResponseDto.success(customerEntity);
-
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetUserMuscleFatResponseDto> getUserMuscleFat(String userId) {
         UserMuscleFatEntity userMuscleFatEntity;
 
@@ -126,6 +112,7 @@ public class CustomerServiceImplement implements CustomerService{
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetUserThreeMajorLiftResponseDto> getUserThreeMajorLift(String userId) {
         UserThreeMajorLiftEntity userThreeMajorLiftEntity;
 
@@ -139,42 +126,35 @@ public class CustomerServiceImplement implements CustomerService{
             exception.printStackTrace();
             return ResponseDto.databaseError(); // 데이터베이스 오류 처리
         }
-
         // 성공적으로 찾은 경우 DTO로 변환하여 응답
         return GetUserThreeMajorLiftResponseDto.success(userThreeMajorLiftEntity);
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList() {
-
-        List<UserMuscleFatEntity> userMuscleFatEntities = new ArrayList<>();
+        List<UserMuscleFatEntity> userMuscleFatEntities;
 
         try {
-
             userMuscleFatEntities = userMuscleFatRepository.findByOrderByUserMuscleFatNumberDesc();
-
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return GetUserMuscleFatListResponseDto.success(userMuscleFatEntities);
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLiftList() {
-        
-        List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities = new ArrayList<>();
+        List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities;
 
         try {
-
             userThreeMajorLiftEntities = userThreeMajorLiftRepository.findByOrderByUserThreeMajorLiftNumberDesc();
-
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return GetUserThreeMajorLiftListResponseDto.success(userThreeMajorLiftEntities);
     }
 
@@ -183,7 +163,7 @@ public class CustomerServiceImplement implements CustomerService{
         // 1. CustomerEntity 조회
         CustomerEntity customerEntity = customerRepository.findByUserId(dto.getUserId());
         if (customerEntity == null) {
-            return ResponseDto.noExistUserId(); // 사용자 미존재 에러 처리
+            return ResponseDto.noExistUserId(); // 존재하지 않는 사용자 에러 처리
         }
 
         // 2. UserMuscleFatEntity 생성

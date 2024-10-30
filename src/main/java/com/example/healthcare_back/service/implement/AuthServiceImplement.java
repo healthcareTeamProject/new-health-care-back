@@ -40,9 +40,10 @@ public class AuthServiceImplement implements AuthService {
     private final UserThreeMajorLiftRepository userThreeMajorLiftRepository;
     private final TelAuthNumberRepository telAuthNumberRepository;
 
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> telAuth(TelAuthRequestDto dto) {
         
         String telNumber = dto.getTelNumber();
@@ -77,6 +78,7 @@ public class AuthServiceImplement implements AuthService {
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> telAuthCheck(TelAuthCheckRequestDto dto) {
 
         String telNumber = dto.getTelNumber();
@@ -97,6 +99,7 @@ public class AuthServiceImplement implements AuthService {
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> signUp(SignUpRequestDto dto) {
 
     String userId = dto.getUserId();
@@ -142,7 +145,7 @@ public class AuthServiceImplement implements AuthService {
         userThreeMajorLiftEntity.setUserId(customerEntity.getUserId());
         userThreeMajorLiftRepository.save(userThreeMajorLiftEntity);
 
-    } catch (Exception exception) {
+    } catch (IllegalArgumentException exception) {
         exception.printStackTrace(); // 예외 발생 시 스택 트레이스 출력
         return ResponseDto.databaseError(); // 데이터베이스 에러 응답
     }
@@ -152,12 +155,13 @@ public class AuthServiceImplement implements AuthService {
 
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto dto) {
 
         String userId = dto.getUserId();
         String password = dto.getPassword();
 
-        String accessToken = null;
+        String accessToken;
 
         try {
 
@@ -181,6 +185,7 @@ public class AuthServiceImplement implements AuthService {
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> idCheck(IdCheckRequestDto dto) {
         
         String userId = dto.getUserId();
@@ -199,6 +204,7 @@ public class AuthServiceImplement implements AuthService {
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> nicknameCheck(NicknameCheckRequestDto dto) {
         String nickname = dto.getNickname();
 

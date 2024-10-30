@@ -1160,12 +1160,14 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-three-major-lif
 | threeMajorLift | threeMajorLift[] | 3대 측정 정보 리스트  |    O     |
 
 **ThreeMajorLift**
-| UserthreeMajorLiftNumber | Integer | 사용자 3대 측정 정보 번호 | O |
+| name | type | description | required |
+|---|:---:|:---:|:---:|
+| userThreeMajorLiftNumber | Integer | 사용자 3대 측정 정보 번호 | O |
 | userId | String | 사용자 아이디 | O |
 | deadlift | BigDecimal | 데드리프트(kg) | X |
 | benchPress | BigDecimal | 벤치프레스(kg) | X |
 | squat | BigDecimal | 스쿼트 | X |
-| UserthreeMajorLiftDate | String | 사용자 3대 측정 등록 날짜 | O |
+| userThreeMajorLiftDate | String | 사용자 3대 측정 등록 날짜 | O |
 
 ###### Example
 

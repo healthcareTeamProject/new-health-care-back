@@ -16,7 +16,6 @@ import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftLi
 import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftResponseDto;
 
 public interface CustomerService {
-
     ResponseEntity<? super GetSignInResponseDto> getSignIn(String userId);
     ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId);
     ResponseEntity<? super GetUserMuscleFatResponseDto> getUserMuscleFat(String userId);

@@ -29,10 +29,7 @@ import lombok.RequiredArgsConstructor;
 public class CustomerController {
 
     private final CustomerService customerService;
-
-    /**
-     * 로그인한 고객의 정보를 가져옵니다.
-     */
+    // 로그인한 고객의 정보를 가져옵니다.
     @GetMapping("/sign-in")
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(
         @AuthenticationPrincipal String userId
