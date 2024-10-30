@@ -30,12 +30,15 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-    // 로그인한 고객의 정보를 가져옵니다.
-    @GetMapping(value = {"", "/"})
+    /**
+     * 로그인한 고객의 정보를 가져옵니다.
+     */
+    @GetMapping("/sign-in")
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(
         @AuthenticationPrincipal String userId
     ) {
-        return customerService.getSignIn(userId);
+        ResponseEntity<? super GetSignInResponseDto> response = customerService.getSignIn(userId);
+        return response;
     }
 
     // 고객의 기본 정보를 가져옵니다.

@@ -32,13 +32,13 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         // 회원가입 X
         if (existed) {
             String accessToken = (String) attributes.get("accessToken");
-            response.sendRedirect("http://localhost:4000/sns-success?accessToken=" + accessToken + "&expiration=36000");
+            response.sendRedirect("http://localhost:3000/sns-success?accessToken=" + accessToken + "&expiration=36000");
         }
         // 회원가입 O
         else {
             String snsId = (String) attributes.get("snsId");
             String joinPath = (String) attributes.get("joinPath");
-            response.sendRedirect("http://localhost:4000/auth?snsId=" + snsId + "&joinPath=" + joinPath); 
+            response.sendRedirect("http://localhost:3000/auth?snsId=" + snsId + "&joinPath=" + joinPath); 
         } 
         
     
