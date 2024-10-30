@@ -1,9 +1,10 @@
 package com.example.healthcare_back.entity;
 
+import java.math.BigDecimal;
+
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
 
-import java.math.BigDecimal;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -62,6 +63,4 @@ public class CustomerEntity {
         this.personalGoals = dto.getPersonalGoals();
         this.height = dto.getHeight();
     }
-
-
 }

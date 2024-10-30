@@ -27,5 +27,4 @@ public class Customer {
         this.personalGoals = customerEntity.getPersonalGoals();
         this.height = customerEntity.getHeight();
     }
-
 }

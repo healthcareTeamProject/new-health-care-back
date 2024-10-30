@@ -38,7 +38,7 @@ public class OAuth2UserServiceImplement extends DefaultOAuth2UserService {
         // SNS ID와 가입 경로를 사용하여 고객 엔티티 조회
         CustomerEntity customerEntity = customerRepository.findBySnsIdAndJoinPath(snsId, registration);
 
-        CustomOAuth2User customOAuth2User = null;
+        CustomOAuth2User customOAuth2User;
 
         // 고객 엔티티가 존재하지 않는 경우 (새로운 사용자)
         if (customerEntity == null) {
@@ -74,6 +74,7 @@ public class OAuth2UserServiceImplement extends DefaultOAuth2UserService {
         }
         if (registration.equals("naver")) {
             // 네이버는 response 필드에서 ID를 추출
+            @SuppressWarnings("unchecked")
             Map<String, String> response = (Map<String, String>) oAuth2User.getAttributes().get("response");
             snsId = response.get("id");
         }

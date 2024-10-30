@@ -2,7 +2,6 @@ package com.example.healthcare_back.service.implement;
 
 import java.util.List;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -39,9 +38,10 @@ public class CustomerServiceImplement implements CustomerService{
 
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(String userId) {
         
-        CustomerEntity customerEntity = null;
+        CustomerEntity customerEntity;
 
         try {
 
@@ -58,6 +58,7 @@ public class CustomerServiceImplement implements CustomerService{
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> patchCustomer(PatchCustomerRequestDto dto, String userId) {
         
         try {
@@ -87,9 +88,10 @@ public class CustomerServiceImplement implements CustomerService{
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId) {
        
-        CustomerEntity customerEntity = null;
+        CustomerEntity customerEntity;
 
         try {
             
@@ -107,6 +109,7 @@ public class CustomerServiceImplement implements CustomerService{
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetUserMuscleFatResponseDto> getUserMuscleFat(String userId) {
         UserMuscleFatEntity userMuscleFatEntity;
 
@@ -126,6 +129,7 @@ public class CustomerServiceImplement implements CustomerService{
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetUserThreeMajorLiftResponseDto> getUserThreeMajorLift(String userId) {
         UserThreeMajorLiftEntity userThreeMajorLiftEntity;
 
@@ -145,9 +149,10 @@ public class CustomerServiceImplement implements CustomerService{
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList() {
 
-        List<UserMuscleFatEntity> userMuscleFatEntities = new ArrayList<>();
+        List<UserMuscleFatEntity> userMuscleFatEntities;
 
         try {
 
@@ -162,9 +167,10 @@ public class CustomerServiceImplement implements CustomerService{
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLiftList() {
         
-        List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities = new ArrayList<>();
+        List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities;
 
         try {
 
