@@ -54,7 +54,7 @@ public class UserThreeMajorLiftEntity {
         this.squat = dto.getSquat();
     }
 
-    public UserThreeMajorLiftEntity(PostUserThreeMajorLiftRequestDto dto) {
+    public UserThreeMajorLiftEntity(SignUpUserThreeMajorLiftRequestDto dto) {
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
