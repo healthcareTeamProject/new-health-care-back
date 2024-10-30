@@ -14,12 +14,12 @@ import lombok.Getter;
 @Getter
 public class UserMuscleFatList {
 
-    private Integer userMuscleFatNumber;
-    private String userId;
-    private BigDecimal weight;
-    private BigDecimal skeletalMuscleMass;
-    private BigDecimal bodyFatMass;
-    private LocalDateTime userMuscleFatDate;
+    private final Integer userMuscleFatNumber;
+    private final String userId;
+    private final BigDecimal weight;
+    private final BigDecimal skeletalMuscleMass;
+    private final BigDecimal bodyFatMass;
+    private final LocalDateTime userMuscleFatDate;
 
     public UserMuscleFatList(UserMuscleFatEntity userMuscleFatEntity) {
         this.userMuscleFatNumber = userMuscleFatEntity.getUserMuscleFatNumber();

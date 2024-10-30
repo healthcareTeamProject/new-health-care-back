@@ -15,20 +15,22 @@ import com.example.healthcare_back.entity.CommentEntity;
 
 import lombok.Getter;
 
+// 게시물 내용 불러오기 Response DTO
+
 @Getter
 public class GetBoardResponseDto extends ResponseDto {
     
-    private Integer boardNumber;
-    private String boardTitle;
-    private String nickname;
-    private LocalDateTime boardUploadDate;
-    private String boardContents;
-    private String youtubeVideoLink;
-    private String boardFileContents;
-    private Integer boardViewCount;
-    private Integer boardLikeCount;
-    private List<String> commentList = new ArrayList<>(); // 초기화
-    private Integer commentCount;
+    private final Integer boardNumber;
+    private final String boardTitle;
+    private final String nickname;
+    private final LocalDateTime boardUploadDate;
+    private final String boardContents;
+    private final String youtubeVideoLink;
+    private final String boardFileContents;
+    private final Integer boardViewCount;
+    private final Integer boardLikeCount;
+    private final List<String> commentList = new ArrayList<>(); // 초기화
+    private final Integer commentCount;
 
     public GetBoardResponseDto(BoardEntity boardEntity, List<CommentEntity> commentEntities) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

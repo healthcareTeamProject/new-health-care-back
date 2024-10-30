@@ -13,10 +13,12 @@ import com.example.healthcare_back.entity.BoardEntity;
 
 import lombok.Getter;
 
+// 게시판 목록 불러오기 Response DTO
+
 @Getter
 public class GetBoardListResponseDto extends ResponseDto {
     
-    private List<BoardList> boardLists;
+    private final List<BoardList> boardLists;
 
     public GetBoardListResponseDto(List<BoardEntity> boardEntities) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

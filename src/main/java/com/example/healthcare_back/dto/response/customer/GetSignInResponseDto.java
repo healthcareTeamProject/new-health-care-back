@@ -10,6 +10,8 @@ import com.example.healthcare_back.entity.CustomerEntity;
 
 import lombok.Getter;
 
+// 로그인 정보 불러오기 Response DTO
+
 @Getter
 public class GetSignInResponseDto extends ResponseDto {
     

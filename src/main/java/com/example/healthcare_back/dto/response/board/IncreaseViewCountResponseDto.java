@@ -9,10 +9,12 @@ import com.example.healthcare_back.dto.response.ResponseMessage;
 
 import lombok.Getter;
 
+// 조회수 증가 Response DTO
+
 @Getter
 public class IncreaseViewCountResponseDto extends ResponseDto {
 
-    private Integer boardNumber; // 조회수를 증가시킨 게시물 번호
+    private final Integer boardNumber; // 조회수를 증가시킨 게시물 번호
 
     public IncreaseViewCountResponseDto(Integer boardNumber) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

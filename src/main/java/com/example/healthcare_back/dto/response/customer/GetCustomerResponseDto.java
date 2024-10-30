@@ -11,16 +11,18 @@ import com.example.healthcare_back.entity.CustomerEntity;
 import java.math.BigDecimal;
 import lombok.Getter;
 
+// 회원 정보 불러오기 Response DTO
+
 @Getter
 public class GetCustomerResponseDto extends ResponseDto {
 
-    private String userId;
-    private String name;
-    private String nickname;
-    private String telNumber;
-    private String profileImage;
-    private String personalGoals;
-    private BigDecimal height;
+    private final String userId;
+    private final String name;
+    private final String nickname;
+    private final String telNumber;
+    private final String profileImage;
+    private final String personalGoals;
+    private final BigDecimal height;
 
     private GetCustomerResponseDto(CustomerEntity customerEntity) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

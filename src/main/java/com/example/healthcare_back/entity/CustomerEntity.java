@@ -1,6 +1,7 @@
 package com.example.healthcare_back.entity;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
+import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
 
 import java.math.BigDecimal;
 import jakarta.persistence.Column;
@@ -13,6 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// 회원 엔터티
 
 @Getter
 @Setter
@@ -21,7 +23,6 @@ import lombok.Setter;
 @Entity(name="customer")
 @Table(name="customer")
 public class CustomerEntity {
-    
     @Id 
     private String userId;
     @Column(nullable = false)
@@ -41,7 +42,6 @@ public class CustomerEntity {
     @Column(precision = 5, scale = 1)
     private BigDecimal height;
 
-
     public CustomerEntity(SignUpRequestDto dto) {
         this.userId = dto.getUserId();
         this.name = dto.getName();
@@ -53,6 +53,15 @@ public class CustomerEntity {
         this.profileImage = dto.getProfileImage();
         this.personalGoals = dto.getPersonalGoals();
         this.height = dto.getHeight(); 
-
     }
+
+    public void patchCustomer(PatchCustomerRequestDto dto) {
+        this.name = dto.getName();
+        this.nickname = dto.getNickname();
+        this.profileImage = dto.getProfileImage();
+        this.personalGoals = dto.getPersonalGoals();
+        this.height = dto.getHeight();
+    }
+
+
 }

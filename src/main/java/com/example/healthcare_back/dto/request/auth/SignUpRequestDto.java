@@ -2,10 +2,6 @@ package com.example.healthcare_back.dto.request.auth;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
-import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
-
-
 import java.math.BigDecimal;
 
 import jakarta.persistence.Column;
@@ -17,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// 회원가입 Request Body DTO
 
 @Getter
 @Setter
@@ -67,6 +64,5 @@ public class SignUpRequestDto {
     @Positive
     @Column(precision = 5, scale = 1)
     private BigDecimal bodyFatMass;
-    
 
 }
