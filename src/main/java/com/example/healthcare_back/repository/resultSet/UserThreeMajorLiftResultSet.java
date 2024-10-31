@@ -2,7 +2,7 @@ package com.example.healthcare_back.repository.resultSet;
 
 import java.math.BigDecimal;
 
-public interface ThreeMajorLiftResultSet {
+public interface UserThreeMajorLiftResultSet {
     Integer getUserThreeMajorLiftNumber();
     String getUserId();
     BigDecimal getDeadlift();
