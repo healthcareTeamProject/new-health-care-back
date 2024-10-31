@@ -13,5 +13,6 @@ public interface UserThreeMajorLiftRepository extends JpaRepository<UserThreeMaj
     
     List<UserThreeMajorLiftEntity> findByOrderByUserThreeMajorLiftNumberDesc();
     UserThreeMajorLiftEntity findByUserId(String userId);
+    
 
 }

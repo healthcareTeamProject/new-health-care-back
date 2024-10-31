@@ -8,19 +8,29 @@ import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.entity.CustomerEntity;
 
+import jakarta.persistence.Column;
+
 import java.math.BigDecimal;
 import lombok.Getter;
+
+// 회원 정보 불러오기 Response DTO
 
 @Getter
 public class GetCustomerResponseDto extends ResponseDto {
 
-    private String userId;
-    private String name;
-    private String nickname;
-    private String telNumber;
-    private String profileImage;
-    private String personalGoals;
-    private BigDecimal height;
+    private final String userId;
+    private final String name;
+    private final String nickname;
+    private final String telNumber;
+    private final String profileImage;
+    private final String personalGoals;
+    private final BigDecimal height;
+    private final BigDecimal deadlift;
+    private final BigDecimal benchPress;
+    private final BigDecimal squat;
+    private final BigDecimal weight;
+    private final BigDecimal skeletalMuscleMass;
+    private final BigDecimal bodyFatMass;
 
     private GetCustomerResponseDto(CustomerEntity customerEntity) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
@@ -31,6 +41,12 @@ public class GetCustomerResponseDto extends ResponseDto {
         this.profileImage = customerEntity.getProfileImage();
         this.personalGoals = customerEntity.getPersonalGoals();
         this.height = customerEntity.getHeight();
+        this.deadlift = customerEntity.getDeadlift(); 
+        this.benchPress = customerEntity.getBenchPress(); 
+        this.squat = customerEntity.getSquat(); 
+        this.weight = customerEntity.getWeight(); 
+        this.skeletalMuscleMass = customerEntity.getSkeletalMuscleMass(); 
+        this.bodyFatMass = customerEntity.getBodyFatMass(); 
     }
 
     public static ResponseEntity<GetCustomerResponseDto> success(CustomerEntity customerEntity) {

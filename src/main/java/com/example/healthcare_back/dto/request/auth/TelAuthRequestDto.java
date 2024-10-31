@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// 전화번호 인증요청 Request Body DTO
+
 @Getter
 @Setter
 @NoArgsConstructor

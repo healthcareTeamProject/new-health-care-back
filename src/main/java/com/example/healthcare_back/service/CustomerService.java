@@ -7,26 +7,27 @@ import com.example.healthcare_back.dto.request.auth.SignUpUserThreeMajorLiftRequ
 import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
+import com.example.healthcare_back.dto.request.customer.PatchUserMuscleFatRequestDto;
+import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetCustomerResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetSignInResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetUserMuscleFatListResponseDto;
-import com.example.healthcare_back.dto.response.customer.GetUserMuscleFatResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftListResponseDto;
-import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftResponseDto;
 
 public interface CustomerService {
 
     ResponseEntity<? super GetSignInResponseDto> getSignIn(String userId);
     ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId);
-    ResponseEntity<? super GetUserMuscleFatResponseDto> getUserMuscleFat(String userId);
     ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList();
-    ResponseEntity<? super GetUserThreeMajorLiftResponseDto> getUserThreeMajorLift(String userId);
     ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLiftList();
 
     ResponseEntity<ResponseDto> patchCustomer(PatchCustomerRequestDto dto, String userId);
+    ResponseEntity<ResponseDto> patchUserMuscleFatCustomer(PatchUserMuscleFatRequestDto dto, String userId);
+    ResponseEntity<ResponseDto> patchThreeMajorLiftCustomer(PatchUserThreeMajorLiftRequestDto dto, String userId);
     ResponseEntity<ResponseDto> signUpUserMuscleFat(SignUpUserMuscleFatRequestDto dto, String userId);
     ResponseEntity<ResponseDto> signUpUserThreeMajorLift(SignUpUserThreeMajorLiftRequestDto dto, String userId);
     ResponseEntity<ResponseDto> postUserMuscleFat(PostUserMuscleFatRequestDto dto, String userId);
     ResponseEntity<ResponseDto> postUserThreeMajorLift(PostUserThreeMajorLiftRequestDto dto, String userId);
+
 }

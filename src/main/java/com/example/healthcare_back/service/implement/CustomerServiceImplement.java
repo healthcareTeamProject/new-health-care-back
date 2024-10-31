@@ -1,26 +1,24 @@
 package com.example.healthcare_back.service.implement;
 
 import java.util.List;
-import java.util.Optional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.healthcare_back.dto.request.auth.SignUpUserMuscleFatRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignUpUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
+import com.example.healthcare_back.dto.request.customer.PatchUserMuscleFatRequestDto;
+import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetCustomerResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetSignInResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetUserMuscleFatListResponseDto;
-import com.example.healthcare_back.dto.response.customer.GetUserMuscleFatResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftListResponseDto;
-import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftResponseDto;
 import com.example.healthcare_back.entity.CustomerEntity;
 import com.example.healthcare_back.entity.UserMuscleFatEntity;
 import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
@@ -59,35 +57,7 @@ public class CustomerServiceImplement implements CustomerService{
         
     }
 
-    @Override
-    public ResponseEntity<ResponseDto> patchCustomer(PatchCustomerRequestDto dto, String userId) {
-        
-        try {
-
-            String name = dto.getName();
-            String nickname = dto.getNickname();
-            String profileImage = dto.getProfileImage();
-            String personalGoals = dto.getPersonalGoals();
-            BigDecimal height = dto.getHeight();
-
-            CustomerEntity customerEntity = customerRepository.findByUserId(userId);
-            if (customerEntity == null) return ResponseDto.noExistUserId();
-            customerEntity.setName(name);
-            customerEntity.setNickname(nickname);
-            customerEntity.setProfileImage(profileImage);
-            customerEntity.setPersonalGoals(personalGoals);
-            customerEntity.setHeight(height);
-            customerRepository.save(customerEntity);
-                
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError();
-        }
-
-        return ResponseDto.success();
-
-    }
-
+    
     @Override
     public ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId) {
        
@@ -106,44 +76,6 @@ public class CustomerServiceImplement implements CustomerService{
         
         return GetCustomerResponseDto.success(customerEntity);
 
-    }
-
-    @Override
-    public ResponseEntity<? super GetUserMuscleFatResponseDto> getUserMuscleFat(String userId) {
-        UserMuscleFatEntity userMuscleFatEntity;
-
-        try {
-            // 사용자 ID로 UserMuscleFatEntity 찾기
-            userMuscleFatEntity = userMuscleFatRepository.findByUserId(userId);
-            if (userMuscleFatEntity == null) {
-                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않을 때
-            }
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError(); // 데이터베이스 오류 처리
-        }
-
-        // 성공적으로 찾은 경우 DTO로 변환하여 응답
-        return GetUserMuscleFatResponseDto.success(userMuscleFatEntity);
-    }
-
-    @Override
-    public ResponseEntity<? super GetUserThreeMajorLiftResponseDto> getUserThreeMajorLift(String userId) {
-        UserThreeMajorLiftEntity userThreeMajorLiftEntity;
-
-        try {
-            // 사용자 ID로 UserThreeMajorLiftEntity 찾기
-            userThreeMajorLiftEntity = userThreeMajorLiftRepository.findByUserId(userId);
-            if (userThreeMajorLiftEntity == null) {
-                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않을 때
-            }
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError(); // 데이터베이스 오류 처리
-        }
-
-        // 성공적으로 찾은 경우 DTO로 변환하여 응답
-        return GetUserThreeMajorLiftResponseDto.success(userThreeMajorLiftEntity);
     }
 
     @Override
@@ -222,14 +154,90 @@ public class CustomerServiceImplement implements CustomerService{
 
     @Override
     public ResponseEntity<ResponseDto> postUserMuscleFat(PostUserMuscleFatRequestDto dto, String userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postUserMuscleFat'");
+        return null;
     }
 
     @Override
     public ResponseEntity<ResponseDto> postUserThreeMajorLift(PostUserThreeMajorLiftRequestDto dto, String userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postUserThreeMajorLift'");
+        return null;
     }
+
+    @Override
+    public ResponseEntity<ResponseDto> patchCustomer(PatchCustomerRequestDto dto, String userId) {
+        
+        try {
+
+            String name = dto.getName();
+            String nickname = dto.getNickname();
+            String profileImage = dto.getProfileImage();
+            String personalGoals = dto.getPersonalGoals();
+            BigDecimal height = dto.getHeight();
+
+            CustomerEntity customerEntity = customerRepository.findByUserId(userId);
+            if (customerEntity == null) return ResponseDto.noExistUserId();
+            customerEntity.setName(name);
+            customerEntity.setNickname(nickname);
+            customerEntity.setProfileImage(profileImage);
+            customerEntity.setPersonalGoals(personalGoals);
+            customerEntity.setHeight(height);
+            customerRepository.save(customerEntity);
+                
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return ResponseDto.success();
+
+    }
+
+    @Override
+    public ResponseEntity<ResponseDto> patchUserMuscleFatCustomer(PatchUserMuscleFatRequestDto dto, String userId) {
+        
+        try {
+
+            BigDecimal weight = dto.getWeight();
+            BigDecimal skeletalMuscleMass = dto.getSkeletalMuscleMass();
+            BigDecimal bodyFatMass = dto.getBodyFatMass();
+
+            CustomerEntity customerEntity = customerRepository.findByUserId(userId);
+            if (customerEntity == null) return ResponseDto.noExistUserId();
+            customerEntity.setWeight(weight);
+            customerEntity.setSkeletalMuscleMass(skeletalMuscleMass);
+            customerEntity.setBodyFatMass(bodyFatMass);
+            customerRepository.save(customerEntity);
+                
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return ResponseDto.success();
+    }
+
+    @Override
+    public ResponseEntity<ResponseDto> patchThreeMajorLiftCustomer(PatchUserThreeMajorLiftRequestDto dto, String userId) {
+
+        try {
+
+            BigDecimal deadlift = dto.getDeadlift();
+            BigDecimal benchPress = dto.getBenchPress();
+            BigDecimal squat = dto.getSquat();
+
+            CustomerEntity customerEntity = customerRepository.findByUserId(userId);
+            if (customerEntity == null) return ResponseDto.noExistUserId();
+            customerEntity.setDeadlift(deadlift);
+            customerEntity.setBenchPress(benchPress);
+            customerEntity.setSquat(squat);
+            customerRepository.save(customerEntity);
+                
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return ResponseDto.success();
+    }
+
 
 }

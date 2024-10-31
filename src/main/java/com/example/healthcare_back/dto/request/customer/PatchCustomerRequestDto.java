@@ -9,6 +9,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
+// 회원정보 수정 Request Body DTO
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,6 +24,5 @@ public class PatchCustomerRequestDto {
     private String personalGoals;
     @NotNull @Column(precision = 5, scale = 1)
     private BigDecimal height;
-  
 
 }

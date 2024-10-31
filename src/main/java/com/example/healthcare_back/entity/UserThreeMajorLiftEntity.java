@@ -2,6 +2,8 @@ package com.example.healthcare_back.entity;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignUpUserThreeMajorLiftRequestDto;
+import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
+import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,6 +21,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// 회원 3대측정 기록 엔터티
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,18 +33,22 @@ public class UserThreeMajorLiftEntity {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer userThreeMajorLiftNumber;
+
     @NotBlank
     private String userId;
+
     @Column(precision = 5, scale = 1)
     private BigDecimal deadlift;
+
     @Column(precision = 5, scale = 1)
     private BigDecimal benchPress;
+
+
     @Column(precision = 5, scale = 1)
     private BigDecimal squat;
 
     @Column(updatable = false)
     private LocalDateTime userThreeMajorLiftDate;
-
 
     @PrePersist
     protected void onCreate() {
@@ -49,17 +57,29 @@ public class UserThreeMajorLiftEntity {
     }
 
     public UserThreeMajorLiftEntity(SignUpRequestDto dto) {
-
+        this.userId = dto.getUserId();
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
     }
-
+    
     public UserThreeMajorLiftEntity(SignUpUserThreeMajorLiftRequestDto dto) {
-
+        this.userId = dto.getUserId();
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
     }
 
+    public UserThreeMajorLiftEntity(PostUserThreeMajorLiftRequestDto dto) {
+        this.userId = dto.getUserId();
+        this.deadlift = dto.getDeadlift();
+        this.benchPress = dto.getBenchPress();
+        this.squat = dto.getSquat();
+    }
+
+    public UserThreeMajorLiftEntity(PatchUserThreeMajorLiftRequestDto dto) {
+        this.deadlift = dto.getDeadlift();
+        this.benchPress = dto.getBenchPress();
+        this.squat = dto.getSquat();
+    }
 }

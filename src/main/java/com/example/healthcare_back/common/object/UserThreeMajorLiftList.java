@@ -13,15 +13,16 @@ import lombok.Getter;
 @Getter
 public class UserThreeMajorLiftList {
     
-    private Integer userThreeMajorLiftNumber;
-    private String userId;
-    private BigDecimal deadlift;
-    private BigDecimal benchPress;
-    private BigDecimal squat;
-    private LocalDateTime userThreeMajorLiftDate;
+    private final Integer userThreeMajorLiftNumber;
+    private final String userId;
+    private final BigDecimal deadlift;
+    private final BigDecimal benchPress;
+    private final BigDecimal squat;
+    private final LocalDateTime userThreeMajorLiftDate;
 
     public UserThreeMajorLiftList(UserThreeMajorLiftEntity userThreeMajorLiftEntity) {
         this.userThreeMajorLiftNumber = userThreeMajorLiftEntity.getUserThreeMajorLiftNumber();
+        this.userId = getUserId();
         this.deadlift = userThreeMajorLiftEntity.getDeadlift();
         this.benchPress = userThreeMajorLiftEntity.getBenchPress();
         this.squat = userThreeMajorLiftEntity.getSquat();

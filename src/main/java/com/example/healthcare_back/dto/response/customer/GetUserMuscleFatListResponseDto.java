@@ -13,10 +13,12 @@ import com.example.healthcare_back.entity.UserMuscleFatEntity;
 
 import lombok.Getter;
 
+// 회원 신체정보 불러오기 Response DTO
+
 @Getter
 public class GetUserMuscleFatListResponseDto extends ResponseDto {
 
-    private List<UserMuscleFatList> userMuscleFatLists;
+    private final List<UserMuscleFatList> userMuscleFatLists;
 
     public GetUserMuscleFatListResponseDto(List<UserMuscleFatEntity> userMuscleFatEntities) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
@@ -27,6 +29,4 @@ public class GetUserMuscleFatListResponseDto extends ResponseDto {
         GetUserMuscleFatListResponseDto responseBody = new GetUserMuscleFatListResponseDto(userMuscleFatEntities);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
-
-    
 }

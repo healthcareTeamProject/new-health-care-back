@@ -2,6 +2,8 @@ package com.example.healthcare_back.entity;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignUpUserMuscleFatRequestDto;
+import com.example.healthcare_back.dto.request.customer.PatchUserMuscleFatRequestDto;
+import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,6 +22,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// 회원 신체정보 엔터티
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,15 +32,20 @@ import lombok.Setter;
 @Table(name="user_muscle_fat")
 public class UserMuscleFatEntity {
     
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userMuscleFatNumber;
+
     @NotBlank
     private String userId;
+
     @NotNull 
     @Column(precision = 5, scale = 1)
     private BigDecimal weight;
+
     @Column(precision = 5, scale = 1)
     private BigDecimal skeletalMuscleMass;
+
     @Column(precision = 5, scale = 1)
     private BigDecimal bodyFatMass;
 
@@ -50,12 +59,27 @@ public class UserMuscleFatEntity {
     }
     
     public UserMuscleFatEntity(SignUpRequestDto dto) {
+        this.userId = dto.getUserId();
         this.weight = dto.getWeight();
         this.skeletalMuscleMass = dto.getSkeletalMuscleMass();
         this.bodyFatMass = dto.getBodyFatMass();
     }
 
     public UserMuscleFatEntity(SignUpUserMuscleFatRequestDto dto) {
+        this.userId = dto.getUserId();
+        this.weight = dto.getWeight();
+        this.skeletalMuscleMass = dto.getSkeletalMuscleMass();
+        this.bodyFatMass = dto.getBodyFatMass();
+    }
+
+    public UserMuscleFatEntity(PostUserMuscleFatRequestDto dto) {
+        this.userId = dto.getUserId();
+        this.weight = dto.getWeight();
+        this.skeletalMuscleMass = dto.getSkeletalMuscleMass();
+        this.bodyFatMass = dto.getBodyFatMass();
+    }
+
+    public UserMuscleFatEntity(PatchUserMuscleFatRequestDto dto) {
         this.weight = dto.getWeight();
         this.skeletalMuscleMass = dto.getSkeletalMuscleMass();
         this.bodyFatMass = dto.getBodyFatMass();

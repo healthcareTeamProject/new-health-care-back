@@ -6,12 +6,10 @@ import java.math.BigDecimal;
 
 import lombok.Getter;
 
-/**
- * 고객 정보를 나타내는 클래스입니다.
- */
+// 고객 정보를 나타내는 클래스
+
 @Getter
 public class Customer {
-
     private final String userId;
     private final String name;
     private final String nickname;
@@ -19,7 +17,6 @@ public class Customer {
     private final String profileImage;
     private final String personalGoals;
     private final BigDecimal height;
-  
 
     private Customer(CustomerEntity customerEntity) {
         this.userId = customerEntity.getUserId();
