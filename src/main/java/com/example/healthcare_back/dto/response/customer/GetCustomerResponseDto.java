@@ -23,6 +23,12 @@ public class GetCustomerResponseDto extends ResponseDto {
     private final String profileImage;
     private final String personalGoals;
     private final BigDecimal height;
+    private final BigDecimal deadlift;
+    private final BigDecimal benchPress;
+    private final BigDecimal squat;
+    private final BigDecimal weight;
+    private final BigDecimal skeletalMuscleMass;
+    private final BigDecimal bodyFatMass;
 
     private GetCustomerResponseDto(CustomerEntity customerEntity) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
@@ -31,8 +37,14 @@ public class GetCustomerResponseDto extends ResponseDto {
         this.nickname = customerEntity.getNickname();
         this.telNumber = customerEntity.getTelNumber();
         this.profileImage = customerEntity.getProfileImage();
-        this.personalGoals = customerEntity.getPersonalGoal();
+        this.personalGoals = customerEntity.getPersonalGoals();
         this.height = customerEntity.getHeight();
+        this.deadlift = customerEntity.getDeadlift(); 
+        this.benchPress = customerEntity.getBenchPress(); 
+        this.squat = customerEntity.getSquat(); 
+        this.weight = customerEntity.getWeight(); 
+        this.skeletalMuscleMass = customerEntity.getSkeletalMuscleMass(); 
+        this.bodyFatMass = customerEntity.getBodyFatMass(); 
     }
 
     public static ResponseEntity<GetCustomerResponseDto> success(CustomerEntity customerEntity) {

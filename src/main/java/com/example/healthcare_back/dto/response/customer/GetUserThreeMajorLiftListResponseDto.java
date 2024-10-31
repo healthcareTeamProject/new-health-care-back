@@ -9,7 +9,7 @@ import com.example.healthcare_back.common.object.UserThreeMajorLiftList;
 import com.example.healthcare_back.dto.response.ResponseCode;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
-import com.example.healthcare_back.repository.resultSet.UserThreeMajorLiftResultSet;
+import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
 
 import lombok.Getter;
 
@@ -20,13 +20,13 @@ public class GetUserThreeMajorLiftListResponseDto extends ResponseDto {
 
     private final List<UserThreeMajorLiftList> userThreeMajorLiftLists;
 
-    public GetUserThreeMajorLiftListResponseDto(List<UserThreeMajorLiftResultSet> userThreeMajorLiftResultSet) {
+    public GetUserThreeMajorLiftListResponseDto(List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
-        this.userThreeMajorLiftLists = UserThreeMajorLiftList.getList(userThreeMajorLiftResultSet);
+        this.userThreeMajorLiftLists = UserThreeMajorLiftList.getList(userThreeMajorLiftEntities);
     }
 
-    public static ResponseEntity<GetUserThreeMajorLiftListResponseDto> success(List<UserThreeMajorLiftResultSet> userThreeMajorLiftResultSet) {
-        GetUserThreeMajorLiftListResponseDto responseBody = new GetUserThreeMajorLiftListResponseDto(userThreeMajorLiftResultSet);
+    public static ResponseEntity<GetUserThreeMajorLiftListResponseDto> success(List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities) {
+        GetUserThreeMajorLiftListResponseDto responseBody = new GetUserThreeMajorLiftListResponseDto(userThreeMajorLiftEntities);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
     

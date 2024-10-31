@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
@@ -30,6 +31,6 @@ public class SignUpUserThreeMajorLiftRequestDto {
     @Column(precision = 5, scale = 1)
     private BigDecimal squat;
     @NotNull 
-    private String userThreeMajorLiftDate;
+    private LocalDateTime userThreeMajorLiftDate;
 
 }

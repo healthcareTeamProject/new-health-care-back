@@ -10,6 +10,7 @@ public interface ResponseMessage {
     String DUPLICATED_USER_TEL_NUMBER = "Duplicated user tel number.";
 
     String NO_EXIST_USER_THREE_MAJOR_LIFT_INFORMATION =  "No exist user three major lift information.";
+    String NO_EXIST_USER_MUSCLE_FAT_INFORMATION =  "No exist user muscle fat information.";
     String NO_EXIST_USER_ID =  "No exist user id.";
     String NO_EXIST_COMMENT =  "No exist comment.";
     String NO_EXIST_BOARD = "No exist board.";
