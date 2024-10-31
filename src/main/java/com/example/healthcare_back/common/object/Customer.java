@@ -18,7 +18,6 @@ public class Customer {
     private final String personalGoal;
     private final BigDecimal height;
 
-    @SuppressWarnings("unused")
     private Customer(CustomerEntity customerEntity) {
         this.userId = customerEntity.getUserId();
         this.name = customerEntity.getName();

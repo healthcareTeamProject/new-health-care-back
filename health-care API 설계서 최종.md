@@ -954,6 +954,8 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-muscle-fat"
 | muscleFat | muscleFatList[] |   신체 정보 리스트    |    O     |
 
 **MuscleFatList**  
+| name      |      type       |      description      | required |
+| --------- | :-------------: | :-------------------: | :------: |
 | userMuscleFatNumber | Integer | 사용자 신체 정보 번호 | O |
 | userId | String | 사용자 아이디 | O |
 | weight | BigDecimal | 몸무게 | O |

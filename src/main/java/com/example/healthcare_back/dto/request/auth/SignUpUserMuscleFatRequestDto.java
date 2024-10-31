@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 // 회원 신체정보 수정 Request Body DTO
 
@@ -31,6 +30,6 @@ public class SignUpUserMuscleFatRequestDto {
     @Column(precision = 5, scale = 1)
     private BigDecimal bodyFatMass;
     @NotNull 
-    private LocalDateTime userMuscleFatDate;
+    private String userMuscleFatDate;
 
 }
