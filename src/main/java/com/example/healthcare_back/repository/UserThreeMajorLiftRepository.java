@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.healthcare_back.repository.resultSet.UserThreeMajorLiftResultSet;
+import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
 
 @Repository
-public interface UserThreeMajorLiftRepository extends JpaRepository<UserThreeMajorLiftResultSet, Integer>  {
+public interface UserThreeMajorLiftRepository extends JpaRepository<UserThreeMajorLiftEntity, Integer>  {
     
-    List<UserThreeMajorLiftResultSet> findByOrderByUserThreeMajorLiftNumberDesc();
-    UserThreeMajorLiftResultSet findByUserId(String userId);
+    List<UserThreeMajorLiftEntity> findByOrderByUserThreeMajorLiftNumberDesc();
+    UserThreeMajorLiftEntity findByUserId(String userId);
 
 }

@@ -6,14 +6,12 @@ import java.util.List;
 
 import com.example.healthcare_back.entity.UserMuscleFatEntity;
 
-
 import java.time.LocalDateTime;
 
 import lombok.Getter;
 
 @Getter
 public class UserMuscleFatList {
-
     private final Integer userMuscleFatNumber;
     private final String userId;
     private final BigDecimal weight;

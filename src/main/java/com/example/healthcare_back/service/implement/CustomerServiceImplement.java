@@ -20,10 +20,10 @@ import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftLi
 import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftResponseDto;
 import com.example.healthcare_back.entity.CustomerEntity;
 import com.example.healthcare_back.entity.UserMuscleFatEntity;
+import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
 import com.example.healthcare_back.repository.CustomerRepository;
 import com.example.healthcare_back.repository.UserMuscleFatRepository;
 import com.example.healthcare_back.repository.UserThreeMajorLiftRepository;
-import com.example.healthcare_back.repository.resultSet.UserThreeMajorLiftResultSet;
 import com.example.healthcare_back.service.CustomerService;
 
 import lombok.RequiredArgsConstructor;
@@ -114,12 +114,12 @@ public class CustomerServiceImplement implements CustomerService {
     @Override
     @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetUserThreeMajorLiftResponseDto> getUserThreeMajorLift(String userId) {
-        UserThreeMajorLiftResultSet userThreeMajorLiftResultSet;
+        UserThreeMajorLiftEntity userThreeMajorLiftEntity;
 
         try {
-            // 사용자 ID로 UserThreeMajorLiftResultSet 찾기
-            userThreeMajorLiftResultSet = userThreeMajorLiftRepository.findByUserId(userId);
-            if (userThreeMajorLiftResultSet == null) {
+            // 사용자 ID로 UserThreeMajorLiftEntity 찾기
+            userThreeMajorLiftEntity = userThreeMajorLiftRepository.findByUserId(userId);
+            if (userThreeMajorLiftEntity == null) {
                 return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않을 때
             }
         } catch (Exception exception) {
@@ -127,7 +127,7 @@ public class CustomerServiceImplement implements CustomerService {
             return ResponseDto.databaseError(); // 데이터베이스 오류 처리
         }
         // 성공적으로 찾은 경우 DTO로 변환하여 응답
-        return GetUserThreeMajorLiftResponseDto.success(userThreeMajorLiftResultSet);
+        return GetUserThreeMajorLiftResponseDto.success(userThreeMajorLiftEntity);
     }
 
     @Override
@@ -147,15 +147,15 @@ public class CustomerServiceImplement implements CustomerService {
     @Override
     @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLiftList() {
-        List<UserThreeMajorLiftResultSet> userThreeMajorLiftResultSet;
+        List<UserThreeMajorLiftEntity> userThreeMajorLiftEntity;
 
         try {
-            userThreeMajorLiftResultSet = userThreeMajorLiftRepository.findByOrderByUserThreeMajorLiftNumberDesc();
+            userThreeMajorLiftEntity = userThreeMajorLiftRepository.findByOrderByUserThreeMajorLiftNumberDesc();
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-        return GetUserThreeMajorLiftListResponseDto.success(userThreeMajorLiftResultSet);
+        return GetUserThreeMajorLiftListResponseDto.success(userThreeMajorLiftEntity);
     }
 
    @Override
@@ -186,13 +186,13 @@ public class CustomerServiceImplement implements CustomerService {
         return ResponseDto.noExistUserId(); // 사용자 미존재 에러 처리
     }
 
-        // 2. UserThreeMajorLiftResultSet 생성
-        // 요청 DTO에서 ThreeMajorLift 정보를 추출하여 UserThreeMajorLiftResultSet 객체를 생성합니다.
-        UserThreeMajorLiftResultSet userThreeMajorLiftResultSet = new UserThreeMajorLiftResultSet(dto);
+        // 2. UserThreeMajorLiftEntity 생성
+        // 요청 DTO에서 ThreeMajorLift 정보를 추출하여 UserThreeMajorLiftEntity 객체를 생성합니다.
+        UserThreeMajorLiftEntity userThreeMajorLiftEntity = new UserThreeMajorLiftEntity(dto);
 
         // 3. 저장
         // 설정이 완료된 UserThreeMajorLift를 데이터베이스에 저장합니다.
-        userThreeMajorLiftRepository.save(userThreeMajorLiftResultset);
+        userThreeMajorLiftRepository.save(userThreeMajorLiftEntity);
 
         // 저장이 완료되면 성공 응답을 반환합니다.
         return ResponseDto.success();

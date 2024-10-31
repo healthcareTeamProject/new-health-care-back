@@ -17,13 +17,13 @@ import com.example.healthcare_back.dto.response.auth.SignInResponseDto;
 import com.example.healthcare_back.entity.CustomerEntity;
 import com.example.healthcare_back.entity.TelAuthNumberEntity;
 import com.example.healthcare_back.entity.UserMuscleFatEntity;
+import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
 import com.example.healthcare_back.provider.JwtProvider;
 import com.example.healthcare_back.provider.SmsProvider;
 import com.example.healthcare_back.repository.CustomerRepository;
 import com.example.healthcare_back.repository.TelAuthNumberRepository;
 import com.example.healthcare_back.repository.UserMuscleFatRepository;
 import com.example.healthcare_back.repository.UserThreeMajorLiftRepository;
-import com.example.healthcare_back.repository.resultSet.UserThreeMajorLiftResultSet;
 import com.example.healthcare_back.service.AuthService;
 
 import lombok.RequiredArgsConstructor;
@@ -141,9 +141,9 @@ public class AuthServiceImplement implements AuthService {
         userMuscleFatRepository.save(userMuscleFatEntity);
 
         // UserThreeMajorLiftResultSet 생성 및 저장
-        UserThreeMajorLiftResultSet userThreeMajorLiftResultSet = new UserThreeMajorLiftResultSet(dto);
-        userThreeMajorLiftResultSet.setUserId(customerEntity.getUserId());
-        userThreeMajorLiftRepository.save(userThreeMajorLiftResultSet);
+        UserThreeMajorLiftEntity userThreeMajorLiftEntity = new UserThreeMajorLiftEntity(dto);
+        userThreeMajorLiftEntity.setUserId(customerEntity.getUserId());
+        userThreeMajorLiftRepository.save(userThreeMajorLiftEntity);
 
     } catch (IllegalArgumentException exception) {
         exception.printStackTrace(); // 예외 발생 시 스택 트레이스 출력
