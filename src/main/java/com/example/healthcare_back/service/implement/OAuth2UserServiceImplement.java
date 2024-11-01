@@ -74,7 +74,6 @@ public class OAuth2UserServiceImplement extends DefaultOAuth2UserService {
         }
         if (registration.equals("naver")) {
             // 네이버는 response 필드에서 ID를 추출
-            @SuppressWarnings("unchecked")
             Map<String, String> response = (Map<String, String>) oAuth2User.getAttributes().get("response");
             snsId = response.get("id");
         }

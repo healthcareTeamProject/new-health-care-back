@@ -65,17 +65,9 @@ public class BoardEntity {
 
     public void update(PatchBoardRequestDto dto) {
         // 수정된 내용으로 게시물 내용 변경
-        if (dto.getBoardTitle() != null && !dto.getBoardTitle().isEmpty()) {
-            this.boardTitle = dto.getBoardTitle();
-        }
-        if (dto.getBoardContents() != null && !dto.getBoardContents().isEmpty()) {
-            this.boardContents = dto.getBoardContents();
-        }
-        if (dto.getYoutubeVideoLink() != null && !dto.getYoutubeVideoLink().isEmpty()) {
-            this.youtubeVideoLink = dto.getYoutubeVideoLink();
-        }
-        if (dto.getBoardFileContents() != null && !dto.getBoardFileContents().isEmpty()) {
-            this.boardFileContents = dto.getBoardFileContents();
-        }
+        this.boardTitle = dto.getBoardTitle();
+        this.boardContents = dto.getBoardContents();
+        this.youtubeVideoLink = dto.getYoutubeVideoLink();
+        this.boardFileContents = dto.getBoardFileContents();
     }
 }

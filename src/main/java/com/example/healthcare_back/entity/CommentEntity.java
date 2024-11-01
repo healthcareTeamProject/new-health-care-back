@@ -56,9 +56,7 @@ public class CommentEntity {
 
     public void update(PatchCommentRequestDto dto) {
         // 새로운 댓글 내용으로 수정
-        if (dto.getCommentContents() != null && !dto.getCommentContents().isEmpty()) {
-            this.commentContents = dto.getCommentContents();
-        }
+        this.commentContents = dto.getCommentContents();
         // 수정된 시간으로 업데이트
         this.commentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date.from(Instant.now()));
     }

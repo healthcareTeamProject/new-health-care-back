@@ -15,7 +15,7 @@ import com.example.healthcare_back.dto.response.board.GetCommentListResponseDto;
 public interface BoardService {
 
     // 게시물 조회
-    ResponseEntity<? super GetBoardResponseDto> getBoard(Integer boardNumber);
+    ResponseEntity<? super GetBoardResponseDto> getBoard(Integer boardNumber, String boardCategory, String boardTag);
 
     // 게시글 목록 조회
     ResponseEntity<? super GetBoardListResponseDto> getBoardList(); 
