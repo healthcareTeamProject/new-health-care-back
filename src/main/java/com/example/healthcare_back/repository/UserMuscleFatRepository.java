@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.example.healthcare_back.entity.CustomerEntity;
 import com.example.healthcare_back.entity.UserMuscleFatEntity;
 
 @Repository
 public interface UserMuscleFatRepository extends JpaRepository<UserMuscleFatEntity, Integer> {
     
     List<UserMuscleFatEntity> findByOrderByUserMuscleFatNumberDesc();
-    UserMuscleFatEntity findByUserId(String userId);
-
+    CustomerEntity findByUserId(String userId);
 }

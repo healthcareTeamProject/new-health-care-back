@@ -2,6 +2,8 @@ package com.example.healthcare_back.entity;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.auth.SignUpUserThreeMajorLiftRequestDto;
+import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
+import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,14 +30,20 @@ import lombok.Setter;
 @Entity(name="userThreeMajorLift")
 @Table(name="user_three_major_lift")
 public class UserThreeMajorLiftEntity {
+    
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer userThreeMajorLiftNumber;
-    @NotBlank
+
+    @Column(nullable = false)
     private String userId;
+
     @Column(precision = 5, scale = 1)
     private BigDecimal deadlift;
+
     @Column(precision = 5, scale = 1)
     private BigDecimal benchPress;
+
+
     @Column(precision = 5, scale = 1)
     private BigDecimal squat;
 
@@ -49,12 +57,26 @@ public class UserThreeMajorLiftEntity {
     }
 
     public UserThreeMajorLiftEntity(SignUpRequestDto dto) {
+        this.userId = dto.getUserId();
+        this.deadlift = dto.getDeadlift();
+        this.benchPress = dto.getBenchPress();
+        this.squat = dto.getSquat();
+    }
+    
+    public UserThreeMajorLiftEntity(SignUpUserThreeMajorLiftRequestDto dto) {
+        this.userId = dto.getUserId();
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
     }
 
-    public UserThreeMajorLiftEntity(SignUpUserThreeMajorLiftRequestDto dto) {
+    public UserThreeMajorLiftEntity(PostUserThreeMajorLiftRequestDto dto) {
+        this.deadlift = dto.getDeadlift();
+        this.benchPress = dto.getBenchPress();
+        this.squat = dto.getSquat();
+    }
+
+    public UserThreeMajorLiftEntity(PatchUserThreeMajorLiftRequestDto dto) {
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();

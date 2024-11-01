@@ -24,6 +24,11 @@ public class ResponseDto {
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
+    public static ResponseEntity<ResponseDto> successWithUserId(String userId) {
+        ResponseDto responseBody = new ResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
+        return ResponseEntity.ok(responseBody);
+    }
+
     public static ResponseEntity<ResponseDto> validationFail() {
         ResponseDto responseBody = new ResponseDto(ResponseCode.VALIDATION_FAIL, ResponseMessage.VALIDATION_FAIL);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
@@ -46,6 +51,11 @@ public class ResponseDto {
 
     public static ResponseEntity<ResponseDto> noExistUserThreeMajorLiftInformation() {
         ResponseDto responseBody = new ResponseDto(ResponseCode.NO_EXIST_USER_THREE_MAJOR_LIFT_INFORMATION, ResponseMessage.NO_EXIST_USER_THREE_MAJOR_LIFT_INFORMATION);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
+    }
+
+    public static ResponseEntity<ResponseDto> noExistUserMuscleFatInformation() {
+        ResponseDto responseBody = new ResponseDto(ResponseCode.NO_EXIST_USER_MUSCLE_FAT_INFORMATION, ResponseMessage.NO_EXIST_USER_MUSCLE_FAT_INFORMATION);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
     }
 

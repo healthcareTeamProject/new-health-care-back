@@ -1,5 +1,6 @@
 package com.example.healthcare_back.repository;
 
+
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,5 +13,6 @@ public interface UserThreeMajorLiftRepository extends JpaRepository<UserThreeMaj
     
     List<UserThreeMajorLiftEntity> findByOrderByUserThreeMajorLiftNumberDesc();
     UserThreeMajorLiftEntity findByUserId(String userId);
+    
 
 }

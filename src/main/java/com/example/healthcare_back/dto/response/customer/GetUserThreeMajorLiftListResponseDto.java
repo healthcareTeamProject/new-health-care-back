@@ -25,8 +25,8 @@ public class GetUserThreeMajorLiftListResponseDto extends ResponseDto {
         this.userThreeMajorLiftLists = UserThreeMajorLiftList.getList(userThreeMajorLiftEntities);
     }
 
-    public static ResponseEntity<GetUserThreeMajorLiftListResponseDto> success(List<UserThreeMajorLiftEntity> userThreeMajorLiftEntity) {
-        GetUserThreeMajorLiftListResponseDto responseBody = new GetUserThreeMajorLiftListResponseDto(userThreeMajorLiftEntity);
+    public static ResponseEntity<GetUserThreeMajorLiftListResponseDto> success(List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities) {
+        GetUserThreeMajorLiftListResponseDto responseBody = new GetUserThreeMajorLiftListResponseDto(userThreeMajorLiftEntities);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
     

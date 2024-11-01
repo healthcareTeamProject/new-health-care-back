@@ -21,9 +21,8 @@ public class PatchCustomerRequestDto {
     @NotBlank
     private String nickname;
     private String profileImage;
-    private String personalGoal;
+    private String personalGoals;
     @NotNull @Column(precision = 5, scale = 1)
     private BigDecimal height;
-  
 
 }

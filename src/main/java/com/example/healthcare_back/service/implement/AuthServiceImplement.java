@@ -1,5 +1,7 @@
 package com.example.healthcare_back.service.implement;
 
+import java.time.LocalDateTime;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,10 +42,9 @@ public class AuthServiceImplement implements AuthService {
     private final UserThreeMajorLiftRepository userThreeMajorLiftRepository;
     private final TelAuthNumberRepository telAuthNumberRepository;
 
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> telAuth(TelAuthRequestDto dto) {
         
         String telNumber = dto.getTelNumber();
@@ -78,7 +79,6 @@ public class AuthServiceImplement implements AuthService {
     }
 
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> telAuthCheck(TelAuthCheckRequestDto dto) {
 
         String telNumber = dto.getTelNumber();
@@ -99,7 +99,6 @@ public class AuthServiceImplement implements AuthService {
     }
 
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> signUp(SignUpRequestDto dto) {
 
     String userId = dto.getUserId();
@@ -108,6 +107,7 @@ public class AuthServiceImplement implements AuthService {
     String password = dto.getPassword();
 
     try {
+        
         // 1. 사용자 ID 중복 체크
         if (customerRepository.existsByUserId(userId)) {
             return ResponseDto.duplicatedUserId(); // 중복된 사용자 ID일 경우 응답
@@ -129,23 +129,37 @@ public class AuthServiceImplement implements AuthService {
 
         // 5. CustomerEntity 생성 및 저장
         CustomerEntity customerEntity = new CustomerEntity(dto); // Dto를 사용하여 CustomerEntity 생성
+        customerEntity.setUserId(dto.getUserId());
+        customerEntity.setPassword(dto.getPassword());
+        customerEntity.setName(dto.getName());
+        customerEntity.setNickname(dto.getNickname());
+        customerEntity.setTelNumber(dto.getTelNumber());
+        customerEntity.setJoinPath(dto.getJoinPath());
+        customerEntity.setSnsId(dto.getSnsId());
+        customerEntity.setHeight(dto.getHeight());
+        customerEntity.setProfileImage(dto.getProfileImage());
+        customerEntity.setPersonalGoals(dto.getPersonalGoals());
         customerRepository.save(customerEntity); // 고객 정보 저장
-
-        if (dto.getWeight() == null) {
-            throw new IllegalArgumentException("체중은 필수 입력 사항입니다.");
-        }
 
         // UserMuscleFatEntity 생성 및 저장
         UserMuscleFatEntity userMuscleFatEntity = new UserMuscleFatEntity(dto);
-        userMuscleFatEntity.setUserId(customerEntity.getUserId());
+        userMuscleFatEntity.setUserId(dto.getUserId());
+        userMuscleFatEntity.setWeight(dto.getWeight());
+        userMuscleFatEntity.setSkeletalMuscleMass(dto.getSkeletalMuscleMass());
+        userMuscleFatEntity.setBodyFatMass(dto.getBodyFatMass());
+        userMuscleFatEntity.setUserMuscleFatDate(LocalDateTime.now());
         userMuscleFatRepository.save(userMuscleFatEntity);
 
-        // UserThreeMajorLiftResultSet 생성 및 저장
+        // UserThreeMajorLiftEntity 생성 및 저장
         UserThreeMajorLiftEntity userThreeMajorLiftEntity = new UserThreeMajorLiftEntity(dto);
-        userThreeMajorLiftEntity.setUserId(customerEntity.getUserId());
+        userThreeMajorLiftEntity.setUserId(dto.getUserId());
+        userThreeMajorLiftEntity.setDeadlift(dto.getDeadlift());
+        userThreeMajorLiftEntity.setBenchPress(dto.getBenchPress());
+        userThreeMajorLiftEntity.setSquat(dto.getSquat());
+        userThreeMajorLiftEntity.setUserThreeMajorLiftDate(LocalDateTime.now());
         userThreeMajorLiftRepository.save(userThreeMajorLiftEntity);
 
-    } catch (IllegalArgumentException exception) {
+    } catch (Exception exception) {
         exception.printStackTrace(); // 예외 발생 시 스택 트레이스 출력
         return ResponseDto.databaseError(); // 데이터베이스 에러 응답
     }
@@ -153,13 +167,14 @@ public class AuthServiceImplement implements AuthService {
     return ResponseDto.success(); // 성공 응답
 }
 
+
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto dto) {
 
         String userId = dto.getUserId();
         String password = dto.getPassword();
-        String accessToken;
+
+        String accessToken = null;
 
         try {
 
@@ -183,7 +198,6 @@ public class AuthServiceImplement implements AuthService {
     }
 
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> idCheck(IdCheckRequestDto dto) {
         
         String userId = dto.getUserId();
@@ -202,7 +216,6 @@ public class AuthServiceImplement implements AuthService {
     }
 
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> nicknameCheck(NicknameCheckRequestDto dto) {
         String nickname = dto.getNickname();
 

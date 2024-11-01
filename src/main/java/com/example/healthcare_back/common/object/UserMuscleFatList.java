@@ -21,7 +21,7 @@ public class UserMuscleFatList {
 
     public UserMuscleFatList(UserMuscleFatEntity userMuscleFatEntity) {
         this.userMuscleFatNumber = userMuscleFatEntity.getUserMuscleFatNumber();
-        this.userId = getUserId();
+        this.userId = userMuscleFatEntity.getUserId();
         this.weight = userMuscleFatEntity.getWeight();
         this.skeletalMuscleMass = userMuscleFatEntity.getSkeletalMuscleMass();
         this.bodyFatMass = userMuscleFatEntity.getBodyFatMass();

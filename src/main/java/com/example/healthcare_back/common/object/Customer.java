@@ -15,7 +15,7 @@ public class Customer {
     private final String nickname;
     private final String telNumber;
     private final String profileImage;
-    private final String personalGoal;
+    private final String personalGoals;
     private final BigDecimal height;
 
     private Customer(CustomerEntity customerEntity) {
@@ -24,7 +24,8 @@ public class Customer {
         this.nickname = customerEntity.getNickname();
         this.telNumber = customerEntity.getTelNumber();
         this.profileImage = customerEntity.getProfileImage();
-        this.personalGoal = customerEntity.getPersonalGoal();
+        this.personalGoals = customerEntity.getPersonalGoals();
         this.height = customerEntity.getHeight();
     }
+
 }

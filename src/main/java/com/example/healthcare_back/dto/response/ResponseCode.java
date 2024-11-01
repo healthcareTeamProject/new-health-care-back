@@ -10,6 +10,7 @@ public interface ResponseCode {
     String DUPLICATED_USER_TEL_NUMBER = "DT";
 
     String NO_EXIST_USER_THREE_MAJOR_LIFT_INFORMATION = "NTI";
+    String NO_EXIST_USER_MUSCLE_FAT_INFORMATION = "NMI";
     String NO_EXIST_USER_ID = "NI";
     String NO_EXIST_COMMENT = "NC";
     String NO_EXIST_BOARD = "NB";

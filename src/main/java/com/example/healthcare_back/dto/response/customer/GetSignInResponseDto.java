@@ -15,11 +15,11 @@ import lombok.Getter;
 @Getter
 public class GetSignInResponseDto extends ResponseDto {
     
-    private final String userId;
-    private final String name;
-    private final String nickname;
-    private final String profileImage;
-    private final String personalGoals;
+    private String userId;
+    private String name;
+    private String nickname;
+    private String profileImage;
+    private String personalGoals;
 
     public GetSignInResponseDto(CustomerEntity customerEntity) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
@@ -27,7 +27,7 @@ public class GetSignInResponseDto extends ResponseDto {
         this.name = customerEntity.getName();
         this.nickname = customerEntity.getNickname();
         this.profileImage = customerEntity.getProfileImage();
-        this.personalGoals = customerEntity.getPersonalGoal();
+        this.personalGoals = customerEntity.getPersonalGoals();
     }
 
     public static ResponseEntity<GetSignInResponseDto> success(CustomerEntity customerEntity) {

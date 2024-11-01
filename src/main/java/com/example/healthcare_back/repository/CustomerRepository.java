@@ -9,13 +9,16 @@ import com.example.healthcare_back.entity.CustomerEntity;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, String> {
+    
     boolean existsByUserId(String userId);
     boolean existsByTelNumber(String telNumber);
     boolean existsByNickname(String nickname);
     boolean existsByProfileImage(String profileImage);
-    boolean existsByPersonalGoal(String personalGoal);
+    boolean existsByPersonalGoals(String personalGoals);
+    
     
     CustomerEntity findByUserId(String userId);
     CustomerEntity findBySnsIdAndJoinPath(String sns, String joinPath);
     List<CustomerEntity> findByNicknameContaining(String nicknamePart);
+
 }

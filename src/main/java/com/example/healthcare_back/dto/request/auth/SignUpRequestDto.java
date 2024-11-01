@@ -19,6 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class SignUpRequestDto {
+    
     @NotBlank
     @Length(max=15)
     private String name;
@@ -43,7 +44,7 @@ public class SignUpRequestDto {
     @NotNull 
     private BigDecimal height;
     private String profileImage;
-    private String personalGoal;
+    private String personalGoals;
 
     @Positive
     @Column(precision = 5, scale = 1)
