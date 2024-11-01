@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS `health_care`.`customer` (
   `join_path` VARCHAR(255) NOT NULL,
   `sns_id` VARCHAR(255) NULL DEFAULT NULL COMMENT 'snsID',
   `height` DECIMAL(5,1) NOT NULL COMMENT '키(cm)',
-  `profile_image` VARCHAR(255) NULL DEFAULT NULL,
-  `personal_goals` VARCHAR(255) NULL DEFAULT NULL,
+  `profile_image` TEXT NULL DEFAULT NULL,
+  `personal_goals` TEXT NULL DEFAULT NULL,
   `weight` DECIMAL(5,1) NOT NULL COMMENT '몸무게(kg)',
   `skeletal_muscle_mass` DECIMAL(5,1) NULL DEFAULT NULL COMMENT '골격근량(kg)',
   `body_fat_mass` DECIMAL(5,1) NULL DEFAULT NULL COMMENT '체지방량(kg)',
@@ -217,7 +217,7 @@ COMMENT = '사용자 식단 식품정보(일정내용)';
 -- Table `health_care`.`user_muscle_fat`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `health_care`.`user_muscle_fat` (
-  `user_muscle_fat_number` INT NOT NULL AUTO_INCREMENT COMMENT '사용자 신체 정보 번호',
+  `user_muscle_fat_number` INT NOT NULL AUTO_INCREMENT,
   `user_id` VARCHAR(20) NOT NULL COMMENT '아이디',
   `weight` DECIMAL(5,1) NOT NULL COMMENT '몸무게(kg)',
   `skeletal_muscle_mass` DECIMAL(5,1) NULL DEFAULT NULL COMMENT '골격근량(kg)',
@@ -225,12 +225,13 @@ CREATE TABLE IF NOT EXISTS `health_care`.`user_muscle_fat` (
   `user_muscle_fat_date` DATETIME NOT NULL COMMENT '사용자 신체 정보 등록 날짜',
   PRIMARY KEY (`user_muscle_fat_number`),
   UNIQUE INDEX `user_muscle_fat_number_UNIQUE` (`user_muscle_fat_number` ASC) VISIBLE,
+  UNIQUE INDEX `idx_user_muscle_fat` (`user_id` ASC, `user_muscle_fat_number` ASC) VISIBLE,
   INDEX `customer_user_muscle_fat` (`user_id` ASC) VISIBLE,
   CONSTRAINT `customer_user_muscle_fat`
     FOREIGN KEY (`user_id`)
     REFERENCES `health_care`.`customer` (`user_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 31
+AUTO_INCREMENT = 13
 DEFAULT CHARACTER SET = utf8mb3
 COMMENT = '사용자 신체 정보';
 
@@ -239,20 +240,21 @@ COMMENT = '사용자 신체 정보';
 -- Table `health_care`.`user_three_major_lift`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `health_care`.`user_three_major_lift` (
-  `user_three_major_lift_number` INT NOT NULL AUTO_INCREMENT COMMENT '사용자 3대 측정 정보 번호',
+  `user_three_major_lift_number` INT NOT NULL AUTO_INCREMENT,
   `user_id` VARCHAR(20) NOT NULL,
   `deadlift` DECIMAL(5,1) NULL DEFAULT NULL COMMENT '데드리프트(kg)',
   `bench_press` DECIMAL(5,1) NULL DEFAULT NULL COMMENT '벤치프레스(kg)',
   `squat` DECIMAL(5,1) NULL DEFAULT NULL COMMENT '스쿼트(kg)',
   `user_three_major_lift_date` DATETIME NOT NULL COMMENT '사용자 3대 측정 정보 등록 날짜',
   PRIMARY KEY (`user_three_major_lift_number`),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_three_major_lift_number` ASC) VISIBLE,
+  UNIQUE INDEX `idx_user_three_major_lift` (`user_id` ASC, `user_three_major_lift_number` ASC) VISIBLE,
+  UNIQUE INDEX `user_three_major_lift_number_UNIQUE` (`user_three_major_lift_number` ASC) VISIBLE,
   INDEX `customer_health_machine_measurement_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `customer_health_machine_measurement`
     FOREIGN KEY (`user_id`)
     REFERENCES `health_care`.`customer` (`user_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 33
+AUTO_INCREMENT = 29
 DEFAULT CHARACTER SET = utf8mb3
 COMMENT = '사용자 3대 측정 정보';
 

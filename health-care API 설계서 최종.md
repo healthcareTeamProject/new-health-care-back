@@ -1612,6 +1612,7 @@ Content-Type: application/json;charset=UTF-8
 | name              |    type    |    description    | required |
 | ----------------- | :--------: | :---------------: | :------: |
 | boardTitle        |   String   |    게시물 제목    |    O     |
+| nickname          |   String   |    작성자 닉네임    |    O     |
 | boardCategory     |   String   |  게시물 카테고리  |    O     |
 | boardTag          |   String   |    게시물 태그    |    O     |
 | boardContents     |   String   |    게시물 내용    |    O     |
@@ -1626,8 +1627,10 @@ Content-Type: application/json;charset=UTF-8
 curl -v -X POST "http://localhost:4000/api/v1/board" \
  -h "Authorization=Bearer XXXX" \
  -d "boardTitle=오늘은 다이어트 20일차" \
+ -d "nickname=뛰라노사우르스" \
  -d "boardCategory=운동일지", \
  -d "boardTag=운동", \
+ -d "boardContents=오늘은 상체운동을 했다." \
  -d "youtubeVideoLink=null", \
  -d "boardFileContents=null", \
  -d "mapLat=37.5691", \

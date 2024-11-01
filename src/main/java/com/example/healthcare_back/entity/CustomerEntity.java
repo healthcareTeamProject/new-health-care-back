@@ -8,6 +8,8 @@ import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftR
 import java.math.BigDecimal;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -26,6 +28,7 @@ import lombok.Setter;
 public class CustomerEntity {
 
     @Id 
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private String userId;
     @Column(nullable = false)
     private String name;
