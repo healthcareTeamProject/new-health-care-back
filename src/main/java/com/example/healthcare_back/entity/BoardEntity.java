@@ -34,7 +34,6 @@ public class BoardEntity {
     private Integer boardViewCount;
     private Integer boardLikeCount;
     private Integer commentCount;
-    
 
     public BoardEntity(PostBoardRequestDto dto, String userId) {
         this.boardTitle = dto.getBoardTitle();
