@@ -81,7 +81,7 @@ public class CustomerController {
     @PatchMapping("/{userId}/user-muscle-fat")
         public ResponseEntity<ResponseDto> patchUserMuscleFatCustomer(
         @RequestBody @Valid PatchUserMuscleFatRequestDto requestBody,
-        @PathVariable String userId
+        @AuthenticationPrincipal String userId
         
     ) {
         ResponseEntity<ResponseDto> response = customerService.patchUserMuscleFatCustomer(requestBody, userId);

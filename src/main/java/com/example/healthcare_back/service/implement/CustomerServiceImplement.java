@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.healthcare_back.dto.request.auth.SignUpUserMuscleFatRequestDto;
-import com.example.healthcare_back.dto.request.auth.SignUpUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserMuscleFatRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
@@ -81,19 +79,22 @@ public class CustomerServiceImplement implements CustomerService{
 
     @Override
     public ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList(String userId) {
-
-        List<UserMuscleFatEntity> userMuscleFatEntities = new ArrayList<>();
+        
+            // 새로운 예외 처리와 로깅 기능을 추가한 코드
+            List<UserMuscleFatEntity> userMuscleFatEntities = new ArrayList<>();
 
         try {
+            // 예외 발생 시 기존 메서드도 포함하여 로깅 가능하게 설정
+            userMuscleFatEntities = userMuscleFatRepository.findByUserIdOrderByUserMuscleFatNumberDesc(userId);
 
-            userMuscleFatEntities = userMuscleFatRepository.findByOrderByUserMuscleFatNumberDesc();
-
+            // 사용자 데이터가 없을 경우 예외 처리
             if (userMuscleFatEntities.isEmpty()) {
-                return ResponseDto.noExistUserMuscleFatInformation(); // 예외적인 응답 처리
+                return ResponseDto.noExistUserMuscleFatInformation();
             }
-
         } catch (Exception exception) {
-            exception.printStackTrace();
+            exception.printStackTrace(); // 로그 출력 추가
+
+            // 예외 발생 시 추가 처리
             return ResponseDto.databaseError();
         }
 
@@ -102,63 +103,23 @@ public class CustomerServiceImplement implements CustomerService{
 
     @Override
     public ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLiftList(String userId) {
-        
-        List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities = new ArrayList<>();
+            List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities = new ArrayList<>();
 
         try {
-
-            userThreeMajorLiftEntities = userThreeMajorLiftRepository.findByOrderByUserThreeMajorLiftNumberDesc();
+            // 추가 로깅과 예외 관리 기능
+            userThreeMajorLiftEntities = userThreeMajorLiftRepository.findByUserIdOrderByUserThreeMajorLiftNumberDesc(userId);
 
             if (userThreeMajorLiftEntities.isEmpty()) {
-                return ResponseDto.noExistUserThreeMajorLiftInformation(); // 예외적인 응답 처리
+                return ResponseDto.noExistUserThreeMajorLiftInformation();
             }
 
         } catch (Exception exception) {
-            exception.printStackTrace();
+            exception.printStackTrace(); // 예외 로깅
+
             return ResponseDto.databaseError();
         }
 
         return GetUserThreeMajorLiftListResponseDto.success(userThreeMajorLiftEntities);
-    }
-
-   @Override
-    public ResponseEntity<ResponseDto> signUpUserMuscleFat(SignUpUserMuscleFatRequestDto dto, String userId) {
-        // 1. CustomerEntity 조회
-        CustomerEntity customerEntity = customerRepository.findByUserId(dto.getUserId());
-        if (customerEntity == null) {
-            return ResponseDto.noExistUserId(); // 사용자 미존재 에러 처리
-        }
-
-        // 2. UserMuscleFatEntity 생성
-        UserMuscleFatEntity userMuscleFatEntity = new UserMuscleFatEntity(dto);
-
-        // 3. 저장
-        userMuscleFatRepository.save(userMuscleFatEntity);
-
-        return ResponseDto.success();
-    }
-
-    @Override
-    public ResponseEntity<ResponseDto> signUpUserThreeMajorLift(SignUpUserThreeMajorLiftRequestDto dto, String userId) {
-        // 1. CustomerEntity 조회
-        // 전달된 UserId를 통해 데이터베이스에서 해당 사용자의 CustomerEntity를 조회합니다.
-        CustomerEntity customerEntity = customerRepository.findByUserId(dto.getUserId());
-
-        // 만약 해당 사용자가 존재하지 않으면 에러 응답을 반환합니다.
-        if (customerEntity == null) {
-        return ResponseDto.noExistUserId(); // 사용자 미존재 에러 처리
-    }
-
-        // 2. UserThreeMajorLiftEntity 생성
-        // 요청 DTO에서 ThreeMajorLift 정보를 추출하여 UserThreeMajorLiftEntity 객체를 생성합니다.
-        UserThreeMajorLiftEntity userThreeMajorLiftEntity = new UserThreeMajorLiftEntity(dto);
-
-        // 3. 저장
-        // 설정이 완료된 UserThreeMajorLiftEntity를 데이터베이스에 저장합니다.
-        userThreeMajorLiftRepository.save(userThreeMajorLiftEntity);
-
-        // 저장이 완료되면 성공 응답을 반환합니다.
-        return ResponseDto.success();
     }
 
     @Override
@@ -213,7 +174,7 @@ public class CustomerServiceImplement implements CustomerService{
             // 새로운 기록 저장
             userThreeMajorLiftRepository.save(newRecord);
 
-            return ResponseDto.successWithUserId(dto.getUserId()); // 성공적으로 저장된 경우 응답
+        return ResponseDto.successWithUserId(dto.getUserId()); // 성공적으로 저장된 경우 응답
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -251,9 +212,9 @@ public class CustomerServiceImplement implements CustomerService{
 
     }
 
+
     @Override
     public ResponseEntity<ResponseDto> patchUserMuscleFatCustomer(PatchUserMuscleFatRequestDto dto, String userId) {
-        
         try {
 
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
@@ -262,16 +223,6 @@ public class CustomerServiceImplement implements CustomerService{
             customerEntity.setSkeletalMuscleMass(dto.getSkeletalMuscleMass());
             customerEntity.setBodyFatMass(dto.getBodyFatMass());
             customerRepository.save(customerEntity);
-
-             // 새로운 기록 추가
-            UserMuscleFatEntity newRecord = new UserMuscleFatEntity();
-            newRecord.setUserId(userId); // 유저 ID
-            newRecord.setWeight(dto.getWeight());
-            newRecord.setSkeletalMuscleMass(dto.getSkeletalMuscleMass());
-            newRecord.setBodyFatMass(dto.getBodyFatMass());
-            newRecord.setUserMuscleFatDate(LocalDateTime.now()); // 현재 날짜 사용
-            userMuscleFatRepository.save(newRecord); // 새로운 기록 저장
-
                 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -280,32 +231,18 @@ public class CustomerServiceImplement implements CustomerService{
 
         return ResponseDto.success();
     }
+
 
     @Override
     public ResponseEntity<ResponseDto> patchThreeMajorLiftCustomer(PatchUserThreeMajorLiftRequestDto dto, String userId) {
-
         try {
-
-            BigDecimal deadlift = dto.getDeadlift();
-            BigDecimal benchPress = dto.getBenchPress();
-            BigDecimal squat = dto.getSquat();
 
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
             if (customerEntity == null) return ResponseDto.noExistUserId();
-            customerEntity.setDeadlift(deadlift);
-            customerEntity.setBenchPress(benchPress);
-            customerEntity.setSquat(squat);
+            customerEntity.setDeadlift(dto.getDeadlift());
+            customerEntity.setBenchPress(dto.getBenchPress());
+            customerEntity.setSquat(dto.getSquat());
             customerRepository.save(customerEntity);
-
-
-            // 새로운 기록 추가
-            UserThreeMajorLiftEntity newRecord = new UserThreeMajorLiftEntity();
-            newRecord.setUserId(userId); // 유저 ID
-            newRecord.setDeadlift(dto.getDeadlift());
-            newRecord.setBenchPress(dto.getBenchPress());
-            newRecord.setSquat(dto.getSquat());
-            newRecord.setUserThreeMajorLiftDate(LocalDateTime.now()); // 현재 날짜 사용
-            userThreeMajorLiftRepository.save(newRecord); // 새로운 기록 저장
                 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -314,6 +251,10 @@ public class CustomerServiceImplement implements CustomerService{
 
         return ResponseDto.success();
     }
+
+    
+
+   
 
 
 }

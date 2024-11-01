@@ -1,7 +1,6 @@
 package com.example.healthcare_back.entity;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
-import com.example.healthcare_back.dto.request.auth.SignUpUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 
@@ -12,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -31,7 +29,8 @@ import lombok.Setter;
 @Table(name="user_three_major_lift")
 public class UserThreeMajorLiftEntity {
     
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userThreeMajorLiftNumber;
 
     @Column(nullable = false)
@@ -62,23 +61,11 @@ public class UserThreeMajorLiftEntity {
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
     }
-    
-    public UserThreeMajorLiftEntity(SignUpUserThreeMajorLiftRequestDto dto) {
-        this.userId = dto.getUserId();
-        this.deadlift = dto.getDeadlift();
-        this.benchPress = dto.getBenchPress();
-        this.squat = dto.getSquat();
-    }
 
     public UserThreeMajorLiftEntity(PostUserThreeMajorLiftRequestDto dto) {
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
     }
-
-    public UserThreeMajorLiftEntity(PatchUserThreeMajorLiftRequestDto dto) {
-        this.deadlift = dto.getDeadlift();
-        this.benchPress = dto.getBenchPress();
-        this.squat = dto.getSquat();
-    }
+    
 }
