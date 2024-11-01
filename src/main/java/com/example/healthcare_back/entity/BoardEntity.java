@@ -1,7 +1,5 @@
 package com.example.healthcare_back.entity;
 
-import java.time.LocalDateTime;
-
 import com.example.healthcare_back.dto.request.board.PatchBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;
 
@@ -10,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,12 +34,11 @@ public class BoardEntity {
     private Integer boardViewCount;
     private Integer boardLikeCount;
     private Integer commentCount;
-    
 
     public BoardEntity(PostBoardRequestDto dto, String userId) {
         this.boardTitle = dto.getBoardTitle();
         this.nickname = userId;
-        this.boardUploadDate = LocalDateTime.now(); // 업로드 날짜 설정
+        this.boardUploadDate = LocalDateTime.now(); // 현재 날짜와 시간
         this.boardContents = dto.getBoardContents();
         this.youtubeVideoLink = dto.getYoutubeVideoLink();
         this.boardFileContents = dto.getBoardFileContents();

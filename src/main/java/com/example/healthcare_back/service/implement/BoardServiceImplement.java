@@ -30,7 +30,6 @@ public class BoardServiceImplement implements BoardService {
     private final CommentRepository commentRepository;
 
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
         public ResponseEntity<? super GetBoardResponseDto> getBoard(Integer boardNumber) {
             BoardEntity boardEntity;
             List<CommentEntity> commentList; // 변경된 타입으로 선언
@@ -55,7 +54,6 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber) {
         try {
             // 게시물 댓글 목록 조회
@@ -77,7 +75,6 @@ public class BoardServiceImplement implements BoardService {
 
 
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<? super GetBoardListResponseDto> getBoardList() {
         try {
             // 게시물 목록 조회
@@ -97,7 +94,6 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> postBoard(PostBoardRequestDto dto, String userId) {
         try {
             // 새로운 게시물 생성
@@ -114,7 +110,6 @@ public class BoardServiceImplement implements BoardService {
     }
     
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> patchBoard(PatchBoardRequestDto dto, Integer boardNumber, String userId) {
         try {
             // Find board by board number
@@ -136,7 +131,6 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> postComment(PostCommentRequestDto dto, Integer boardNumber, String userId) {
         try {
             // 게시물 번호로 게시글 조회
@@ -158,7 +152,6 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> patchComment(PatchCommentRequestDto dto, Integer boardNumber,
             Integer commentNumber, String userId) {
             try {
@@ -188,7 +181,6 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> deleteBoard(Integer boardNumber, String userId) {
         try {
             // 게시물 번호로 게시물 조회
@@ -211,7 +203,6 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<ResponseDto> deleteComment(Integer boardNumber, Integer commentNumber, String userId) {
         try {
             // 연관된 번호로 게시글과 댓글 조회

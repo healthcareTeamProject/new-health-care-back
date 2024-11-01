@@ -31,7 +31,8 @@ import lombok.Setter;
 @Table(name="user_three_major_lift")
 public class UserThreeMajorLiftEntity {
     
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer userThreeMajorLiftNumber;
 
     @Column(nullable = false)
