@@ -32,14 +32,14 @@ public class BoardController {
 
     @GetMapping("/{boardNumber}")
     public ResponseEntity<? super GetBoardResponseDto> getBoard(
-        @PathVariable Integer boardNumber, String boardCategory, String boardTag
+        @PathVariable("boardNumber") Integer boardNumber
     ) {
-        return boardService.getBoard(boardNumber, boardCategory, boardTag); // 특정 게시물을 조회합니다.
+        return boardService.getBoard(boardNumber); // 특정 게시물을 조회합니다.
     }
 
     @GetMapping("/{boardNumber}/comment-list")
     public ResponseEntity<? super GetCommentListResponseDto> getCommentList(
-        @PathVariable Integer boardNumber
+        @PathVariable("boardNumber") Integer boardNumber
     ) {
         return boardService.getCommentList(boardNumber); // 특정 게시물의 댓글 목록을 조회합니다.
     }
@@ -64,7 +64,7 @@ public class BoardController {
 
     @DeleteMapping("/{boardNumber}")
     public ResponseEntity<ResponseDto> deleteBoard(
-        @PathVariable Integer boardNumber,
+        @PathVariable("boardNumber") Integer boardNumber,
         @RequestParam String userId // 권한 확인을 위한 userId를 전달하는 경우
     ) {
         return boardService.deleteBoard(boardNumber, userId); // 특정 게시물을 삭제합니다.
@@ -72,7 +72,7 @@ public class BoardController {
 
     @PostMapping("/{boardNumber}/comments")
     public ResponseEntity<ResponseDto> postComment(
-        @PathVariable Integer boardNumber,
+        @PathVariable("boardNumber") Integer boardNumber,
         @RequestBody @Valid PostCommentRequestDto requestBody,
         @RequestParam String userId // 요청에서 userId 가져오기
     ) {
@@ -82,8 +82,8 @@ public class BoardController {
     // 댓글 수정
     @PatchMapping("/{boardNumber}/comments/{commentNumber}")
     public ResponseEntity<ResponseDto> patchComment(
-        @PathVariable Integer boardNumber,
-        @PathVariable Integer commentNumber,
+        @PathVariable("boardNumber") Integer boardNumber,
+        @PathVariable("commentNumber") Integer commentNumber,
         @RequestBody @Valid PatchCommentRequestDto requestBody,
         @RequestParam String userId // userId 전달
     ) {
@@ -93,8 +93,8 @@ public class BoardController {
     // 댓글 삭제
     @DeleteMapping("/{boardNumber}/comments/{commentNumber}")
     public ResponseEntity<ResponseDto> deleteComment(
-        @PathVariable Integer boardNumber,
-        @PathVariable Integer commentNumber,
+        @PathVariable("boardNumber") Integer boardNumber,
+        @PathVariable("commentNumber") Integer commentNumber,
         @RequestParam String userId // 권한 확인을 위한 userId
     ) {
         return boardService.deleteComment(boardNumber, commentNumber, userId); // 댓글 삭제

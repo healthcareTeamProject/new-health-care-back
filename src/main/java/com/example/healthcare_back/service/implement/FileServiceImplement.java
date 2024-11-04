@@ -24,6 +24,7 @@ public class FileServiceImplement implements FileService {
     private String fileUrl;
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public String upload(MultipartFile file) {
         // 빈 파일인지 확인
         if (file.isEmpty()) {
@@ -54,6 +55,7 @@ public class FileServiceImplement implements FileService {
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public Resource getFile(String fileName) {
         try {
             Resource resource = new UrlResource("file:" + Paths.get(filePath, fileName).toString());

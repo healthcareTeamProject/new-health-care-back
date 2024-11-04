@@ -30,7 +30,7 @@ public class BoardServiceImplement implements BoardService {
     private final CommentRepository commentRepository;
 
     @Override
-        public ResponseEntity<? super GetBoardResponseDto> getBoard(Integer boardNumber, String boardCategory, String boardTag) {
+        public ResponseEntity<? super GetBoardResponseDto> getBoard(Integer boardNumber) {
             BoardEntity boardEntity;
             List<CommentEntity> commentList; // 변경된 타입으로 선언
     
