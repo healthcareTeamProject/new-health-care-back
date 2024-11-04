@@ -1,7 +1,6 @@
 package com.example.healthcare_back.entity;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
-import com.example.healthcare_back.dto.request.auth.SignUpUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 
@@ -31,7 +30,7 @@ import lombok.Setter;
 public class UserThreeMajorLiftEntity {
     
     @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userThreeMajorLiftNumber;
 
     @Column(nullable = false)
@@ -62,23 +61,11 @@ public class UserThreeMajorLiftEntity {
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
     }
-    
-    public UserThreeMajorLiftEntity(SignUpUserThreeMajorLiftRequestDto dto) {
-        this.userId = dto.getUserId();
-        this.deadlift = dto.getDeadlift();
-        this.benchPress = dto.getBenchPress();
-        this.squat = dto.getSquat();
-    }
 
     public UserThreeMajorLiftEntity(PostUserThreeMajorLiftRequestDto dto) {
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
     }
-
-    public UserThreeMajorLiftEntity(PatchUserThreeMajorLiftRequestDto dto) {
-        this.deadlift = dto.getDeadlift();
-        this.benchPress = dto.getBenchPress();
-        this.squat = dto.getSquat();
-    }
+    
 }

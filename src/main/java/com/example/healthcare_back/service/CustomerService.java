@@ -2,8 +2,6 @@ package com.example.healthcare_back.service;
 
 import org.springframework.http.ResponseEntity;
 
-import com.example.healthcare_back.dto.request.auth.SignUpUserMuscleFatRequestDto;
-import com.example.healthcare_back.dto.request.auth.SignUpUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
@@ -25,8 +23,6 @@ public interface CustomerService {
     ResponseEntity<ResponseDto> patchCustomer(PatchCustomerRequestDto dto, String userId);
     ResponseEntity<ResponseDto> patchUserMuscleFatCustomer(PatchUserMuscleFatRequestDto dto, String userId);
     ResponseEntity<ResponseDto> patchThreeMajorLiftCustomer(PatchUserThreeMajorLiftRequestDto dto, String userId);
-    ResponseEntity<ResponseDto> signUpUserMuscleFat(SignUpUserMuscleFatRequestDto dto, String userId);
-    ResponseEntity<ResponseDto> signUpUserThreeMajorLift(SignUpUserThreeMajorLiftRequestDto dto, String userId);
     ResponseEntity<ResponseDto> postUserMuscleFat(PostUserMuscleFatRequestDto dto, String userId);
     ResponseEntity<ResponseDto> postUserThreeMajorLift(PostUserThreeMajorLiftRequestDto dto, String userId);
 
