@@ -2,14 +2,10 @@ package com.example.healthcare_back.entity;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
-import com.example.healthcare_back.dto.request.customer.PatchUserMuscleFatRequestDto;
-import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
 
 import java.math.BigDecimal;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -28,7 +24,6 @@ import lombok.Setter;
 public class CustomerEntity {
 
     @Id 
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private String userId;
     @Column(nullable = false)
     private String name;
@@ -85,18 +80,6 @@ public class CustomerEntity {
         this.profileImage = dto.getProfileImage();
         this.personalGoals = dto.getPersonalGoals();
         this.height = dto.getHeight();
-    }
-
-    public void patchCustomer(PatchUserMuscleFatRequestDto dto) {
-        this.weight = dto.getWeight(); 
-        this.skeletalMuscleMass = dto.getSkeletalMuscleMass(); 
-        this.bodyFatMass = dto.getBodyFatMass();
-    }
-
-    public void patchCustomer(PatchUserThreeMajorLiftRequestDto dto) {
-        this.deadlift = dto.getDeadlift(); 
-        this.benchPress = dto.getBenchPress(); 
-        this.squat = dto.getSquat();
     }
 
 

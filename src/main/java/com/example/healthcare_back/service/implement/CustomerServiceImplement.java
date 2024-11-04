@@ -188,19 +188,13 @@ public class CustomerServiceImplement implements CustomerService{
         
         try {
 
-            String name = dto.getName();
-            String nickname = dto.getNickname();
-            String profileImage = dto.getProfileImage();
-            String personalGoals = dto.getPersonalGoals();
-            BigDecimal height = dto.getHeight();
-
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
             if (customerEntity == null) return ResponseDto.noExistUserId();
-            customerEntity.setName(name);
-            customerEntity.setNickname(nickname);
-            customerEntity.setProfileImage(profileImage);
-            customerEntity.setPersonalGoals(personalGoals);
-            customerEntity.setHeight(height);
+            customerEntity.setName(dto.getName());
+            customerEntity.setNickname(dto.getNickname());
+            customerEntity.setProfileImage(dto.getProfileImage());
+            customerEntity.setPersonalGoals(dto.getPersonalGoals());
+            customerEntity.setHeight(dto.getHeight());
             customerRepository.save(customerEntity);
                 
         } catch (Exception exception) {

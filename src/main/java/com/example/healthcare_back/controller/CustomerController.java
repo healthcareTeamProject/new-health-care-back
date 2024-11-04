@@ -50,7 +50,7 @@ public class CustomerController {
     }
 
     // 고객의 신체 정보 리스트를 가져옵니다.
-    @GetMapping("/{userId}/user-muscle-fat")
+    @GetMapping("/{userId}/user-muscle-fat-list")
     public ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList(
         @PathVariable("userId") String userId
     ) {
@@ -59,7 +59,7 @@ public class CustomerController {
     }
 
     // 고객의 3대 측정 정보 리스트를 가져옵니다.
-    @GetMapping("/{userId}/user-three-major-lift")
+    @GetMapping("/{userId}/user-three-major-lift-list")
     public ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLift(
         @PathVariable("userId") String userId
     ) {

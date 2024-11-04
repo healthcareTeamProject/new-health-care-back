@@ -921,7 +921,7 @@ Content-Type: application/json;charset=UTF-8
 사용자는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 사용자 아이디를 포함하여 요청하고 성공적으로 이루어지면 사용자 신체정보 번호, 사용자의 몸무게, 골격근량, 체지방량, 사용자 신체 정보 등록 날짜를 응답받습니다. 만약 존재하지 않는 아이디일 경우 존재하지 않는 아이디에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/{userId}/user-muscle-fat**
+- end point : **/{userId}/user-muscle-fat-list**
 
 ##### Request
 
@@ -934,7 +934,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-muscle-fat"
+curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-muscle-fat-list"
 ```
 
 ##### Response
@@ -954,7 +954,7 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-muscle-fat"
 | muscleFat | muscleFatList[] |   신체 정보 리스트    |    O     |
 
 **MuscleFatList**  
-| name      |      type       |      description      | required |
+| name | type | description | required |
 | --------- | :-------------: | :-------------------: | :------: |
 | userMuscleFatNumber | Integer | 사용자 신체 정보 번호 | O |
 | userId | String | 사용자 아이디 | O |
@@ -974,12 +974,17 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "SU",
   "message": "Success.",
-  "userMuscleFatNumber": 1,
-  "userId": "qwer1234",
-  "weigh" : 80 ,
-  "skeletalMuscleMass" : 34.5,
-  "bodyFatMass" : 10.4,
-  "userMuscleFatDate": "2024-11-11"
+  "userMuscleFatLists": [
+        {
+            "userMuscleFatNumber": 1,
+            "userId": "qwer1234",
+            "weight": 70.5,
+            "skeletalMuscleMass": 30.5,
+            "bodyFatMass": 10.3,
+            "userMuscleFatDate": "2024-11-04T09:39:27"
+        },
+        ...
+    ]
 }
 ```
 
@@ -1019,108 +1024,6 @@ Content-Type: application/json;charset=UTF-8
 }
 
 ```
-
-#### - 특정 사용자 신체 정보 상세 보기
-
-##### 설명
-
-사용자는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 사용자 아이디를 포함하여 요청하고 성공적으로 이루어지면 특정 사용자 신체정보 번호, 사용자의 몸무게, 골격근량, 체지방량, 사용자 신체 정보 등록 날짜를 응답받습니다. 만약 존재하지 않는 아이디일 경우 존재하지 않는 아이디 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
-
-- method : **GET**
-- end point : **/{userId}/user-muscle-fat/{userMuscleFatNumber}**
-
-##### Request
-
-###### Header
-
-| name          |      description      | required |
-| ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    O     |
-
-###### Example
-
-```bash
-curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-muscle-fat"
-```
-
-##### Response
-
-###### Header
-
-| name         |                       description                        | required |
-| ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
-
-###### Response Body
-
-| name                |    type    |        description         | required |
-| ------------------- | :--------: | :------------------------: | :------: |
-| code                |   String   |         결과 코드          |    O     |
-| message             |   String   |   결과 코드에 대한 설명    |    O     |
-| userMuscleFatNumber |  Integer   |   사용자 신체 정보 번호    |    O     |
-| userId              |   String   |       사용자 아이디        |    O     |
-| weight              | BigDecimal |           몸무게           |    O     |
-| skeletalMuscleMass  | BigDecimal |          골격근량          |    X     |
-| bodyFatMass         | BigDecimal |          체지방량          |    X     |
-| userMuscleFatDate   |   String   | 사용자 신체 정보 등록 날짜 |    O     |
-
-###### Example
-
-**응답 성공**
-
-```bash
-HTTP/1.1 200 OK
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "SU",
-  "message": "Success.",
-  "userMuscleFatNumber": 1,
-  "userId": "qwer1234",
-  "weigh" : 80 ,
-  "skeletalMuscleMass" : 34.5,
-  "bodyFatMass" : 10.4,
-  "userMuscleFatDate": "2024-11-11"
-}
-```
-
-**응답 : 실패 (존재하지 않는 아이디)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "NI",
-  "message": "No exist user id."
-}
-```
-
-**응답 실패 (데이터 유효성 검사 실패)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "VF",
-  "message": "Validation failed."
-}
-```
-
-**응답 실패 (데이터베이스 에러)**
-
-```bash
-HTTP/1.1 500 Internal Server Error
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "DBE",
-  "message": "Database error."
-}
-```
-
----
 
 #### - 사용자 3대 측정 정보 리스트
 
@@ -1129,7 +1032,7 @@ Content-Type: application/json;charset=UTF-8
 사용자는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 사용자 아이디를 포함하여 요청하고 성공적으로 이루어지면 특정 사용자 3대 측정 정보 번호, 데드리프트, 벤치프레스, 스쿼트, 사용자 3대 측정 정보 등록 날짜를 응답받습니다. 만약 존재하지 않는 정보일 경우 존재하지 않는 아이디와 존재하지 않는 3대 측정 정보에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/{userId}/user-three-major-lift**
+- end point : **/{userId}/user-three-major-lift-list**
 
 ##### Request
 
@@ -1142,7 +1045,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-three-major-lift"
+curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-three-major-lift-list"
 ```
 
 ##### Response
@@ -1182,12 +1085,17 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "SU",
   "message": "Success.",
-  "threeMajorLiftsNumber": 1,
-  "userId": "qwer1234",
-  "deadlift" : 120,
-  "benchPress" : 100,
-  "squat" : 110,
-  "threeMajorLiftDate" : "2024-11-11"
+  "userThreeMajorLiftLists": [
+        {
+            "userThreeMajorLiftNumber": 1,
+            "userId": "qwer1234",
+            "deadlift": 100.0,
+            "benchPress": 100.0,
+            "squat": 100.0,
+            "userThreeMajorLiftDate": "2024-11-04T09:39:32"
+        },
+        ...
+    ]
 }
 ```
 
@@ -1241,125 +1149,11 @@ Content-Type: application/json;charset=UTF-8
 
 ---
 
-#### - 특정 사용자 3대 측정 정보 상세 보기
+#### - 마이페이지 사용자 기본 정보 수정
 
 ##### 설명
 
-사용자는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 사용자 아이디를 포함하여 요청하고 성공적으로 이루어지면 특정 사용자 3대 측정 정보 번호, 데드리프트, 벤치프레스, 스쿼트, 사용자 3대 측정 정보 등록 날짜를 응답받습니다. 만약 존재하지 않는 정보일 경우 존재하지 않는 아이디와 존재하지 않는 3대 측정 정보에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
-
-- method : **GET**
-- end point : **/{userId}/user-three-major-lift**
-
-##### Request
-
-###### Header
-
-| name          |      description      | required |
-| ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    O     |
-
-###### Example
-
-```bash
-curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-three-major-lift"
-```
-
-##### Response
-
-###### Header
-
-| name         |                       description                        | required |
-| ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
-
-###### Response Body
-
-| name                     |    type    |        description        | required |
-| ------------------------ | :--------: | :-----------------------: | :------: |
-| code                     |   String   |         결과 코드         |    O     |
-| message                  |   String   |   결과 코드에 대한 설명   |    O     |
-| UserThreeMajorLiftNumber |  Integer   | 사용자 3대 측정 정보 번호 |    O     |
-| userId                   |   String   |       사용자 아이디       |    O     |
-| deadlift                 | BigDecimal |      데드리프트(kg)       |    X     |
-| benchPress               | BigDecimal |      벤치프레스(kg)       |    X     |
-| squat                    | BigDecimal |          스쿼트           |    X     |
-| UserThreeMajorLiftDate   |   String   | 사용자 3대 측정 등록 날짜 |    O     |
-
-###### Example
-
-**응답 성공**
-
-```bash
-HTTP/1.1 200 OK
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "SU",
-  "message": "Success.",
-  "threeMajorLiftsNumber": 1,
-  "userId": "qwer1234",
-  "deadlift" : 120,
-  "benchPress" : 100,
-  "squat" : 110,
-  "threeMajorLiftDate" : "2024-11-11"
-}
-```
-
-**응답 : 실패 (존재하지 않는 아이디)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "NI",
-  "message": "No exist user id."
-}
-```
-
-**응답 : 실패 (존재하지 않는 사용자 3대 측정 정보)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "NTI",
-  "message": "No exist user three major lift information."
-}
-```
-
-**응답 실패 (데이터 유효성 검사 실패)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "VF",
-  "message": "Validation failed."
-}
-```
-
-**응답 실패 (데이터베이스 에러)**
-
-```bash
-HTTP/1.1 500 Internal Server Error
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "DBE",
-  "message": "Database error."
-}
-```
-
----
-
-#### - 마이페이지 정보 수정
-
-##### 설명
-
-클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 사용자 프로필 이미지, 이름, 닉네임, 키, 개인 목표, 몸무게, 골격근량, 체지방량, 벤치프레스, 스쿼트, 데드리프트를 입력하여 요청하고 마이페이지 정보 수정이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 사용자 프로필 이미지, 이름, 닉네임, 키, 개인 목표를 입력하여 요청하고 마이페이지 정보 수정이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **PATCH**
 - end point : **/**
@@ -1374,35 +1168,303 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name               |    type    |        description         | required |
-| ------------------ | :--------: | :------------------------: | :------: |
-| profileImage       |   String   |    사용자 프로필이미지     |    X     |
-| name               |   String   |       사용자의 이름        |    O     |
-| nickname           |   String   |      사용자의 닉네임       |    O     |
-| height             | BigDecimal |         사용자 키          |    O     |
-| weight             | BigDecimal |       사용자 몸무게        |    O     |
-| skeletalMuscleMass | BigDecimal |          골격근량          |    X     |
-| bodyFatMass        | BigDecimal |      사용자 체지방량       |    X     |
-| deadlift           | BigDecimal | 사용자 3대 측정 데드리프트 |    X     |
-| benchPress         | BigDecimal | 사용자 3대 측정 벤치프레스 |    X     |
-| squat              | BigDecimal |   사용자 3대 측정 스쿼트   |    X     |
-| personalGoal       |   String   |      사용자 개인목표       |    X     |
+| name         |    type    |     description     | required |
+| ------------ | :--------: | :-----------------: | :------: |
+| profileImage |   String   | 사용자 프로필이미지 |    X     |
+| name         |   String   |    사용자의 이름    |    O     |
+| nickname     |   String   |   사용자의 닉네임   |    O     |
+| height       | BigDecimal |      사용자 키      |    O     |
+| personalGoal |   String   |   사용자 개인목표   |    X     |
 
 ###### Example
 
 ```bash
-curl -v -X PATCH "http://localhost:4000/api/v1" \
+curl -v -X PATCH "http://localhost:4000/api/v1/customer" \
 -d "profileImage=null" \
 -d "name=홍길동" \
 -d "nickname=뽀삐puppy12" \
 -d "height=180" \
+-d "personalGoal=이번달은 3대 측정 500 만들꺼야"
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name    |  type  |      description      | required |
+| ------- | :----: | :-------------------: | :------: |
+| code    | String |       결과 코드       |    O     |
+| message | String | 결과 코드에 대한 설명 |    O     |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success."
+}
+```
+
+**응답 : 실패 (존재하지 않는 아이디)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NI",
+  "message": "No exist user id."
+}
+```
+
+**응답 실패 (데이터 유효성 검사 실패)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "VF",
+  "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (중복된 닉네임)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DN",
+  "message": "Duplicated user nickname."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+---
+
+#### - 마이페이지 3대 측정 정보 수정
+
+##### 설명
+
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 사용자 몸무게, 골격근량, 체지방량을 입력하여 요청하면 리스트에 등록을 위한 작성과 마이페이지 정보 수정이 성공적으로 함께 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
+
+- method : **POST**, **PATCH**
+- end point : **/{userId}/user-muscle-fat**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
+
+###### Request Body
+
+**POST**
+| name | type | description | required |
+| ------------------ | :--------: | :-------------: | :------: |
+| userId | String | 사용자 아이디 | O |
+| weight | BigDecimal | 사용자 몸무게 | O |
+| skeletalMuscleMass | BigDecimal | 골격근량 | X |
+| bodyFatMass | BigDecimal | 사용자 체지방량 | X |
+
+**PATCH**
+| name | type | description | required |
+| ------------------ | :--------: | :-------------: | :------: |
+| weight | BigDecimal | 사용자 몸무게 | O |
+| skeletalMuscleMass | BigDecimal | 골격근량 | X |
+| bodyFatMass | BigDecimal | 사용자 체지방량 | X |
+
+###### Example
+
+**POST**
+
+```bash
+curl -v -X PATCH "http://localhost:4000/api/v1/customer/{userId}/user-muscle-fat" \
+-d "userId=qwer1234" \
 -d "weigh=80" \
 -d "skeletalMuscleMass=34.5" \
 -d "bodyFatMass=10.4" \
+```
+
+**PATCH**
+
+```bash
+curl -v -X PATCH "http://localhost:4000/api/v1/customer/{userId}/user-muscle-fat" \
+-d "weigh=80" \
+-d "skeletalMuscleMass=34.5" \
+-d "bodyFatMass=10.4" \
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name    |  type  |      description      | required |
+| ------- | :----: | :-------------------: | :------: |
+| code    | String |       결과 코드       |    O     |
+| message | String | 결과 코드에 대한 설명 |    O     |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success."
+}
+```
+
+**응답 : 실패 (존재하지 않는 아이디)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NI",
+  "message": "No exist user id."
+}
+```
+
+**응답 실패 (데이터 유효성 검사 실패)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "VF",
+  "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+---
+
+#### - 마이페이지 사용자 3대 측정 정보 수정
+
+##### 설명
+
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 사용자 벤치프레스, 스쿼트, 데드리프트의 중량 입력하여 요청하면 작성과 마이페이지 정보 수정이 함께 성공적으로 이루어지면서 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
+
+- method : **POST**, **PATCH**
+- end point : **/{userId}/user-three-major-lift**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
+
+###### Request Body
+
+**POST**
+| name | type | description | required |
+| ------------------ | :--------: | :------------------------: | :------: |
+| userId | String | 사용자 아이디 | O |
+| deadlift | BigDecimal | 사용자 3대 측정 데드리프트 | X |
+| benchPress | BigDecimal | 사용자 3대 측정 벤치프레스 | X |
+| squat | BigDecimal | 사용자 3대 측정 스쿼트 | X |
+
+**PATCH**
+| name | type | description | required |
+| ------------------ | :--------: | :------------------------: | :------: |
+| deadlift | BigDecimal | 사용자 3대 측정 데드리프트 | X |
+| benchPress | BigDecimal | 사용자 3대 측정 벤치프레스 | X |
+| squat | BigDecimal | 사용자 3대 측정 스쿼트 | X |
+
+###### Example
+
+**POST**
+
+```bash
+curl -v -X POST "http://localhost:4000/api/v1/customer/{userId}/user-three-major-lift" \
+-d "userId=qwer1234" \
 -d "deadlift=124" \
 -d "benchPress=74" \
 -d "squat=100" \
--d "personalGoal=이번달은 3대 측정 500 만들꺼야"
+```
+
+**PATCH**
+
+```bash
+curl -v -X PATCH "http://localhost:4000/api/v1/customer/{userId}/user-three-major-lift" \
+-d "deadlift=124" \
+-d "benchPress=74" \
+-d "squat=100" \
 ```
 
 ##### Response
@@ -1609,17 +1671,17 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name              |    type    |    description    | required |
-| ----------------- | :--------: | :---------------: | :------: |
-| boardTitle        |   String   |    게시물 제목    |    O     |
-| nickname          |   String   |    작성자 닉네임    |    O     |
-| boardCategory     |   String   |  게시물 카테고리  |    O     |
-| boardTag          |   String   |    게시물 태그    |    O     |
-| boardContents     |   String   |    게시물 내용    |    O     |
-| youtubeVideoLink  |   String   | 유튜브비디오 링크 |    X     |
-| boardFileContents |   String   |    게시물 자료    |    X     |
-| mapLat            | BigDecimal |       위도        |    X     |
-| mapLng            | BigDecimal |       경도        |    X     |
+| name              |    type    |      description      | required |
+| ----------------- | :--------: | :-------------------: | :------: |
+| boardTitle        |   String   |      게시물 제목      |    O     |
+| userId            |   String   | 작성자 아이디(닉네임) |    O     |
+| boardCategory     |   String   |    게시물 카테고리    |    O     |
+| boardTag          |   String   |      게시물 태그      |    O     |
+| boardContents     |   String   |      게시물 내용      |    O     |
+| youtubeVideoLink  |   String   |   유튜브비디오 링크   |    X     |
+| boardFileContents |   String   |      게시물 자료      |    X     |
+| mapLat            | BigDecimal |         위도          |    X     |
+| mapLng            | BigDecimal |         경도          |    X     |
 
 ###### Example
 
@@ -1745,7 +1807,7 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 | message           |    String     | 결과 코드에 대한 설명 |    O     |
 | boardNumber       |    Integer    |      게시물 번호      |    O     |
 | boardTitle        |    String     |      게시물 제목      |    O     |
-| nickname          |    String     |     게시물 닉네임     |    O     |
+| userId            |    String     | 게시물 아이디(닉네임) |    O     |
 | boardUploadDate   |    String     | 작성 게시물 생성 날짜 |    O     |
 | boardContents     |    String     |      게시물 내용      |    O     |
 | youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
@@ -2357,15 +2419,13 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/health-schedule" \
+curl -X POST "http://localhost:4000/api/v1/health-schedule" \
 -h "Authorization=Bearer XXXX" \
--d "health_schedule_number=1" \
+-d "userId=qwer1234" \
 -d "health_title=가슴" \
 -d "health_memo=
     벤치프레스 12 3set,
     플라이 15 5set"
--d "schedule_start=2024.10.17 12:00"
--d "schedule_end=2024.10.17 23:59"
 ```
 
 ##### Response
@@ -2466,15 +2526,12 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/meal-schedule" \
+curl -X POST "http://localhost:4000/api/v1/meal-schedule" \
 -h "Authorization=Bearer XXXX" \
--d "health_schedule_number=1" \
 -d "health_title=아침" \
 -d "health_memo=
     닭가슴살 109kcal,
     사과 52kcal"
--d "schedule_start=2024.10.17 12:00"
--d "schedule_end=2024.10.17 23:59"
 ```
 
 ##### Response
@@ -2599,6 +2656,12 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "SU",
   "message": "Success.",
+  "healthScheduleNumber": "1.",
+  "userId": "qwer1234",
+  "healthTitle": "상체",
+  "healthMemo": "벤치프레스 12 3set, 플라이 15 5set",
+  "healthScheduleStart": "2024-11-04T12:15:10",
+  "healthScheduleEnd": "2024-11-05T12:15:10"
 }
 ```
 
@@ -2695,6 +2758,12 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "SU",
   "message": "Success.",
+  "mealScheduleNumber": "1",
+  "userId": "qwer1234",
+  "mealTitle": "아침",
+  "mealMemo": "닭가슴살 109kcal, 사과 52kcal",
+  "scheduleStart": "2024-11-04T12:15:10",
+  "scheduleEnd": "2024-11-05T12:15:10"
 }
 ```
 
@@ -2743,7 +2812,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜에 등록이 된 운동 스케줄을 클릭하여 수정이 된다면 성공에 대한 응답을 받습니다. 수정이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
 
 - method : **PATCH**
-- end point : **/{healthScheduleNumber}**
+- end point : **/{userId}/health_schedule**
 
 ##### Request
 
@@ -2767,7 +2836,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/healthScheduleNumber/1" \
+curl -X PATCH "http://localhost:4000/api/v1/{userId}/health_schedule" \
 -h "Authorization=Bearer XXXX" \
 -d "health_schedule_number=1" \
 -d "health_title=가슴, 이두" \
@@ -2855,7 +2924,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜에 등록이 된 식단 스케줄을 클릭하여 수정이 된다면 성공에 대한 응답을 받습니다. 수정이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다. 식품에 대한 정보는 외부 API를 받아와 사용합니다.
 
 - method : **PATCH**
-- end point : **/{mealScheduleNumber}**
+- end point : **/{userId}/meal_schedule**
 
 ##### Request
 
@@ -2879,7 +2948,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/mealScheduleNumber/1" \
+curl -X PATCH "http://localhost:4000/api/v1/{userId}/meal_schedule" \
 -h "Authorization=Bearer XXXX" \
 -d "health_schedule_number=1" \
 -d "health_title=아침" \

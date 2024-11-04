@@ -1,7 +1,6 @@
 package com.example.healthcare_back.entity;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
-import com.example.healthcare_back.dto.request.customer.PatchUserMuscleFatRequestDto;
 import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
 
 import jakarta.persistence.Column;
