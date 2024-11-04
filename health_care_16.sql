@@ -22,7 +22,7 @@ USE `health_care` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `health_care`.`tel_auth_number` (
   `tel_number` VARCHAR(11) NOT NULL COMMENT '전화번호',
-  `auth_number` VARCHAR(255) NULL DEFAULT NULL,
+  `auth_number` VARCHAR(4) NOT NULL,
   PRIMARY KEY (`tel_number`),
   UNIQUE INDEX `tel_number_UNIQUE` (`tel_number` ASC) VISIBLE)
 ENGINE = InnoDB
@@ -34,12 +34,12 @@ COMMENT = '전화번호 인증';
 -- Table `health_care`.`customer`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `health_care`.`customer` (
-  `user_id` VARCHAR(20) NOT NULL DEFAULT '',
-  `name` VARCHAR(255) NOT NULL,
-  `nickname` VARCHAR(255) NOT NULL,
+  `user_id` VARCHAR(20) NOT NULL,
+  `name` VARCHAR(15) NOT NULL,
+  `nickname` VARCHAR(30) NOT NULL,
   `password` VARCHAR(255) CHARACTER SET 'armscii8' NOT NULL COMMENT '비밀번호',
   `tel_number` VARCHAR(11) NOT NULL COMMENT '전화번호',
-  `join_path` VARCHAR(255) NOT NULL,
+  `join_path` VARCHAR(5) NOT NULL,
   `sns_id` VARCHAR(255) NULL DEFAULT NULL COMMENT 'snsID',
   `height` DECIMAL(5,1) NOT NULL COMMENT '키(cm)',
   `profile_image` TEXT NULL DEFAULT NULL,
@@ -67,18 +67,15 @@ COMMENT = '사용자정보';
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `health_care`.`board` (
   `board_number` INT NOT NULL AUTO_INCREMENT COMMENT '게시물 번호',
-  `board_title` VARCHAR(255) NULL DEFAULT NULL,
+  `board_title` VARCHAR(80) NOT NULL,
   `user_id` VARCHAR(20) NOT NULL COMMENT '게시물을 작성한 사용자 아이디',
   `board_category` VARCHAR(30) NOT NULL COMMENT '게시물 카테고리',
   `board_tag` VARCHAR(30) NOT NULL COMMENT '게시물 태그',
-  `board_contents` VARCHAR(255) NULL DEFAULT NULL,
+  `board_contents` TEXT NOT NULL,
   `youtube_video_link` VARCHAR(255) NULL DEFAULT NULL COMMENT '유튜브비디오링크',
   `board_upload_date` DATETIME NOT NULL COMMENT '사용자 작성 게시물 생성날짜',
   `board_view_count` INT NOT NULL DEFAULT '0' COMMENT '조회수',
   `board_like_count` INT NOT NULL DEFAULT '0' COMMENT '게시물 추천 수',
-  `board_file_contents` VARCHAR(255) NULL DEFAULT NULL,
-  `comment_count` INT NULL DEFAULT NULL,
-  `nickname` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`board_number`),
   UNIQUE INDEX `board_number_UNIQUE` (`board_number` ASC) VISIBLE,
   INDEX `post_category_INDEX` (`board_category` ASC) VISIBLE,
@@ -132,8 +129,8 @@ CREATE TABLE IF NOT EXISTS `health_care`.`comment` (
   `comment_number` INT NOT NULL AUTO_INCREMENT COMMENT '댓글 번호',
   `user_id` VARCHAR(20) NOT NULL COMMENT '댓글을 작성한 사용자 아이디',
   `board_number` INT NOT NULL COMMENT '댓글을 작성한 게시물 번호',
-  `comment_contents` VARCHAR(255) NULL DEFAULT NULL,
-  `comment_date` VARCHAR(255) NULL DEFAULT NULL,
+  `comment_contents` TEXT NOT NULL,
+  `comment_date` DATETIME NOT NULL,
   `comment_like_count` INT NOT NULL DEFAULT '0' COMMENT '댓글 추천 수',
   PRIMARY KEY (`comment_number`),
   UNIQUE INDEX `comments_number_UNIQUE` (`comment_number` ASC) VISIBLE,
@@ -231,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `health_care`.`user_muscle_fat` (
     FOREIGN KEY (`user_id`)
     REFERENCES `health_care`.`customer` (`user_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 13
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb3
 COMMENT = '사용자 신체 정보';
 
@@ -254,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `health_care`.`user_three_major_lift` (
     FOREIGN KEY (`user_id`)
     REFERENCES `health_care`.`customer` (`user_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 29
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb3
 COMMENT = '사용자 3대 측정 정보';
 
