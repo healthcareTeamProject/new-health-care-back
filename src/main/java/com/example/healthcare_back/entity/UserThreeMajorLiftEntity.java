@@ -66,5 +66,11 @@ public class UserThreeMajorLiftEntity {
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
     }
+
+    public UserThreeMajorLiftEntity(PatchUserThreeMajorLiftRequestDto dto) {
+        this.deadlift = dto.getDeadlift();
+        this.benchPress = dto.getBenchPress();
+        this.squat = dto.getSquat();
+    }
     
 }

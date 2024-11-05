@@ -2,9 +2,8 @@ package com.example.healthcare_back.common.object;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDateTime;
 
-import com.example.healthcare_back.entity.BoardEntity;
+import com.example.healthcare_back.repository.resultSet.BoardListResultSet;
 
 import lombok.Getter;
 
@@ -13,21 +12,21 @@ public class BoardList {
     private final Integer boardNumber;
     private final String boardTitle;
     private final String nickname;
-    private final LocalDateTime boardUploadDate;
+    private final String boardUploadDate;
     private final Integer boardViewCount;
 
-    public BoardList (BoardEntity boardEntity) {
-        this.boardNumber = boardEntity.getBoardNumber();
-        this.boardTitle = boardEntity.getBoardTitle();
-        this.nickname = boardEntity.getNickname();
-        this.boardUploadDate = boardEntity.getBoardUploadDate();
-        this.boardViewCount = boardEntity.getBoardViewCount();
+    public BoardList (BoardListResultSet resultSet) {
+        this.boardNumber = resultSet.getBoardNumber();
+        this.boardTitle = resultSet.getBoardTitle();
+        this.nickname = resultSet.getNickname();
+        this.boardUploadDate = resultSet.getBoardUploadDate();
+        this.boardViewCount = resultSet.getBoardViewCount();
     }
 
-    public static List<BoardList> getList(List<BoardEntity> boardEntities) {
+    public static List<BoardList> getList(List<BoardListResultSet> resultSets) {
         List<BoardList> boards = new ArrayList<>();
-        for (BoardEntity boardEntity: boardEntities) {
-            BoardList boardList = new BoardList(boardEntity);
+        for (BoardListResultSet resultSet: resultSets) {
+            BoardList boardList = new BoardList(resultSet);
             boards.add(boardList);
         }
         return boards;

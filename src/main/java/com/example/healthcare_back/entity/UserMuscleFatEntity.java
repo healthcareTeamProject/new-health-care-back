@@ -67,5 +67,11 @@ public class UserMuscleFatEntity {
         this.skeletalMuscleMass = dto.getSkeletalMuscleMass();
         this.bodyFatMass = dto.getBodyFatMass();
     }
+
+    public UserMuscleFatEntity(PatchUserMuscleFatRequestDto dto) {
+        this.weight = dto.getWeight();
+        this.skeletalMuscleMass = dto.getSkeletalMuscleMass();
+        this.bodyFatMass = dto.getBodyFatMass();
+    }
     
 }
