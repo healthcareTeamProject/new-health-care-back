@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 // 회원정보 수정 Request Body DTO
@@ -16,6 +17,8 @@ import jakarta.validation.constraints.NotNull;
 @NoArgsConstructor
 public class PatchUserMuscleFatRequestDto {
 
+    @NotBlank
+    private String userId;
     @NotNull
     @Column(precision = 5, scale = 1)
     private BigDecimal weight;

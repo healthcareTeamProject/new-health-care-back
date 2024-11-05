@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserMuscleFatRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
-import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
-import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetCustomerResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetSignInResponseDto;
@@ -35,7 +33,6 @@ public class CustomerServiceImplement implements CustomerService{
     private final UserMuscleFatRepository userMuscleFatRepository;
     private final UserThreeMajorLiftRepository userThreeMajorLiftRepository;
 
-
     @Override
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(String userId) {
         
@@ -44,7 +41,7 @@ public class CustomerServiceImplement implements CustomerService{
         try {
 
             customerEntity = customerRepository.findByUserId(userId);
-            if (customerEntity == null) return ResponseDto.authenticationFail();
+            if (customerEntity == null) return ResponseDto.noExistUserId();
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -122,73 +119,16 @@ public class CustomerServiceImplement implements CustomerService{
     }
 
     @Override
-    public ResponseEntity<ResponseDto> postUserMuscleFat(PostUserMuscleFatRequestDto dto, String userId) {
-        try {
-
-            // 사용자 존재 여부 확인
-            CustomerEntity customerEntity = customerRepository.findByUserId(dto.getUserId());
-            if (customerEntity == null) {
-                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
-            }
-
-            // 새로운 UserMuscleFatEntity 객체 생성
-            UserMuscleFatEntity newRecord = new UserMuscleFatEntity();
-            newRecord.setUserId(userId); // 유저 ID 설정
-            newRecord.setWeight(dto.getWeight()); // 체중 설정
-            newRecord.setSkeletalMuscleMass(dto.getSkeletalMuscleMass()); // 골격근량 설정
-            newRecord.setBodyFatMass(dto.getBodyFatMass()); // 체지방량 설정
-            newRecord.setUserMuscleFatDate(LocalDateTime.now()); // 현재 날짜 설정
-
-            // 새로운 기록 저장
-            userMuscleFatRepository.save(newRecord);
-
-        return ResponseDto.successWithUserId(dto.getUserId()); // 성공적으로 저장된 경우 응답
-
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError(); // 오류 발생 시 데이터베이스 오류 응답
-        }
-
-    }
-
-    @Override
-    public ResponseEntity<ResponseDto> postUserThreeMajorLift(PostUserThreeMajorLiftRequestDto dto, String userId) {
-        try {
-
-            // 사용자 존재 여부 확인
-            CustomerEntity customerEntity = customerRepository.findByUserId(dto.getUserId());
-            if (customerEntity == null) {
-                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
-            }
-
-            // 새로운 UserThreeMajorLiftEntity 객체 생성
-            UserThreeMajorLiftEntity newRecord = new UserThreeMajorLiftEntity();
-            newRecord.setUserId(userId); // 유저 ID 설정
-            newRecord.setDeadlift(dto.getDeadlift()); // 데드리프트 설정
-            newRecord.setBenchPress(dto.getBenchPress()); // 벤치프레스 설정
-            newRecord.setSquat(dto.getSquat()); // 스쿼트 설정
-            newRecord.setUserThreeMajorLiftDate(LocalDateTime.now()); // 현재 날짜 설정
-
-            // 새로운 기록 저장
-            userThreeMajorLiftRepository.save(newRecord);
-
-        return ResponseDto.successWithUserId(dto.getUserId()); // 성공적으로 저장된 경우 응답
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError(); // 오류 발생 시 데이터베이스 오류 응답
-        }
-
-    }
-
-    @Override
     public ResponseEntity<ResponseDto> patchCustomer(PatchCustomerRequestDto dto, String userId) {
         
         try {
 
+            // 사용자 존재 여부 확인
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
-            if (customerEntity == null) return ResponseDto.noExistUserId();
+            if (customerEntity == null) {
+                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+            }
+
             customerEntity.setName(dto.getName());
             customerEntity.setNickname(dto.getNickname());
             customerEntity.setProfileImage(dto.getProfileImage());
@@ -210,19 +150,34 @@ public class CustomerServiceImplement implements CustomerService{
     public ResponseEntity<ResponseDto> patchUserMuscleFatCustomer(PatchUserMuscleFatRequestDto dto, String userId) {
         try {
 
+            // 사용자 존재 여부 확인
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
-            if (customerEntity == null) return ResponseDto.noExistUserId();
+            if (customerEntity == null) {
+                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+            }
+
             customerEntity.setWeight(dto.getWeight());
             customerEntity.setSkeletalMuscleMass(dto.getSkeletalMuscleMass());
             customerEntity.setBodyFatMass(dto.getBodyFatMass());
             customerRepository.save(customerEntity);
-                
+
+            // 새로운 UserMuscleFatEntity 객체 생성
+            UserMuscleFatEntity newUserMuscleFat = new UserMuscleFatEntity();
+            newUserMuscleFat.setUserId(userId); // 유저 ID 설정
+            newUserMuscleFat.setWeight(dto.getWeight());
+            newUserMuscleFat.setSkeletalMuscleMass(dto.getSkeletalMuscleMass());
+            newUserMuscleFat.setBodyFatMass(dto.getBodyFatMass());
+            newUserMuscleFat.setUserMuscleFatDate(LocalDateTime.now()); // 현재 날짜 설정
+            // 새로운 기록 저장
+            userMuscleFatRepository.save(newUserMuscleFat);
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
 
         return ResponseDto.success();
+
     }
 
 
@@ -230,12 +185,25 @@ public class CustomerServiceImplement implements CustomerService{
     public ResponseEntity<ResponseDto> patchThreeMajorLiftCustomer(PatchUserThreeMajorLiftRequestDto dto, String userId) {
         try {
 
+            // 사용자 존재 여부 확인
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
-            if (customerEntity == null) return ResponseDto.noExistUserId();
+            if (customerEntity == null) {
+                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+            }
+
             customerEntity.setDeadlift(dto.getDeadlift());
             customerEntity.setBenchPress(dto.getBenchPress());
             customerEntity.setSquat(dto.getSquat());
             customerRepository.save(customerEntity);
+
+            UserThreeMajorLiftEntity newUserThreeMajorLift = new UserThreeMajorLiftEntity();
+            newUserThreeMajorLift.setUserId(userId); // 유저 ID 설정
+            newUserThreeMajorLift.setDeadlift(dto.getDeadlift());
+            newUserThreeMajorLift.setBenchPress(dto.getBenchPress());
+            newUserThreeMajorLift.setSquat(dto.getSquat());
+            newUserThreeMajorLift.setUserThreeMajorLiftDate(LocalDateTime.now()); // 현재 날짜 설정
+            userThreeMajorLiftRepository.save(newUserThreeMajorLift);
+
                 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -244,10 +212,5 @@ public class CustomerServiceImplement implements CustomerService{
 
         return ResponseDto.success();
     }
-
-    
-
-   
-
 
 }

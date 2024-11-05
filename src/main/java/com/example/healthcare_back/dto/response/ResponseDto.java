@@ -3,7 +3,11 @@ package com.example.healthcare_back.dto.response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.example.healthcare_back.dto.response.customer.GetCustomerResponseDto;
+
 import java.time.LocalDateTime;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -71,6 +75,11 @@ public class ResponseDto {
 
     public static ResponseEntity<ResponseDto> noExistComment() {
         ResponseDto responseBody = new ResponseDto(ResponseCode.NO_EXIST_COMMENT, ResponseMessage.NO_EXIST_COMMENT);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
+    }
+
+    public static ResponseEntity<ResponseDto> noExistSchedule() {
+        ResponseDto responseBody = new ResponseDto(ResponseCode.NO_EXIST_SCHEDULE, ResponseMessage.NO_EXIST_SCHEDULE);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
     }
 

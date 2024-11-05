@@ -14,6 +14,7 @@ public interface ResponseCode {
     String NO_EXIST_USER_ID = "NI";
     String NO_EXIST_COMMENT = "NC";
     String NO_EXIST_BOARD = "NB";
+    String NO_EXIST_SCHEDULE = "NS";
 
     String TEL_AUTH_FAIL = "TAF";
     String SIGN_IN_FAIL = "SF";

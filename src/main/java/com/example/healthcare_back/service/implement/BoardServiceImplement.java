@@ -1,5 +1,6 @@
 package com.example.healthcare_back.service.implement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -41,14 +42,21 @@ public class BoardServiceImplement implements BoardService {
         
             // 게시물에 대한 댓글 조회
             List<CommentEntity> commentList = commentRepository.findByBoardNumber(boardNumber);
+            if (commentList == null) {
+                return GetBoardResponseDto.noExistBoard(); // 게시물이 없을 경우 처리
+            }
 
-            // 성공적인 응답
-            return GetBoardResponseDto.success(boardList, commentList);
     
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError(); // 데이터베이스 오류 처리
         }
+        
+        // 성공적인 응답
+        BoardEntity boardList = new BoardEntity();
+        List<CommentEntity> commentList = new ArrayList<>();
+        return GetBoardResponseDto.success(boardList, commentList);
+
     }
 
     @Override

@@ -36,4 +36,6 @@ public class MealScheduleDetailEntity {
 
     @Column(nullable = false)
     private Integer mealCount;
+
+    
 }
