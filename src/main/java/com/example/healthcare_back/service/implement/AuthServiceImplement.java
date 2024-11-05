@@ -100,33 +100,31 @@ public class AuthServiceImplement implements AuthService {
 
     @Override
     public ResponseEntity<ResponseDto> signUp(SignUpRequestDto dto) {
-
         String userId = dto.getUserId();
         String telNumber = dto.getTelNumber();
         String authNumber = dto.getAuthNumber(); 
         String password = dto.getPassword();
-
+    
         try {
-
             // 1. 사용자 ID 중복 체크
             if (customerRepository.existsByUserId(userId)) {
                 return ResponseDto.duplicatedUserId(); // 중복된 사용자 ID일 경우 응답
             }
-
+        
             // 2. 전화번호 중복 체크
             if (customerRepository.existsByTelNumber(telNumber)) {
                 return ResponseDto.duplicatedUserTelNumber(); // 중복된 전화번호일 경우 응답
             }
-
+        
             // 3. 인증번호 확인
             if (!telAuthNumberRepository.existsByTelNumberAndAuthNumber(telNumber, authNumber)) {
                 return ResponseDto.telAuthFail(); // 인증번호 불일치일 경우 응답
             }
-
+        
             // 4. 비밀번호 인코딩
-            String encodedPassword = passwordEncoder.encode(password); // 비밀번호 인코딩
-            dto.setPassword(encodedPassword); // 인코딩된 비밀번호 설정
-
+            String encodedPassword = passwordEncoder.encode(password);
+            dto.setPassword(encodedPassword);
+            
             // 5. CustomerEntity 생성 및 저장
             CustomerEntity customerEntity = new CustomerEntity(dto); // Dto를 사용하여 CustomerEntity 생성
             customerEntity.setUserId(dto.getUserId());
@@ -140,35 +138,34 @@ public class AuthServiceImplement implements AuthService {
             customerEntity.setProfileImage(dto.getProfileImage());
             customerEntity.setPersonalGoals(dto.getPersonalGoals());
             customerRepository.save(customerEntity); // 고객 정보 저장
-            
-            // 7. UserMuscleFatEntity 생성 및 저장
+
+            // 6. UserMuscleFatEntity 생성 및 저장
             UserMuscleFatEntity userMuscleFatEntity = new UserMuscleFatEntity(dto);
-            userMuscleFatEntity.setUserMuscleFatNumber(1); 
             userMuscleFatEntity.setUserId(customerEntity.getUserId());
+            userMuscleFatEntity.setUserMuscleFatNumber(0);
             userMuscleFatEntity.setWeight(dto.getWeight());
             userMuscleFatEntity.setSkeletalMuscleMass(dto.getSkeletalMuscleMass());
             userMuscleFatEntity.setBodyFatMass(dto.getBodyFatMass());
             userMuscleFatEntity.setUserMuscleFatDate(LocalDateTime.now());
             userMuscleFatRepository.save(userMuscleFatEntity);
-
-            // 8. UserThreeMajorLiftEntity 생성 및 저장
+        
+            // 7. UserThreeMajorLiftEntity 생성 및 저장
             UserThreeMajorLiftEntity userThreeMajorLiftEntity = new UserThreeMajorLiftEntity(dto);
-            userThreeMajorLiftEntity.setUserThreeMajorLiftNumber(1); 
             userThreeMajorLiftEntity.setUserId(customerEntity.getUserId());
+            userThreeMajorLiftEntity.setUserThreeMajorLiftNumber(0);
             userThreeMajorLiftEntity.setDeadlift(dto.getDeadlift());
             userThreeMajorLiftEntity.setBenchPress(dto.getBenchPress());
             userThreeMajorLiftEntity.setSquat(dto.getSquat());
             userThreeMajorLiftEntity.setUserThreeMajorLiftDate(LocalDateTime.now());
             userThreeMajorLiftRepository.save(userThreeMajorLiftEntity);
-
+        
         } catch (Exception exception) {
-            exception.printStackTrace(); // 예외 발생 시 스택 트레이스 출력
+            exception.printStackTrace();
             return ResponseDto.databaseError(); // 데이터베이스 에러 응답
         }
-
-        return ResponseDto.success(); // 성공 응답
-    }
-
+    
+            return ResponseDto.success(); // 성공 응답
+        }
 
 
     @Override

@@ -1,7 +1,7 @@
 package com.example.healthcare_back.entity;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
-import com.example.healthcare_back.dto.request.customer.PostUserMuscleFatRequestDto;
+import com.example.healthcare_back.dto.request.customer.PatchUserMuscleFatRequestDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -62,7 +62,7 @@ public class UserMuscleFatEntity {
         this.bodyFatMass = dto.getBodyFatMass();
     }
 
-    public UserMuscleFatEntity(PostUserMuscleFatRequestDto dto) {
+    public UserMuscleFatEntity(PatchUserMuscleFatRequestDto dto) {
         this.weight = dto.getWeight();
         this.skeletalMuscleMass = dto.getSkeletalMuscleMass();
         this.bodyFatMass = dto.getBodyFatMass();

@@ -1,5 +1,7 @@
 package com.example.healthcare_back.entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,8 +17,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="mealSchedule")
-@Table(name="meal_Schedule")
+@Entity(name="mealScheduleDetail")
+@Table(name="meal_schedule_detail")
 public class MealScheduleDetailEntity {
 
     @Id
@@ -30,8 +32,10 @@ public class MealScheduleDetailEntity {
     private String mealName;
 
     @Column(nullable = false, precision = 5, scale = 1)
-    private Double mealKcal;
+    private BigDecimal mealKcal;
 
     @Column(nullable = false)
     private Integer mealCount;
+
+    
 }

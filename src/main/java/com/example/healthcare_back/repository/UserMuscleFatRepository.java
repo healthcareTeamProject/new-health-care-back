@@ -14,4 +14,5 @@ public interface UserMuscleFatRepository extends JpaRepository<UserMuscleFatEnti
     List<UserMuscleFatEntity> findByUserIdOrderByUserMuscleFatNumberDesc(String userId);
 
     CustomerEntity findByUserId(String userId);
+
 }

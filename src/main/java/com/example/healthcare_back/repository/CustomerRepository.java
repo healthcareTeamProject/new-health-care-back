@@ -1,7 +1,5 @@
 package com.example.healthcare_back.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,9 +14,7 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, String
     boolean existsByProfileImage(String profileImage);
     boolean existsByPersonalGoals(String personalGoals);
     
-    
     CustomerEntity findByUserId(String userId);
     CustomerEntity findBySnsIdAndJoinPath(String sns, String joinPath);
-    List<CustomerEntity> findByNicknameContaining(String nicknamePart);
 
 }

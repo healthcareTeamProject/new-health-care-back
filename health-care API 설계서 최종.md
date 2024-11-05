@@ -1626,6 +1626,18 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NB",
+  "message": "No exist board."
+}
+```
+
 **응답 : 실패 (인증 실패)**
 
 ```bash
@@ -1737,6 +1749,18 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "VF",
   "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 유저)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NI",
+  "message": "No exist user id."
 }
 ```
 
@@ -1869,6 +1893,18 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NB",
+  "message": "No exist board."
+}
+```
+
 **응답 : 실패 (인증 실패)**
 
 ```bash
@@ -1983,6 +2019,18 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NB",
+  "message": "No exist board."
+}
+```
+
 **응답 : 실패 (인증 실패)**
 
 ```bash
@@ -2074,6 +2122,18 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NB",
+  "message": "No exist board."
+}
+```
+
 **응답 : 실패 (인증 실패)**
 
 ```bash
@@ -2157,6 +2217,30 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "SU",
   "message": "Success."
+}
+```
+
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NB",
+  "message": "No exist board."
+}
+```
+
+**응답 : 실패 (존재하지 않는 유저)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NI",
+  "message": "No exist user id."
 }
 ```
 
@@ -2256,6 +2340,18 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
+**응답 : 실패 (존재하지 않는 댓글)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NC",
+  "message": "No exist comment."
+}
+```
+
 **응답 : 실패 (인증 실패)**
 
 ```bash
@@ -2342,6 +2438,18 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "VF",
   "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 댓글)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NC",
+  "message": "No exist comment."
 }
 ```
 
@@ -2469,6 +2577,18 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
+**응답 : 실패 (존재하지 않는 유저)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NI",
+  "message": "No exist user id."
+}
+```
+
 **응답 : 실패 (인증 실패)**
 
 ```bash
@@ -2575,6 +2695,18 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
+**응답 : 실패 (존재하지 않는 유저)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NI",
+  "message": "No exist user id."
+}
+```
+
 **응답 : 실패 (인증 실패)**
 
 ```bash
@@ -2674,6 +2806,18 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "VF",
   "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 스케줄)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NS",
+  "message": "No exist schedule."
 }
 ```
 
@@ -2779,6 +2923,18 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
+**응답 : 실패 (존재하지 않는 스케줄)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NS",
+  "message": "No exist schedule."
+}
+```
+
 **응답 : 실패 (인증 실패)**
 
 ```bash
@@ -2838,7 +2994,6 @@ Content-Type: application/json;charset=UTF-8
 ```bash
 curl -X PATCH "http://localhost:4000/api/v1/{userId}/health_schedule" \
 -h "Authorization=Bearer XXXX" \
--d "health_schedule_number=1" \
 -d "health_title=가슴, 이두" \
 -d "health_memo=
     벤치프레스 12 3set,
@@ -2846,8 +3001,6 @@ curl -X PATCH "http://localhost:4000/api/v1/{userId}/health_schedule" \
     플라이 15 5set,
     바벨 컬 10 3set,
     덤벨 컬 10 3set"
--d "schedule_start=2024.10.17 12:00"
--d "schedule_end=2024.10.17 23:59"
 ```
 
 ##### Response
@@ -2888,6 +3041,18 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "VF",
   "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 스케줄)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NS",
+  "message": "No exist schedule."
 }
 ```
 
@@ -2950,14 +3115,11 @@ Content-Type: application/json;charset=UTF-8
 ```bash
 curl -X PATCH "http://localhost:4000/api/v1/{userId}/meal_schedule" \
 -h "Authorization=Bearer XXXX" \
--d "health_schedule_number=1" \
 -d "health_title=아침" \
 -d "health_memo=
     닭가슴살 109kcal,
     사과 52kcal,
     현미밥 152kcal"
--d "schedule_start=2024.10.17 12:00"
--d "schedule_end=2024.10.17 23:59"
 ```
 
 ##### Response
@@ -2998,6 +3160,18 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "VF",
   "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 스케줄)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NS",
+  "message": "No exist schedule."
 }
 ```
 
@@ -3103,6 +3277,18 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
+**응답 : 실패 (존재하지 않는 스케줄)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NS",
+  "message": "No exist schedule."
+}
+```
+
 **응답 : 실패 (인증 실패)**
 
 ```bash
@@ -3202,6 +3388,18 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "VF",
   "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 스케줄)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NS",
+  "message": "No exist schedule."
 }
 ```
 

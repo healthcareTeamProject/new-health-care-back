@@ -30,7 +30,7 @@ public class GetCustomerResponseDto extends ResponseDto {
     private final BigDecimal skeletalMuscleMass;
     private final BigDecimal bodyFatMass;
 
-    private GetCustomerResponseDto(CustomerEntity customerEntity) {
+    public GetCustomerResponseDto(CustomerEntity customerEntity) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
         this.userId = customerEntity.getUserId();
         this.name = customerEntity.getName();

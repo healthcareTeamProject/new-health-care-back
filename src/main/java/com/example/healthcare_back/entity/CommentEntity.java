@@ -43,7 +43,7 @@ public class CommentEntity {
         this.userId = userId;
         this.commentContents = dto.getCommentContents();
         this.commentDate = commentDate;
-        this.commentLikeCount = 0; // Initialize to 0 for new comments
+        this.commentLikeCount = 0;
     }
 
     public void increaseFavoriteCount() {

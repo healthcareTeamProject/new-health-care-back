@@ -9,7 +9,7 @@ import com.example.healthcare_back.common.object.BoardList;
 import com.example.healthcare_back.dto.response.ResponseCode;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
-import com.example.healthcare_back.entity.BoardEntity;
+import com.example.healthcare_back.repository.resultSet.BoardListResultSet;
 
 import lombok.Getter;
 
@@ -18,16 +18,15 @@ import lombok.Getter;
 @Getter
 public class GetBoardListResponseDto extends ResponseDto {
     
-    private final List<BoardList> boardLists;
+    private final List<BoardList> boardList;
 
-    public GetBoardListResponseDto(List<BoardEntity> boardEntities) {
+    private GetBoardListResponseDto(List<BoardListResultSet> resultSets) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
-        this.boardLists = BoardList.getList(boardEntities);
+        this.boardList = BoardList.getList(resultSets);
     }
 
-    public static ResponseEntity<GetBoardListResponseDto> success(List<BoardEntity> boardEntities) {
-        GetBoardListResponseDto responseBody = new GetBoardListResponseDto(boardEntities);
+    public static ResponseEntity<GetBoardListResponseDto> success(List<BoardListResultSet> resultSets) {
+        GetBoardListResponseDto responseBody = new GetBoardListResponseDto(resultSets);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
-
 }
