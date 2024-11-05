@@ -41,16 +41,14 @@ public class BoardServiceImplement implements BoardService {
         
             // 게시물에 대한 댓글 조회
             List<CommentEntity> commentList = commentRepository.findByBoardNumber(boardNumber);
+
+            // 성공적인 응답
+            return GetBoardResponseDto.success(boardList, commentList);
     
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError(); // 데이터베이스 오류 처리
         }
-        
-        // 성공적인 응답
-        BoardEntity boardList;
-        List<CommentEntity> commentList;
-        return GetBoardResponseDto.success(boardList, commentList);
     }
 
     @Override
