@@ -45,6 +45,7 @@ public class BoardServiceImplement implements BoardService {
             if (commentList == null) {
                 return GetBoardResponseDto.noExistBoard(); // 게시물이 없을 경우 처리
             }
+
     
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -55,6 +56,7 @@ public class BoardServiceImplement implements BoardService {
         BoardEntity boardList = new BoardEntity();
         List<CommentEntity> commentList = new ArrayList<>();
         return GetBoardResponseDto.success(boardList, commentList);
+
     }
 
     @Override

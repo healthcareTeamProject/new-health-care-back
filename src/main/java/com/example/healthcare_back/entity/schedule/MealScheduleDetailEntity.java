@@ -18,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name="mealScheduleDetail")
-@Table(name="meal_schedule_detail")
+@Table(name="meal_Schedule_Detail")
 public class MealScheduleDetailEntity {
 
     @Id

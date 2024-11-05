@@ -552,7 +552,7 @@ curl -v -X POST "http://localhost:4000/api/v1/auth/sign-up" \
 -d "authNumber=1234" \
 -d "joinPath=HOME" \
 -d "height=180" \
--d "weigh=80" \
+-d "weight=80" \
 -d "skeletalMuscleMass=34.5" \
 -d "bodyFatMass=10.4" \
 -d "deadlift=124" \

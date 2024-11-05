@@ -163,10 +163,8 @@ public class AuthServiceImplement implements AuthService {
             exception.printStackTrace();
             return ResponseDto.databaseError(); // 데이터베이스 에러 응답
         }
-    
             return ResponseDto.success(); // 성공 응답
         }
-
 
     @Override
     public ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto dto) {

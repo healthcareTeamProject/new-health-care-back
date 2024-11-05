@@ -38,7 +38,7 @@ public class SignUpRequestDto {
     @NotBlank
     private String authNumber;
     @NotBlank
-    @Pattern(regexp="^(home|kakao|naver)$")
+    @Pattern(regexp="^(HOME|KAKAO|NAVER)$")
     private String joinPath;
     private String snsId;
     @NotNull 
