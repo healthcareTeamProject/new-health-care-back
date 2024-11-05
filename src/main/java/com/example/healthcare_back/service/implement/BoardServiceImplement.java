@@ -43,7 +43,7 @@ public class BoardServiceImplement implements BoardService {
             // 게시물에 대한 댓글 조회
             List<CommentEntity> commentList = commentRepository.findByBoardNumber(boardNumber);
             if (commentList == null) {
-                return GetCommentListResponseDto.noExistComment(); // 이 없을 경우 처리
+                return GetBoardResponseDto.noExistBoard(); // 게시물이 없을 경우 처리
             }
     
         } catch (Exception exception) {
