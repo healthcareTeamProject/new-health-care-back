@@ -1,13 +1,10 @@
 package com.example.healthcare_back.service.implement;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.healthcare_back.dto.request.schedule.DeleteHealthScheduleRequestDto;
+import com.example.healthcare_back.dto.request.schedule.DeleteMealScheduleRequestDto;
 import com.example.healthcare_back.dto.request.schedule.PatchHealthScheduleRequestDto;
 import com.example.healthcare_back.dto.request.schedule.PatchMealScheduleRequestDto;
 import com.example.healthcare_back.dto.request.schedule.PostHealthScheduleRequestDto;
@@ -15,13 +12,11 @@ import com.example.healthcare_back.dto.request.schedule.PostMealScheduleRequestD
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.schedule.GetHealthScheduleResponseDto;
 import com.example.healthcare_back.dto.response.schedule.GetMealScheduleResponseDto;
-import com.example.healthcare_back.entity.schedule.HealthScheduleEntity;
 import com.example.healthcare_back.repository.schedule.HealthScheduleRepository;
 import com.example.healthcare_back.repository.schedule.MealScheduleDetailRepository;
 import com.example.healthcare_back.service.ScheduleService;
 
 import lombok.RequiredArgsConstructor;
-import okhttp3.Response;
 
 @Service
 @RequiredArgsConstructor
@@ -33,45 +28,44 @@ public class ScheduleServiceImplement implements ScheduleService {
     // HealthSchedule
 
    @Override
-    public ResponseEntity<GetHealthScheduleResponseDto> getHealthScheduleById(Integer healthScheduleNumber) {
+    public ResponseEntity<GetHealthScheduleResponseDto> getHealthScheduleById(String userId) {
         return null;
     }
 
     @Override
-    public ResponseEntity<ResponseDto> postHealthSchedule(PostHealthScheduleRequestDto dto) {
+    public ResponseEntity<ResponseDto> postHealthSchedule(String userId, PostHealthScheduleRequestDto dto) {
         return null;
     }
 
     @Override
-    public ResponseEntity<ResponseDto> patchHealthSchedule(Integer healthScheduleNumber,
-            PatchHealthScheduleRequestDto dto) {
+    public ResponseEntity<ResponseDto> patchHealthSchedule(String userId, PatchHealthScheduleRequestDto dto) {
                 return null;
     }
 
     @Override
-    public ResponseEntity<ResponseDto> deleteHealthSchedule(Integer healthScheduleNumber) {
+    public ResponseEntity<ResponseDto> deleteHealthSchedule(String userId, DeleteHealthScheduleRequestDto dto) {
         return null;
     }
 
     // MealSchedule
 
     @Override
-    public ResponseEntity<GetMealScheduleResponseDto> getMealScheduleById(Integer mealScheduleNumber) {
+    public ResponseEntity<GetMealScheduleResponseDto> getMealScheduleById(String userId) {
         return null;
     }
 
     @Override
-    public ResponseEntity<ResponseDto> postMealSchedule(PostMealScheduleRequestDto dto) {
+    public ResponseEntity<ResponseDto> postMealSchedule(String userId, PostMealScheduleRequestDto dto) {
         return null;
     }
 
     @Override
-    public ResponseEntity<ResponseDto> patchMealSchedule(Integer mealScheduleNumber, PatchMealScheduleRequestDto dto) {
+    public ResponseEntity<ResponseDto> patchMealSchedule(String userId, PatchMealScheduleRequestDto dto) {
         return null;
     }
 
     @Override
-    public ResponseEntity<ResponseDto> deleteMealSchedule(Integer mealScheduleNumber) {
+    public ResponseEntity<ResponseDto> deleteMealSchedule(String userId, DeleteMealScheduleRequestDto dto) {
 
         try {
             
