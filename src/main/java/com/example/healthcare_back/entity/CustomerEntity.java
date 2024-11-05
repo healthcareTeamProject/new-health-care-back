@@ -37,7 +37,7 @@ public class CustomerEntity {
     private String joinPath;
     private String snsId;
     private String profileImage;
-    private String personalGoals;
+    private String personalGoal;
     @Column(precision = 5, scale = 1)
     private BigDecimal height;
     
@@ -64,7 +64,7 @@ public class CustomerEntity {
         this.joinPath = dto.getJoinPath();
         this.snsId = dto.getSnsId();
         this.profileImage = dto.getProfileImage();
-        this.personalGoals = dto.getPersonalGoals();
+        this.personalGoal = dto.getPersonalGoal();
         this.height = dto.getHeight(); 
         this.deadlift = dto.getDeadlift(); 
         this.benchPress = dto.getBenchPress(); 
@@ -78,7 +78,7 @@ public class CustomerEntity {
         this.name = dto.getName();
         this.nickname = dto.getNickname();
         this.profileImage = dto.getProfileImage();
-        this.personalGoals = dto.getPersonalGoals();
+        this.personalGoal = dto.getPersonalGoal();
         this.height = dto.getHeight();
     }
 

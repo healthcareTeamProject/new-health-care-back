@@ -21,7 +21,7 @@ public class GetCustomerResponseDto extends ResponseDto {
     private final String nickname;
     private final String telNumber;
     private final String profileImage;
-    private final String personalGoals;
+    private final String personalGoal;
     private final BigDecimal height;
     private final BigDecimal deadlift;
     private final BigDecimal benchPress;
@@ -37,7 +37,7 @@ public class GetCustomerResponseDto extends ResponseDto {
         this.nickname = customerEntity.getNickname();
         this.telNumber = customerEntity.getTelNumber();
         this.profileImage = customerEntity.getProfileImage();
-        this.personalGoals = customerEntity.getPersonalGoals();
+        this.personalGoal = customerEntity.getPersonalGoal();
         this.height = customerEntity.getHeight();
         this.deadlift = customerEntity.getDeadlift(); 
         this.benchPress = customerEntity.getBenchPress(); 

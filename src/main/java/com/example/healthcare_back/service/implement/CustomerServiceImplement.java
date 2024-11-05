@@ -132,7 +132,7 @@ public class CustomerServiceImplement implements CustomerService{
             customerEntity.setName(dto.getName());
             customerEntity.setNickname(dto.getNickname());
             customerEntity.setProfileImage(dto.getProfileImage());
-            customerEntity.setPersonalGoals(dto.getPersonalGoals());
+            customerEntity.setPersonalGoal(dto.getPersonalGoal());
             customerEntity.setHeight(dto.getHeight());
             customerRepository.save(customerEntity);
                 
