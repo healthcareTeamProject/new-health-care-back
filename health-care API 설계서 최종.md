@@ -2746,7 +2746,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    X     |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
 
 ###### Example
 
@@ -2860,7 +2860,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    X     |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
 
 ###### Example
 

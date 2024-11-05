@@ -1,93 +1,86 @@
 package com.example.healthcare_back.service.implement;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.healthcare_back.dto.request.schedule.PatchHealthScheduleRequestDto;
 import com.example.healthcare_back.dto.request.schedule.PatchMealScheduleRequestDto;
 import com.example.healthcare_back.dto.request.schedule.PostHealthScheduleRequestDto;
 import com.example.healthcare_back.dto.request.schedule.PostMealScheduleRequestDto;
+import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.schedule.GetHealthScheduleResponseDto;
 import com.example.healthcare_back.dto.response.schedule.GetMealScheduleResponseDto;
 import com.example.healthcare_back.entity.schedule.HealthScheduleEntity;
 import com.example.healthcare_back.repository.schedule.HealthScheduleRepository;
+import com.example.healthcare_back.repository.schedule.MealScheduleDetailRepository;
 import com.example.healthcare_back.service.ScheduleService;
 
 import lombok.RequiredArgsConstructor;
+import okhttp3.Response;
 
 @Service
 @RequiredArgsConstructor
 public class ScheduleServiceImplement implements ScheduleService {
 
     private final HealthScheduleRepository healthScheduleRepository;
+    private final MealScheduleDetailRepository mealScheduleDetailRepository;
 
     // HealthSchedule
-    @Override
-    public List<GetHealthScheduleResponseDto> getAllHealthSchedules(String userId) {
-        List<HealthScheduleEntity> schedules = healthScheduleRepository.findByUserId(userId);
-        return schedules.stream()
-                .map(schedule -> new GetHealthScheduleResponseDto(schedule))
-                .collect(Collectors.toList());
+
+   @Override
+    public ResponseEntity<GetHealthScheduleResponseDto> getHealthScheduleById(Integer healthScheduleNumber) {
+        return null;
     }
 
     @Override
-    public GetHealthScheduleResponseDto getHealthScheduleById(Integer healthScheduleNumber) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getHealthScheduleById'");
+    public ResponseEntity<ResponseDto> postHealthSchedule(PostHealthScheduleRequestDto dto) {
+        return null;
     }
 
     @Override
-    public PostHealthScheduleRequestDto postHealthSchedule(PostHealthScheduleRequestDto dto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postHealthSchedule'");
-    }
-
-    @Override
-    public PatchHealthScheduleRequestDto patchHealthSchedule(Integer healthScheduleNumber,
+    public ResponseEntity<ResponseDto> patchHealthSchedule(Integer healthScheduleNumber,
             PatchHealthScheduleRequestDto dto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'patchHealthSchedule'");
+                return null;
     }
 
     @Override
-    public void deleteHealthSchedule(Integer healthScheduleNumber) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteHealthSchedule'");
+    public ResponseEntity<ResponseDto> deleteHealthSchedule(Integer healthScheduleNumber) {
+        return null;
     }
-
 
     // MealSchedule
+
     @Override
-    public List<GetMealScheduleResponseDto> getAllMealSchedules(String userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllMealSchedules'");
+    public ResponseEntity<GetMealScheduleResponseDto> getMealScheduleById(Integer mealScheduleNumber) {
+        return null;
     }
 
     @Override
-    public GetMealScheduleResponseDto getMealScheduleById(Integer mealScheduleNumber) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMealScheduleById'");
+    public ResponseEntity<ResponseDto> postMealSchedule(PostMealScheduleRequestDto dto) {
+        return null;
     }
 
     @Override
-    public PostMealScheduleRequestDto postMealSchedule(PostMealScheduleRequestDto dto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postMealSchedule'");
+    public ResponseEntity<ResponseDto> patchMealSchedule(Integer mealScheduleNumber, PatchMealScheduleRequestDto dto) {
+        return null;
     }
 
     @Override
-    public PatchMealScheduleRequestDto patchMealSchedule(Integer mealScheduleNumber, PatchMealScheduleRequestDto dto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'patchMealSchedule'");
+    public ResponseEntity<ResponseDto> deleteMealSchedule(Integer mealScheduleNumber) {
+
+        try {
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return ResponseDto.success();
     }
 
-    @Override
-    public void deleteMealSchedule(Integer mealScheduleNumber) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteMealSchedule'");
-    }
-
-    
 }
