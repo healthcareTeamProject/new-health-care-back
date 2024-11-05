@@ -138,7 +138,7 @@ public class AuthServiceImplement implements AuthService {
             customerEntity.setSnsId(dto.getSnsId());
             customerEntity.setHeight(dto.getHeight());
             customerEntity.setProfileImage(dto.getProfileImage());
-            customerEntity.setPersonalGoals(dto.getPersonalGoals());
+            customerEntity.setPersonalGoal(dto.getPersonalGoal());
             customerRepository.save(customerEntity); // 고객 정보 저장
             
             // 7. UserMuscleFatEntity 생성 및 저장
@@ -168,8 +168,6 @@ public class AuthServiceImplement implements AuthService {
 
         return ResponseDto.success(); // 성공 응답
     }
-
-
 
     @Override
     public ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto dto) {

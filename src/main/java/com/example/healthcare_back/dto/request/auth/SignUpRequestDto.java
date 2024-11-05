@@ -38,13 +38,13 @@ public class SignUpRequestDto {
     @NotBlank
     private String authNumber;
     @NotBlank
-    @Pattern(regexp="^(home|kakao|naver)$")
+    @Pattern(regexp="^(HOME|KAKAO|NAVER)$")
     private String joinPath;
     private String snsId;
     @NotNull 
     private BigDecimal height;
     private String profileImage;
-    private String personalGoals;
+    private String personalGoal;
 
     @Positive
     @Column(precision = 5, scale = 1)

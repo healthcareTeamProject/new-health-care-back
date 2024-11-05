@@ -1,7 +1,6 @@
 package com.example.healthcare_back.entity;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
-import com.example.healthcare_back.dto.request.customer.PostUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
 
 import jakarta.persistence.Column;
@@ -57,12 +56,6 @@ public class UserThreeMajorLiftEntity {
 
     public UserThreeMajorLiftEntity(SignUpRequestDto dto) {
         this.userId = dto.getUserId();
-        this.deadlift = dto.getDeadlift();
-        this.benchPress = dto.getBenchPress();
-        this.squat = dto.getSquat();
-    }
-
-    public UserThreeMajorLiftEntity(PostUserThreeMajorLiftRequestDto dto) {
         this.deadlift = dto.getDeadlift();
         this.benchPress = dto.getBenchPress();
         this.squat = dto.getSquat();
