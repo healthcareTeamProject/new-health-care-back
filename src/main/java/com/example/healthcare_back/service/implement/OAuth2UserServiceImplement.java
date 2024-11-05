@@ -10,9 +10,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import com.example.healthcare_back.common.object.CustomOAuth2User;
-import com.example.healthcare_back.entity.CustomerEntity;
+import com.example.healthcare_back.entity.customer.CustomerEntity;
 import com.example.healthcare_back.provider.JwtProvider;
-import com.example.healthcare_back.repository.CustomerRepository;
+import com.example.healthcare_back.repository.customer.CustomerRepository;
 
 import lombok.RequiredArgsConstructor;
 

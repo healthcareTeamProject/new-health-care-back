@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.healthcare_back.entity.UserMuscleFatEntity;
+import com.example.healthcare_back.entity.customer.UserMuscleFatEntity;
 
 import java.time.LocalDateTime;
 

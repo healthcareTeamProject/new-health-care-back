@@ -9,7 +9,7 @@ import com.example.healthcare_back.common.object.UserThreeMajorLiftList;
 import com.example.healthcare_back.dto.response.ResponseCode;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
-import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
+import com.example.healthcare_back.entity.customer.UserThreeMajorLiftEntity;
 
 import lombok.Getter;
 

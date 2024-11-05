@@ -1,4 +1,4 @@
-package com.example.healthcare_back.repository;
+package com.example.healthcare_back.repository.board;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.example.healthcare_back.entity.BoardEntity;
-import com.example.healthcare_back.entity.CommentEntity;
+import com.example.healthcare_back.entity.board.BoardEntity;
+import com.example.healthcare_back.entity.board.CommentEntity;
 
 @Repository
 public interface CommentRepository extends JpaRepository<CommentEntity, Integer> {

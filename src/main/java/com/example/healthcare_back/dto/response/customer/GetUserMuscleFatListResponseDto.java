@@ -9,7 +9,7 @@ import com.example.healthcare_back.common.object.UserMuscleFatList;
 import com.example.healthcare_back.dto.response.ResponseCode;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
-import com.example.healthcare_back.entity.UserMuscleFatEntity;
+import com.example.healthcare_back.entity.customer.UserMuscleFatEntity;
 
 import lombok.Getter;
 

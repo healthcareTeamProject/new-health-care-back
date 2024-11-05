@@ -1,4 +1,4 @@
-package com.example.healthcare_back.entity;
+package com.example.healthcare_back.entity.customer;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;

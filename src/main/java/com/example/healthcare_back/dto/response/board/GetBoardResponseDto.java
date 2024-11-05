@@ -12,8 +12,8 @@ import org.springframework.http.ResponseEntity;
 import com.example.healthcare_back.dto.response.ResponseCode;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
-import com.example.healthcare_back.entity.BoardEntity;
-import com.example.healthcare_back.entity.CommentEntity;
+import com.example.healthcare_back.entity.board.BoardEntity;
+import com.example.healthcare_back.entity.board.CommentEntity;
 
 import lombok.Getter;
 

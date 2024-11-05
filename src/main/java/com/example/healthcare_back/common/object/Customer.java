@@ -1,8 +1,8 @@
 package com.example.healthcare_back.common.object;
 
-import com.example.healthcare_back.entity.CustomerEntity;
-
 import java.math.BigDecimal;
+
+import com.example.healthcare_back.entity.customer.CustomerEntity;
 
 import lombok.Getter;
 

@@ -2490,9 +2490,7 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 
 [FullCalendar API]: https://fullcalendar.io/docs/react/
 
-##### 식단 스케줄: - url : /api/v1/meal-schedule
-
-##### 운동 스케줄: - url : /api/v1/health-schedule
+##### 스케줄: - url : /api/v1/schedule
 
 ---
 
@@ -2503,7 +2501,7 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜를 클릭하여 운동 스케줄을 작성 후 등록합니다. 등록이 된다면 성공에 대한 응답을 받습니다. 등록이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
 
 - method : **POST**
-- end point : **/**
+- end point : **/health-schedule**
 
 ##### Request
 
@@ -2527,7 +2525,7 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 ###### Example
 
 ```bash
-curl -X POST "http://localhost:4000/api/v1/health-schedule" \
+curl -X POST "http://localhost:4000/api/v1/schedule/health-schedule" \
 -h "Authorization=Bearer XXXX" \
 -d "userId=qwer1234" \
 -d "health_title=가슴" \
@@ -2622,7 +2620,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜를 클릭하여 식단 스케줄을 작성 후 등록합니다. 등록이 된다면 성공에 대한 응답을 받습니다. 등록이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다. 식품에 대한 정보는 외부 API를 받아와 사용합니다.
 
 - method : **POST**
-- end point : **/**
+- end point : **/meal-schedule**
 
 ##### Request
 
@@ -2646,7 +2644,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X POST "http://localhost:4000/api/v1/meal-schedule" \
+curl -X POST "http://localhost:4000/api/v1/schedule/meal-schedule" \
 -h "Authorization=Bearer XXXX" \
 -d "health_title=아침" \
 -d "health_memo=
@@ -2740,7 +2738,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 외부 API의 달력을 불러와 운동 스케줄을 확인할 수 있습니다. 등록과 수정이 가능합니다. 스케줄의 확인이 된다면 성공에 대한 응답을 받습니다. 스케줄의 확인이 되지 않는다면 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/{healthScheduleNumber}**
+- end point : **/health-schedule/{healthScheduleNumber}**
 
 ##### Request
 
@@ -2753,7 +2751,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/health-schedule/1"
+curl -X GET "http://localhost:4000/api/v1/schedule/health-schedule/1"
 ```
 
 ##### Response
@@ -2854,7 +2852,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 외부 API의 달력을 불러와 식단 스케줄을 확인할 수 있습니다. 등록과 수정이 가능합니다. 스케줄의 확인이 된다면 성공에 대한 응답을 받습니다. 스케줄의 확인이 되지 않는다면 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/{mealScheduleNumber}**
+- end point : **/meal-schedule/{mealScheduleNumber}**
 
 ##### Request
 
@@ -2867,7 +2865,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/meal-schedule/1"
+curl -X GET "http://localhost:4000/api/v1/schedule/meal-schedule/1"
 ```
 
 ##### Response
@@ -2968,7 +2966,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜에 등록이 된 운동 스케줄을 클릭하여 수정이 된다면 성공에 대한 응답을 받습니다. 수정이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
 
 - method : **PATCH**
-- end point : **/{userId}/health_schedule**
+- end point : **/health-schedule/{userId}/{healthScheduleNumber}**
 
 ##### Request
 
@@ -2992,7 +2990,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X PATCH "http://localhost:4000/api/v1/{userId}/health_schedule" \
+curl -X PATCH "http://localhost:4000/api/v1/schedule/health_schedule/qwer1234/1" \
 -h "Authorization=Bearer XXXX" \
 -d "health_title=가슴, 이두" \
 -d "health_memo=
@@ -3089,7 +3087,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜에 등록이 된 식단 스케줄을 클릭하여 수정이 된다면 성공에 대한 응답을 받습니다. 수정이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다. 식품에 대한 정보는 외부 API를 받아와 사용합니다.
 
 - method : **PATCH**
-- end point : **/{userId}/meal_schedule**
+- end point : **/meal_schedule/{userId}/{mealScheduleNumber}**
 
 ##### Request
 
@@ -3113,7 +3111,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X PATCH "http://localhost:4000/api/v1/{userId}/meal_schedule" \
+curl -X PATCH "http://localhost:4000/api/v1/schedule/meal_schedule/qwer1234/1" \
 -h "Authorization=Bearer XXXX" \
 -d "health_title=아침" \
 -d "health_memo=
@@ -3208,7 +3206,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 운동 스케줄의 번호를 포함하고 일정을 삭제합니다. 삭제가 된다면 성공에 대한 응답을 받습니다. 삭제가 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
 
 - method : **DELETE**
-- end point : **/{healthScheduleNumber}**
+- end point : **/health_schedule/{healthScheduleNumber}**
 
 ##### Request
 
@@ -3232,7 +3230,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/health-schedule/1" \
+curl -X GET "http://localhost:4000/api/v1/schedule/health-schedule/1" \
 -h "Authorization=Bearer XXXX"
 ```
 
@@ -3322,7 +3320,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 식단 스케줄의 번호를 포함하고 일정을 삭제합니다. 삭제가 된다면 성공에 대한 응답을 받습니다. 삭제가 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
 
 - method : **DELETE**
-- end point : **/{mealScheduleNumber}**
+- end point : **/meal_schedule/{mealScheduleNumber}**
 
 ##### Request
 
@@ -3346,7 +3344,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/meal-schedule/1" \
+curl -X GET "http://localhost:4000/api/v1/schedule/meal-schedule/1" \
 -h "Authorization=Bearer XXXX"
 ```
 

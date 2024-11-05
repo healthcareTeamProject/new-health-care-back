@@ -1,10 +1,7 @@
-package com.example.healthcare_back.entity;
+package com.example.healthcare_back.entity.schedule;
 
 
 import java.time.LocalDateTime;
-
-import com.example.healthcare_back.dto.request.schedule.PatchMealScheduleDetailRequestDto;
-import com.example.healthcare_back.dto.response.schedule.GetMealScheduleDetailRequestDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,17 +36,12 @@ public class MealScheduleEntity {
     private String mealMemo;
 
     @Column(nullable = false)
+    private LocalDateTime mealScheduleDate;
+
+    @Column(nullable = false)
     private LocalDateTime mealScheduleStart;
 
     @Column(nullable = false)
     private LocalDateTime mealScheduleEnd;
 
-
-    public void PostMealScheduleDetail(GetMealScheduleDetailRequestDto dto) {
-        
-    }
-
-    public void PatchMealScheduleDetail(PatchMealScheduleDetailRequestDto dto) {
-
-    }
 }

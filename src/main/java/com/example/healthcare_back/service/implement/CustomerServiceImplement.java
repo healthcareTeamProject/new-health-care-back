@@ -15,12 +15,12 @@ import com.example.healthcare_back.dto.response.customer.GetCustomerResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetSignInResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetUserMuscleFatListResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftListResponseDto;
-import com.example.healthcare_back.entity.CustomerEntity;
-import com.example.healthcare_back.entity.UserMuscleFatEntity;
-import com.example.healthcare_back.entity.UserThreeMajorLiftEntity;
-import com.example.healthcare_back.repository.CustomerRepository;
-import com.example.healthcare_back.repository.UserMuscleFatRepository;
-import com.example.healthcare_back.repository.UserThreeMajorLiftRepository;
+import com.example.healthcare_back.entity.customer.CustomerEntity;
+import com.example.healthcare_back.entity.customer.UserMuscleFatEntity;
+import com.example.healthcare_back.entity.customer.UserThreeMajorLiftEntity;
+import com.example.healthcare_back.repository.customer.CustomerRepository;
+import com.example.healthcare_back.repository.customer.UserMuscleFatRepository;
+import com.example.healthcare_back.repository.customer.UserThreeMajorLiftRepository;
 import com.example.healthcare_back.service.CustomerService;
 
 import lombok.RequiredArgsConstructor;

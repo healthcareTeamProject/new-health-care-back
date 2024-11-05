@@ -1,9 +1,9 @@
-package com.example.healthcare_back.repository;
+package com.example.healthcare_back.repository.auth;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.healthcare_back.entity.TelAuthNumberEntity;
+import com.example.healthcare_back.entity.auth.TelAuthNumberEntity;
 
 @Repository
 public interface TelAuthNumberRepository extends JpaRepository<TelAuthNumberEntity, String> {

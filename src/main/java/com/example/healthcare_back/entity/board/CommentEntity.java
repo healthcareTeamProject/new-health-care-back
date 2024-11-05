@@ -1,4 +1,4 @@
-package com.example.healthcare_back.entity;
+package com.example.healthcare_back.entity.board;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;

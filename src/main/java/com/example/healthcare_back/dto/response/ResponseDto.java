@@ -3,10 +3,8 @@ package com.example.healthcare_back.dto.response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.example.healthcare_back.dto.response.customer.GetCustomerResponseDto;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

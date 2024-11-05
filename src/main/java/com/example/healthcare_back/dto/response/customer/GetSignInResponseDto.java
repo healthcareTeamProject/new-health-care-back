@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import com.example.healthcare_back.dto.response.ResponseCode;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
-import com.example.healthcare_back.entity.CustomerEntity;
+import com.example.healthcare_back.entity.customer.CustomerEntity;
 
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.example.healthcare_back.entity;
+package com.example.healthcare_back.entity.board;
 
 import com.example.healthcare_back.dto.request.board.PatchBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;

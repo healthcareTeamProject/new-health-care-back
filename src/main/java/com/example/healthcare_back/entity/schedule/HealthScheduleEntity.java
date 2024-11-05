@@ -1,4 +1,4 @@
-package com.example.healthcare_back.entity;
+package com.example.healthcare_back.entity.schedule;
 
 import java.time.LocalDateTime;
 
