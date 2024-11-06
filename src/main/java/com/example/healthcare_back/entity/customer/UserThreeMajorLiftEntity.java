@@ -2,6 +2,7 @@ package com.example.healthcare_back.entity.customer;
 
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,6 +47,7 @@ public class UserThreeMajorLiftEntity {
     private BigDecimal squat;
 
     @Column(updatable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd-HH")
     private LocalDateTime userThreeMajorLiftDate;
 
     @PrePersist

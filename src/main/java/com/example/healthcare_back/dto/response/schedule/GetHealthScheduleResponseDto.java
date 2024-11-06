@@ -9,13 +9,12 @@ import lombok.Getter;
 @Getter
 public class GetHealthScheduleResponseDto {
     
-    private Integer healthScheduleNumber;   // 운동 스케줄 번호
+    private Integer healthScheduleNumber;
     private String userId;
-    private String healthTitle;          // 운동 일정 제목
-    private String healthMemo;           // 운동 일정 메모
-    
-    private LocalDateTime healthScheduleStart;  // 스케줄 시작일
-    private LocalDateTime healthScheduleEnd;    // 스케줄 종료일
+    private String healthTitle;
+    private String healthMemo;
+    private LocalDateTime healthScheduleStart;
+    private LocalDateTime healthScheduleEnd;
     
     public GetHealthScheduleResponseDto(HealthScheduleEntity healthScheduleEntity) {
         this.healthScheduleNumber = healthScheduleEntity.getHealthScheduleNumber();

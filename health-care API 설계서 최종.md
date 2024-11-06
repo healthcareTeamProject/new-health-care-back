@@ -2966,7 +2966,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜에 등록이 된 운동 스케줄을 클릭하여 수정이 된다면 성공에 대한 응답을 받습니다. 수정이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
 
 - method : **PATCH**
-- end point : **/health-schedule/{userId}/{healthScheduleNumber}**
+- end point : **/health-schedule/{healthScheduleNumber}**
 
 ##### Request
 
@@ -2990,7 +2990,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X PATCH "http://localhost:4000/api/v1/schedule/health_schedule/qwer1234/1" \
+curl -X PATCH "http://localhost:4000/api/v1/schedule/health_schedule/1" \
 -h "Authorization=Bearer XXXX" \
 -d "health_title=가슴, 이두" \
 -d "health_memo=
@@ -3087,7 +3087,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜에 등록이 된 식단 스케줄을 클릭하여 수정이 된다면 성공에 대한 응답을 받습니다. 수정이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다. 식품에 대한 정보는 외부 API를 받아와 사용합니다.
 
 - method : **PATCH**
-- end point : **/meal_schedule/{userId}/{mealScheduleNumber}**
+- end point : **/meal_schedule/{mealScheduleNumber}**
 
 ##### Request
 
@@ -3111,7 +3111,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X PATCH "http://localhost:4000/api/v1/schedule/meal_schedule/qwer1234/1" \
+curl -X PATCH "http://localhost:4000/api/v1/schedule/meal_schedule/1" \
 -h "Authorization=Bearer XXXX" \
 -d "health_title=아침" \
 -d "health_memo=

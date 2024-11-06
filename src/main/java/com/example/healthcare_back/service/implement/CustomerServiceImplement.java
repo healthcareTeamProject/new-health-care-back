@@ -81,7 +81,7 @@ public class CustomerServiceImplement implements CustomerService{
 
         try {
             // 예외 발생 시 기존 메서드도 포함하여 로깅 가능하게 설정
-            userMuscleFatEntities = userMuscleFatRepository.findByUserIdOrderByUserMuscleFatNumberDesc(userId);
+            userMuscleFatEntities = userMuscleFatRepository.findByUserIdOrderByUserMuscleFatNumberAsc(userId);
 
             // 사용자 데이터가 없을 경우 예외 처리
             if (userMuscleFatEntities.isEmpty()) {
@@ -103,7 +103,7 @@ public class CustomerServiceImplement implements CustomerService{
 
         try {
             // 추가 로깅과 예외 관리 기능
-            userThreeMajorLiftEntities = userThreeMajorLiftRepository.findByUserIdOrderByUserThreeMajorLiftNumberDesc(userId);
+            userThreeMajorLiftEntities = userThreeMajorLiftRepository.findByUserIdOrderByUserThreeMajorLiftNumberAsc(userId);
 
             if (userThreeMajorLiftEntities.isEmpty()) {
                 return ResponseDto.noExistUserThreeMajorLiftInformation();
@@ -148,6 +148,8 @@ public class CustomerServiceImplement implements CustomerService{
 
     @Override
     public ResponseEntity<ResponseDto> patchUserMuscleFatCustomer(PatchUserMuscleFatRequestDto dto, String userId) {
+        
+        
         try {
 
             // 사용자 존재 여부 확인

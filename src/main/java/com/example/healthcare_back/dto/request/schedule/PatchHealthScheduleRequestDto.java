@@ -1,4 +1,8 @@
 package com.example.healthcare_back.dto.request.schedule;
+import java.time.LocalDateTime;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,9 +11,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PatchHealthScheduleRequestDto {
-    
-    private String userId;  // 유저 ID
-    private String healthTitle;  // 운동 일정 제목
-    private String healthMemo;   // 운동 일정 메모
+
+    @NotBlank
+    private String healthTitle;
+    @NotBlank
+    private String healthMemo;
+    @NotNull
+    private LocalDateTime healthScheduleStart;
+    @NotNull
+    private LocalDateTime healthScheduleEnd;
     
 }

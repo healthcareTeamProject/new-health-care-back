@@ -22,7 +22,6 @@ public class GetMealScheduleResponseDto {
     public GetMealScheduleResponseDto(MealScheduleEntity mealScheduleEntity, List<MealScheduleDetailEntity> mealDetails) {
         this.mealScheduleNumber = mealScheduleEntity.getMealScheduleNumber();
         this.userId = mealScheduleEntity.getUserId();
-        this.mealScheduleDate = mealScheduleEntity.getMealScheduleDate();
         this.mealScheduleStart = mealScheduleEntity.getMealScheduleStart(); 
         this.mealScheduleEnd = mealScheduleEntity.getMealScheduleEnd(); 
         this.mealDetails = mealDetails.stream()

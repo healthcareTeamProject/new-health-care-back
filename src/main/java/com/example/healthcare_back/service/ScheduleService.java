@@ -1,9 +1,8 @@
 package com.example.healthcare_back.service;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
 
-import com.example.healthcare_back.dto.request.schedule.DeleteHealthScheduleRequestDto;
-import com.example.healthcare_back.dto.request.schedule.DeleteMealScheduleRequestDto;
+import org.springframework.http.ResponseEntity;
 
 // import java.util.List;
 
@@ -18,17 +17,17 @@ import com.example.healthcare_back.dto.response.schedule.GetMealScheduleResponse
 public interface ScheduleService {
     
     // HealthSchedule
-    // List<GetHealthScheduleResponseDto> getAllHealthSchedules(String userId);
-    ResponseEntity<GetHealthScheduleResponseDto> getHealthScheduleById(String userId);
-    ResponseEntity<ResponseDto> postHealthSchedule(String userId, PostHealthScheduleRequestDto dto);
-    ResponseEntity<ResponseDto> patchHealthSchedule(String userId, PatchHealthScheduleRequestDto dto);
-    ResponseEntity<ResponseDto> deleteHealthSchedule(String userId, DeleteHealthScheduleRequestDto dto);
+    // ResponseEntity<List<? super GetHealthScheduleResponseDto>> getAllSchedules(String userId);
+    ResponseEntity<? super GetHealthScheduleResponseDto> getHealthScheduleById(Integer healthScheduleNumber);
+    ResponseEntity<ResponseDto> postHealthSchedule(PostHealthScheduleRequestDto dto);
+    ResponseEntity<ResponseDto> patchHealthSchedule(Integer healthScheduleNumber, PatchHealthScheduleRequestDto dto);
+    ResponseEntity<ResponseDto> deleteHealthSchedule(Integer healthScheduleNumber);
 
     // MealSchedule
-    // List<GetMealScheduleResponseDto> getAllMealSchedules(String userId);
-    ResponseEntity<GetMealScheduleResponseDto> getMealScheduleById(String userId);
-    ResponseEntity<ResponseDto> postMealSchedule(String userId, PostMealScheduleRequestDto dto);
-    ResponseEntity<ResponseDto> patchMealSchedule(String userId, PatchMealScheduleRequestDto dto);
-    ResponseEntity<ResponseDto> deleteMealSchedule(String userId, DeleteMealScheduleRequestDto dto);
+    // ResponseEntity<List<? super GetMealScheduleResponseDto>> getAllMealSchedules(String userId);
+    ResponseEntity<? super GetMealScheduleResponseDto> getMealScheduleById(String userId);
+    ResponseEntity<ResponseDto> postMealSchedule(PostMealScheduleRequestDto dto);
+    ResponseEntity<ResponseDto> patchMealSchedule(Integer mealScheduleNumber, PatchMealScheduleRequestDto dto);
+    ResponseEntity<ResponseDto> deleteMealSchedule(Integer mealScheduleNumber);
 }
     
