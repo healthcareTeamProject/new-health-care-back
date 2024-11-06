@@ -15,8 +15,6 @@ public class PostHealthScheduleRequestDto {
     @NotBlank
     private String userId;
     @NotBlank
-    private String healthTitle;
-    @NotBlank
     private String healthMemo;
     @NotNull
     private LocalDateTime healthScheduleStart;

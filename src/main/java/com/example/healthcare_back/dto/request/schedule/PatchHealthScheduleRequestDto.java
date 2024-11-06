@@ -13,8 +13,6 @@ import lombok.Setter;
 public class PatchHealthScheduleRequestDto {
 
     @NotBlank
-    private String healthTitle;
-    @NotBlank
     private String healthMemo;
     @NotNull
     private LocalDateTime healthScheduleStart;

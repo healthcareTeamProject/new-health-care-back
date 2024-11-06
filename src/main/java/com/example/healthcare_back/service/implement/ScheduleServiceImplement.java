@@ -1,6 +1,7 @@
 package com.example.healthcare_back.service.implement;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,29 +38,30 @@ public class ScheduleServiceImplement implements ScheduleService {
     private final HealthScheduleRepository healthScheduleRepository;
     private final MealScheduleDetailRepository mealScheduleDetailRepository;
     private final MealScheduleRepository mealScheduleRepository;
-    private final RestTemplate restTemplate;  // API 호출용 RestTemplate 객체
 
     //HealthSchedule
 
-    // @Override
-    // public ResponseEntity<List<? super GetHealthScheduleResponseDto>> getAllSchedules(String userId) {
-    //     try {
+    @Override
+    public List<HealthScheduleEntity> findByHealthScheduleStartBetween(LocalDateTime start, LocalDateTime end) {
+        try {
+            // 날짜 범위 내 운동 일정 조회
+            List<HealthScheduleEntity> schedules = healthScheduleRepository.findByHealthScheduleStartBetween(start, end);
             
-
-    //     } catch (Exception exception) {
-    //         exception.printStackTrace();
-    //         return ResponseDto.databaseError();
-            
-    //     }
-
-    //     return ResponseDto.success();
-    // }
+            // 조회된 운동 일정을 반환
+            return schedules;
+        } catch (Exception e) {
+            // 예외 발생 시 로깅
+            System.err.println("Error retrieving schedules: " + e.getMessage());
+            throw new RuntimeException("Failed to retrieve schedules", e);  // 예외를 다시 던져서 컨트롤러에서 처리하도록 함
+        }
+    }
 
     @Override
-    public ResponseEntity<? super GetHealthScheduleResponseDto> getHealthScheduleById(Integer healthScheduleNumber) {
+    public List<HealthScheduleEntity> findByUserId(String userId) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getHealthScheduleById'");
+        throw new UnsupportedOperationException("Unimplemented method 'findByUserId'");
     }
+
 
     @Override
     public ResponseEntity<ResponseDto> postHealthSchedule(PostHealthScheduleRequestDto dto) {
@@ -73,7 +75,6 @@ public class ScheduleServiceImplement implements ScheduleService {
             
             HealthScheduleEntity newschedule = new HealthScheduleEntity();
             newschedule.setUserId(dto.getUserId());
-            newschedule.setHealthTitle(dto.getHealthTitle());
             newschedule.setHealthMemo(dto.getHealthMemo());
             newschedule.setHealthScheduleStart(dto.getHealthScheduleStart());
             newschedule.setHealthScheduleEnd(dto.getHealthScheduleEnd());
@@ -97,7 +98,6 @@ public class ScheduleServiceImplement implements ScheduleService {
                 return ResponseDto.noExistSchedule();
             }
 
-            healthScheduleEntity.setHealthTitle(dto.getHealthTitle());
             healthScheduleEntity.setHealthMemo(dto.getHealthMemo());
             healthScheduleEntity.setHealthScheduleStart(dto.getHealthScheduleStart());
             healthScheduleEntity.setHealthScheduleEnd(dto.getHealthScheduleEnd());
@@ -132,18 +132,6 @@ public class ScheduleServiceImplement implements ScheduleService {
     }
 
     //MealScheduleSchedule
-
-    // @Override
-    // public ResponseEntity<List<? super GetMealScheduleResponseDto>> getAllMealSchedules(String userId) {
-    //     // TODO Auto-generated method stub
-    //     throw new UnsupportedOperationException("Unimplemented method 'getAllMealSchedules'");
-    // }
-
-    @Override
-    public ResponseEntity<? super GetMealScheduleResponseDto> getMealScheduleById(String userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMealScheduleById'");
-    }
 
     @Override
     public ResponseEntity<ResponseDto> postMealSchedule(PostMealScheduleRequestDto dto) {
@@ -213,5 +201,7 @@ public class ScheduleServiceImplement implements ScheduleService {
 
         return ResponseDto.success();
     }
+
+    
 
 }

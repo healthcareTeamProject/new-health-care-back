@@ -28,9 +28,6 @@ public class HealthScheduleEntity {
     @Column(nullable = false, length = 20)
     private String userId;
 
-    @Column(nullable = false, length = 20)
-    private String healthTitle;
-
     @Column(nullable = false, columnDefinition = "TEXT")
     private String healthMemo;
 
