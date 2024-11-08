@@ -13,12 +13,10 @@ import lombok.Setter;
 public class PostHealthScheduleRequestDto {
 
     @NotBlank
-    private String userId;
-    @NotBlank
-    private String healthMemo;
+    private String healthTitle;
     @NotNull
     private LocalDateTime healthScheduleStart;
     @NotNull
     private LocalDateTime healthScheduleEnd;
-    
+
 }

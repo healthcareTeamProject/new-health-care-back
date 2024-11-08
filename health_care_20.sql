@@ -18,6 +18,62 @@ CREATE SCHEMA IF NOT EXISTS `health_care` DEFAULT CHARACTER SET utf8mb3 ;
 USE `health_care` ;
 
 -- -----------------------------------------------------
+-- Table `health_care`.`board`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `health_care`.`board` (
+  `board_number` INT NOT NULL AUTO_INCREMENT COMMENT '게시물 번호',
+  `board_title` VARCHAR(80) NOT NULL,
+  `user_id` VARCHAR(20) NOT NULL COMMENT '게시물을 작성한 사용자 아이디',
+  `board_category` VARCHAR(30) NOT NULL COMMENT '게시물 카테고리',
+  `board_tag` VARCHAR(30) NOT NULL COMMENT '게시물 태그',
+  `board_contents` TEXT NOT NULL,
+  `youtube_video_link` VARCHAR(255) NULL DEFAULT NULL COMMENT '유튜브비디오링크',
+  `board_upload_date` DATETIME NOT NULL COMMENT '사용자 작성 게시물 생성날짜',
+  `board_view_count` INT NOT NULL DEFAULT '0' COMMENT '조회수',
+  `board_like_count` INT NOT NULL DEFAULT '0' COMMENT '게시물 추천 수',
+  PRIMARY KEY (`board_number`),
+  UNIQUE INDEX `board_number_UNIQUE` (`board_number` ASC) VISIBLE,
+  INDEX `post_category_INDEX` (`board_category` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3
+COMMENT = '사용자 게시물';
+
+
+-- -----------------------------------------------------
+-- Table `health_care`.`board_file_contents`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `health_care`.`board_file_contents` (
+  `board_file_number` INT NOT NULL AUTO_INCREMENT,
+  `board_number` INT NOT NULL,
+  `board_file_contents` TEXT NOT NULL,
+  PRIMARY KEY (`board_file_number`),
+  UNIQUE INDEX `board_file_number_UNIQUE` (`board_file_number` ASC) VISIBLE,
+  INDEX `boards_board_file_contents_idx` (`board_number` ASC) VISIBLE,
+  CONSTRAINT `boards_board_file_contents`
+    FOREIGN KEY (`board_number`)
+    REFERENCES `health_care`.`board` (`board_number`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `health_care`.`board_health_map`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `health_care`.`board_health_map` (
+  `board_number` INT NOT NULL COMMENT '게시물 번호',
+  `map_lat` DECIMAL(9,6) NOT NULL COMMENT '위도',
+  `map_lng` DECIMAL(9,6) NOT NULL COMMENT '경도',
+  PRIMARY KEY (`board_number`),
+  UNIQUE INDEX `board_number_UNIQUE` (`board_number` ASC) VISIBLE,
+  CONSTRAINT `user_board_board_health_map`
+    FOREIGN KEY (`board_number`)
+    REFERENCES `health_care`.`board` (`board_number`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3
+COMMENT = '사용자 게시물 헬스장 지도';
+
+
+-- -----------------------------------------------------
 -- Table `health_care`.`tel_auth_number`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `health_care`.`tel_auth_number` (
@@ -63,66 +119,6 @@ COMMENT = '사용자정보';
 
 
 -- -----------------------------------------------------
--- Table `health_care`.`board`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `health_care`.`board` (
-  `board_number` INT NOT NULL AUTO_INCREMENT COMMENT '게시물 번호',
-  `board_title` VARCHAR(80) NOT NULL,
-  `user_id` VARCHAR(20) NOT NULL COMMENT '게시물을 작성한 사용자 아이디',
-  `board_category` VARCHAR(30) NOT NULL COMMENT '게시물 카테고리',
-  `board_tag` VARCHAR(30) NOT NULL COMMENT '게시물 태그',
-  `board_contents` TEXT NOT NULL,
-  `youtube_video_link` VARCHAR(255) NULL DEFAULT NULL COMMENT '유튜브비디오링크',
-  `board_upload_date` DATETIME NOT NULL COMMENT '사용자 작성 게시물 생성날짜',
-  `board_view_count` INT NOT NULL DEFAULT '0' COMMENT '조회수',
-  `board_like_count` INT NOT NULL DEFAULT '0' COMMENT '게시물 추천 수',
-  PRIMARY KEY (`board_number`),
-  UNIQUE INDEX `board_number_UNIQUE` (`board_number` ASC) VISIBLE,
-  INDEX `post_category_INDEX` (`board_category` ASC) VISIBLE,
-  INDEX `customer_user_board` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `customer_user_board`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `health_care`.`customer` (`user_id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3
-COMMENT = '사용자 게시물';
-
-
--- -----------------------------------------------------
--- Table `health_care`.`board_file_contents`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `health_care`.`board_file_contents` (
-  `board_file_number` INT NOT NULL AUTO_INCREMENT,
-  `board_number` INT NOT NULL,
-  `board_file_contents` TEXT NOT NULL,
-  PRIMARY KEY (`board_file_number`),
-  UNIQUE INDEX `board_file_number_UNIQUE` (`board_file_number` ASC) VISIBLE,
-  INDEX `boards_board_file_contents_idx` (`board_number` ASC) VISIBLE,
-  CONSTRAINT `boards_board_file_contents`
-    FOREIGN KEY (`board_number`)
-    REFERENCES `health_care`.`board` (`board_number`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-
--- -----------------------------------------------------
--- Table `health_care`.`board_health_map`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `health_care`.`board_health_map` (
-  `board_number` INT NOT NULL COMMENT '게시물 번호',
-  `map_lat` DECIMAL(9,6) NOT NULL COMMENT '위도',
-  `map_lng` DECIMAL(9,6) NOT NULL COMMENT '경도',
-  PRIMARY KEY (`board_number`),
-  UNIQUE INDEX `board_number_UNIQUE` (`board_number` ASC) VISIBLE,
-  CONSTRAINT `user_board_board_health_map`
-    FOREIGN KEY (`board_number`)
-    REFERENCES `health_care`.`board` (`board_number`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3
-COMMENT = '사용자 게시물 헬스장 지도';
-
-
--- -----------------------------------------------------
 -- Table `health_care`.`comment`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `health_care`.`comment` (
@@ -153,8 +149,7 @@ COMMENT = '사용자 게시물 댓글';
 CREATE TABLE IF NOT EXISTS `health_care`.`health_schedule` (
   `health_schedule_number` INT NOT NULL AUTO_INCREMENT COMMENT '운동 스케줄 번호',
   `user_id` VARCHAR(20) NOT NULL COMMENT '아이디',
-  `health_title` VARCHAR(20) NOT NULL COMMENT '일정 제목',
-  `health_memo` TEXT NOT NULL COMMENT '일정 내용\\\\n',
+  `health_title` TEXT NOT NULL COMMENT '일정 내용\\\\\\\\n',
   `health_schedule_start` DATETIME NOT NULL COMMENT '스케줄 등록을 위한 시작날짜\\\\\\\\n',
   `health_schedule_end` DATETIME NOT NULL COMMENT '스케줄 등록을 위한 마지막날짜\\\\\\\\n',
   PRIMARY KEY (`health_schedule_number`),
@@ -228,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `health_care`.`user_muscle_fat` (
     FOREIGN KEY (`user_id`)
     REFERENCES `health_care`.`customer` (`user_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 15
 DEFAULT CHARACTER SET = utf8mb3
 COMMENT = '사용자 신체 정보';
 
@@ -251,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `health_care`.`user_three_major_lift` (
     FOREIGN KEY (`user_id`)
     REFERENCES `health_care`.`customer` (`user_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 13
 DEFAULT CHARACTER SET = utf8mb3
 COMMENT = '사용자 3대 측정 정보';
 

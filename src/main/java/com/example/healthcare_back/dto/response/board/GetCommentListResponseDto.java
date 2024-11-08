@@ -1,33 +1,33 @@
-package com.example.healthcare_back.dto.response.board;
+// package com.example.healthcare_back.dto.response.board;
 
-import java.util.List;
+// import java.util.List;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+// import org.springframework.http.HttpStatus;
+// import org.springframework.http.ResponseEntity;
 
-import com.example.healthcare_back.common.object.CommentList;
-import com.example.healthcare_back.dto.response.ResponseCode;
-import com.example.healthcare_back.dto.response.ResponseDto;
-import com.example.healthcare_back.dto.response.ResponseMessage;
-import com.example.healthcare_back.repository.resultSet.CommentListResultSet;
+// import com.example.healthcare_back.common.object.CommentList;
+// import com.example.healthcare_back.dto.response.ResponseCode;
+// import com.example.healthcare_back.dto.response.ResponseDto;
+// import com.example.healthcare_back.dto.response.ResponseMessage;
+// import com.example.healthcare_back.repository.resultSet.CommentListResultSet;
 
-import lombok.Getter;
+// import lombok.Getter;
 
-// 댓글 목록 불러오기 Response DTO
+// // 댓글 목록 불러오기 Response DTO
 
-@Getter
-public class GetCommentListResponseDto extends ResponseDto {
+// @Getter
+// public class GetCommentListResponseDto extends ResponseDto {
     
-    private final List<CommentList> commentList;
+//     private final List<CommentList> commentList;
 
-    private GetCommentListResponseDto(List<CommentListResultSet> resultSets) {
-        super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
-        this.commentList = CommentList.getList(resultSets);
-    }
+//     private GetCommentListResponseDto(List<CommentListResultSet> resultSets) {
+//         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
+//         this.commentList = CommentList.getList(resultSets);
+//     }
 
-    public static ResponseEntity<GetCommentListResponseDto> success(List<CommentListResultSet> resultSets) {
-        GetCommentListResponseDto responseBody = new GetCommentListResponseDto(resultSets);
-        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
-    }
+//     public static ResponseEntity<GetCommentListResponseDto> success(List<CommentListResultSet> resultSets) {
+//         GetCommentListResponseDto responseBody = new GetCommentListResponseDto(resultSets);
+//         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+//     }
 
-}
+// }

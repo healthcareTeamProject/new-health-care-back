@@ -3,9 +3,6 @@ package com.example.healthcare_back.dto.response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -21,15 +18,10 @@ public class ResponseDto {
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
-    public static ResponseEntity<ResponseDto> success(Integer integer, LocalDateTime localDateTime) {
-        ResponseDto responseBody = new ResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
-        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
-    }
-
-    public static ResponseEntity<ResponseDto> successWithUserId(String userId) {
-        ResponseDto responseBody = new ResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
-        return ResponseEntity.ok(responseBody);
-    }
+    // public static ResponseEntity<ResponseDto> success(Integer integer, LocalDateTime localDateTime) {
+    //     ResponseDto responseBody = new ResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
+    //     return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    // }
 
     public static ResponseEntity<ResponseDto> validationFail() {
         ResponseDto responseBody = new ResponseDto(ResponseCode.VALIDATION_FAIL, ResponseMessage.VALIDATION_FAIL);
@@ -47,7 +39,7 @@ public class ResponseDto {
     }
 
     public static ResponseEntity<ResponseDto> duplicatedUserTelNumber() {
-        ResponseDto responseBody = new ResponseDto(ResponseCode.DUPLICATED_USER_TEL_NUMBER, ResponseMessage.DUPLICATED_USER_TEL_NUMBER );
+        ResponseDto responseBody = new ResponseDto(ResponseCode.DUPLICATED_USER_TEL_NUMBER, ResponseMessage.DUPLICATED_USER_TEL_NUMBER);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
     }
 
@@ -110,4 +102,5 @@ public class ResponseDto {
         ResponseDto responseBody = new ResponseDto(ResponseCode.DATABASE_ERROR, ResponseMessage.DATABASE_ERROR);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody);
     }
+
 }

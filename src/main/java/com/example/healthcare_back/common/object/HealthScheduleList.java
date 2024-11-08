@@ -14,7 +14,7 @@ public class HealthScheduleList {
 
     private Integer healthScheduleNumber;
     private String userId;
-    private String healthMemo;
+    private String healthTitle;
     private LocalDateTime healthScheduleStart;
     private LocalDateTime healthScheduleEnd;
 
@@ -22,17 +22,17 @@ public class HealthScheduleList {
 
         this.healthScheduleNumber = healthScheduleEntity.getHealthScheduleNumber();
         this.userId = healthScheduleEntity.getUserId();
-        this.healthMemo = healthScheduleEntity.getHealthMemo();
+        this.healthTitle = healthScheduleEntity.getHealthTitle();
         this.healthScheduleStart = healthScheduleEntity.getHealthScheduleStart();
         this.healthScheduleEnd = healthScheduleEntity.getHealthScheduleEnd();
     }
-
+    
     public static List<HealthScheduleList> getList(List<HealthScheduleEntity> healthScheduleEntities) {
-        List<HealthScheduleList> HealthScheduleList = new ArrayList<>();
+        List<HealthScheduleList> healthScheduleLists = new ArrayList<>();
         for (HealthScheduleEntity entity : healthScheduleEntities) {
-            HealthScheduleList.add(new HealthScheduleList(entity));
+            healthScheduleLists.add(new HealthScheduleList(entity));
         }
-        return HealthScheduleList; 
+        return healthScheduleLists; 
     }
     
 }
