@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.healthcare_back.entity.customer.UserMuscleFatEntity;
 import com.example.healthcare_back.entity.schedule.HealthScheduleEntity;
 
 import lombok.Getter;
