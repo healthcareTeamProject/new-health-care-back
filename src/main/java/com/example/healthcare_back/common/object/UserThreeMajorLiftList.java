@@ -1,24 +1,23 @@
 package com.example.healthcare_back.common.object;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.healthcare_back.entity.customer.UserThreeMajorLiftEntity;
-
-import java.time.LocalDateTime;
 
 import lombok.Getter;
 
 @Getter
 public class UserThreeMajorLiftList {
     
-    private final Integer userThreeMajorLiftNumber;
-    private final String userId;
-    private final BigDecimal deadlift;
-    private final BigDecimal benchPress;
-    private final BigDecimal squat;
-    private final LocalDateTime userThreeMajorLiftDate;
+    private Integer userThreeMajorLiftNumber;
+    private String userId;
+    private BigDecimal deadlift;
+    private BigDecimal benchPress;
+    private BigDecimal squat;
+    private LocalDateTime userThreeMajorLiftDate;
 
     public UserThreeMajorLiftList(UserThreeMajorLiftEntity userThreeMajorLiftEntity) {
         this.userThreeMajorLiftNumber = userThreeMajorLiftEntity.getUserThreeMajorLiftNumber();

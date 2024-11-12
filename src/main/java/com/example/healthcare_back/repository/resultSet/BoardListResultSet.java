@@ -1,9 +1,15 @@
 package com.example.healthcare_back.repository.resultSet;
 
+import java.time.LocalDateTime;
+
 public interface BoardListResultSet {
     Integer getBoardNumber();
+
     String getBoardTitle();
-    String getNickname();
-    String getBoardUploadDate();
+
+    String getUserId();
+
+    LocalDateTime getBoardUploadDate();
+
     Integer getBoardViewCount();
 }

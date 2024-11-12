@@ -10,13 +10,13 @@ import lombok.Getter;
 
 @Getter
 public class Customer {
-    private final String userId;
-    private final String name;
-    private final String nickname;
-    private final String telNumber;
-    private final String profileImage;
-    private final String personalGoals;
-    private final BigDecimal height;
+    private String userId;
+    private String name;
+    private String nickname;
+    private String telNumber;
+    private String profileImage;
+    private String personalGoals;
+    private BigDecimal height;
 
     private Customer(CustomerEntity customerEntity) {
         this.userId = customerEntity.getUserId();
