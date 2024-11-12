@@ -2479,6 +2479,208 @@ Content-Type: application/json;charset=UTF-8
 
 ---
 
+#### - 게시물 좋아요 기능
+
+##### 설명
+
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 게시판 번호를 포함하여 요청하고 게시글 좋아요 입력이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
+
+- method : **PUT**
+- end point : **/{boardNumber}/favorite**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
+
+```bash
+curl -v -X PUT "http://localhost:4000/api/v1/board/1/favorite" \
+-h "Authorization": "Bearer XXXX"
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name    |  type  |      description      | required |
+| ------- | :----: | :-------------------: | :------: |
+| code    | String |       결과 코드       |    O     |
+| message | String | 결과 코드에 대한 설명 |    O     |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success."
+}
+```
+
+**응답 실패 (데이터 유효성 검사 실패)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "VF",
+  "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NB",
+  "message": "No exist board."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+---
+
+#### - 댓글 좋아요 기능
+
+##### 설명
+
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 게시판 번호를 포함하여 요청하고 댓글 좋아요 입력이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
+
+- method : **PUT**
+- end point : **/{boardNumber}/comments/{commentNumber}/favorite**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
+
+```bash
+curl -v -X PUT "http://localhost:4000/api/v1/board/1/favorite" \
+-h "Authorization": "Bearer XXXX"
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name    |  type  |      description      | required |
+| ------- | :----: | :-------------------: | :------: |
+| code    | String |       결과 코드       |    O     |
+| message | String | 결과 코드에 대한 설명 |    O     |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success."
+}
+```
+
+**응답 실패 (데이터 유효성 검사 실패)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "VF",
+  "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 댓글)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NC",
+  "message": "No exist comments."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+---
+
 <h2 style='background-color: rgba(55, 55, 55, 0.2); text-align: center'> Calendar 모듈</h2>
 
 Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.  

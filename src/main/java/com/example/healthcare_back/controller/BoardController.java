@@ -111,4 +111,14 @@ public class BoardController {
     ) {
         return boardService.deleteComment(boardNumber, commentNumber, userId);
     }
+
+    // // 게시글 좋아요 입력
+    // @PutMapping("/{boardNumber}/favorite")
+    // public ResponseEntity<? super ResponseDto> putFavorite(
+    //     @PathVariable Integer boardNumber,
+    //     @AuthenticationPrincipal String userId
+    // ) {
+    //     ResponseEntity<? super ResponseDto> response = boardService.putFavorite()
+
+    // }
 }
