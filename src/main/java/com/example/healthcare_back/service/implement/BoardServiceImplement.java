@@ -28,6 +28,7 @@ import com.example.healthcare_back.repository.board.CommentRepository;
 import com.example.healthcare_back.repository.customer.CustomerRepository;
 import com.example.healthcare_back.service.BoardService;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -48,21 +49,20 @@ public class BoardServiceImplement implements BoardService {
         List<CommentEntity> commentEntities;
         
         try {
-        
             boardEntity = boardRepository.findByBoardNumber(boardNumber);
             if (boardEntity == null) return GetBoardResponseDto.noExistBoard();
-    
-            // 댓글을 최신순으로 조회
+
+            // 댓글을 최신순으로 조회, 없으면 빈 리스트로 초기화
             commentEntities = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardNumber);
-            if (commentEntities == null || commentEntities.isEmpty()) {
-                return GetCommentListResponseDto.noExistComment();
+            if (commentEntities == null) {
+                commentEntities = new ArrayList<>();  // 댓글이 없을 때 빈 리스트 반환
             }
-    
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-    
+
         return GetBoardResponseDto.success(boardEntity, boardFileContentsEntity, commentEntities);
 
     }
@@ -99,6 +99,12 @@ public class BoardServiceImplement implements BoardService {
             // 각 게시물에 대한 댓글 리스트 조회 (최신순) 및 응답 생성
             for (BoardEntity boardEntity : boardList) {
                 List<CommentEntity> comments = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardEntity.getBoardNumber());
+
+                // 댓글이 없으면 빈 리스트로 설정
+                if (comments == null) {
+                    comments = new ArrayList<>();
+                }
+
                 GetBoardResponseDto boardResponse = new GetBoardResponseDto(
                         ResponseCode.SUCCESS,
                         ResponseMessage.SUCCESS,
@@ -113,7 +119,7 @@ public class BoardServiceImplement implements BoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-    
+
         return GetBoardListResponseDto.success(boardResponseList);
 
     }
@@ -262,23 +268,28 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<ResponseDto> deleteBoard(Integer boardNumber, String userId) {
 
         try {
-
             // 게시물 번호로 게시물 조회
             BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
             if (boardEntity == null) return ResponseDto.noExistBoard();
-
+    
+            // board_health_map 테이블의 관련 데이터 삭제
+            boardHealthMapRepository.deleteByBoardNumber(boardNumber);
+    
             // 게시물과 연관된 댓글 삭제
             commentRepository.deleteByBoardNumber(boardNumber);
+    
+            // board 테이블의 게시물 삭제
             boardRepository.delete(boardEntity);
-
+    
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
+    
         // 성공적인 응답
         return ResponseDto.success();
 
@@ -313,15 +324,18 @@ public class BoardServiceImplement implements BoardService {
 
         try {
             BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
-            if (boardEntity == null) return ResponseDto.noExistBoard();
-
+            if (boardEntity == null) {
+                // 게시글이 없으면 "게시글이 없습니다" 응답 반환
+                return ResponseDto.noExistBoard();
+            }
+    
             // 좋아요 개수만 증가/감소
             if (boardEntity.getBoardLikeCount() > 0) {
                 boardEntity.decreaseLikeCount(); // 좋아요 취소
             } else {
                 boardEntity.increaseLikeCount(); // 좋아요 추가
             }
-
+    
             boardRepository.save(boardEntity);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -335,8 +349,11 @@ public class BoardServiceImplement implements BoardService {
 
         try {
             BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
-            if (boardEntity == null) return ResponseDto.noExistBoard();
+            if (boardEntity == null) {
+                return ResponseDto.noExistBoard();
+            }
     
+            // 조회수 증가
             boardEntity.increaseViewCount();
             boardRepository.save(boardEntity);
         } catch (Exception exception) {
@@ -351,15 +368,17 @@ public class BoardServiceImplement implements BoardService {
 
         try {
             CommentEntity commentEntity = commentRepository.findByCommentNumber(commentNumber);
-            if (commentEntity == null) return ResponseDto.noExistComment();
-
+            if (commentEntity == null) {
+                return ResponseDto.noExistComment();
+            }
+    
             // 좋아요 개수만 증가/감소
             if (commentEntity.getCommentLikeCount() > 0) {
                 commentEntity.decreaseLikeCount(); // 좋아요 취소
             } else {
                 commentEntity.increaseLikeCount(); // 좋아요 추가
             }
-
+    
             commentRepository.save(commentEntity);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -367,7 +386,5 @@ public class BoardServiceImplement implements BoardService {
         }
         return ResponseDto.success();
     }
-
-
 
 }

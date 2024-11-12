@@ -18,7 +18,7 @@ import lombok.Getter;
 @Getter
 public class GetUserThreeMajorLiftListResponseDto extends ResponseDto {
 
-    private final List<UserThreeMajorLiftList> userThreeMajorLiftLists;
+    private List<UserThreeMajorLiftList> userThreeMajorLiftLists;
 
     // 생성자: UserThreeMajorLiftEntity 리스트를 받아 성공 코드와 메시지를 설정하고,
     // UserThreeMajorLiftList로 변환하여 userThreeMajorLiftLists 필드에 할당

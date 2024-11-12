@@ -12,39 +12,22 @@ import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.auth.SignInResponseDto;
 
 public interface AuthService {
-    
-   /**
-    * 주어진 사용자 ID가 이미 사용 중인지 확인합니다.
-    */
+
+   // 주어진 사용자 ID가 이미 사용 중인지 확인
    ResponseEntity<ResponseDto> idCheck(IdCheckRequestDto requestBody);
 
-   /**
-    * 주어진 닉네임이 이미 사용 중인지 확인합니다.
-    */
+   // 주어진 닉네임이 이미 사용 중인지 확인
    ResponseEntity<ResponseDto> nicknameCheck(NicknameCheckRequestDto requestBody);
 
-   /**
-    * 전화 인증 과정을 시작하고 SMS를 전송합니다.
-    */
+   // 전화 인증 과정을 시작하고 SMS를 전송
    ResponseEntity<ResponseDto> telAuth(TelAuthRequestDto requestBody);
 
-   /**
-    * 사용자가 제공한 전화 인증 번호의 유효성을 검사합니다.
-    */
+   // 사용자가 제공한 전화 인증 번호의 유효성을 검사
    ResponseEntity<ResponseDto> telAuthCheck(TelAuthCheckRequestDto requestBody);
 
-   /**
-    * 주어진 회원가입 정보를 사용하여 새로운 사용자를 등록합니다.
-    */
+   // 주어진 회원가입 정보를 사용하여 새로운 사용자를 등록
    ResponseEntity<ResponseDto> signUp(SignUpRequestDto requestBody);
-   
 
-
-   /**s
-    * 사용자의 로그인 정보를 기반으로 인증합니다.
-    */
+   // 사용자의 로그인 정보를 기반으로 인증
    ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto requestBody);
-
-   
-
 }

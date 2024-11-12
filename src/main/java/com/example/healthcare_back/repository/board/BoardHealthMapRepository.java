@@ -10,4 +10,6 @@ public interface BoardHealthMapRepository extends JpaRepository<BoardHealthMapEn
 
     BoardHealthMapEntity findByBoardNumber(Integer boardNumber);
 
+    void deleteByBoardNumber(Integer boardNumber);
+
 }

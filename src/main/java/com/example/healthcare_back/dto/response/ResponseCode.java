@@ -21,6 +21,8 @@ public interface ResponseCode {
     String SIGN_IN_FAIL = "SF";
     String AUTHENTICATION_FAIL = "AF";
 
+    String NO_PERMISSION = "NP";
+
     String MESSAGE_SEND_FAIL = "TF";
     String TOKEN_CREATE_FAIL = "TCF";
     String DATABASE_ERROR = "DBE";
