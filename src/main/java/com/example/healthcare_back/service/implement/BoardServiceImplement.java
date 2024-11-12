@@ -10,8 +10,10 @@ import com.example.healthcare_back.dto.request.board.PatchCommentRequestDto;
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PostCommentRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
+import com.example.healthcare_back.dto.response.board.GetBoardCategoryResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardListResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardResponseDto;
+import com.example.healthcare_back.dto.response.board.GetBoardTagResponseDto;
 import com.example.healthcare_back.dto.response.board.GetCommentListResponseDto;
 import com.example.healthcare_back.entity.board.BoardEntity;
 import com.example.healthcare_back.entity.board.BoardFileContentsEntity;
@@ -251,6 +253,44 @@ public class BoardServiceImplement implements BoardService {
 
         // 성공적인 응답
         return ResponseDto.success();
+    }
+
+    @Override
+    public ResponseEntity<? super GetBoardCategoryResponseDto> getBoardCategory(String boardCategory) {
+        
+        List<BoardEntity> boardCategoryList;
+
+        try {
+
+            // 카테고리별 게시물 목록 조회
+            boardCategoryList = boardRepository.findByBoardCategory(boardCategory);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError(); // 데이터베이스 오류 처리
+        }
+
+        return GetBoardCategoryResponseDto.success(boardCategoryList);
+
+    }
+
+    @Override
+    public ResponseEntity<? super GetBoardTagResponseDto> getBoardTag(String boardTag) {
+        
+        List<BoardEntity> boardTagList;
+
+        try {
+
+            // 해시태그별 게시물 목록 조회
+            boardTagList = boardRepository.findByBoardCategory(boardTag);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError(); // 데이터베이스 오류 처리
+        }
+
+        return GetBoardTagResponseDto.success(boardTagList);
+
     }
 
 }

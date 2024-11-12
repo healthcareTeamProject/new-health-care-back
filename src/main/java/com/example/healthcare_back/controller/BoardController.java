@@ -16,8 +16,10 @@ import com.example.healthcare_back.dto.request.board.PatchCommentRequestDto;
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PostCommentRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
+import com.example.healthcare_back.dto.response.board.GetBoardCategoryResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardListResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardResponseDto;
+import com.example.healthcare_back.dto.response.board.GetBoardTagResponseDto;
 import com.example.healthcare_back.dto.response.board.GetCommentListResponseDto;
 import com.example.healthcare_back.service.BoardService;
 
@@ -43,6 +45,20 @@ public class BoardController {
     public ResponseEntity<? super GetCommentListResponseDto> getCommentList(
             @PathVariable Integer boardNumber) {
         return boardService.getCommentList(boardNumber);
+    }
+
+    // 카테고리별 게시물 조회
+    @GetMapping("/{boardCategory}")
+    public ResponseEntity<? super GetBoardCategoryResponseDto> getBoardCategory(
+            @PathVariable String boardCategory) {
+        return boardService.getBoardCategory(boardCategory);
+    }
+
+    // 해시태그별 게시물 조회
+    @GetMapping("/{boardTag}")
+    public ResponseEntity<? super GetBoardTagResponseDto> getBoardTag(
+            @PathVariable String boardTag) {
+        return boardService.getBoardTag(boardTag);
     }
 
     // 게시물 리스트 조회
@@ -111,14 +127,4 @@ public class BoardController {
     ) {
         return boardService.deleteComment(boardNumber, commentNumber, userId);
     }
-
-    // // 게시글 좋아요 입력
-    // @PutMapping("/{boardNumber}/favorite")
-    // public ResponseEntity<? super ResponseDto> putFavorite(
-    //     @PathVariable Integer boardNumber,
-    //     @AuthenticationPrincipal String userId
-    // ) {
-    //     ResponseEntity<? super ResponseDto> response = boardService.putFavorite()
-
-    // }
 }
