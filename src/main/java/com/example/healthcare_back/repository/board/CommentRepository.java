@@ -6,16 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-<<<<<<< HEAD
-import com.example.healthcare_back.entity.board.BoardEntity;
-import com.example.healthcare_back.entity.board.CommentEntity;
-
-=======
 import com.example.healthcare_back.entity.board.CommentEntity;
 
 import jakarta.transaction.Transactional;
 
->>>>>>> 59ec9a791fce95275047e79dddde2077520ea816
 @Repository
 public interface CommentRepository extends JpaRepository<CommentEntity, Integer> {
    
@@ -37,11 +31,7 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
     List<CommentEntity> findCommentsByBoardNumber(Integer boardNumber); // 댓글 목록 반환
     List<CommentEntity> findByBoardNumber(Integer boardNumber); // 게시물 리스트 조회
     CommentEntity findByCommentNumber(Integer commentNumber); // 댓글 리스트 조회
-<<<<<<< HEAD
-    BoardEntity deleteByBoardNumber(Integer boardNumber); // 해당하는 게시물 번호의 게시물 삭제
-=======
 
     @Transactional
     void deleteByBoardNumber(Integer boardNumber); // 해당하는 게시물 번호의 게시물 삭제
->>>>>>> 59ec9a791fce95275047e79dddde2077520ea816
 }

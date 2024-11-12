@@ -32,6 +32,7 @@ public class ScheduleController {
     
     private final ScheduleService scheduleService;
 
+    // 운동 일정 상세 조회
     @GetMapping("/health-schedule/{healthScheduleNumber}")
     public ResponseEntity<? super GetHealthScheduleResponseDto> getHealthSchedule(
             @PathVariable Integer healthScheduleNumber, 
@@ -41,6 +42,7 @@ public class ScheduleController {
         return response;
     }
 
+    // 운동 일정 리스트 조회
     @GetMapping("/health-schedule-list")
     public ResponseEntity<? super GetHealthScheduleListResponseDto> getHealthScheduleList(
             @AuthenticationPrincipal String userId
@@ -80,7 +82,7 @@ public class ScheduleController {
 
     // ===================================================================
 
-    // 식단 일정 상세보기
+    // 식단 일정 상세 조회
     @GetMapping("/meal-schedule/{mealScheduleNumber}")
     public ResponseEntity<? super GetMealScheduleResponseDto> getMealSchedule(
             @PathVariable Integer mealScheduleNumber,
@@ -90,7 +92,7 @@ public class ScheduleController {
         return response;
     }
 
-    // 식단 일정 조회
+    // 식단 일정 리스트 조회
     @GetMapping("/meal-schedule-list")
     public ResponseEntity<? super GetMealScheduleListResponseDto> getMealScheduleList(
             @AuthenticationPrincipal String userId
