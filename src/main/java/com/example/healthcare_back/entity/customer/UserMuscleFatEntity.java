@@ -30,18 +30,13 @@ public class UserMuscleFatEntity {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userMuscleFatNumber;
-
     private String userId;
-
     @Column(precision = 5, scale = 1)
     private BigDecimal weight;
-
     @Column(precision = 5, scale = 1)
     private BigDecimal skeletalMuscleMass;
-
     @Column(precision = 5, scale = 1)
     private BigDecimal bodyFatMass;
-
     private LocalDateTime userMuscleFatDate;
     
     public UserMuscleFatEntity(SignUpRequestDto dto) {

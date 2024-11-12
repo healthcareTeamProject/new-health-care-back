@@ -38,8 +38,8 @@ Auth 모듈은 인증 없이 요청할 수 있습니다.
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/sign-in" \
--d "userId=qwer1234" \
--d "password=qwer1234"
+-d "userId": "qwer1234" \
+-d "password": "qwer1234"
 ```
 
 ##### Response
@@ -146,7 +146,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/id-check" \
--d "userId=qwer1234"
+-d "userId": "qwer1234"
 ```
 
 ##### Response
@@ -239,7 +239,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/nickname-check" \
--d "nickname=뽀삐puppy12"
+-d "nickname": "뽀삐puppy12"
 ```
 
 ##### Response
@@ -330,7 +330,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/tel-auth" \
--d "telNumber=01011112222"
+-d "telNumber": "01011112222"
 ```
 
 ##### Response
@@ -434,8 +434,8 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/tel-auth-check" \
--d "telNumber=01011112222" \
--d "authNumber=1234"
+-d "telNumber": "01011112222" \
+-d "authNumber": "1234"
 ```
 
 ##### Response
@@ -537,28 +537,28 @@ Content-Type: application/json;charset=UTF-8
 | deadlift           | BigDecimal |                   사용자 3대 측정 데드리프트                   |    X     |
 | benchPress         | BigDecimal |                   사용자 3대 측정 벤치프레스                   |    X     |
 | squat              | BigDecimal |                     사용자 3대 측정 스쿼트                     |    X     |
-| personalGoal       |   String   |                        사용자 개인목표                         |    X     |
+| personalGoals       |   String   |                        사용자 개인목표                         |    X     |
 
 ###### Example
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/sign-up" \
--d "profileImage=null" \
--d "name=홍길동" \
--d "userId=qwer1234" \
--d "nickname=뽀삐puppy12" \
--d "password=qwer1234" \
--d "telNumber=01011112222" \
--d "authNumber=1234" \
--d "joinPath=HOME" \
--d "height=180" \
--d "weight=80" \
--d "skeletalMuscleMass=34.5" \
--d "bodyFatMass=10.4" \
--d "deadlift=124" \
--d "benchPress=74" \
--d "squat=100" \
--d "personalGoal=이번달은 3대 측정 500 만들꺼야"
+-d "profileImage": "null" \
+-d "name": "홍길동" \
+-d "userId": "qwer1234" \
+-d "nickname": "뽀삐puppy12" \
+-d "password": "qwer1234" \
+-d "telNumber": "01011112222" \
+-d "authNumber": "1234" \
+-d "joinPath": "HOME" \
+-d "height": "180" \
+-d "weight": "80" \
+-d "skeletalMuscleMass": "34.5" \
+-d "bodyFatMass": "10.4" \
+-d "deadlift": "124" \
+-d "benchPress": "74" \
+-d "squat": "100" \
+-d "personalGoals": "이번달은 3대 측정 500 만들꺼야"
 ```
 
 ##### Response
@@ -855,7 +855,7 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 | name         |   String   |      사용자 이름      |    O     |
 | nickname     |   String   |     사용자 닉네임     |    O     |
 | height       | BigDecimal |      사용자의 키      |    O     |
-| personalGoal |   String   |   사용자의 개인목표   |    X     |
+| personalGoals |   String   |   사용자의 개인목표   |    X     |
 
 ###### Example
 
@@ -872,7 +872,7 @@ Content-Type: application/json;charset=UTF-8
   "name": "홍길동" ,
   "nickname": "뛰라노사우르스",
   "height": 180,
-  "personalGoal": "건강을 위하여";
+  "personalGoals": "건강을 위하여";
 }
 ```
 
@@ -1174,17 +1174,17 @@ Content-Type: application/json;charset=UTF-8
 | name         |   String   |    사용자의 이름    |    O     |
 | nickname     |   String   |   사용자의 닉네임   |    O     |
 | height       | BigDecimal |      사용자 키      |    O     |
-| personalGoal |   String   |   사용자 개인목표   |    X     |
+| personalGoals |   String   |   사용자 개인목표   |    X     |
 
 ###### Example
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1/customer" \
--d "profileImage=null" \
--d "name=홍길동" \
--d "nickname=뽀삐puppy12" \
--d "height=180" \
--d "personalGoal=이번달은 3대 측정 500 만들꺼야"
+-d "profileImage": "null" \
+-d "name": "홍길동" \
+-d "nickname": "뽀삐puppy12" \
+-d "height": "180" \
+-d "personalGoals": "이번달은 3대 측정 500 만들꺼야"
 ```
 
 ##### Response
@@ -1318,19 +1318,19 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1/customer/{userId}/user-muscle-fat" \
--d "userId=qwer1234" \
--d "weigh=80" \
--d "skeletalMuscleMass=34.5" \
--d "bodyFatMass=10.4" \
+-d "userId": "qwer1234" \
+-d "weigh": "80" \
+-d "skeletalMuscleMass": "34.5" \
+-d "bodyFatMass": "10.4"
 ```
 
 **PATCH**
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1/customer/{userId}/user-muscle-fat" \
--d "weigh=80" \
--d "skeletalMuscleMass=34.5" \
--d "bodyFatMass=10.4" \
+-d "weigh": "80" \
+-d "skeletalMuscleMass": "34.5" \
+-d "bodyFatMass": "10.4"
 ```
 
 ##### Response
@@ -1452,19 +1452,19 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/customer/{userId}/user-three-major-lift" \
--d "userId=qwer1234" \
--d "deadlift=124" \
--d "benchPress=74" \
--d "squat=100" \
+-d "userId": "qwer1234" \
+-d "deadlift": "124" \
+-d "benchPress": "74" \
+-d "squat": "100"
 ```
 
 **PATCH**
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1/customer/{userId}/user-three-major-lift" \
--d "deadlift=124" \
--d "benchPress=74" \
--d "squat=100" \
+-d "deadlift": "124" \
+-d "benchPress": "74" \
+-d "squat": "100"
 ```
 
 ##### Response
@@ -1699,16 +1699,16 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/board" \
- -h "Authorization=Bearer XXXX" \
- -d "boardTitle=오늘은 다이어트 20일차" \
- -d "nickname=뛰라노사우르스" \
- -d "boardCategory=운동일지", \
- -d "boardTag=운동", \
- -d "boardContents=오늘은 상체운동을 했다." \
- -d "youtubeVideoLink=null", \
- -d "boardFileContents=null", \
- -d "mapLat=37.5691", \
- -d "mapLng=126.9786",
+-h "Authorization": "Bearer XXXX" \
+-d "boardTitle": "오늘은 다이어트 20일차" \
+-d "nickname": "뛰라노사우르스" \
+-d "boardCategory": "운동일지", \
+-d "boardTag": "운동", \
+-d "boardContents": "오늘은 상체운동을 했다." \
+-d "youtubeVideoLink": "null", \
+-d "boardFileContents" "null", \
+-d "mapLat": "37.5691", \
+-d "mapLng": "126.9786"
 ```
 
 ##### Response
@@ -1790,15 +1790,15 @@ Content-Type: application/json;charset=UTF-8
 
 ---
 
-#### - 게시물 상세 페이지
+#### - 게시물, 댓글 상세 페이지
 
 ##### 설명
 
-클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. Bearer 인증 토큰과 URL에 용품 번호를 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물 상세 페이지를 응답받습니다.
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. Bearer 인증 토큰과 URL에 게시물 번호나 게시물 번호 뒤에 comment-list를 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물과 댓글 상세 페이지를 응답받습니다.
 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/{boardNumber}**
+- end point : **/{boardNumber}**, **/{boardNumber}/comment-list**
 
 ##### Request
 
@@ -1968,14 +1968,14 @@ URL에 게시물 번호를 포함하고 게시물 번호, 게시물 제목, 게�
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1/boardNumber/1" \
--h "Authorization=Bearer XXXX" \
--d "boardTitle=오늘은 다이어트 94일차" \
--d "boardCategory=식단일지", \
--d "boardTag=식단", \
--d "youtubeVideoLink=null", \
--d "boardFileContents=null", \
--d "mapLat=34.5691", \
--d "mapLng=106.9786",
+-h "Authorization": "Bearer XXXX" \
+-d "boardTitle": "오늘은 다이어트 94일차" \
+-d "boardCategory": "식단일지", \
+-d "boardTag": "식단", \
+-d "youtubeVideoLink": "null", \
+-d "boardFileContents": "null", \
+-d "mapLat": "34.5691", \
+-d "mapLng": "106.9786"
 ```
 
 ##### Response
@@ -2080,7 +2080,7 @@ URL에 게시물 번호를 포함하고 게시물 삭제가 성공적으로 이�
 
 ```bash
 curl -v -X DELETE "http://localhost:4000/api/v1/board/1" \
--h "Authorization=Bearer XXXX"
+-h "Authorization": "Bearer XXXX"
 ```
 
 ###### Header
@@ -2164,10 +2164,10 @@ Content-Type: application/json;charset=UTF-8
 
 ##### 설명
 
-클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 댓글 내용을 입력하여 요청하고 댓글 등록이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 댓글 내용을 입력하여 요청하고 게시물에 대한 댓글 등록이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **POST**
-- end point : **/**
+- end point : **/{boardNumber}/comments**
 
 ##### Request
 
@@ -2181,14 +2181,14 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |  type  | description | required |
 | ------------- | :----: | :---------: | :------: |
-| boardContents | String |  댓글 내용  |    O     |
+| commentContents | String |  댓글 내용  |    O     |
 
 ###### Example
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/board/3" \
--h "Authorization=Bearer XXXX" \
--d "boardContents=너무 도움됬어요 감사함욤"
+-h "Authorization": "Bearer XXXX" \
+-d "boardContents": "너무 도움됬어요 감사함욤"
 ```
 
 ##### Response
@@ -2277,7 +2277,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 댓글 번호를 포함하고 댓글 내용을 입력하여 요청하고 댓글 수정이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **PATCH**
-- end point : **/{commentNumber}**
+- end point : **/{boardNumber}/comments/{commentNumber}**
 
 ###### Header
 
@@ -2289,14 +2289,14 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |  type  | description | required |
 | ------------- | :----: | :---------: | :------: |
-| boardContents | String |  댓글 내용  |    O     |
+| commentContents | String |  댓글 내용  |    O     |
 
 ###### Example
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1/comment/1" \
--h "Authorization=Bearer XXXX" \
--d "boardContent=제 친구랑 같이 이 방법으로 운동중이에요!!"
+-h "Authorization": "Bearer XXXX" \
+-d "boardContent": "제 친구랑 같이 이 방법으로 운동중이에요!!"
 ```
 
 ##### Response
@@ -2382,10 +2382,10 @@ Content-Type: application/json;charset=UTF-8
 
 ##### 설명
 
-클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 댓글 번호를 포함하여 요청하고 댓글 삭제가 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 게시판 번호와 댓글 번호를 포함하여 요청하고 댓글 삭제가 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **DELETE**
-- end point : **/{commentsNumber}**
+- end point : **/{boardNumber}/comments/{commentNumber}**
 
 ##### Request
 
@@ -2397,7 +2397,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X DELETE "http://localhost:4000/api/v1/comment/1" \
--h "Authorization=Bearer XXXX"
+-h "Authorization": "Bearer XXXX"
 ```
 
 ##### Response
@@ -2497,7 +2497,7 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 사용자는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 사용자 아이디를 포함하여 요청하고 성공적으로 이루어지면 사용자가 작성한 운동 스케줄 리스트를 날짜별로 응답받습니다. 만약 존재하지 않는 아이디일 경우 존재하지 않는 아이디에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/{userId}/health-shcedule-list**
+- end point : **/{userId}/health-schedule-list**
 
 ##### Request
 
@@ -2527,12 +2527,12 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/health-shcedule-list
 | -------------- | :------------------: | :-------------------: | :------: |
 | code           |        String        |       결과 코드       |    O     |
 | message        |        String        | 결과 코드에 대한 설명 |    O     |
-| healthShcedule | healthShceduleList[] |  운동 스케줄 리스트   |    O     |
+| healthSchedule | healthScheduleList[] |  운동 스케줄 리스트   |    O     |
 
 **HealthShceduleList**  
 | name | type | description | required |
 | --------- | :-------------: | :-------------------: | :------: |
-| healthShceduleNumber | Integer | 사용자 운동 스케줄 번호 | O |
+| healthScheduleNumber | Integer | 사용자 운동 스케줄 번호 | O |
 | userId | String | 사용자 아이디 | O |
 | healthTitle | String | 운동 스케줄 제목 및 내용 | O |
 | healthScheduleStart | LocalDataTime | 운동 스케줄 시작일 | O |
@@ -2633,7 +2633,7 @@ Content-Type: application/json;charset=UTF-8
 사용자는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 사용자 아이디를 포함하여 요청하고 성공적으로 이루어지면 사용자가 작성한 식단 스케줄 리스트를 날짜별로 응답받습니다. 만약 존재하지 않는 아이디일 경우 존재하지 않는 아이디에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/{userId}/meal-shcedule-list**
+- end point : **/{userId}/meal-schedule-list**
 
 ##### Request
 
@@ -2646,7 +2646,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/meal-shcedule-list"
+curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/meal-schedule-list"
 ```
 
 ##### Response
@@ -2663,12 +2663,12 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/meal-shcedule-list"
 | ------------ | :----------------: | :-------------------: | :------: |
 | code         |       String       |       결과 코드       |    O     |
 | message      |       String       | 결과 코드에 대한 설명 |    O     |
-| mealShcedule | mealShceduleList[] |  운동 스케줄 리스트   |    O     |
+| mealSchedule | mealScheduleList[] |  운동 스케줄 리스트   |    O     |
 
 **MealShceduleList**  
 | name | type | description | required |
 | --------- | :-------------: | :-------------------: | :------: |
-| mealShceduleNumber | Integer | 사용자 식단 스케줄 번호 | O |
+| mealScheduleNumber | Integer | 사용자 식단 스케줄 번호 | O |
 | userId | String | 사용자 아이디 | O |
 | mealTitle | String | 식단 스케줄 제목 및 내용 | O |
 | mealScheduleStart | LocalDataTime | 식단 스케줄 시작일 | O |
@@ -2792,11 +2792,11 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -X POST "http://localhost:4000/api/v1/schedule/health-schedule" \
--h "Authorization=Bearer XXXX" \
--d "userId=qwer1234" \
--d "health_title=가슴" \
--d "health_memo=
-    벤치프레스 12 3set,
+-h "Authorization": "Bearer XXXX" \
+-d "userId": "qwer1234" \
+-d "health_title": "가슴" \
+-d "health_memo:
+    "벤치프레스 12 3set,
     플라이 15 5set"
 ```
 
@@ -2910,10 +2910,10 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -X POST "http://localhost:4000/api/v1/schedule/meal-schedule" \
--h "Authorization=Bearer XXXX" \
--d "health_title=아침" \
--d "health_memo=
-    닭가슴살 109kcal,
+-h "Authorization": "Bearer XXXX" \
+-d "health_title": "아침" \
+-d "health_memo":
+    "닭가슴살 109kcal,
     사과 52kcal"
 ```
 
@@ -3254,10 +3254,10 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -X PATCH "http://localhost:4000/api/v1/schedule/health_schedule/1" \
--h "Authorization=Bearer XXXX" \
--d "health_title=가슴, 이두" \
--d "health_memo=
-    벤치프레스 12 3set,
+-h "Authorization": "Bearer XXXX" \
+-d "health_title": "가슴, 이두" \
+-d "health_memo": 
+    "벤치프레스 12 3set,
     체스트 프레스 15 5set,
     플라이 15 5set,
     바벨 컬 10 3set,
@@ -3375,9 +3375,9 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -X PATCH "http://localhost:4000/api/v1/schedule/meal_schedule/1" \
--h "Authorization=Bearer XXXX" \
--d "health_title=아침" \
--d "health_memo=
+-h "Authorization": "Bearer XXXX" \
+-d "health_title": "아침" \
+-d "health_memo":
     닭가슴살 109kcal,
     사과 52kcal,
     현미밥 152kcal"
@@ -3483,7 +3483,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -X GET "http://localhost:4000/api/v1/schedule/health-schedule/1" \
--h "Authorization=Bearer XXXX"
+-h "Authorization": "Bearer XXXX"
 ```
 
 ##### Response
@@ -3586,7 +3586,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -X GET "http://localhost:4000/api/v1/schedule/meal-schedule/1" \
--h "Authorization=Bearer XXXX"
+-h "Authorization": "Bearer XXXX"
 ```
 
 ##### Response
