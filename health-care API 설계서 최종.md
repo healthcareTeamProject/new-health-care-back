@@ -1664,6 +1664,230 @@ Content-Type: application/json;charset=UTF-8
 
 ---
 
+#### - 카테고리별 게시물 리스트 보기
+
+##### 설명
+
+모든 클라이언트는 카테고리, 게시물 번호, 게시물 제목, 게시물 작성자 닉네임, 게시물 작성날짜, 게시물 조회수가 조회가 되면 성공적으로 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
+
+- method : **GET**
+- end point : **/category/{boardCategory}**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    X     |
+
+###### Example
+
+```bash
+curl -X GET "http://localhost:4000/api/v1/board/category/{boardCategory}"
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name    |    type     |      description      | required |
+| ------- | :---------: | :-------------------: | :------: |
+| code    |   String    |       결과 코드       |    O     |
+| message |   String    | 결과 코드에 대한 설명 |    O     |
+| boardCategory   | BoardCategoryList[] |     게시글 리스트     |    O     |
+
+**BoardCategoryList**  
+| name | type | description | required |
+|---|:---:|:---:|:---:|
+| boardCategory | String | 게시물 카테고리 | O |
+| boardNumber | Integer | 게시물 번호 | O |
+| boardTitle | String | 게시물 제목 | O |
+| nickname | String | 게시물 작성자 닉네임 | O |
+| boardUploadDate | String | 게시물 작성날짜 | O |
+| boardViewCount | Integer | 게시물 조회수 | O |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success.",
+  "tools": [
+    {
+      "boardCategory": "운동일지",
+      "boardNumber": 1,
+      "boardTitle": "오늘에 추천 식단은~~",
+      "nickname": "뽀보이strong1",
+      "board_upload_date": 2024-10-17 14:36,
+      "board_view_count" : 20
+    },
+    ...
+  ]
+}
+```
+
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NB",
+  "message": "No exist board."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+---
+
+#### - 해시태그별 게시물 리스트 보기
+
+##### 설명
+
+모든 클라이언트는 게시물 번호, 게시물 제목, 게시물 작성자 닉네임, 게시물 작성날짜, 게시물 조회수가 조회가 되면 성공적으로 응답을 받습니다. 네트워크 에러, 서버에러, 데이터베이스 에러가 발생할 수 있습니다.
+
+- method : **GET**
+- end point : **/tag/{boardTag}**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    X     |
+
+###### Example
+
+```bash
+curl -X GET "http://localhost:4000/api/v1/board/tag/{boardTag}"
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name    |    type     |      description      | required |
+| ------- | :---------: | :-------------------: | :------: |
+| code    |   String    |       결과 코드       |    O     |
+| message |   String    | 결과 코드에 대한 설명 |    O     |
+| boardTag   | BoardTagList[] |     게시글 리스트     |    O     |
+
+**BoardTagList**  
+| name | type | description | required |
+|---|:---:|:---:|:---:|
+| boardTag | String | 게시물 해시태그 | O |
+| boardNumber | Integer | 게시물 번호 | O |
+| boardTitle | String | 게시물 제목 | O |
+| nickname | String | 게시물 작성자 닉네임 | O |
+| boardUploadDate | String | 게시물 작성날짜 | O |
+| boardViewCount | Integer | 게시물 조회수 | O |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success.",
+  "tools": [
+    {
+      "boardTag": "운동"
+      "boardNumber": 1,
+      "boardTitle": "오늘에 추천 식단은~~",
+      "nickname": "뽀보이strong1",
+      "board_upload_date": 2024-10-17 14:36,
+      "board_view_count" : 20
+    },
+    ...
+  ]
+}
+```
+
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NB",
+  "message": "No exist board."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+---
+
 #### - 게시물 등록
 
 ##### 설명

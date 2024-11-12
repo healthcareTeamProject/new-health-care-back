@@ -282,7 +282,7 @@ public class BoardServiceImplement implements BoardService {
         try {
 
             // 해시태그별 게시물 목록 조회
-            boardTagList = boardRepository.findByBoardCategory(boardTag);
+            boardTagList = boardRepository.findByBoardTag(boardTag);
 
         } catch (Exception exception) {
             exception.printStackTrace();
