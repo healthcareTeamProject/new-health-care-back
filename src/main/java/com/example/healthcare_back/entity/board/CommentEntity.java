@@ -35,23 +35,18 @@ public class CommentEntity {
 
     private LocalDateTime commentDate;
 
-    private Integer commentLikeCount;
+    private Integer commentLikeCount = 0;
+
 
     public CommentEntity(PostCommentRequestDto dto, Integer boardNumber, String userId) {
         this.commentDate = LocalDateTime.now();
         this.boardNumber = boardNumber;
         this.userId = userId;
-        this.commentLikeCount = 0;
         this.commentContents = dto.getCommentContents();
     }
 
-    public void increaseFavoriteCount() {
-        this.commentLikeCount++;
-    }
-
-    public void decreaseFavoriteCount() {
-        this.commentLikeCount--;
-    }
+    public void increaseLikeCount() { this.commentLikeCount++; }
+    public void decreaseLikeCount() { this.commentLikeCount--; }
 
     public void update(PatchCommentRequestDto dto, Integer boardNumber, Integer commentNumber, String userId) {
         this.commentDate = LocalDateTime.now();

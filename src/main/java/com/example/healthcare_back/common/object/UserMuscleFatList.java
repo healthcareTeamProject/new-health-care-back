@@ -12,7 +12,6 @@ import lombok.Getter;
 @Getter
 public class UserMuscleFatList {
     private Integer userMuscleFatNumber;
-    private String userId;
     private BigDecimal weight;
     private BigDecimal skeletalMuscleMass;
     private BigDecimal bodyFatMass;
@@ -21,7 +20,6 @@ public class UserMuscleFatList {
     // UserMuscleFatEntity 객체를 사용하여 UserMuscleFatList 객체를 생성하는 생성자
     public UserMuscleFatList(UserMuscleFatEntity userMuscleFatEntity) {
         this.userMuscleFatNumber = userMuscleFatEntity.getUserMuscleFatNumber();
-        this.userId = userMuscleFatEntity.getUserId();
         this.weight = userMuscleFatEntity.getWeight();
         this.skeletalMuscleMass = userMuscleFatEntity.getSkeletalMuscleMass();
         this.bodyFatMass = userMuscleFatEntity.getBodyFatMass();

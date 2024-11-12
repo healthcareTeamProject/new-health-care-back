@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,10 +46,19 @@ public class BoardController {
         return boardService.getCommentList(boardNumber);
     }
 
-    // 게시물 리스트 조회
+    // 모든 게시물 리스트 조회
     @GetMapping(value = {"", "/"})
     public ResponseEntity<? super GetBoardListResponseDto> getBoardList() {
         ResponseEntity<? super GetBoardListResponseDto> response = boardService.getBoardList();
+        return response;
+    }
+
+    // 특정 사용자의 게시물 리스트 조회
+    @GetMapping("/user")
+    public ResponseEntity<? super GetBoardListResponseDto> getUserBoardList(
+        @AuthenticationPrincipal String userId
+    ) {
+        ResponseEntity<? super GetBoardListResponseDto> response = boardService.getUserBoardList(userId);
         return response;
     }
 
@@ -56,7 +66,7 @@ public class BoardController {
     @PostMapping(value = { "", "/" })
     public ResponseEntity<? super ResponseDto> postBoard(
             @RequestBody @Valid PostBoardRequestDto requestBody,
-            @AuthenticationPrincipal String userId // 요청에서 userId를 가져오는 경우
+            @AuthenticationPrincipal String userId
     ) {
         ResponseEntity<? super ResponseDto> response = boardService.postBoard(requestBody, userId);
         return response;
@@ -111,4 +121,29 @@ public class BoardController {
     ) {
         return boardService.deleteComment(boardNumber, commentNumber, userId);
     }
+
+   // 좋아요 추가/취소 (게시물)
+   @PutMapping("/{boardNumber}/like")
+   public ResponseEntity<? super ResponseDto> likeBoard(
+           @PathVariable Integer boardNumber
+   ) {
+       return boardService.putBoardLike(boardNumber);
+   }
+
+   // 조회수 증가 (게시물)
+   @PutMapping("/{boardNumber}/view")
+   public ResponseEntity<? super ResponseDto> increaseViewCount(
+           @PathVariable Integer boardNumber
+   ) {
+       return boardService.increaseViewCount(boardNumber);
+   }
+
+   // 좋아요 추가/취소 (댓글)
+   @PutMapping("/{boardNumber}/comments/{commentNumber}/like")
+   public ResponseEntity<? super ResponseDto> likeComment(
+           @PathVariable Integer boardNumber,
+           @PathVariable Integer commentNumber
+   ) {
+       return boardService.putCommentLike(commentNumber);
+   }
 }

@@ -18,12 +18,12 @@ public class CommentList {
     private LocalDateTime commentDate;
     private Integer commentLikeCount;
 
-    public CommentList(CommentEntity resultSet) {
-        this.commentNumber = resultSet.getCommentNumber();
-        this.commentContents = resultSet.getCommentContents();
-        this.userId = resultSet.getUserId();
-        this.commentDate = LocalDateTime.now();
-        this.commentLikeCount = resultSet.getCommentLikeCount();
+    public CommentList(CommentEntity commentEntity) {
+        this.commentNumber = commentEntity.getCommentNumber();
+        this.commentContents = commentEntity.getCommentContents();
+        this.userId = commentEntity.getUserId();
+        this.commentDate = commentEntity.getCommentDate();
+        this.commentLikeCount = commentEntity.getCommentLikeCount();
     }
 
     public static List<CommentList> getList(List<CommentEntity> resultSets) {

@@ -16,8 +16,6 @@ public class PostBoardRequestDto {
     
     private String boardTitle;
     
-    private String userId;
-    
     private String boardCategory;
     
     private String boardTag;

@@ -3,10 +3,12 @@ package com.example.healthcare_back.dto.response.board;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.example.healthcare_back.common.object.CommentList;
 import com.example.healthcare_back.dto.response.ResponseCode;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
@@ -29,15 +31,11 @@ public class GetBoardResponseDto extends ResponseDto {
     private String boardFileContents;
     private Integer boardViewCount;
     private Integer boardLikeCount;
-    private List<String> commentList;
+    private List<CommentList> commentList; // 수정: List<CommentList>로 변경
 
+    // 생성자 수정
     public GetBoardResponseDto(String code, String message, BoardEntity boardEntity, BoardFileContentsEntity boardFileContentsEntity, List<CommentEntity> commentEntities) {
         super(code, message);
-        List<String> commentList = new ArrayList<>();
-        for (CommentEntity commentEntity : commentEntities) {
-            String comment = commentEntity.getCommentContents();
-            commentList.add(comment);
-        }
 
         this.boardNumber = boardEntity.getBoardNumber();
         this.boardTitle = boardEntity.getBoardTitle();
@@ -45,9 +43,16 @@ public class GetBoardResponseDto extends ResponseDto {
         this.boardUploadDate = boardEntity.getBoardUploadDate();
         this.boardContents = boardEntity.getBoardContents();
         this.youtubeVideoLink = boardEntity.getYoutubeVideoLink();
-        this.boardFileContents = boardFileContentsEntity != null ?  boardFileContentsEntity.getBoardFileContents() : null;
+        this.boardFileContents = boardFileContentsEntity != null ? boardFileContentsEntity.getBoardFileContents() : null;
         this.boardViewCount = boardEntity.getBoardViewCount();
         this.boardLikeCount = boardEntity.getBoardLikeCount();
+
+        // commentList 초기화
+        this.commentList = commentEntities != null && !commentEntities.isEmpty()
+                ? commentEntities.stream()
+                      .map(comment -> new CommentList(comment)) // CommentEntity를 CommentList로 변환
+                      .collect(Collectors.toList())
+                : new ArrayList<>(); // commentEntities가 null 또는 비어있는 경우 빈 리스트 반환
     }
 
     public static ResponseEntity<GetBoardResponseDto> success(BoardEntity boardEntity, BoardFileContentsEntity boardFileContentsEntity, List<CommentEntity> commentEntities) {

@@ -41,38 +41,26 @@ public class BoardEntity {
 
     private LocalDateTime boardUploadDate;
 
-    private Integer boardViewCount;
-
-    private Integer boardLikeCount;
+    private Integer boardViewCount = 0;
+    
+    private Integer boardLikeCount = 0;
 
     public BoardEntity(PostBoardRequestDto dto, String userId) {
         this.boardUploadDate = LocalDateTime.now();
         this.userId = userId;
         this.boardTitle = dto.getBoardTitle();
-        this.userId = dto.getUserId();
         this.boardCategory = dto.getBoardCategory();
         this.boardTag = dto.getBoardTag();
         this.boardContents = dto.getBoardContents();
         this.youtubeVideoLink = dto.getYoutubeVideoLink();
-        this.boardViewCount = 0;
-        this.boardLikeCount = 0;
     }
 
-    public void increaseViewCount() {
-        this.boardViewCount++;
-    }
-
-    public void increaseLikeCount() {
-        this.boardLikeCount++;
-    }
-
-    public void decreaseLikeCount() {
-        this.boardLikeCount--;
-    }
+    public void increaseViewCount() { this.boardViewCount++; }
+    public void increaseLikeCount() { this.boardLikeCount++; }
+    public void decreaseLikeCount() { this.boardLikeCount--; }
 
     public void update(PatchBoardRequestDto dto, Integer boardNumber, String userId) {
         this.boardNumber = boardNumber;
-        this.userId = userId;
         this.boardTitle = dto.getBoardTitle();
         this.boardCategory = dto.getBoardCategory();
         this.boardTag = dto.getBoardTag();

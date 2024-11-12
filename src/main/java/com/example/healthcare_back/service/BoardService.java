@@ -19,6 +19,9 @@ public interface BoardService {
     // 게시글 목록 조회
     ResponseEntity<? super GetBoardListResponseDto> getBoardList();
 
+    // 게시글 목록 조회
+    ResponseEntity<? super GetBoardListResponseDto> getUserBoardList(String userId);
+
     // 댓글 목록 조회
     ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber);
 
@@ -40,4 +43,10 @@ public interface BoardService {
     // 댓글 삭제
     ResponseEntity<? super ResponseDto> deleteComment(Integer boardNumber, Integer commentNumber, String userId);
 
+
+    ResponseEntity<? super ResponseDto> putBoardLike(Integer boardNumber);
+    ResponseEntity<? super ResponseDto> increaseViewCount(Integer boardNumber);
+    ResponseEntity<? super ResponseDto> putCommentLike(Integer commentNumber);
+
+    
 }

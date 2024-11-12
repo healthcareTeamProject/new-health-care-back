@@ -1,5 +1,6 @@
 package com.example.healthcare_back.service.implement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,9 @@ import com.example.healthcare_back.dto.request.board.PatchBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PatchCommentRequestDto;
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PostCommentRequestDto;
+import com.example.healthcare_back.dto.response.ResponseCode;
 import com.example.healthcare_back.dto.response.ResponseDto;
+import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.dto.response.board.GetBoardListResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardResponseDto;
 import com.example.healthcare_back.dto.response.board.GetCommentListResponseDto;
@@ -17,6 +20,7 @@ import com.example.healthcare_back.entity.board.BoardEntity;
 import com.example.healthcare_back.entity.board.BoardFileContentsEntity;
 import com.example.healthcare_back.entity.board.BoardHealthMapEntity;
 import com.example.healthcare_back.entity.board.CommentEntity;
+import com.example.healthcare_back.entity.customer.CustomerEntity;
 import com.example.healthcare_back.repository.board.BoardFileContentsRepository;
 import com.example.healthcare_back.repository.board.BoardHealthMapRepository;
 import com.example.healthcare_back.repository.board.BoardRepository;
@@ -42,22 +46,23 @@ public class BoardServiceImplement implements BoardService {
         BoardEntity boardEntity;
         BoardFileContentsEntity boardFileContentsEntity = null;
         List<CommentEntity> commentEntities;
-
+        
         try {
-
-            // 게시물 조회
+        
             boardEntity = boardRepository.findByBoardNumber(boardNumber);
-            if (boardEntity == null) return GetBoardResponseDto.noExistBoard(); // 게시물이 없을 경우 처리
-
-            // 게시물에 대한 댓글 조회
-            commentEntities = commentRepository.findByBoardNumber(boardNumber);
-            if (commentEntities == null) return GetCommentListResponseDto.noExistComment(); // 댓글이 없을 경우 처리
-
+            if (boardEntity == null) return GetBoardResponseDto.noExistBoard();
+    
+            // 댓글을 최신순으로 조회
+            commentEntities = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardNumber);
+            if (commentEntities == null || commentEntities.isEmpty()) {
+                return GetCommentListResponseDto.noExistComment();
+            }
+    
         } catch (Exception exception) {
             exception.printStackTrace();
-            return ResponseDto.databaseError(); // 데이터베이스 오류 처리
+            return ResponseDto.databaseError();
         }
-
+    
         return GetBoardResponseDto.success(boardEntity, boardFileContentsEntity, commentEntities);
 
     }
@@ -68,16 +73,15 @@ public class BoardServiceImplement implements BoardService {
         List<CommentEntity> commentList;
 
         try {
-
-            // 게시물 댓글 목록 조회
-            commentList = commentRepository.findByBoardNumber(boardNumber);
-            if (commentList == null) return GetCommentListResponseDto.noExistComment(); // 댓글이 없는 경우 처리
-
+            // 게시물 댓글 목록을 최신순으로 조회
+            commentList = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardNumber);
+            if (commentList.isEmpty()) return GetCommentListResponseDto.noExistComment(); // 댓글이 없는 경우 처리
+    
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
+    
         return GetCommentListResponseDto.success(commentList);
 
     }
@@ -86,18 +90,69 @@ public class BoardServiceImplement implements BoardService {
     public ResponseEntity<? super GetBoardListResponseDto> getBoardList() {
 
         List<BoardEntity> boardList;
+        List<GetBoardResponseDto> boardResponseList = new ArrayList<>();
+        
+        try {
+            // 최신순으로 모든 게시물 조회
+            boardList = boardRepository.findAllByOrderByBoardUploadDateDesc();
+        
+            // 각 게시물에 대한 댓글 리스트 조회 (최신순) 및 응답 생성
+            for (BoardEntity boardEntity : boardList) {
+                List<CommentEntity> comments = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardEntity.getBoardNumber());
+                GetBoardResponseDto boardResponse = new GetBoardResponseDto(
+                        ResponseCode.SUCCESS,
+                        ResponseMessage.SUCCESS,
+                        boardEntity,
+                        null, // boardFileContentsEntity가 없으면 null
+                        comments
+                );
+                boardResponseList.add(boardResponse);
+            }
+        
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+    
+        return GetBoardListResponseDto.success(boardResponseList);
+
+    }
+
+    @Override
+    public ResponseEntity<? super GetBoardListResponseDto> getUserBoardList(String userId) {
+        
+        List<BoardEntity> boardList;
+        List<GetBoardResponseDto> boardResponseList = new ArrayList<>();
 
         try {
+            // 사용자 존재 여부 확인
+            CustomerEntity customerEntity = customerRepository.findByUserId(userId);
+            if (customerEntity == null) {
+                return ResponseDto.noExistUserId(); // 고객이 없을 경우 응답
+            }
 
-            // 게시물 목록 조회
-            boardList = boardRepository.findAll();
+            // 특정 사용자가 작성한 모든 게시물을 최신순으로 조회
+            boardList = boardRepository.findByUserIdOrderByBoardUploadDateDesc(userId);
+
+            // 각 게시물에 대한 댓글 리스트 조회 및 응답 생성
+            for (BoardEntity boardEntity : boardList) {
+                List<CommentEntity> comments = commentRepository.findByBoardNumber(boardEntity.getBoardNumber());
+                GetBoardResponseDto boardResponse = new GetBoardResponseDto(
+                        ResponseCode.SUCCESS, 
+                        ResponseMessage.SUCCESS, 
+                        boardEntity, 
+                        null, // boardFileContentsEntity가 없으면 null
+                        comments
+                );
+                boardResponseList.add(boardResponse);
+            }
 
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
 
-        return GetBoardListResponseDto.success(boardList);
+        return GetBoardListResponseDto.success(boardResponseList);
 
     }
 
@@ -252,5 +307,67 @@ public class BoardServiceImplement implements BoardService {
         // 성공적인 응답
         return ResponseDto.success();
     }
+
+    @Override
+    public ResponseEntity<? super ResponseDto> putBoardLike(Integer boardNumber) {
+
+        try {
+            BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
+            if (boardEntity == null) return ResponseDto.noExistBoard();
+
+            // 좋아요 개수만 증가/감소
+            if (boardEntity.getBoardLikeCount() > 0) {
+                boardEntity.decreaseLikeCount(); // 좋아요 취소
+            } else {
+                boardEntity.increaseLikeCount(); // 좋아요 추가
+            }
+
+            boardRepository.save(boardEntity);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return ResponseDto.success();
+    }
+
+    @Override
+    public ResponseEntity<? super ResponseDto> increaseViewCount(Integer boardNumber) {
+
+        try {
+            BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
+            if (boardEntity == null) return ResponseDto.noExistBoard();
+    
+            boardEntity.increaseViewCount();
+            boardRepository.save(boardEntity);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return ResponseDto.success();
+    }
+
+    @Override
+    public ResponseEntity<? super ResponseDto> putCommentLike(Integer commentNumber) {
+
+        try {
+            CommentEntity commentEntity = commentRepository.findByCommentNumber(commentNumber);
+            if (commentEntity == null) return ResponseDto.noExistComment();
+
+            // 좋아요 개수만 증가/감소
+            if (commentEntity.getCommentLikeCount() > 0) {
+                commentEntity.decreaseLikeCount(); // 좋아요 취소
+            } else {
+                commentEntity.increaseLikeCount(); // 좋아요 추가
+            }
+
+            commentRepository.save(commentEntity);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return ResponseDto.success();
+    }
+
+
 
 }

@@ -13,7 +13,6 @@ import lombok.Getter;
 public class UserThreeMajorLiftList {
     
     private Integer userThreeMajorLiftNumber;
-    private String userId;
     private BigDecimal deadlift;
     private BigDecimal benchPress;
     private BigDecimal squat;
@@ -22,7 +21,6 @@ public class UserThreeMajorLiftList {
     // UserThreeMajorLiftEntity 객체를 사용하여 UserThreeMajorLiftList 객체를 생성하는 생성자
     public UserThreeMajorLiftList(UserThreeMajorLiftEntity userThreeMajorLiftEntity) {
         this.userThreeMajorLiftNumber = userThreeMajorLiftEntity.getUserThreeMajorLiftNumber();
-        this.userId = userThreeMajorLiftEntity.getUserId();
         this.deadlift = userThreeMajorLiftEntity.getDeadlift();
         this.benchPress = userThreeMajorLiftEntity.getBenchPress();
         this.squat = userThreeMajorLiftEntity.getSquat();

@@ -30,8 +30,10 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
     )
     List<CommentEntity> findCommentsByBoardNumber(Integer boardNumber); // 댓글 목록 반환
     List<CommentEntity> findByBoardNumber(Integer boardNumber); // 게시물 리스트 조회
+    List<CommentEntity> findByBoardNumberOrderByCommentDateDesc(Integer boardNumber);
     CommentEntity findByCommentNumber(Integer commentNumber); // 댓글 리스트 조회
 
     @Transactional
     void deleteByBoardNumber(Integer boardNumber); // 해당하는 게시물 번호의 게시물 삭제
+    
 }

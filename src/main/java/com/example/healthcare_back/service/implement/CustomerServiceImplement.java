@@ -29,11 +29,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CustomerServiceImplement implements CustomerService{
 
-    // 고객 저장소
     private final CustomerRepository customerRepository;
-    // 사용자 근육/지방 데이터 저장소
     private final UserMuscleFatRepository userMuscleFatRepository;
-    // 사용자 3대 운동 데이터 저장소
     private final UserThreeMajorLiftRepository userThreeMajorLiftRepository;
 
     // 사용자 로그인 정보 조회
@@ -82,7 +79,7 @@ public class CustomerServiceImplement implements CustomerService{
 
         try {
             // 주어진 userId로 사용자 근육/지방 데이터 조회
-            userMuscleFatEntities = userMuscleFatRepository.findByUserIdOrderByUserMuscleFatNumberAsc(userId);
+            userMuscleFatEntities = userMuscleFatRepository.findByUserIdOrderByUserMuscleFatNumberDesc(userId);
             
             // 데이터가 없을 경우
             if (userMuscleFatEntities.isEmpty()) {
@@ -105,7 +102,7 @@ public class CustomerServiceImplement implements CustomerService{
 
         try {
             // 주어진 userId로 사용자 3대 운동 데이터 조회
-            userThreeMajorLiftEntities = userThreeMajorLiftRepository.findByUserIdOrderByUserThreeMajorLiftNumberAsc(userId);
+            userThreeMajorLiftEntities = userThreeMajorLiftRepository.findByUserIdOrderByUserThreeMajorLiftNumberDesc(userId);
 
             // 데이터가 없을 경우
             if (userThreeMajorLiftEntities.isEmpty()) {
