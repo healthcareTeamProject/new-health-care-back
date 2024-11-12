@@ -4,9 +4,9 @@ public interface ResponseCode {
     
     String SUCCESS = "SU";
 
-    String VALIDATION_FAIL = "VF"; 
+    String VALIDATION_FAIL = "VF";
     String DUPLICATED_USER_ID = "DI";
-    String DUPLICATED_USER_NICKNAME = "DN";  
+    String DUPLICATED_USER_NICKNAME = "DN";
     String DUPLICATED_USER_TEL_NUMBER = "DT";
 
     String NO_EXIST_USER_THREE_MAJOR_LIFT_INFORMATION = "NTI";
