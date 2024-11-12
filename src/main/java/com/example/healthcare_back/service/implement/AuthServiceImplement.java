@@ -42,7 +42,7 @@ public class AuthServiceImplement implements AuthService {
     private final UserThreeMajorLiftRepository userThreeMajorLiftRepository;
     private final TelAuthNumberRepository telAuthNumberRepository;
 
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public ResponseEntity<ResponseDto> telAuth(TelAuthRequestDto dto) {

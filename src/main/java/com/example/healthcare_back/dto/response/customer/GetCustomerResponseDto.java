@@ -1,5 +1,7 @@
 package com.example.healthcare_back.dto.response.customer;
 
+import java.math.BigDecimal;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -8,7 +10,6 @@ import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.entity.customer.CustomerEntity;
 
-import java.math.BigDecimal;
 import lombok.Getter;
 
 // 회원 정보 불러오기 Response DTO
@@ -16,19 +17,19 @@ import lombok.Getter;
 @Getter
 public class GetCustomerResponseDto extends ResponseDto {
 
-    private final String userId;
-    private final String name;
-    private final String nickname;
-    private final String telNumber;
-    private final String profileImage;
-    private final String personalGoals;
-    private final BigDecimal height;
-    private final BigDecimal deadlift;
-    private final BigDecimal benchPress;
-    private final BigDecimal squat;
-    private final BigDecimal weight;
-    private final BigDecimal skeletalMuscleMass;
-    private final BigDecimal bodyFatMass;
+    private String userId;
+    private String name;
+    private String nickname;
+    private String telNumber;
+    private String profileImage;
+    private String personalGoals;
+    private BigDecimal height;
+    private BigDecimal deadlift;
+    private BigDecimal benchPress;
+    private BigDecimal squat;
+    private BigDecimal weight;
+    private BigDecimal skeletalMuscleMass;
+    private BigDecimal bodyFatMass;
 
     public GetCustomerResponseDto(CustomerEntity customerEntity) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

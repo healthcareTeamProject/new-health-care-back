@@ -1,8 +1,8 @@
 package com.example.healthcare_back.service.implement;
 
-import java.util.List;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class CustomerServiceImplement implements CustomerService{
     @Override
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(String userId) {
         
-        CustomerEntity customerEntity = null;
+        CustomerEntity customerEntity;
 
         try {
             // 주어진 userId로 고객 조회
@@ -59,7 +59,7 @@ public class CustomerServiceImplement implements CustomerService{
     @Override
     public ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId) {
        
-        CustomerEntity customerEntity = null;
+        CustomerEntity customerEntity;
 
         try {
             // 주어진 userId로 고객 조회
@@ -127,6 +127,7 @@ public class CustomerServiceImplement implements CustomerService{
         try {
             // 주어진 userId로 고객 조회
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
+
             if (customerEntity == null) {
                 return ResponseDto.noExistUserId(); // 고객이 없을 경우 응답
             }
@@ -154,6 +155,7 @@ public class CustomerServiceImplement implements CustomerService{
         try {
             // 주어진 userId로 고객 조회
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
+          
             if (customerEntity == null) {
                 return ResponseDto.noExistUserId(); // 고객이 없을 경우 응답
             }

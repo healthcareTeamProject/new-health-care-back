@@ -30,20 +30,13 @@ public class UserThreeMajorLiftEntity {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userThreeMajorLiftNumber;
-
-    @Column(nullable = false)
     private String userId;
-
     @Column(precision = 5, scale = 1)
     private BigDecimal deadlift;
-
     @Column(precision = 5, scale = 1)
     private BigDecimal benchPress;
-
-
     @Column(precision = 5, scale = 1)
     private BigDecimal squat;
-
     private LocalDateTime userThreeMajorLiftDate;
 
     public UserThreeMajorLiftEntity(SignUpRequestDto dto) {

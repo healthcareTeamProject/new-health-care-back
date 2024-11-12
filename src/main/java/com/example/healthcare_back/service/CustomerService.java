@@ -22,5 +22,4 @@ public interface CustomerService {
     ResponseEntity<ResponseDto> patchCustomer(PatchCustomerRequestDto dto, String userId);
     ResponseEntity<ResponseDto> patchUserMuscleFatCustomer(PatchUserMuscleFatRequestDto dto, String userId);
     ResponseEntity<ResponseDto> patchThreeMajorLiftCustomer(PatchUserThreeMajorLiftRequestDto dto, String userId);
-
 }
