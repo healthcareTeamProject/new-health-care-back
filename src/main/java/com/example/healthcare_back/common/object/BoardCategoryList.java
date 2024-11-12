@@ -27,11 +27,11 @@ public class BoardCategoryList {
     }
 
     public static List<BoardCategoryList> getCategoryList(List<BoardEntity> resultSets) {
-        List<BoardCategoryList> boards = new ArrayList<>();
+        List<BoardCategoryList> boardCategory = new ArrayList<>();
         for (BoardEntity resultSet : resultSets) {
             BoardCategoryList boardCategoryList = new BoardCategoryList(resultSet);
-            boards.add(boardCategoryList);
+            boardCategory.add(boardCategoryList);
         }
-        return boards;
+        return boardCategory;
     }
 }

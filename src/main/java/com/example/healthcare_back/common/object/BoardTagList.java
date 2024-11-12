@@ -27,11 +27,11 @@ public class BoardTagList {
     }
 
     public static List<BoardTagList> getTagList(List<BoardEntity> resultSets) {
-        List<BoardTagList> boards = new ArrayList<>();
+        List<BoardTagList> boardTag = new ArrayList<>();
         for (BoardEntity resultSet : resultSets) {
             BoardTagList boardTagList = new BoardTagList(resultSet);
-            boards.add(boardTagList);
+         boardTag.add(boardTagList);
         }
-        return boards;
+        return boardTag;
     }
 }
