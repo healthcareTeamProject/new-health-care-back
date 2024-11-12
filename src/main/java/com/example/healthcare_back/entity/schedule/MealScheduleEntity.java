@@ -51,6 +51,7 @@ public class MealScheduleEntity {
     @Column(nullable = false)
     private LocalDateTime mealScheduleEnd;
 
+    // 연관된 식단 상세 일정 리스트. 부모 식단 일정이 삭제되면 자동으로 연관된 상세 일정도 삭제됨
     @OneToMany(mappedBy = "mealSchedule", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<MealScheduleDetailEntity> mealScheduleDetails;
 
@@ -58,7 +59,7 @@ public class MealScheduleEntity {
     public MealScheduleEntity(PostMealScheduleRequestDto dto, String userId) throws JsonProcessingException {
         this.userId = userId;
         this.mealTitle = dto.getMealTitle();
-        this.mealMemo = objectMapper.writeValueAsString(dto.getMealMemo()); // JSON으로 변환하여 저장
+        this.mealMemo = objectMapper.writeValueAsString(dto.getMealMemo()); // mealMemo를 JSON 문자열로 변환하여 저장
         this.mealScheduleStart = dto.getMealScheduleStart();
         this.mealScheduleEnd = dto.getMealScheduleEnd();
     }
