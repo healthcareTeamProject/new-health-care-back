@@ -18,7 +18,7 @@ import lombok.Getter;
 @Getter
 public class GetUserMuscleFatListResponseDto extends ResponseDto {
 
-    private final List<UserMuscleFatList> userMuscleFatLists;
+    private List<UserMuscleFatList> userMuscleFatLists;
 
     public GetUserMuscleFatListResponseDto(List<UserMuscleFatEntity> userMuscleFatEntities) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

@@ -39,5 +39,4 @@ public interface BoardService {
 
     // 댓글 삭제
     ResponseEntity<? super ResponseDto> deleteComment(Integer boardNumber, Integer commentNumber, String userId);
-
 }

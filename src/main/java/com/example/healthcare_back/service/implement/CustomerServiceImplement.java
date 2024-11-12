@@ -1,8 +1,8 @@
 package com.example.healthcare_back.service.implement;
 
-import java.util.List;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class CustomerServiceImplement implements CustomerService{
     @Override
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(String userId) {
         
-        CustomerEntity customerEntity = null;
+        CustomerEntity customerEntity;
 
         try {
 
@@ -56,7 +56,7 @@ public class CustomerServiceImplement implements CustomerService{
     @Override
     public ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId) {
        
-        CustomerEntity customerEntity = null;
+        CustomerEntity customerEntity;
 
         try {
             
@@ -125,9 +125,7 @@ public class CustomerServiceImplement implements CustomerService{
 
             // 사용자 존재 여부 확인
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
-            if (customerEntity == null) {
-                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
-            }
+            if (customerEntity == null) return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
 
             customerEntity.setName(dto.getName());
             customerEntity.setNickname(dto.getNickname());
@@ -154,9 +152,7 @@ public class CustomerServiceImplement implements CustomerService{
 
             // 사용자 존재 여부 확인
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
-            if (customerEntity == null) {
-                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
-            }
+            if (customerEntity == null) return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
 
             customerEntity.setWeight(dto.getWeight());
             customerEntity.setSkeletalMuscleMass(dto.getSkeletalMuscleMass());

@@ -18,7 +18,7 @@ import lombok.Getter;
 @Getter
 public class GetUserThreeMajorLiftListResponseDto extends ResponseDto {
 
-    private final List<UserThreeMajorLiftList> userThreeMajorLiftLists;
+    private List<UserThreeMajorLiftList> userThreeMajorLiftLists;
 
     public GetUserThreeMajorLiftListResponseDto(List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

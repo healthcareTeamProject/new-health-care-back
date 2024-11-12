@@ -14,7 +14,5 @@ public class AuthNumberCreator {
             authNumber += random.nextInt(10);
 
         return authNumber;
-
     }
-
 }

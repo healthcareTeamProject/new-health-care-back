@@ -1,6 +1,7 @@
 package com.example.healthcare_back.filter;
 
 import java.io.IOException;
+
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -12,6 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.healthcare_back.provider.JwtProvider;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,7 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             setContext(request, userId);
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         

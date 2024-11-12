@@ -30,7 +30,7 @@ public class GetBoardResponseDto extends ResponseDto {
     private Integer boardViewCount;
     private Integer boardLikeCount;
     private List<String> commentList;
-
+    
     public GetBoardResponseDto(String code, String message, BoardEntity boardEntity, BoardFileContentsEntity boardFileContentsEntity, List<CommentEntity> commentEntities) {
         super(code, message);
         List<String> commentList = new ArrayList<>();
