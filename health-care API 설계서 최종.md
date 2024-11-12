@@ -1664,6 +1664,230 @@ Content-Type: application/json;charset=UTF-8
 
 ---
 
+#### - 카테고리별 게시물 리스트 보기
+
+##### 설명
+
+모든 클라이언트는 카테고리, 게시물 번호, 게시물 제목, 게시물 작성자 닉네임, 게시물 작성날짜, 게시물 조회수가 조회가 되면 성공적으로 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
+
+- method : **GET**
+- end point : **/category/{boardCategory}**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    X     |
+
+###### Example
+
+```bash
+curl -X GET "http://localhost:4000/api/v1/board/category/{boardCategory}"
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name    |    type     |      description      | required |
+| ------- | :---------: | :-------------------: | :------: |
+| code    |   String    |       결과 코드       |    O     |
+| message |   String    | 결과 코드에 대한 설명 |    O     |
+| boardCategory   | BoardCategoryList[] |     게시글 리스트     |    O     |
+
+**BoardCategoryList**  
+| name | type | description | required |
+|---|:---:|:---:|:---:|
+| boardCategory | String | 게시물 카테고리 | O |
+| boardNumber | Integer | 게시물 번호 | O |
+| boardTitle | String | 게시물 제목 | O |
+| nickname | String | 게시물 작성자 닉네임 | O |
+| boardUploadDate | String | 게시물 작성날짜 | O |
+| boardViewCount | Integer | 게시물 조회수 | O |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success.",
+  "tools": [
+    {
+      "boardCategory": "운동일지",
+      "boardNumber": 1,
+      "boardTitle": "오늘에 추천 식단은~~",
+      "nickname": "뽀보이strong1",
+      "board_upload_date": 2024-10-17 14:36,
+      "board_view_count" : 20
+    },
+    ...
+  ]
+}
+```
+
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NB",
+  "message": "No exist board."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+---
+
+#### - 해시태그별 게시물 리스트 보기
+
+##### 설명
+
+모든 클라이언트는 게시물 번호, 게시물 제목, 게시물 작성자 닉네임, 게시물 작성날짜, 게시물 조회수가 조회가 되면 성공적으로 응답을 받습니다. 네트워크 에러, 서버에러, 데이터베이스 에러가 발생할 수 있습니다.
+
+- method : **GET**
+- end point : **/tag/{boardTag}**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    X     |
+
+###### Example
+
+```bash
+curl -X GET "http://localhost:4000/api/v1/board/tag/{boardTag}"
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name    |    type     |      description      | required |
+| ------- | :---------: | :-------------------: | :------: |
+| code    |   String    |       결과 코드       |    O     |
+| message |   String    | 결과 코드에 대한 설명 |    O     |
+| boardTag   | BoardTagList[] |     게시글 리스트     |    O     |
+
+**BoardTagList**  
+| name | type | description | required |
+|---|:---:|:---:|:---:|
+| boardTag | String | 게시물 해시태그 | O |
+| boardNumber | Integer | 게시물 번호 | O |
+| boardTitle | String | 게시물 제목 | O |
+| nickname | String | 게시물 작성자 닉네임 | O |
+| boardUploadDate | String | 게시물 작성날짜 | O |
+| boardViewCount | Integer | 게시물 조회수 | O |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success.",
+  "tools": [
+    {
+      "boardTag": "운동"
+      "boardNumber": 1,
+      "boardTitle": "오늘에 추천 식단은~~",
+      "nickname": "뽀보이strong1",
+      "board_upload_date": 2024-10-17 14:36,
+      "board_view_count" : 20
+    },
+    ...
+  ]
+}
+```
+
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NB",
+  "message": "No exist board."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+---
+
 #### - 게시물 등록
 
 ##### 설명
@@ -1791,6 +2015,288 @@ Content-Type: application/json;charset=UTF-8
 ---
 
 #### - 게시물, 댓글 상세 페이지
+
+##### 설명
+
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. Bearer 인증 토큰과 URL에 게시물 번호나 게시물 번호 뒤에 comment-list를 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물과 댓글 상세 페이지를 응답받습니다.
+네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
+
+- method : **GET**
+- end point : **/{boardNumber}**, **/{boardNumber}/comment-list**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    X     |
+
+###### Example
+
+```bash
+curl -X GET "http://localhost:4000/api/v1/board/1" \
+-h "Authorization=Bearer XXXX"
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name              |     type      |      description      | required |
+| ----------------- | :-----------: | :-------------------: | :------: |
+| code              |    String     |       결과 코드       |    O     |
+| message           |    String     | 결과 코드에 대한 설명 |    O     |
+| boardNumber       |    Integer    |      게시물 번호      |    O     |
+| boardTitle        |    String     |      게시물 제목      |    O     |
+| userId            |    String     | 게시물 아이디(닉네임) |    O     |
+| boardUploadDate   |    String     | 작성 게시물 생성 날짜 |    O     |
+| boardContents     |    String     |      게시물 내용      |    O     |
+| youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
+| boardFileContents |    String     |      게시물 자료      |    X     |
+| boardViewCount    |    Integer    |        조회수         |    O     |
+| boardLikeCount    |    Integer    |    게시물 추천 수     |    O     |
+| comment           | CommentList[] |      댓글 리스트      |    O     |
+
+**commentList**
+| name | type | description | required |
+|---|:---:|:---:|:---:|
+| commentsNumber | Integer | 댓글 번호 | O |
+| userId | String | 댓글 사용자 아이디 | O |
+| commentsContents | String | 댓글 내용 | O |
+| commentsLikeCount | Integer | 댓글 추천수 |O |
+| commentsDate | String | 댓글 작성 날짜 | O |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success.",
+  "boardNumber": 1,
+  "nickname": "뽀보이strong1",
+  "boardUploadDate": 2024-10-17 14:36,
+  "boardContents": "오늘 하체랑 엉덩이가 터질것같다"
+  "youtubeVideoLink": null,
+  "boardFileContents": null,
+  "boardViewCount": 10,
+  "boardLikeCount": 10,
+  "comments": [
+    {
+      "commentsNumber": 1,
+      "userId": "zxcv1234",
+      "commentsContents": "하체운동 어떻게 하시나요?",
+      "commentsLikeCount": 1,
+      "commentsDate": "2024-10-18 13:03"
+    },
+    ...
+  ]
+}
+```
+
+**응답 실패 (데이터 유효성 검사 실패)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "VF",
+  "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NB",
+  "message": "No exist board."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+---
+
+#### - 카테고리별 게시물, 댓글 상세 페이지
+
+##### 설명
+
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. Bearer 인증 토큰과 URL에 게시물 번호나 게시물 번호 뒤에 comment-list를 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물과 댓글 상세 페이지를 응답받습니다.
+네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
+
+- method : **GET**
+- end point : **/{boardNumber}**, **/{boardNumber}/comment-list**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    X     |
+
+###### Example
+
+```bash
+curl -X GET "http://localhost:4000/api/v1/board/1" \
+-h "Authorization=Bearer XXXX"
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name              |     type      |      description      | required |
+| ----------------- | :-----------: | :-------------------: | :------: |
+| code              |    String     |       결과 코드       |    O     |
+| message           |    String     | 결과 코드에 대한 설명 |    O     |
+| boardNumber       |    Integer    |      게시물 번호      |    O     |
+| boardTitle        |    String     |      게시물 제목      |    O     |
+| userId            |    String     | 게시물 아이디(닉네임) |    O     |
+| boardUploadDate   |    String     | 작성 게시물 생성 날짜 |    O     |
+| boardContents     |    String     |      게시물 내용      |    O     |
+| youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
+| boardFileContents |    String     |      게시물 자료      |    X     |
+| boardViewCount    |    Integer    |        조회수         |    O     |
+| boardLikeCount    |    Integer    |    게시물 추천 수     |    O     |
+| comment           | CommentList[] |      댓글 리스트      |    O     |
+
+**commentList**
+| name | type | description | required |
+|---|:---:|:---:|:---:|
+| commentsNumber | Integer | 댓글 번호 | O |
+| userId | String | 댓글 사용자 아이디 | O |
+| commentsContents | String | 댓글 내용 | O |
+| commentsLikeCount | Integer | 댓글 추천수 |O |
+| commentsDate | String | 댓글 작성 날짜 | O |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success.",
+  "boardNumber": 1,
+  "nickname": "뽀보이strong1",
+  "boardUploadDate": 2024-10-17 14:36,
+  "boardContents": "오늘 하체랑 엉덩이가 터질것같다"
+  "youtubeVideoLink": null,
+  "boardFileContents": null,
+  "boardViewCount": 10,
+  "boardLikeCount": 10,
+  "comments": [
+    {
+      "commentsNumber": 1,
+      "userId": "zxcv1234",
+      "commentsContents": "하체운동 어떻게 하시나요?",
+      "commentsLikeCount": 1,
+      "commentsDate": "2024-10-18 13:03"
+    },
+    ...
+  ]
+}
+```
+
+**응답 실패 (데이터 유효성 검사 실패)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "VF",
+  "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NB",
+  "message": "No exist board."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+---
+
+#### - 해시태그별 게시물, 댓글 상세 페이지
 
 ##### 설명
 
@@ -2450,6 +2956,208 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "NC",
   "message": "No exist comment."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+---
+
+#### - 게시물 좋아요 기능
+
+##### 설명
+
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 게시판 번호를 포함하여 요청하고 게시글 좋아요 입력이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
+
+- method : **PUT**
+- end point : **/{boardNumber}/favorite**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
+
+```bash
+curl -v -X PUT "http://localhost:4000/api/v1/board/1/favorite" \
+-h "Authorization": "Bearer XXXX"
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name    |  type  |      description      | required |
+| ------- | :----: | :-------------------: | :------: |
+| code    | String |       결과 코드       |    O     |
+| message | String | 결과 코드에 대한 설명 |    O     |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success."
+}
+```
+
+**응답 실패 (데이터 유효성 검사 실패)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "VF",
+  "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 게시물)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NB",
+  "message": "No exist board."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+---
+
+#### - 댓글 좋아요 기능
+
+##### 설명
+
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 게시판 번호를 포함하여 요청하고 댓글 좋아요 입력이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
+
+- method : **PUT**
+- end point : **/{boardNumber}/comments/{commentNumber}/favorite**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
+
+```bash
+curl -v -X PUT "http://localhost:4000/api/v1/board/1/favorite" \
+-h "Authorization": "Bearer XXXX"
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name    |  type  |      description      | required |
+| ------- | :----: | :-------------------: | :------: |
+| code    | String |       결과 코드       |    O     |
+| message | String | 결과 코드에 대한 설명 |    O     |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success."
+}
+```
+
+**응답 실패 (데이터 유효성 검사 실패)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "VF",
+  "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 댓글)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "NC",
+  "message": "No exist comments."
 }
 ```
 

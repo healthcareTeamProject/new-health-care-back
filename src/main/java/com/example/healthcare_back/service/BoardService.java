@@ -10,6 +10,8 @@ import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardListResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardResponseDto;
 import com.example.healthcare_back.dto.response.board.GetCommentListResponseDto;
+import com.example.healthcare_back.dto.response.board.GetBoardCategoryResponseDto;
+import com.example.healthcare_back.dto.response.board.GetBoardTagResponseDto;
 
 public interface BoardService {
 
@@ -24,6 +26,12 @@ public interface BoardService {
 
     // 댓글 목록 조회
     ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber);
+
+    // 카테고리별 게시물 조회
+    ResponseEntity<? super GetBoardCategoryResponseDto> getBoardCategory(String boardCategory);
+
+    // 태그별 게시물 조회
+    ResponseEntity<? super GetBoardTagResponseDto> getBoardTag(String boardTag);
 
     // 게시물 작성
     ResponseEntity<? super ResponseDto> postBoard(PostBoardRequestDto dto, String userId);

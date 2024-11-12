@@ -11,11 +11,13 @@ import com.example.healthcare_back.entity.board.BoardEntity;
 public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
 
     boolean existsByBoardNumber(Integer boardNumber);
-
     BoardEntity findByBoardNumber(Integer boardNumber);
 
     List<BoardEntity> findByUserId(String userId); // 특정 사용자 작성 게시물 조회
     List<BoardEntity> findAllByOrderByBoardUploadDateDesc();
     List<BoardEntity> findByUserIdOrderByBoardUploadDateDesc(String userId);
+
+    List<BoardEntity> findByBoardCategory(String boardCategory);
+    List<BoardEntity> findByBoardTag(String boardTag);
 
 }

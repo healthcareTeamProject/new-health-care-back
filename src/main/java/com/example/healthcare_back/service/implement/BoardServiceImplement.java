@@ -13,8 +13,10 @@ import com.example.healthcare_back.dto.request.board.PostCommentRequestDto;
 import com.example.healthcare_back.dto.response.ResponseCode;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
+import com.example.healthcare_back.dto.response.board.GetBoardCategoryResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardListResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardResponseDto;
+import com.example.healthcare_back.dto.response.board.GetBoardTagResponseDto;
 import com.example.healthcare_back.dto.response.board.GetCommentListResponseDto;
 import com.example.healthcare_back.entity.board.BoardEntity;
 import com.example.healthcare_back.entity.board.BoardFileContentsEntity;
@@ -385,6 +387,18 @@ public class BoardServiceImplement implements BoardService {
             return ResponseDto.databaseError();
         }
         return ResponseDto.success();
+    }
+
+    @Override
+    public ResponseEntity<? super GetBoardCategoryResponseDto> getBoardCategory(String boardCategory) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getBoardCategory'");
+    }
+
+    @Override
+    public ResponseEntity<? super GetBoardTagResponseDto> getBoardTag(String boardTag) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getBoardTag'");
     }
 
 }
