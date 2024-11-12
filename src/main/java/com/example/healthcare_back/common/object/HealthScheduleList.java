@@ -12,7 +12,6 @@ import lombok.Getter;
 public class HealthScheduleList {
 
     private Integer healthScheduleNumber;
-    private String userId;
     private String healthTitle;
     private LocalDateTime healthScheduleStart;
     private LocalDateTime healthScheduleEnd;
@@ -20,7 +19,6 @@ public class HealthScheduleList {
     public HealthScheduleList(HealthScheduleEntity healthScheduleEntity) {
 
         this.healthScheduleNumber = healthScheduleEntity.getHealthScheduleNumber();
-        this.userId = healthScheduleEntity.getUserId();
         this.healthTitle = healthScheduleEntity.getHealthTitle();
         this.healthScheduleStart = healthScheduleEntity.getHealthScheduleStart();
         this.healthScheduleEnd = healthScheduleEntity.getHealthScheduleEnd();

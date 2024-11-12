@@ -13,7 +13,6 @@ public interface HealthScheduleRepository extends JpaRepository<HealthScheduleEn
     List<HealthScheduleEntity> findByUserIdOrderByHealthScheduleNumberDesc(String userId);
     List<HealthScheduleEntity> findByHealthScheduleNumber(Integer healthScheduleNumber);
     List<HealthScheduleEntity> deleteByHealthScheduleNumber(Integer healthScheduleNumber);
-
-
+    HealthScheduleEntity findByHealthScheduleNumberAndUserId(Integer healthScheduleNumber, String userId);
 
 }

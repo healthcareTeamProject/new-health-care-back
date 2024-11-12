@@ -18,11 +18,6 @@ public class ResponseDto {
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
-    // public static ResponseEntity<ResponseDto> success(Integer integer, LocalDateTime localDateTime) {
-    //     ResponseDto responseBody = new ResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
-    //     return ResponseEntity.status(HttpStatus.OK).body(responseBody);
-    // }
-
     public static ResponseEntity<ResponseDto> validationFail() {
         ResponseDto responseBody = new ResponseDto(ResponseCode.VALIDATION_FAIL, ResponseMessage.VALIDATION_FAIL);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
@@ -70,6 +65,11 @@ public class ResponseDto {
 
     public static ResponseEntity<ResponseDto> noExistSchedule() {
         ResponseDto responseBody = new ResponseDto(ResponseCode.NO_EXIST_SCHEDULE, ResponseMessage.NO_EXIST_SCHEDULE);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
+    }
+
+    public static ResponseEntity<ResponseDto> noExistDetail() {
+        ResponseDto responseBody = new ResponseDto(ResponseCode.NO_EXIST_DETAIL, ResponseMessage.NO_EXIST_DETAIL);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
     }
 

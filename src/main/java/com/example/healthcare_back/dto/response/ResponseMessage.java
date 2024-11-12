@@ -15,6 +15,7 @@ public interface ResponseMessage {
     String NO_EXIST_COMMENT =  "No exist comment.";
     String NO_EXIST_BOARD = "No exist board.";
     String NO_EXIST_SCHEDULE = "No exist schedule.";
+    String NO_EXIST_DETAIL = "No exist detail.";
 
     String TEL_AUTH_FAIL = "Tel number authentication failed.";
     String SIGN_IN_FAIL = "Sign in failed.";
