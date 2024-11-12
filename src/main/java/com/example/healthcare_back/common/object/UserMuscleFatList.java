@@ -18,6 +18,7 @@ public class UserMuscleFatList {
     private BigDecimal bodyFatMass;
     private LocalDateTime userMuscleFatDate;
 
+    // UserMuscleFatEntity 객체를 사용하여 UserMuscleFatList 객체를 생성하는 생성자
     public UserMuscleFatList(UserMuscleFatEntity userMuscleFatEntity) {
         this.userMuscleFatNumber = userMuscleFatEntity.getUserMuscleFatNumber();
         this.userId = userMuscleFatEntity.getUserId();
@@ -27,6 +28,7 @@ public class UserMuscleFatList {
         this.userMuscleFatDate = userMuscleFatEntity.getUserMuscleFatDate();
     }
 
+    // UserMuscleFatEntity 목록을 받아 UserMuscleFatList 목록으로 변환하여 반환하는 메서드
     public static List<UserMuscleFatList> getList(List<UserMuscleFatEntity> userMuscleFatEntities) {
         List<UserMuscleFatList> MuscleFatList = new ArrayList<>();
         for (UserMuscleFatEntity entity : userMuscleFatEntities) {

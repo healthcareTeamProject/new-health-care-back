@@ -19,6 +19,7 @@ public class UserThreeMajorLiftList {
     private BigDecimal squat;
     private LocalDateTime userThreeMajorLiftDate;
 
+    // UserThreeMajorLiftEntity 객체를 사용하여 UserThreeMajorLiftList 객체를 생성하는 생성자
     public UserThreeMajorLiftList(UserThreeMajorLiftEntity userThreeMajorLiftEntity) {
         this.userThreeMajorLiftNumber = userThreeMajorLiftEntity.getUserThreeMajorLiftNumber();
         this.userId = userThreeMajorLiftEntity.getUserId();
@@ -28,6 +29,7 @@ public class UserThreeMajorLiftList {
         this.userThreeMajorLiftDate = userThreeMajorLiftEntity.getUserThreeMajorLiftDate();
     }
 
+    // UserThreeMajorLiftEntity 목록을 받아 UserThreeMajorLiftList 목록으로 변환하여 반환하는 메서드
     public static List<UserThreeMajorLiftList> getList(List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities) {
         List<UserThreeMajorLiftList> userThreeMajorLiftList = new ArrayList<>();
         for (UserThreeMajorLiftEntity entity : userThreeMajorLiftEntities) {

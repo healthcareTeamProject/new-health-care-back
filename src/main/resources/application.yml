@@ -1,0 +1,4 @@
+file:
+  mealDataCsvPaths:
+    - "/path/to/your/식품의약품안전처_통합식품영양성분정보(가공식품)_20241105.csv"
+    - "/path/to/your/식품의약품안전처_통합식품영양성분정보(음식)_20240805.csv"

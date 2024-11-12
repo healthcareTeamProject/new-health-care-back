@@ -38,8 +38,8 @@ Auth 모듈은 인증 없이 요청할 수 있습니다.
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/sign-in" \
--d "userId": "qwer1234" \
--d "password": "qwer1234"
+-d "userId=qwer1234" \
+-d "password=qwer1234"
 ```
 
 ##### Response
@@ -70,7 +70,7 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "SU",
   "message": "Success.",
-  "accessToken": "${ACCESS_TOKEN}",
+  "accessToken": "${ACCESS-TOKEN}",
   "expiration": 32400
 }
 ```
@@ -146,7 +146,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/id-check" \
--d "userId": "qwer1234"
+-d "userId=qwer1234"
 ```
 
 ##### Response
@@ -239,7 +239,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/nickname-check" \
--d "nickname": "뽀삐puppy12"
+-d "nickname=뽀삐puppy12"
 ```
 
 ##### Response
@@ -330,7 +330,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/tel-auth" \
--d "telNumber": "01011112222"
+-d "telNumber=01011112222"
 ```
 
 ##### Response
@@ -434,8 +434,8 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/tel-auth-check" \
--d "telNumber": "01011112222" \
--d "authNumber": "1234"
+-d "telNumber=01011112222" \
+-d "authNumber=1234"
 ```
 
 ##### Response
@@ -537,28 +537,28 @@ Content-Type: application/json;charset=UTF-8
 | deadlift           | BigDecimal |                   사용자 3대 측정 데드리프트                   |    X     |
 | benchPress         | BigDecimal |                   사용자 3대 측정 벤치프레스                   |    X     |
 | squat              | BigDecimal |                     사용자 3대 측정 스쿼트                     |    X     |
-| personalGoals       |   String   |                        사용자 개인목표                         |    X     |
+| personalGoal       |   String   |                        사용자 개인목표                         |    X     |
 
 ###### Example
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/sign-up" \
--d "profileImage": "null" \
--d "name": "홍길동" \
--d "userId": "qwer1234" \
--d "nickname": "뽀삐puppy12" \
--d "password": "qwer1234" \
--d "telNumber": "01011112222" \
--d "authNumber": "1234" \
--d "joinPath": "HOME" \
--d "height": "180" \
--d "weight": "80" \
--d "skeletalMuscleMass": "34.5" \
--d "bodyFatMass": "10.4" \
--d "deadlift": "124" \
--d "benchPress": "74" \
--d "squat": "100" \
--d "personalGoals": "이번달은 3대 측정 500 만들꺼야"
+-d "profileImage=null" \
+-d "name=홍길동" \
+-d "userId=qwer1234" \
+-d "nickname=뽀삐puppy12" \
+-d "password=qwer1234" \
+-d "telNumber=01011112222" \
+-d "authNumber=1234" \
+-d "joinPath=HOME" \
+-d "height=180" \
+-d "weight=80" \
+-d "skeletalMuscleMass=34.5" \
+-d "bodyFatMass=10.4" \
+-d "deadlift=124" \
+-d "benchPress=74" \
+-d "squat=100" \
+-d "personalGoal=이번달은 3대 측정 500 만들꺼야"
 ```
 
 ##### Response
@@ -855,7 +855,7 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 | name         |   String   |      사용자 이름      |    O     |
 | nickname     |   String   |     사용자 닉네임     |    O     |
 | height       | BigDecimal |      사용자의 키      |    O     |
-| personalGoals |   String   |   사용자의 개인목표   |    X     |
+| personalGoal |   String   |   사용자의 개인목표   |    X     |
 
 ###### Example
 
@@ -872,7 +872,7 @@ Content-Type: application/json;charset=UTF-8
   "name": "홍길동" ,
   "nickname": "뛰라노사우르스",
   "height": 180,
-  "personalGoals": "건강을 위하여";
+  "personalGoal": "건강을 위하여";
 }
 ```
 
@@ -1174,17 +1174,17 @@ Content-Type: application/json;charset=UTF-8
 | name         |   String   |    사용자의 이름    |    O     |
 | nickname     |   String   |   사용자의 닉네임   |    O     |
 | height       | BigDecimal |      사용자 키      |    O     |
-| personalGoals |   String   |   사용자 개인목표   |    X     |
+| personalGoal |   String   |   사용자 개인목표   |    X     |
 
 ###### Example
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1/customer" \
--d "profileImage": "null" \
--d "name": "홍길동" \
--d "nickname": "뽀삐puppy12" \
--d "height": "180" \
--d "personalGoals": "이번달은 3대 측정 500 만들꺼야"
+-d "profileImage=null" \
+-d "name=홍길동" \
+-d "nickname=뽀삐puppy12" \
+-d "height=180" \
+-d "personalGoal=이번달은 3대 측정 500 만들꺼야"
 ```
 
 ##### Response
@@ -1318,19 +1318,19 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1/customer/{userId}/user-muscle-fat" \
--d "userId": "qwer1234" \
--d "weigh": "80" \
--d "skeletalMuscleMass": "34.5" \
--d "bodyFatMass": "10.4"
+-d "userId=qwer1234" \
+-d "weigh=80" \
+-d "skeletalMuscleMass=34.5" \
+-d "bodyFatMass=10.4" \
 ```
 
 **PATCH**
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1/customer/{userId}/user-muscle-fat" \
--d "weigh": "80" \
--d "skeletalMuscleMass": "34.5" \
--d "bodyFatMass": "10.4"
+-d "weigh=80" \
+-d "skeletalMuscleMass=34.5" \
+-d "bodyFatMass=10.4" \
 ```
 
 ##### Response
@@ -1452,19 +1452,19 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/customer/{userId}/user-three-major-lift" \
--d "userId": "qwer1234" \
--d "deadlift": "124" \
--d "benchPress": "74" \
--d "squat": "100"
+-d "userId=qwer1234" \
+-d "deadlift=124" \
+-d "benchPress=74" \
+-d "squat=100" \
 ```
 
 **PATCH**
 
 ```bash
 curl -v -X PATCH "http://localhost:4000/api/v1/customer/{userId}/user-three-major-lift" \
--d "deadlift": "124" \
--d "benchPress": "74" \
--d "squat": "100"
+-d "deadlift=124" \
+-d "benchPress=74" \
+-d "squat=100" \
 ```
 
 ##### Response
@@ -2179,8 +2179,8 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name          |  type  | description | required |
-| ------------- | :----: | :---------: | :------: |
+| name            |  type  | description | required |
+| --------------- | :----: | :---------: | :------: |
 | commentContents | String |  댓글 내용  |    O     |
 
 ###### Example
@@ -2287,8 +2287,8 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name          |  type  | description | required |
-| ------------- | :----: | :---------: | :------: |
+| name            |  type  | description | required |
+| --------------- | :----: | :---------: | :------: |
 | commentContents | String |  댓글 내용  |    O     |
 
 ###### Example
@@ -2494,10 +2494,10 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 
 ##### 설명
 
-사용자는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 사용자 아이디를 포함하여 요청하고 성공적으로 이루어지면 사용자가 작성한 운동 스케줄 리스트를 날짜별로 응답받습니다. 만약 존재하지 않는 아이디일 경우 존재하지 않는 아이디에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
+사용자는 요청 헤더에 Bearer 인증 토큰을 포함해서 요청하고 성공적으로 이루어지면 사용자가 작성한 운동 스케줄 리스트를 날짜별로 응답받습니다. 만약 존재하지 않는 스케줄일 경우 존재하지 않는 스케줄에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/{userId}/health-schedule-list**
+- end point : **/health-shcedule-list**
 
 ##### Request
 
@@ -2510,7 +2510,7 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/health-shcedule-list"
+curl -X GET "http://localhost:4000/api/v1/customer/health-shcedule-list"
 ```
 
 ##### Response
@@ -2527,13 +2527,12 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/health-shcedule-list
 | -------------- | :------------------: | :-------------------: | :------: |
 | code           |        String        |       결과 코드       |    O     |
 | message        |        String        | 결과 코드에 대한 설명 |    O     |
-| healthSchedule | healthScheduleList[] |  운동 스케줄 리스트   |    O     |
+| healthShcedule | healthShceduleList[] |  운동 스케줄 리스트   |    O     |
 
 **HealthShceduleList**  
 | name | type | description | required |
 | --------- | :-------------: | :-------------------: | :------: |
-| healthScheduleNumber | Integer | 사용자 운동 스케줄 번호 | O |
-| userId | String | 사용자 아이디 | O |
+| healthShceduleNumber | Integer | 사용자 운동 스케줄 번호 | O |
 | healthTitle | String | 운동 스케줄 제목 및 내용 | O |
 | healthScheduleStart | LocalDataTime | 운동 스케줄 시작일 | O |
 | healthScheduleEnd | LocalDataTime | 운동 스케줄 종료일 | O |
@@ -2551,25 +2550,22 @@ Content-Type: application/json;charset=UTF-8
   "message": "Success.",
   "schedules": [
     {
-      "health_schedule_number": 1,
-      "user_id": "user123",
-      "health_memo": "운동 일정 1",
-      "health_schedule_start": "2024-11-10T09:00:00",
-      "health_schedule_end": "2024-11-10T10:00:00"
+      "healthScheduleNumber": 1,
+      "healthTitle": "운동 제목 및 일정 1",
+      "healthScheduleStart": "2024-11-10T09:00:00",
+      "healthScheduleEnd": "2024-11-10T10:00:00"
     },
     {
-      "health_schedule_number": 2,
-      "user_id": "user123",
-      "health_memo": "운동 일정 2",
-      "health_schedule_start": "2024-11-10T11:00:00",
-      "health_schedule_end": "2024-11-10T12:00:00"
+      "healthScheduleNumber": 2,
+      "healthTitle": "운동 제목 및 일정 2",
+      "healthScheduleStart": "2024-11-10T11:00:00",
+      "healthScheduleEnd": "2024-11-10T12:00:00"
     },
     {
-      "health_schedule_number": 3,
-      "user_id": "user123",
-      "health_memo": "운동 일정 3",
-      "health_schedule_start": "2024-11-11T14:00:00",
-      "health_schedule_end": "2024-11-11T15:00:00"
+      "healthScheduleNumber": 3,
+      "healthTitle": "운동 제목 및 일정 3",
+      "healthScheduleStart": "2024-11-11T14:00:00",
+      "healthScheduleEnd": "2024-11-11T15:00:00"
     }
   ]
 }
@@ -2630,10 +2626,10 @@ Content-Type: application/json;charset=UTF-8
 
 ##### 설명
 
-사용자는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 사용자 아이디를 포함하여 요청하고 성공적으로 이루어지면 사용자가 작성한 식단 스케줄 리스트를 날짜별로 응답받습니다. 만약 존재하지 않는 아이디일 경우 존재하지 않는 아이디에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
+사용자는 요청 헤더에 Bearer 인증 토큰을 포함해서 요청하고 성공적으로 이루어지면 사용자가 작성한 식단 스케줄 리스트를 날짜별로 응답받습니다. 만약 존재하지 않는 스케줄일 경우 존재하지 않는 스케줄에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/{userId}/meal-schedule-list**
+- end point : **/meal-shcedule-list**
 
 ##### Request
 
@@ -2646,7 +2642,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/meal-schedule-list"
+curl -X GET "http://localhost:4000/api/v1/customer/meal-shcedule-list"
 ```
 
 ##### Response
@@ -2659,20 +2655,29 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/meal-schedule-list"
 
 ###### Response Body
 
-| name         |        type        |      description      | required |
-| ------------ | :----------------: | :-------------------: | :------: |
-| code         |       String       |       결과 코드       |    O     |
-| message      |       String       | 결과 코드에 대한 설명 |    O     |
-| mealSchedule | mealScheduleList[] |  운동 스케줄 리스트   |    O     |
+| name         |        type        |       description       | required |
+| ------------ | :----------------: | :---------------------: | :------: |
+| code         |       String       |        결과 코드        |    O     |
+| message      |       String       |  결과 코드에 대한 설명  |    O     |
+| mealShcedule | mealShceduleList[] |   식단 스케줄 리스트    |    O     |
+| mealMemo     |   mealMemoList[]   | 일정 리스트(식품 정보 ) |    O     |
 
 **MealShceduleList**  
 | name | type | description | required |
 | --------- | :-------------: | :-------------------: | :------: |
-| mealScheduleNumber | Integer | 사용자 식단 스케줄 번호 | O |
-| userId | String | 사용자 아이디 | O |
-| mealTitle | String | 식단 스케줄 제목 및 내용 | O |
+| mealShceduleNumber | Integer | 사용자 식단 스케줄 번호 | O |
+| mealTitle | String | 식단 스케줄 제목 | O |
+| mealMemo[] | mealMemoList[] | 식단 스케줄 내용 | O |
 | mealScheduleStart | LocalDataTime | 식단 스케줄 시작일 | O |
 | mealScheduleEnd | LocalDataTime | 식단 스케줄 종료일 | O |
+
+**MealMemoList**
+| name | type | description | required |
+| --------- | :-------------: | :-------------------: | :------: |
+| mealShceduleDetailNumber | Integer | 사용자 식품 정보 번호 | O |
+| mealName | String | 식품 이름 | O |
+| mealKcal | String | 식품 칼로리 | O |
+| mealCount | Integer | 식품 개수 | O |
 
 ###### Example
 
@@ -2686,28 +2691,58 @@ Content-Type: application/json;charset=UTF-8
   "code": "SU",
   "message": "Success.",
   "schedules": [
-    {
-      "health_schedule_number": 1,
-      "user_id": "user123",
-      "health_memo": "식단 일정 1",
-      "health_schedule_start": "2024-11-10T09:00:00",
-      "health_schedule_end": "2024-11-10T10:00:00"
-    },
-    {
-      "health_schedule_number": 2,
-      "user_id": "user123",
-      "health_memo": "식단 일정 2",
-      "health_schedule_start": "2024-11-10T11:00:00",
-      "health_schedule_end": "2024-11-10T12:00:00"
-    },
-    {
-      "health_schedule_number": 3,
-      "user_id": "user123",
-      "health_memo": "식단 일정 3",
-      "health_schedule_start": "2024-11-11T14:00:00",
-      "health_schedule_end": "2024-11-11T15:00:00"
-    }
-  ]
+        {
+            "mealScheduleNumber": 3,
+            "mealTitle": "아침",
+            "mealScheduleStart": "2024-11-12T08:00:00",
+            "mealScheduleEnd": "2024-11-12T09:00:00",
+            "mealMemo": [
+                {
+                    "mealScheduleDetailNumber": 4,
+                    "mealName": "가마솥 수제 누룽지",
+                    "mealKcal": 360.0,
+                    "mealCount": 1
+                },
+                {
+                    "mealScheduleDetailNumber": 3,
+                    "mealName": "닭가슴살마늘볶음밥",
+                    "mealKcal": 320.0,
+                    "mealCount": 1
+                }
+            ],
+            "totalKcal": 680.0
+        },
+        {
+            "mealScheduleNumber": 2,
+            "mealTitle": "아침",
+            "mealScheduleStart": "2024-11-12T08:00:00",
+            "mealScheduleEnd": "2024-11-12T09:00:00",
+            "mealMemo": [
+                {
+                    "mealScheduleDetailNumber": 2,
+                    "mealName": "닭가슴살마늘볶음밥",
+                    "mealKcal": 320.0,
+                    "mealCount": 1
+                }
+            ],
+            "totalKcal": 320.0
+        },
+        {
+            "mealScheduleNumber": 1,
+            "mealTitle": "아침",
+            "mealScheduleStart": "2024-11-12T08:00:00",
+            "mealScheduleEnd": "2024-11-12T09:00:00",
+            "mealMemo": [
+                {
+                    "mealScheduleDetailNumber": 1,
+                    "mealName": "닭가슴살마늘볶음밥",
+                    "mealKcal": 320.0,
+                    "mealCount": 1
+                }
+            ],
+            "totalKcal": 320.0
+        }
+    ]
 }
 ```
 
@@ -2783,7 +2818,6 @@ Content-Type: application/json;charset=UTF-8
 
 | name                |  type  |          description          | required |
 | ------------------- | :----: | :---------------------------: | :------: |
-| userId              | String |         사용자 아이디         |    O     |
 | healthTitle         | String |       일정 제목 및 내용       |    O     |
 | healthScheduleStart | String |  스케줄 등록을 위한 시작날짜  |    O     |
 | healthScheduleEnd   | String | 스케줄 등록을 위한 마지막날짜 |    O     |
@@ -2792,12 +2826,13 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -X POST "http://localhost:4000/api/v1/schedule/health-schedule" \
--h "Authorization": "Bearer XXXX" \
--d "userId": "qwer1234" \
--d "health_title": "가슴" \
--d "health_memo:
-    "벤치프레스 12 3set,
-    플라이 15 5set"
+-h "Authorization=Bearer XXXX" \
+-d "healthTitle=
+    가슴 -
+    벤치프레스 12 3set,
+    플라이 15 5set" \
+-d "healthScheduleStart = 2023-11-10T08:00:00"\
+-d "healthScheduleEnd = 2023-11-10T09:00:00 "\
 ```
 
 ##### Response
@@ -2898,23 +2933,35 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name              |  type  |          description          | required |
-| ----------------- | :----: | :---------------------------: | :------: |
-| userId            | String |         사용자 아이디         |    O     |
-| mealTitle         | String |           일정 제목           |    O     |
-| mealMemo          | String |     일정 내용(식품 정보)      |    O     |
-| mealScheduleStart | String |  스케줄 등록을 위한 시작날짜  |    O     |
-| mealScheduleEnd   | String | 스케줄 등록을 위한 마지막날짜 |    O     |
+| name              |      type      |          description          | required |
+| ----------------- | :------------: | :---------------------------: | :------: |
+| mealTitle         |     String     |           일정 제목           |    O     |
+| mealMemo[]        | mealMemoList[] |     일정 내용(식품 정보)      |    O     |
+| mealScheduleStart |     String     |  스케줄 등록을 위한 시작날짜  |    O     |
+| mealScheduleEnd   |     String     | 스케줄 등록을 위한 마지막날짜 |    O     |
+
+**MealMemoList**
+| name | type | description | required |
+| --------- | :-------------: | :-------------------: | :------: |
+| mealShceduleDetailNumber | Integer | 사용자 식품 정보 번호 | O |
+| mealName | String | 식품 이름 | O |
+| mealKcal | String | 식품 칼로리 | O |
+| mealCount | Integer | 식품 개수 | O |
 
 ###### Example
 
 ```bash
 curl -X POST "http://localhost:4000/api/v1/schedule/meal-schedule" \
--h "Authorization": "Bearer XXXX" \
--d "health_title": "아침" \
--d "health_memo":
-    "닭가슴살 109kcal,
-    사과 52kcal"
+-h "Authorization=Bearer XXXX" \
+-d "mealTitle=아침" \
+-d "mealScheduleStart=2024-11-12T08:00:00" \
+-d "mealScheduleEnd=2024-11-12T09:00:00" \
+-d "mealMemo=
+    [{
+      "mealName": "가마솥 수제 누룽지",
+      "mealKcal": 360,
+      "mealCount": 1
+      }]
 ```
 
 ##### Response
@@ -3000,7 +3047,7 @@ Content-Type: application/json;charset=UTF-8
 
 ##### 설명
 
-클라이언트는 외부 API의 달력을 불러와 운동 스케줄을 확인할 수 있습니다. 등록과 수정이 가능합니다. 스케줄의 확인이 된다면 성공에 대한 응답을 받습니다. 스케줄의 확인이 되지 않는다면 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
+클라이언트는 외부 API의 달력을 불러와 운동 스케줄을 확인할 수 있습니다. 스케줄의 상세 확인이 된다면 성공에 대한 응답을 받습니다. 스케줄의 확인이 되지 않는다면 존재하지 않는 스케줄, 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
 - end point : **/health-schedule/{healthScheduleNumber}**
@@ -3034,7 +3081,6 @@ curl -X GET "http://localhost:4000/api/v1/schedule/health-schedule/1"
 | code                 | String  |           결과 코드           |    O     |
 | message              | String  |     결과 코드에 대한 설명     |    O     |
 | healthScheduleNumber | Integer |       운동 스케줄 번호        |    O     |
-| userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |       일정 제목 및 내용       |    O     |
 | healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
 | healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
@@ -3051,9 +3097,7 @@ Content-Type: application/json;charset=UTF-8
   "code": "SU",
   "message": "Success.",
   "healthScheduleNumber": "1.",
-  "userId": "qwer1234",
-  "healthTitle": "상체",
-  "healthMemo": "벤치프레스 12 3set, 플라이 15 5set",
+  "healthTitle": "상체 - 벤치프레스 12 3set, 플라이 15 5set",
   "healthScheduleStart": "2024-11-04T12:15:10",
   "healthScheduleEnd": "2024-11-05T12:15:10"
 }
@@ -3113,7 +3157,7 @@ Content-Type: application/json;charset=UTF-8
 
 ##### 설명
 
-클라이언트는 외부 API의 달력을 불러와 식단 스케줄을 확인할 수 있습니다. 등록과 수정이 가능합니다. 스케줄의 확인이 된다면 성공에 대한 응답을 받습니다. 스케줄의 확인이 되지 않는다면 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
+클라이언트는 외부 API의 달력을 불러와 식단 스케줄을 확인할 수 있습니다. 스케줄의 상세 확인이 된다면 성공에 대한 응답을 받습니다. 스케줄의 확인이 되지 않는다면 존재하지 않는 스케줄, 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
 - end point : **/meal-schedule/{mealScheduleNumber}**
@@ -3142,16 +3186,24 @@ curl -X GET "http://localhost:4000/api/v1/schedule/meal-schedule/1"
 
 ###### Response Body
 
-| name               |  type   |          description          | required |
-| ------------------ | :-----: | :---------------------------: | :------: |
-| code               | String  |           결과 코드           |    O     |
-| message            | String  |     결과 코드에 대한 설명     |    O     |
-| mealScheduleNumber | Integer |       식단 스케줄 번호        |    O     |
-| userId             | String  |         사용자 아이디         |    O     |
-| mealTitle          | String  |           일정 제목           |    O     |
-| mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| scheduleStart      | String  |  스케줄 등록을 위한 시작날짜  |    O     |
-| scheduleEnd        | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
+| name               |      type      |          description          | required |
+| ------------------ | :------------: | :---------------------------: | :------: |
+| code               |     String     |           결과 코드           |    O     |
+| message            |     String     |     결과 코드에 대한 설명     |    O     |
+| mealScheduleNumber |    Integer     |       식단 스케줄 번호        |    O     |
+| mealTitle          |     String     |           일정 제목           |    O     |
+| mealMemo[]         | mealMemoList[] |     일정 내용(식품 정보)      |    O     |
+| scheduleStart      |     String     |  스케줄 등록을 위한 시작날짜  |    O     |
+| scheduleEnd        |     String     | 스케줄 등록을 위한 마지막날짜 |    O     |
+| totalKcal          |   BigDecimal   |        식품 총 칼로리         |    O     |
+
+**MealMemoList**
+| name | type | description | required |
+| --------- | :-------------: | :-------------------: | :------: |
+| mealShceduleDetailNumber | Integer | 사용자 식품 정보 번호 | O |
+| mealName | String | 식품 이름 | O |
+| mealKcal | String | 식품 칼로리 | O |
+| mealCount | Integer | 식품 개수 | O |
 
 ###### Example
 
@@ -3164,12 +3216,19 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "SU",
   "message": "Success.",
-  "mealScheduleNumber": "1",
-  "userId": "qwer1234",
+  "mealScheduleNumber": 1,
   "mealTitle": "아침",
-  "mealMemo": "닭가슴살 109kcal, 사과 52kcal",
-  "scheduleStart": "2024-11-04T12:15:10",
-  "scheduleEnd": "2024-11-05T12:15:10"
+  "mealScheduleStart": "2024-11-12T08:00:00",
+  "mealScheduleEnd": "2024-11-12T09:00:00",
+  "mealMemo": [
+      {
+          "mealScheduleDetailNumber": 1,
+          "mealName": "닭가슴살마늘볶음밥",
+          "mealKcal": 320.0,
+          "mealCount": 1
+      },
+    "totalKcal": 320.0
+  ]
 }
 ```
 
@@ -3245,7 +3304,6 @@ Content-Type: application/json;charset=UTF-8
 | name                 |  type   |          description          | required |
 | -------------------- | :-----: | :---------------------------: | :------: |
 | healthScheduleNumber | Integer |       운동 스케줄 번호        |    O     |
-| userId               | String  |         사용자 아이디         |    O     |
 | healthTitle          | String  |       일정 제목 및 내용       |    O     |
 | healthScheduleStart  | String  |  스케줄 등록을 위한 시작날짜  |    O     |
 | healthScheduleEnd    | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
@@ -3253,15 +3311,18 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X PATCH "http://localhost:4000/api/v1/schedule/health_schedule/1" \
--h "Authorization": "Bearer XXXX" \
--d "health_title": "가슴, 이두" \
--d "health_memo": 
-    "벤치프레스 12 3set,
+curl -X PATCH "http://localhost:4000/api/v1/schedule/health-schedule/1" \
+-h "Authorization=Bearer XXXX" \
+-d "healthTitle=
+    가슴 -
+    벤치프레스 12 3set,
     체스트 프레스 15 5set,
     플라이 15 5set,
+    이두 -
     바벨 컬 10 3set,
-    덤벨 컬 10 3set"
+    덤벨 컬 10 3set" \
+-d "healthScheduleStart=2023-11-11T08:00:00" \
+-d "healthScheduleEnd=2023-11-11T09:00:00"\
 ```
 
 ##### Response
@@ -3350,7 +3411,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜에 등록이 된 식단 스케줄을 클릭하여 수정이 된다면 성공에 대한 응답을 받습니다. 수정이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다. 식품에 대한 정보는 외부 API를 받아와 사용합니다.
 
 - method : **PATCH**
-- end point : **/meal_schedule/{mealScheduleNumber}**
+- end point : **/meal-schedule/{mealScheduleNumber}**
 
 ##### Request
 
@@ -3362,25 +3423,36 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name               |  type   |          description          | required |
-| ------------------ | :-----: | :---------------------------: | :------: |
-| mealScheduleNumber | Integer |       식단 스케줄 번호        |    O     |
-| userId             | String  |         사용자 아이디         |    O     |
-| mealTitle          | String  |           일정 제목           |    O     |
-| mealMemo           | String  |     일정 내용(식품 정보)      |    O     |
-| scheduleStart      | String  |  스케줄 등록을 위한 시작날짜  |    O     |
-| scheduleEnd        | String  | 스케줄 등록을 위한 마지막날짜 |    O     |
+| name               |      type      |          description          | required |
+| ------------------ | :------------: | :---------------------------: | :------: |
+| mealScheduleNumber |    Integer     |       식단 스케줄 번호        |    O     |
+| mealTitle          |     String     |           일정 제목           |    O     |
+| mealMemo[]         | mealMemoList[] |     일정 내용(식품 정보)      |    O     |
+| scheduleStart      |     String     |  스케줄 등록을 위한 시작날짜  |    O     |
+| scheduleEnd        |     String     | 스케줄 등록을 위한 마지막날짜 |    O     |
+
+**MealMemoList**
+| name | type | description | required |
+| --------- | :-------------: | :-------------------: | :------: |
+| mealShceduleDetailNumber | Integer | 사용자 식품 정보 번호 | O |
+| mealName | String | 식품 이름 | O |
+| mealKcal | String | 식품 칼로리 | O |
+| mealCount | Integer | 식품 개수 | O |
 
 ###### Example
 
 ```bash
-curl -X PATCH "http://localhost:4000/api/v1/schedule/meal_schedule/1" \
--h "Authorization": "Bearer XXXX" \
--d "health_title": "아침" \
--d "health_memo":
-    닭가슴살 109kcal,
-    사과 52kcal,
-    현미밥 152kcal"
+curl -X PATCH "http://localhost:4000/api/v1/schedule/meal-schedule/1" \
+-h "Authorization=Bearer XXXX" \
+-d "mealTitle=아침" \
+-d "mealScheduleStart=2024-11-12T19:00:00" \
+-d "mealScheduleEnd=2024-11-12T20:00:00" \
+-d "mealMemo=
+        [{
+            "mealName": "닭가슴살",
+            "mealKcal": 300.0,
+            "mealCount": 1
+        }]" \
 ```
 
 ##### Response
@@ -3469,7 +3541,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 운동 스케줄의 번호를 포함하고 일정을 삭제합니다. 삭제가 된다면 성공에 대한 응답을 받습니다. 삭제가 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
 
 - method : **DELETE**
-- end point : **/health_schedule/{healthScheduleNumber}**
+- end point : **/health-schedule/{healthScheduleNumber}**
 
 ##### Request
 
@@ -3483,7 +3555,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -X GET "http://localhost:4000/api/v1/schedule/health-schedule/1" \
--h "Authorization": "Bearer XXXX"
+-h "Authorization=Bearer XXXX"
 ```
 
 ##### Response
@@ -3572,7 +3644,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 식단 스케줄의 번호를 포함하고 일정을 삭제합니다. 삭제가 된다면 성공에 대한 응답을 받습니다. 삭제가 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
 
 - method : **DELETE**
-- end point : **/meal_schedule/{mealScheduleNumber}**
+- end point : **/meal-schedule/{mealScheduleNumber}**
 
 ##### Request
 
@@ -3586,7 +3658,7 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -X GET "http://localhost:4000/api/v1/schedule/meal-schedule/1" \
--h "Authorization": "Bearer XXXX"
+-h "Authorization=Bearer XXXX"
 ```
 
 ##### Response
@@ -3639,6 +3711,109 @@ Content-Type: application/json;charset=UTF-8
 {
   "code": "NS",
   "message": "No exist schedule."
+}
+```
+
+**응답 : 실패 (인증 실패)**
+
+```bash
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "AF",
+  "message": "Authentication fail."
+}
+```
+
+**응답 실패 (데이터베이스 에러)**
+
+```bash
+HTTP/1.1 500 Internal Server Error
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "DBE",
+  "message": "Database error."
+}
+```
+
+---
+
+#### - 식단 스케줄표 상세 일정 삭제
+
+##### 설명
+
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 식단 스케줄의 상세 일정 번호를 포함하고 일정을 삭제합니다. 삭제가 된다면 성공에 대한 응답을 받습니다. 삭제가 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
+
+- method : **DELETE**
+- end point : **/meal-schedule-detail/{mealScheduleDetailNumber}**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
+
+###### Example
+
+```bash
+curl -X GET "http://localhost:4000/api/v1/schedule/meal-schedule-detail/1" \
+-h "Authorization=Bearer XXXX"
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name    |  type  |      description      | required |
+| ------- | :----: | :-------------------: | :------: |
+| code    | String |       결과 코드       |    O     |
+| message | String | 결과 코드에 대한 설명 |    O     |
+
+###### Example
+
+**응답 성공**
+
+```bash
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "SU",
+  "message": "Success.",
+}
+```
+
+**응답 실패 (데이터 유효성 검사 실패)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "VF",
+  "message": "Validation failed."
+}
+```
+
+**응답 : 실패 (존재하지 않는 상세 정보)**
+
+```bash
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+
+{
+  "code": "ND",
+  "message": "No exist detail."
 }
 ```
 
