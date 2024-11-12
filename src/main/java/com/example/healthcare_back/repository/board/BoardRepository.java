@@ -1,5 +1,6 @@
 package com.example.healthcare_back.repository.board;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -29,4 +30,18 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
     BoardEntity findByBoardNumber(Integer boardNumber); // 게시물 번호 조회
     List<BoardEntity> findAllByBoardNumber(Integer boardNumber); // 게시물 목록 조회
     BoardEntity deleteByBoardNumber(Integer boardNumber); // 해당하는 게시물 번호의 게시물 삭제
+=======
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.healthcare_back.entity.board.BoardEntity;
+
+@Repository
+public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
+
+    boolean existsByBoardNumber(Integer boardNumber);
+
+    BoardEntity findByBoardNumber(Integer boardNumber);
+
+>>>>>>> 59ec9a791fce95275047e79dddde2077520ea816
 }

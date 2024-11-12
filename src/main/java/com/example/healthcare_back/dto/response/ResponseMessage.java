@@ -4,9 +4,9 @@ public interface ResponseMessage {
 
     String SUCCESS = "Success.";
 
-    String VALIDATION_FAIL = "Validation failed."; 
-    String DUPLICATED_USER_ID = "Duplicated user id."; 
-    String DUPLICATED_USER_NICKNAME = "Duplicated user nickname.";  
+    String VALIDATION_FAIL = "Validation failed.";
+    String DUPLICATED_USER_ID = "Duplicated user id.";
+    String DUPLICATED_USER_NICKNAME = "Duplicated user nickname.";
     String DUPLICATED_USER_TEL_NUMBER = "Duplicated user tel number.";
 
     String NO_EXIST_USER_THREE_MAJOR_LIFT_INFORMATION =  "No exist user three major lift information.";

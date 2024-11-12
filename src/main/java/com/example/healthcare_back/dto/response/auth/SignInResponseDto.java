@@ -14,8 +14,8 @@ import lombok.Getter;
 @Getter
 public class SignInResponseDto extends ResponseDto {
     
-    private final String accessToken;
-    private final Integer expiration;
+    private String accessToken;
+    private Integer expiration;
 
     private SignInResponseDto(String accessToken) {
         

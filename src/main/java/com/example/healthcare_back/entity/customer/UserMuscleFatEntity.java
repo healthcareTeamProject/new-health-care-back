@@ -1,20 +1,17 @@
 package com.example.healthcare_back.entity.customer;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserMuscleFatRequestDto;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,29 +30,14 @@ public class UserMuscleFatEntity {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userMuscleFatNumber;
-
-    @Column(nullable = false)
     private String userId;
-
-    @NotNull 
     @Column(precision = 5, scale = 1)
     private BigDecimal weight;
-
     @Column(precision = 5, scale = 1)
     private BigDecimal skeletalMuscleMass;
-
     @Column(precision = 5, scale = 1)
     private BigDecimal bodyFatMass;
-
-    @Column(updatable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd-HH")
     private LocalDateTime userMuscleFatDate;
-
-    @PrePersist
-    protected void onCreate() {
-        this.userMuscleFatDate = LocalDateTime.now(); 
-        userMuscleFatDate = LocalDateTime.now(); // 현재 시간으로 설정
-    }
     
     public UserMuscleFatEntity(SignUpRequestDto dto) {
         this.userId = dto.getUserId();

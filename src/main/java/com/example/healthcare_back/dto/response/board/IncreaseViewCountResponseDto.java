@@ -13,6 +13,7 @@ import lombok.Getter;
 
 @Getter
 public class IncreaseViewCountResponseDto extends ResponseDto {
+<<<<<<< HEAD
 
     private final Integer boardNumber; // 조회수를 증가시킨 게시물 번호
 
@@ -26,6 +27,13 @@ public class IncreaseViewCountResponseDto extends ResponseDto {
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
+=======
+    
+    public IncreaseViewCountResponseDto(String code, String message, Integer boardNumber) {
+        super(code, message);
+    }
+
+>>>>>>> 59ec9a791fce95275047e79dddde2077520ea816
     public static ResponseEntity<ResponseDto> notExistBoard() {
         ResponseDto responseBody = new ResponseDto(ResponseCode.NO_EXIST_BOARD, ResponseMessage.NO_EXIST_BOARD);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);

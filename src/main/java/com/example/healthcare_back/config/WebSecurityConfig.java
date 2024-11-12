@@ -3,23 +3,21 @@ package com.example.healthcare_back.config;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-
 import com.example.healthcare_back.filter.JwtAuthenticationFilter;
 import com.example.healthcare_back.handler.OAuth2SuccessHandler;
 import com.example.healthcare_back.service.implement.OAuth2UserServiceImplement;
-
 
 import lombok.RequiredArgsConstructor;
 
@@ -51,6 +49,7 @@ public class WebSecurityConfig {
             // URL 패턴 및 HTTP 메서드에 따른 인증 및 인가 설정
             .authorizeHttpRequests(request -> request
                 .requestMatchers("/api/v1/auth/**", "/oauth2/callback/*", "/file/*", "/").permitAll() // 특정 경로는 모든 사용자에게 허용
+                .requestMatchers(HttpMethod.GET, "/api/v1/board/**").permitAll()
                 .anyRequest().authenticated() // 나머지 요청은 인증된 사용자만 접근 가능
             )
             // 인증 및 인가 중 발생하는 예외 처리
@@ -81,6 +80,5 @@ public class WebSecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
 }
-
 
 }

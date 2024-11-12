@@ -1,6 +1,9 @@
 package com.example.healthcare_back.dto.request.board;
 
+<<<<<<< HEAD
 import jakarta.validation.constraints.NotBlank;
+=======
+>>>>>>> 59ec9a791fce95275047e79dddde2077520ea816
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +14,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PostCommentRequestDto {
+<<<<<<< HEAD
     @NotBlank
+=======
+    
+>>>>>>> 59ec9a791fce95275047e79dddde2077520ea816
     private String commentContents;
 }
