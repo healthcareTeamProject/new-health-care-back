@@ -38,14 +38,14 @@ public class BoardController {
         return boardService.getBoard(boardNumber);
     }
 
-    // 게시물 댓글 목록 조회
+    // 특정 게시물 댓글 목록 조회
     @GetMapping("/{boardNumber}/comment-list")
     public ResponseEntity<? super GetCommentListResponseDto> getCommentList(
             @PathVariable Integer boardNumber) {
         return boardService.getCommentList(boardNumber);
     }
 
-    // 게시물 목록 조회
+    // 게시물 리스트 조회
     @GetMapping(value = {"", "/"})
     public ResponseEntity<? super GetBoardListResponseDto> getBoardList() {
         ResponseEntity<? super GetBoardListResponseDto> response = boardService.getBoardList();
