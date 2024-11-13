@@ -44,51 +44,6 @@ public class BoardServiceImplement implements BoardService {
     private final CustomerRepository customerRepository;
 
     @Override
-    public ResponseEntity<? super GetBoardResponseDto> getBoard(Integer boardNumber) {
-
-        BoardEntity boardEntity;
-        BoardFileContentsEntity boardFileContentsEntity = null;
-        List<CommentEntity> commentEntities;
-        
-        try {
-            boardEntity = boardRepository.findByBoardNumber(boardNumber);
-            if (boardEntity == null) return GetBoardResponseDto.noExistBoard();
-
-            // 댓글을 최신순으로 조회, 없으면 빈 리스트로 초기화
-            commentEntities = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardNumber);
-            if (commentEntities == null) {
-                commentEntities = new ArrayList<>();  // 댓글이 없을 때 빈 리스트 반환
-            }
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError();
-        }
-
-        return GetBoardResponseDto.success(boardEntity, boardFileContentsEntity, commentEntities);
-
-    }
-
-    @Override
-    public ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber) {
-
-        List<CommentEntity> commentList;
-
-        try {
-            // 게시물 댓글 목록을 최신순으로 조회
-            commentList = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardNumber);
-            if (commentList.isEmpty()) return GetCommentListResponseDto.noExistComment(); // 댓글이 없는 경우 처리
-    
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError();
-        }
-    
-        return GetCommentListResponseDto.success(commentList);
-
-    }
-
-    @Override
     public ResponseEntity<? super GetBoardListResponseDto> getBoardList() {
 
         List<BoardEntity> boardList;
@@ -122,7 +77,38 @@ public class BoardServiceImplement implements BoardService {
             return ResponseDto.databaseError();
         }
 
+        // 성공적인 응답
         return GetBoardListResponseDto.success(boardResponseList);
+
+    }
+
+    @Override
+    public ResponseEntity<? super GetBoardResponseDto> getBoard(Integer boardNumber) {
+
+        BoardEntity boardEntity;
+        BoardFileContentsEntity boardFileContentsEntity = null;
+        List<CommentEntity> commentEntities;
+        
+        try {
+            // 게시물 번호와 연결된 게시물 조회, 없으면 오류 반환
+            boardEntity = boardRepository.findByBoardNumber(boardNumber);
+            if (boardEntity == null) {
+                return GetBoardResponseDto.noExistBoard();
+            }
+
+            // 댓글을 최신순으로 조회, 없으면 빈 리스트로 초기화
+            commentEntities = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardNumber);
+            if (commentEntities == null) {
+                commentEntities = new ArrayList<>();  // 댓글이 없을 때 빈 리스트 반환
+            }
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        // 성공적인 응답
+        return GetBoardResponseDto.success(boardEntity, boardFileContentsEntity, commentEntities);
 
     }
 
@@ -160,12 +146,112 @@ public class BoardServiceImplement implements BoardService {
             return ResponseDto.databaseError();
         }
 
+        // 성공적인 응답
         return GetBoardListResponseDto.success(boardResponseList);
 
     }
 
     @Override
-    public ResponseEntity<? super ResponseDto> postBoard(PostBoardRequestDto dto, String userId) {
+    public ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber) {
+
+        List<CommentEntity> commentList;
+
+        try {
+            // 게시물 댓글 목록을 최신순으로 조회
+            commentList = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardNumber);
+            if (commentList.isEmpty()) return GetCommentListResponseDto.noExistComment(); // 댓글이 없는 경우 처리
+    
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+    
+        // 성공적인 응답
+        return GetCommentListResponseDto.success(commentList);
+
+    }
+
+    @Override
+    public ResponseEntity<? super GetBoardCategoryResponseDto> getBoardCategory(String boardCategory) {
+        
+        List<BoardEntity> boardList;
+        List<GetBoardResponseDto> boardResponseList = new ArrayList<>();
+        
+        try {
+            // 카테고리별 최신순으로 게시물 조회
+            boardList = boardRepository.findByBoardCategoryOrderByBoardUploadDateDesc(boardCategory);
+        
+            // 각 게시물에 대한 댓글 리스트 조회 (최신순) 및 응답 생성
+            for (BoardEntity boardEntity : boardList) {
+                List<CommentEntity> comments = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardEntity.getBoardNumber());
+
+                // 댓글이 없으면 빈 리스트로 설정
+                if (comments == null) {
+                    comments = new ArrayList<>();
+                }
+
+                GetBoardResponseDto boardResponse = new GetBoardResponseDto(
+                        ResponseCode.SUCCESS,
+                        ResponseMessage.SUCCESS,
+                        boardEntity,
+                        null, // boardFileContentsEntity가 없으면 null
+                        comments
+                );
+                boardResponseList.add(boardResponse);
+            }
+        
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        // 성공적인 응답
+        return GetBoardCategoryResponseDto.success(boardResponseList);
+
+    }
+
+    @Override
+    public ResponseEntity<? super GetBoardTagResponseDto> getBoardTag(String boardTag) {
+        
+        List<BoardEntity> boardList;
+        List<GetBoardResponseDto> boardResponseList = new ArrayList<>();
+        
+        try {
+            // 최신순으로 모든 게시물 조회
+            boardList = boardRepository.findByBoardTagOrderByBoardUploadDateDesc(boardTag);
+        
+            // 각 게시물에 대한 댓글 리스트 조회 (최신순) 및 응답 생성
+            for (BoardEntity boardEntity : boardList) {
+                List<CommentEntity> comments = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardEntity.getBoardNumber());
+
+                // 댓글이 없으면 빈 리스트로 설정
+                if (comments == null) {
+                    comments = new ArrayList<>();
+                }
+
+                GetBoardResponseDto boardTagResponse = new GetBoardResponseDto(
+                        ResponseCode.SUCCESS,
+                        ResponseMessage.SUCCESS,
+                        boardEntity,
+                        null, // boardFileContentsEntity가 없으면 null
+                        comments
+                );
+                boardResponseList.add(boardTagResponse);
+            }
+        
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        // 성공적인 응답
+        return GetBoardTagResponseDto.success(boardResponseList);
+
+    }
+
+    @Override
+    public ResponseEntity<? super ResponseDto> postBoard(PostBoardRequestDto dto, 
+    String userId) {
 
         try {
 
@@ -196,7 +282,8 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    public ResponseEntity<ResponseDto> patchBoard(PatchBoardRequestDto dto, Integer boardNumber, String userId) {
+    public ResponseEntity<ResponseDto> patchBoard(PatchBoardRequestDto dto, 
+    Integer boardNumber, String userId) {
 
         try {
 
@@ -218,7 +305,8 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    public ResponseEntity<ResponseDto> postComment(PostCommentRequestDto dto, Integer boardNumber, String userId) {
+    public ResponseEntity<ResponseDto> postComment(PostCommentRequestDto dto, 
+    Integer boardNumber, String userId) {
 
         try {
 
@@ -244,16 +332,21 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    public ResponseEntity<ResponseDto> patchComment(PatchCommentRequestDto dto, Integer boardNumber, Integer commentNumber, String userId) {
+    public ResponseEntity<ResponseDto> patchComment(PatchCommentRequestDto dto, 
+    Integer boardNumber, Integer commentNumber, String userId) {
 
         try {
 
             // 각각의 번호와 연결된 게시글과 댓글 조회
             BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
-            if (boardEntity == null) return ResponseDto.noExistBoard();
+            if (boardEntity == null) {
+                return ResponseDto.noExistBoard();
+            }
 
             CommentEntity commentEntity = commentRepository.findByCommentNumber(commentNumber);
-            if (commentEntity == null) return ResponseDto.noExistComment();
+            if (commentEntity == null) {
+                return ResponseDto.noExistComment();
+            }
 
             // 댓글 내용 수정
             commentEntity.update(dto, boardNumber, commentNumber, userId);
@@ -276,10 +369,15 @@ public class BoardServiceImplement implements BoardService {
         try {
             // 게시물 번호로 게시물 조회
             BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
-            if (boardEntity == null) return ResponseDto.noExistBoard();
+            if (boardEntity == null) {
+                return ResponseDto.noExistBoard();
+            }
     
             // board_health_map 테이블의 관련 데이터 삭제
             boardHealthMapRepository.deleteByBoardNumber(boardNumber);
+
+            // board_file_contents 테이블의 관련 데이터 삭제
+            boardFileContentsRepository.deleteByBoardNumber(boardNumber);
     
             // 게시물과 연관된 댓글 삭제
             commentRepository.deleteByBoardNumber(boardNumber);
@@ -298,16 +396,21 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    public ResponseEntity<ResponseDto> deleteComment(Integer boardNumber, Integer commentNumber, String userId) {
+    public ResponseEntity<ResponseDto> deleteComment(Integer boardNumber, 
+    Integer commentNumber, String userId) {
         
         try {
 
             // 연관된 번호로 게시글과 댓글 조회
             BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
-            if (boardEntity == null) return ResponseDto.noExistBoard();
+            if (boardEntity == null) {
+                return ResponseDto.noExistBoard();
+            }
 
             CommentEntity commentEntity = commentRepository.findByCommentNumber(commentNumber);
-            if (commentEntity == null) return ResponseDto.noExistComment();
+            if (commentEntity == null) {
+                return ResponseDto.noExistComment();
+            }
 
             // 댓글 삭제
             commentRepository.delete(commentEntity);
@@ -343,6 +446,8 @@ public class BoardServiceImplement implements BoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
+
+        // 성공적인 응답
         return ResponseDto.success();
     }
 
@@ -362,6 +467,8 @@ public class BoardServiceImplement implements BoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
+
+        // 성공적인 응답
         return ResponseDto.success();
     }
 
@@ -386,19 +493,8 @@ public class BoardServiceImplement implements BoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
+
+        // 성공적인 응답
         return ResponseDto.success();
     }
-
-    @Override
-    public ResponseEntity<? super GetBoardCategoryResponseDto> getBoardCategory(String boardCategory) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBoardCategory'");
-    }
-
-    @Override
-    public ResponseEntity<? super GetBoardTagResponseDto> getBoardTag(String boardTag) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBoardTag'");
-    }
-
 }

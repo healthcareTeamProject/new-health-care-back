@@ -50,8 +50,8 @@ public class GetBoardResponseDto extends ResponseDto {
         // commentList 초기화
         this.commentList = commentEntities != null && !commentEntities.isEmpty()
                 ? commentEntities.stream()
-                      .map(comment -> new CommentList(comment)) // CommentEntity를 CommentList로 변환
-                      .collect(Collectors.toList())
+                    .map(comment -> new CommentList(comment)) // CommentEntity를 CommentList로 변환
+                    .collect(Collectors.toList())
                 : new ArrayList<>(); // commentEntities가 null 또는 비어있는 경우 빈 리스트 반환
     }
 

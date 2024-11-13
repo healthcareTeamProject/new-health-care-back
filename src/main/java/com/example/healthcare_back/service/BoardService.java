@@ -7,19 +7,19 @@ import com.example.healthcare_back.dto.request.board.PatchCommentRequestDto;
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PostCommentRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
+import com.example.healthcare_back.dto.response.board.GetBoardCategoryResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardListResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardResponseDto;
-import com.example.healthcare_back.dto.response.board.GetCommentListResponseDto;
-import com.example.healthcare_back.dto.response.board.GetBoardCategoryResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardTagResponseDto;
+import com.example.healthcare_back.dto.response.board.GetCommentListResponseDto;
 
 public interface BoardService {
 
-    // 게시물 조회
-    ResponseEntity<? super GetBoardResponseDto> getBoard(Integer boardNumber);
-
     // 게시글 목록 조회
     ResponseEntity<? super GetBoardListResponseDto> getBoardList();
+
+    // 게시물 조회
+    ResponseEntity<? super GetBoardResponseDto> getBoard(Integer boardNumber);
 
     // 게시글 목록 조회
     ResponseEntity<? super GetBoardListResponseDto> getUserBoardList(String userId);
@@ -51,10 +51,13 @@ public interface BoardService {
     // 댓글 삭제
     ResponseEntity<? super ResponseDto> deleteComment(Integer boardNumber, Integer commentNumber, String userId);
 
-
+    // 게시글 좋아요 누르기
     ResponseEntity<? super ResponseDto> putBoardLike(Integer boardNumber);
+
+    // 게시글 조회수 증가
     ResponseEntity<? super ResponseDto> increaseViewCount(Integer boardNumber);
+
+    // 댓글 좋아요 누르기
     ResponseEntity<? super ResponseDto> putCommentLike(Integer commentNumber);
 
-    
 }

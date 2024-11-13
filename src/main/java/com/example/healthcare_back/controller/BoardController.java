@@ -34,6 +34,13 @@ public class BoardController {
 
     private final BoardService boardService;
 
+    // 모든 게시물 리스트 조회
+    @GetMapping(value = {"", "/"})
+    public ResponseEntity<? super GetBoardListResponseDto> getBoardList() {
+        ResponseEntity<? super GetBoardListResponseDto> response = boardService.getBoardList();
+        return response;
+    }
+
     // 특정 게시물 조회
     @GetMapping("/{boardNumber}")
     public ResponseEntity<? super GetBoardResponseDto> getBoard(
@@ -48,19 +55,28 @@ public class BoardController {
         return boardService.getCommentList(boardNumber);
     }
 
-    // 모든 게시물 리스트 조회
-    @GetMapping(value = {"", "/"})
-    public ResponseEntity<? super GetBoardListResponseDto> getBoardList() {
-        ResponseEntity<? super GetBoardListResponseDto> response = boardService.getBoardList();
-        return response;
-    }
-
     // 특정 사용자의 게시물 리스트 조회
     @GetMapping("/user")
     public ResponseEntity<? super GetBoardListResponseDto> getUserBoardList(
-        @AuthenticationPrincipal String userId
+            @AuthenticationPrincipal String userId // 권한 확인을 위한 userId를 전달하는 경우
     ) {
         ResponseEntity<? super GetBoardListResponseDto> response = boardService.getUserBoardList(userId);
+        return response;
+    }
+
+    // 카테고리별 게시물, 댓글 조회
+    @GetMapping("/category/{boardCategory}")
+    public ResponseEntity<? super GetBoardCategoryResponseDto> getBoardCategory(
+            @PathVariable("boardCategory") String boardCategory) {
+        ResponseEntity<? super GetBoardCategoryResponseDto> response = boardService.getBoardCategory(boardCategory);
+        return response;
+    }
+
+    // 해시태그별 게시물, 댓글 조회
+    @GetMapping("/tag/{boardTag}")
+    public ResponseEntity<? super GetBoardTagResponseDto> getBoardTag(
+            @PathVariable("boardTag") String boardTag) {
+        ResponseEntity<? super GetBoardTagResponseDto> response = boardService.getBoardTag(boardTag);
         return response;
     }
 
@@ -79,7 +95,7 @@ public class BoardController {
     public ResponseEntity<? super ResponseDto> patchBoard(
             @PathVariable("boardNumber") Integer boardNumber,
             @RequestBody @Valid PatchBoardRequestDto requestBody,
-            @AuthenticationPrincipal String userId // userId를 전달하는 경우
+            @AuthenticationPrincipal String userId // 권한 확인을 위한 userId를 전달하는 경우
     ) {
         return boardService.patchBoard(requestBody, boardNumber, userId);
     }
@@ -98,7 +114,7 @@ public class BoardController {
     public ResponseEntity<? super ResponseDto> postComment(
             @PathVariable("boardNumber") Integer boardNumber,
             @RequestBody @Valid PostCommentRequestDto requestBody,
-            @AuthenticationPrincipal String userId // 요청에서 userId 가져오기
+            @AuthenticationPrincipal String userId // 권한 확인을 위한 userId를 전달하는 경우
     ) {
         return boardService.postComment(requestBody, boardNumber, userId);
     }
@@ -109,7 +125,7 @@ public class BoardController {
             @PathVariable("boardNumber") Integer boardNumber,
             @PathVariable("commentNumber") Integer commentNumber,
             @RequestBody @Valid PatchCommentRequestDto requestBody,
-            @AuthenticationPrincipal String userId // userId 전달
+            @AuthenticationPrincipal String userId // 권한 확인을 위한 userId를 전달하는 경우
     ) {
         return boardService.patchComment(requestBody, boardNumber, commentNumber, userId);
     }
@@ -119,33 +135,33 @@ public class BoardController {
     public ResponseEntity<? super ResponseDto> deleteComment(
             @PathVariable("boardNumber") Integer boardNumber,
             @PathVariable("commentNumber") Integer commentNumber,
-            @AuthenticationPrincipal String userId // 권한 확인을 위한 userId
+            @AuthenticationPrincipal String userId // 권한 확인을 위한 userId를 전달하는 경우
     ) {
         return boardService.deleteComment(boardNumber, commentNumber, userId);
     }
 
-   // 좋아요 추가/취소 (게시물)
-   @PutMapping("/{boardNumber}/like")
-   public ResponseEntity<? super ResponseDto> likeBoard(
-           @PathVariable Integer boardNumber
-   ) {
-       return boardService.putBoardLike(boardNumber);
-   }
+    // 좋아요 추가/취소 (게시물)
+    @PutMapping("/{boardNumber}/like")
+    public ResponseEntity<? super ResponseDto> likeBoard(
+            @PathVariable("boardNumber") Integer boardNumber
+    ) {
+        return boardService.putBoardLike(boardNumber);
+    }
 
-   // 조회수 증가 (게시물)
-   @PutMapping("/{boardNumber}/view")
-   public ResponseEntity<? super ResponseDto> increaseViewCount(
-           @PathVariable Integer boardNumber
-   ) {
-       return boardService.increaseViewCount(boardNumber);
-   }
+    // 조회수 증가 (게시물)
+    @PutMapping("/{boardNumber}/view")
+    public ResponseEntity<? super ResponseDto> increaseViewCount(
+            @PathVariable("boardNumber") Integer boardNumber
+    ) {
+        return boardService.increaseViewCount(boardNumber);
+    }
 
    // 좋아요 추가/취소 (댓글)
-   @PutMapping("/{boardNumber}/comments/{commentNumber}/like")
-   public ResponseEntity<? super ResponseDto> likeComment(
-           @PathVariable Integer boardNumber,
-           @PathVariable Integer commentNumber
-   ) {
-       return boardService.putCommentLike(commentNumber);
-   }
+    @PutMapping("/{boardNumber}/comments/{commentNumber}/like")
+    public ResponseEntity<? super ResponseDto> likeComment(
+            @PathVariable("boardNumber") Integer boardNumber,
+            @PathVariable("commentNumber") Integer commentNumber
+    ) {
+        return boardService.putCommentLike(commentNumber);
+    }
 }
