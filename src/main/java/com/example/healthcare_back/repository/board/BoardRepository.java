@@ -14,10 +14,10 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
     BoardEntity findByBoardNumber(Integer boardNumber);
 
     List<BoardEntity> findByUserId(String userId); // 특정 사용자 작성 게시물 조회
-    List<BoardEntity> findAllByOrderByBoardUploadDateDesc();
-    List<BoardEntity> findByUserIdOrderByBoardUploadDateDesc(String userId);
+    List<BoardEntity> findAllByOrderByBoardUploadDateDesc(); // 최신 날짜 순서로 게시물 조회
+    List<BoardEntity> findByUserIdOrderByBoardUploadDateDesc(String userId); // 특정 사용자 게시물을 최신 날짜 순서로 조회
 
-    List<BoardEntity> findByBoardCategory(String boardCategory);
-    List<BoardEntity> findByBoardTag(String boardTag);
+    List<BoardEntity> findByBoardCategoryOrderByBoardUploadDateDesc(String boardCategory); // 카테고리별 게시물 조회
+    List<BoardEntity> findByBoardTagOrderByBoardUploadDateDesc(String boardTag); // 해시태그별 게시물 조회
 
 }

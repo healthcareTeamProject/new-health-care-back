@@ -1,8 +1,6 @@
 package com.example.healthcare_back.service.implement;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.nio.file.Paths;
 import java.util.UUID;
 
@@ -26,9 +24,7 @@ public class FileServiceImplement implements FileService {
     @Override
     public String upload(MultipartFile file) {
         // 빈 파일인지 확인
-        if (file.isEmpty()) {
-            return null; // 또는 적절한 예외 처리
-        }
+        if (file.isEmpty()) return null; // 또는 적절한 예외 처리
 
         // 원본 파일명 및 확장자 구하기
         String originalFileName = file.getOriginalFilename();
@@ -44,7 +40,7 @@ public class FileServiceImplement implements FileService {
         // 파일 저장
         try {
             file.transferTo(new File(savePath));
-        } catch (IOException | IllegalStateException e) {
+        } catch (Exception e) {
             e.printStackTrace(); // 로깅 추가 가능
             return null; // 또는 적절한 예외 처리
         }
@@ -63,7 +59,7 @@ public class FileServiceImplement implements FileService {
                 // 파일이 존재하지 않거나 읽을 수 없는 경우 처리
                 return null; // 또는 적절한 예외 처리
             }
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             e.printStackTrace(); // 로깅 추가 가능
             return null; // 또는 적절한 예외 처리
         }

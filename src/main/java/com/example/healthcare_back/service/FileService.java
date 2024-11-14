@@ -10,4 +10,5 @@ public interface FileService {
 
     // 파일 불러오기
     Resource getFile(String fileName);
+    
 }
