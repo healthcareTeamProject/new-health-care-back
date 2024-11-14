@@ -1,7 +1,6 @@
 package com.example.healthcare_back.common.object;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,7 +8,6 @@ import com.example.healthcare_back.common.util.CustomBigDecimalSerializer;
 import com.example.healthcare_back.dto.response.schedule.GetMealDetailResponseDto;
 import com.example.healthcare_back.entity.schedule.MealScheduleDetailEntity;
 import com.example.healthcare_back.entity.schedule.MealScheduleEntity;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Getter;
@@ -19,10 +17,8 @@ public class MealScheduleList {
 
     private Integer mealScheduleNumber;
     private String mealTitle;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime mealScheduleStart;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime mealScheduleEnd;
+    private String mealScheduleStart;
+    private String mealScheduleEnd;
     private List<GetMealDetailResponseDto> mealMemo; // mealDetails 대신 mealMemo로 변경
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal totalKcal;  // 전체 칼로리 합계 필드 추가

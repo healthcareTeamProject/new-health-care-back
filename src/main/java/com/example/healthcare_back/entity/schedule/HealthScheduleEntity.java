@@ -36,12 +36,10 @@ public class HealthScheduleEntity {
     private String healthTitle; // 일정 내용
 
     @Column(nullable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime healthScheduleStart; // 스케줄 시작 날짜
+    private String healthScheduleStart; // 스케줄 시작 날짜
 
     @Column(nullable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime healthScheduleEnd; // 스케줄 종료 날짜
+    private String healthScheduleEnd; // 스케줄 종료 날짜
 
     public HealthScheduleEntity(PostHealthScheduleRequestDto dto, String userId) {
         this.userId = userId;

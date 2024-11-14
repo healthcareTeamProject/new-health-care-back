@@ -72,6 +72,12 @@ public class ScheduleServiceImplement implements ScheduleService {
         List<HealthScheduleEntity> healthScheduleEntities = new ArrayList<>();
 
         try {
+            // 사용자 존재 여부 확인
+            CustomerEntity customerEntity = customerRepository.findByUserId(userId);
+            if (customerEntity == null) {
+                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+            }
+
             // 특정 사용자 ID로 건강 일정 목록 조회
             healthScheduleEntities = healthScheduleRepository.findByUserIdOrderByHealthScheduleNumberDesc(userId);
             if (healthScheduleEntities.isEmpty()) {
@@ -90,6 +96,7 @@ public class ScheduleServiceImplement implements ScheduleService {
     @Override
     public ResponseEntity<ResponseDto> postHealthSchedule(PostHealthScheduleRequestDto dto, String userId) {
         try {
+            
             // 사용자 존재 여부 확인
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
             if (customerEntity == null) {
@@ -109,12 +116,20 @@ public class ScheduleServiceImplement implements ScheduleService {
 
     // 건강 일정 수정
     @Override
-    public ResponseEntity<ResponseDto> patchHealthSchedule(PatchHealthScheduleRequestDto dto, Integer healthScheduleNumber) {
+    public ResponseEntity<ResponseDto> patchHealthSchedule(PatchHealthScheduleRequestDto dto, Integer healthScheduleNumber, String userId) {
+        
         try {
+
+            // 사용자 존재 여부 확인
+            HealthScheduleEntity hScheduleEntity = healthScheduleRepository.findByHealthScheduleNumberAndUserId(healthScheduleNumber, userId);
+            if (hScheduleEntity == null) {
+                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+            }
+
             // healthScheduleNumber로 건강 일정 존재 여부 확인
             List<HealthScheduleEntity> healthScheduleEntityList = healthScheduleRepository.findByHealthScheduleNumber(healthScheduleNumber);
-            if (healthScheduleEntityList == null || healthScheduleEntityList.isEmpty()) {
-                return ResponseDto.noExistSchedule(); // 일정이 없는 경우 응답
+            if (healthScheduleEntityList.isEmpty()) {
+                healthScheduleEntityList = new ArrayList<>();
             }
             HealthScheduleEntity healthScheduleEntity = healthScheduleEntityList.get(0);
 
@@ -134,7 +149,14 @@ public class ScheduleServiceImplement implements ScheduleService {
 
     // 건강 일정 삭제
     @Override
-    public ResponseEntity<ResponseDto> deleteHealthSchedule(Integer healthScheduleNumber) {
+    public ResponseEntity<ResponseDto> deleteHealthSchedule(Integer healthScheduleNumber, String userId) {
+
+        // 사용자 존재 여부 확인
+        HealthScheduleEntity hScheduleEntity = healthScheduleRepository.findByHealthScheduleNumberAndUserId(healthScheduleNumber, userId);
+        if (hScheduleEntity == null) {
+            return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+        }
+
         try {
             healthScheduleRepository.deleteByHealthScheduleNumber(healthScheduleNumber); // healthScheduleNumber로 일정 삭제
 
@@ -153,9 +175,8 @@ public class ScheduleServiceImplement implements ScheduleService {
     public ResponseEntity<? super GetMealScheduleResponseDto> getMealSchedule(Integer mealScheduleNumber, String userId) {
         try {
             // MealScheduleEntity 조회 및 존재 여부 확인
-            MealScheduleEntity mealSchedule = mealScheduleRepository.findByMealScheduleNumberAndUserId(mealScheduleNumber, userId)
-                    .orElse(null);
-
+            MealScheduleEntity mealSchedule = mealScheduleRepository.findByMealScheduleNumberAndUserId(mealScheduleNumber, userId);
+                    
             // 관련된 상세 식품 정보 조회
             List<MealScheduleDetailEntity> details = mealScheduleDetailRepository
                     .findByMealSchedule_MealScheduleNumber(mealScheduleNumber);
@@ -174,6 +195,13 @@ public class ScheduleServiceImplement implements ScheduleService {
         List<MealScheduleEntity> mealScheduleEntities = new ArrayList<>();
 
         try {
+            // 사용자 존재 여부 확인
+            CustomerEntity customerEntity = customerRepository.findByUserId(userId);
+            if (customerEntity == null) {
+                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+            }
+
+
             // 특정 사용자 ID로 식단 일정 목록 조회
             mealScheduleEntities = mealScheduleRepository.findByUserIdOrderByMealScheduleNumberDesc(userId);
         
@@ -200,6 +228,13 @@ public class ScheduleServiceImplement implements ScheduleService {
     @Override
     public ResponseEntity<ResponseDto> postMealSchedule(PostMealScheduleRequestDto dto, String userId) {
         try {
+
+            // 사용자 존재 여부 확인
+            CustomerEntity customerEntity = customerRepository.findByUserId(userId);
+            if (customerEntity == null) {
+                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+            }
+
             // 메인 식단 일정 생성
             MealScheduleEntity mealScheduleEntity = new MealScheduleEntity(dto, userId);
             mealScheduleRepository.save(mealScheduleEntity);
@@ -222,12 +257,21 @@ public class ScheduleServiceImplement implements ScheduleService {
 
     // 식단 일정 수정
     @Override
-    public ResponseEntity<ResponseDto> patchMealSchedule(PatchMealScheduleRequestDto dto, Integer mealScheduleNumber) {
+    public ResponseEntity<ResponseDto> patchMealSchedule(PatchMealScheduleRequestDto dto, Integer mealScheduleNumber, String userId) {
         try {
+
+            // 사용자 존재 여부 확인
+            MealScheduleEntity mScheduleEntity = mealScheduleRepository.findByMealScheduleNumberAndUserId(mealScheduleNumber, userId);
+            if (mScheduleEntity == null) {
+                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+            }
+
             // 스케줄 존재 여부 확인
-            MealScheduleEntity mealScheduleEntity = mealScheduleRepository.findById(mealScheduleNumber)
-                    .orElseThrow(() -> new RuntimeException("Schedule not found"));
-        
+            MealScheduleEntity mealScheduleEntity = mealScheduleRepository.findByMealScheduleNumber(mealScheduleNumber);
+            if (mealScheduleEntity == null) {
+                return ResponseDto.noExistSchedule();
+            }
+
             // 업데이트된 정보를 설정
             mealScheduleEntity.setMealTitle(dto.getMealTitle());
             mealScheduleEntity.setMealScheduleStart(dto.getMealScheduleStart());
@@ -258,8 +302,14 @@ public class ScheduleServiceImplement implements ScheduleService {
 
     // 식단 일정 삭제
     @Override
-    public ResponseEntity<ResponseDto> deleteMealSchedule(Integer mealScheduleNumber) {
+    public ResponseEntity<ResponseDto> deleteMealSchedule(Integer mealScheduleNumber, String userId) {
         try {
+            // 사용자 존재 여부 확인
+            MealScheduleEntity mealScheduleEntity = mealScheduleRepository.findByMealScheduleNumberAndUserId(mealScheduleNumber, userId);
+            if (mealScheduleEntity == null) {
+                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+            }
+
             // 자식 엔티티들(세부 식품 정보) 삭제
             List<MealScheduleDetailEntity> details = mealScheduleDetailRepository.findByMealSchedule_MealScheduleNumber(mealScheduleNumber);
             mealScheduleDetailRepository.deleteAll(details);
@@ -277,18 +327,21 @@ public class ScheduleServiceImplement implements ScheduleService {
 
     // 특정 식단 상세 일정 삭제
     @Override
-    public ResponseEntity<ResponseDto> deleteMealScheduleDetail(Integer mealScheduleDetailNumber) {
+    public ResponseEntity<ResponseDto> deleteMealScheduleDetail(Integer mealScheduleDetailNumber, String userId) {
+
         try {
-            // MealScheduleDetailEntity 존재 여부 확인
-            Optional<MealScheduleDetailEntity> detailEntityOpt = mealScheduleDetailRepository.findById(mealScheduleDetailNumber);
-            
+            // mealScheduleDetailNumber와 userId로 MealScheduleDetailEntity 찾기
+            Optional<MealScheduleDetailEntity> detailEntityOpt = mealScheduleDetailRepository
+                    .findByMealScheduleDetailNumberAndMealSchedule_UserId(mealScheduleDetailNumber, userId);
+    
             if (!detailEntityOpt.isPresent()) {
-                return ResponseDto.noExistDetail(); // 식단 상세 정보가 존재하지 않음을 알리는 응답
+                return ResponseDto.noPermission();
             }
-        
+    
             // 상세 정보 삭제
             mealScheduleDetailRepository.deleteById(mealScheduleDetailNumber);
             return ResponseDto.success(); // 성공 응답
+    
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답

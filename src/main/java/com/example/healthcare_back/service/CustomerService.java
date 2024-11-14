@@ -14,24 +14,13 @@ import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftLi
 
 public interface CustomerService {
 
-    // 로그인 사용자 정보 조회
     ResponseEntity<? super GetSignInResponseDto> getSignIn(String userId);
+    ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId, String requestedUserId);
+    ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList(String userId, String requestedUserId);
+    ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLiftList(String userId, String requestedUserId);
 
-    // 사용자 세부 정보 조회
-    ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId);
-
-    // 사용자 신체정보 조회
-    ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList(String userId);
-
-    // 사용자 3대측정 정보 조회
-    ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLiftList(String userId);
-
-    // 사용자 정보 수정
     ResponseEntity<ResponseDto> patchCustomer(PatchCustomerRequestDto dto, String userId);
+    ResponseEntity<ResponseDto> patchUserMuscleFatCustomer(PatchUserMuscleFatRequestDto dto, String userId, String requestedUserId);
+    ResponseEntity<ResponseDto> patchThreeMajorLiftCustomer(PatchUserThreeMajorLiftRequestDto dto, String userId, String requestedUserId);
 
-    // 사용자 신체정보 수정
-    ResponseEntity<ResponseDto> patchUserMuscleFatCustomer(PatchUserMuscleFatRequestDto dto, String userId);
-
-    // 사용자 3대측정 정보 수정
-    ResponseEntity<ResponseDto> patchThreeMajorLiftCustomer(PatchUserThreeMajorLiftRequestDto dto, String userId);
 }

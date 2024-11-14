@@ -18,10 +18,8 @@ public class GetHealthScheduleResponseDto extends ResponseDto {
     
     private Integer healthScheduleNumber;
     private String healthTitle;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime healthScheduleStart;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime healthScheduleEnd;
+    private String healthScheduleStart;
+    private String healthScheduleEnd;
 
     // HealthScheduleEntity를 받아 필드 초기화하는 생성자
     public GetHealthScheduleResponseDto(HealthScheduleEntity healthScheduleEntity) {

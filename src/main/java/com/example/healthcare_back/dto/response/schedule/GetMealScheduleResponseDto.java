@@ -23,10 +23,8 @@ public class GetMealScheduleResponseDto extends ResponseDto {
     
     private Integer mealScheduleNumber;
     private String mealTitle;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime mealScheduleStart;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime mealScheduleEnd;
+    private String mealScheduleStart;
+    private String mealScheduleEnd;
     private List<GetMealDetailResponseDto> mealMemo;  // mealMemo를 List<GetMealDetailResponseDto> 타입으로 유지
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal totalKcal;  // 각 항목별 칼로리 리스트로 변경

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import com.example.healthcare_back.common.util.CustomBigDecimalSerializer;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jakarta.persistence.Column;
@@ -32,6 +33,7 @@ public class UserThreeMajorLiftEntity {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userThreeMajorLiftNumber;
+    @Column(nullable = false)
     private String userId;
     @Column(precision = 5, scale = 1)
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
@@ -42,6 +44,7 @@ public class UserThreeMajorLiftEntity {
     @Column(precision = 5, scale = 1)
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal squat;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime userThreeMajorLiftDate;
 
     public UserThreeMajorLiftEntity(SignUpRequestDto dto) {

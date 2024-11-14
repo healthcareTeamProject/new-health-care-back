@@ -46,12 +46,10 @@ public class MealScheduleEntity {
     @Column(nullable = false)
     private String mealMemo; 
     @Column(nullable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime mealScheduleStart;
+    private String mealScheduleStart;
 
     @Column(nullable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime mealScheduleEnd;
+    private String mealScheduleEnd;
 
     // 연관된 식단 상세 일정 리스트. 부모 식단 일정이 삭제되면 자동으로 연관된 상세 일정도 삭제됨
     @OneToMany(mappedBy = "mealSchedule", cascade = CascadeType.REMOVE, orphanRemoval = true)

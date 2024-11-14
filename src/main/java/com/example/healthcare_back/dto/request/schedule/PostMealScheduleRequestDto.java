@@ -19,10 +19,10 @@ public class PostMealScheduleRequestDto {
     private String mealTitle;
 
     @NotNull
-    private LocalDateTime mealScheduleStart;
+    private String mealScheduleStart;
 
     @NotNull
-    private LocalDateTime mealScheduleEnd;
+    private String mealScheduleEnd;
 
     @NotNull
     private List<MealDetail> mealMemo; // 변경된 부분: mealMemo를 List<MealDetail>로 수정
