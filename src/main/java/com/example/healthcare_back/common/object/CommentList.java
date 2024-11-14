@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.healthcare_back.entity.board.CommentEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 
@@ -15,6 +16,7 @@ public class CommentList {
     private Integer commentNumber;
     private String commentContents;
     private String userId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime commentDate;
     private Integer commentLikeCount;
 

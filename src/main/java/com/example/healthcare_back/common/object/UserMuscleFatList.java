@@ -5,15 +5,20 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.healthcare_back.common.util.CustomBigDecimalSerializer;
 import com.example.healthcare_back.entity.customer.UserMuscleFatEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Getter;
 
 @Getter
 public class UserMuscleFatList {
     private Integer userMuscleFatNumber;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal weight;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal skeletalMuscleMass;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal bodyFatMass;
     private LocalDateTime userMuscleFatDate;
 

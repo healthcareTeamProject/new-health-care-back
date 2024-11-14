@@ -15,4 +15,5 @@ public interface UserMuscleFatRepository extends JpaRepository<UserMuscleFatEnti
 
     CustomerEntity findByUserId(String userId);
 
+
 }

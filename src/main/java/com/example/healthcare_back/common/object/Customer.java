@@ -2,7 +2,9 @@ package com.example.healthcare_back.common.object;
 
 import java.math.BigDecimal;
 
+import com.example.healthcare_back.common.util.CustomBigDecimalSerializer;
 import com.example.healthcare_back.entity.customer.CustomerEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Getter;
 
@@ -16,6 +18,7 @@ public class Customer {
     private String telNumber;
     private String profileImage;
     private String personalGoals;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal height;
 
     private Customer(CustomerEntity customerEntity) {

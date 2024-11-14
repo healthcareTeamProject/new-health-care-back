@@ -3,8 +3,10 @@ package com.example.healthcare_back.entity.customer;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.example.healthcare_back.common.util.CustomBigDecimalSerializer;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserMuscleFatRequestDto;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,10 +34,13 @@ public class UserMuscleFatEntity {
     private Integer userMuscleFatNumber;
     private String userId;
     @Column(precision = 5, scale = 1)
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal weight;
     @Column(precision = 5, scale = 1)
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal skeletalMuscleMass;
     @Column(precision = 5, scale = 1)
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal bodyFatMass;
     private LocalDateTime userMuscleFatDate;
     

@@ -7,11 +7,14 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 
+import com.example.healthcare_back.common.util.CustomBigDecimalSerializer;
 import com.example.healthcare_back.dto.response.ResponseCode;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.entity.schedule.MealScheduleDetailEntity;
 import com.example.healthcare_back.entity.schedule.MealScheduleEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Getter;
 
@@ -20,10 +23,13 @@ public class GetMealScheduleResponseDto extends ResponseDto {
     
     private Integer mealScheduleNumber;
     private String mealTitle;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime mealScheduleStart;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime mealScheduleEnd;
     private List<GetMealDetailResponseDto> mealMemo;  // mealMemo를 List<GetMealDetailResponseDto> 타입으로 유지
-    private List<BigDecimal> totalKcal;  // 각 항목별 칼로리 리스트로 변경
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
+    private BigDecimal totalKcal;  // 각 항목별 칼로리 리스트로 변경
 
     public GetMealScheduleResponseDto(MealScheduleEntity mealSchedule, List<MealScheduleDetailEntity> detailEntities) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
@@ -37,10 +43,10 @@ public class GetMealScheduleResponseDto extends ResponseDto {
             .map(GetMealDetailResponseDto::new)
             .collect(Collectors.toList());
 
-        // 각 항목의 칼로리를 리스트로 저장
+        // 각 항목의 칼로리를 합산하여 총 칼로리 계산
         this.totalKcal = detailEntities.stream()
-            .map(MealScheduleDetailEntity::getMealKcal)  // 각 MealScheduleDetailEntity에서 getMealKcal 호출
-            .collect(Collectors.toList());  // 리스트로 수집
+            .map(detail -> detail.getMealKcal().multiply(BigDecimal.valueOf(detail.getMealCount())))
+            .reduce(BigDecimal.ZERO, BigDecimal::add);  // 총합 계산
     }
 
     // 수정된 구조의 성공 응답 메서드

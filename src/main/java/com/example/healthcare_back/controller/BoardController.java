@@ -17,10 +17,8 @@ import com.example.healthcare_back.dto.request.board.PatchCommentRequestDto;
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PostCommentRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
-import com.example.healthcare_back.dto.response.board.GetBoardCategoryResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardListResponseDto;
 import com.example.healthcare_back.dto.response.board.GetBoardResponseDto;
-import com.example.healthcare_back.dto.response.board.GetBoardTagResponseDto;
 import com.example.healthcare_back.dto.response.board.GetCommentListResponseDto;
 import com.example.healthcare_back.service.BoardService;
 

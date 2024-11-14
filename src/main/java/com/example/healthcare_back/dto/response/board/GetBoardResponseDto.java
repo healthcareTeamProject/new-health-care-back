@@ -15,6 +15,7 @@ import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.entity.board.BoardEntity;
 import com.example.healthcare_back.entity.board.BoardFileContentsEntity;
 import com.example.healthcare_back.entity.board.CommentEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 
@@ -25,6 +26,7 @@ public class GetBoardResponseDto extends ResponseDto {
     private Integer boardNumber;
     private String boardTitle;
     private String userId;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime boardUploadDate;
     private String boardContents;
     private String youtubeVideoLink;

@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.healthcare_back.common.util.CustomBigDecimalSerializer;
 import com.example.healthcare_back.entity.customer.UserThreeMajorLiftEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Getter;
 
@@ -13,8 +15,11 @@ import lombok.Getter;
 public class UserThreeMajorLiftList {
     
     private Integer userThreeMajorLiftNumber;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal deadlift;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal benchPress;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal squat;
     private LocalDateTime userThreeMajorLiftDate;
 

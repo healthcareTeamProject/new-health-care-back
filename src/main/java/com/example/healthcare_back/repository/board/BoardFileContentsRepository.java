@@ -10,4 +10,5 @@ public interface BoardFileContentsRepository extends JpaRepository<BoardFileCont
 
     BoardFileContentsEntity findByBoardNumber(Integer boardNumber);
 
+
 }

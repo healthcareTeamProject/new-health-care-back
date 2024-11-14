@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.healthcare_back.entity.schedule.HealthScheduleEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 
@@ -13,7 +14,9 @@ public class HealthScheduleList {
 
     private Integer healthScheduleNumber;
     private String healthTitle;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime healthScheduleStart;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime healthScheduleEnd;
 
     // HealthScheduleEntity 객체를 이용하여 HealthScheduleList 객체를 생성하는 생성자

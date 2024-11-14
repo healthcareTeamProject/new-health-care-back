@@ -5,10 +5,12 @@ import java.math.BigDecimal;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.example.healthcare_back.common.util.CustomBigDecimalSerializer;
 import com.example.healthcare_back.dto.response.ResponseCode;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.entity.customer.CustomerEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Getter;
 
@@ -23,12 +25,19 @@ public class GetCustomerResponseDto extends ResponseDto {
     private String telNumber;
     private String profileImage;
     private String personalGoals;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal height;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal deadlift;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal benchPress;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal squat;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal weight;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal skeletalMuscleMass;
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal bodyFatMass;
 
     public GetCustomerResponseDto(CustomerEntity customerEntity) {

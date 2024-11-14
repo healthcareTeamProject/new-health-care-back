@@ -16,4 +16,5 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, String
     
     CustomerEntity findByUserId(String userId);
     CustomerEntity findBySnsIdAndJoinPath(String sns, String joinPath);
+
 }
