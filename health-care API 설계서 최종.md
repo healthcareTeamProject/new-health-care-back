@@ -4329,11 +4329,11 @@ curl -X PATCH "http://localhost:4000/api/v1/schedule/meal-schedule/1" \
 -d "mealScheduleStart=2024-11-12T19:00:00" \
 -d "mealScheduleEnd=2024-11-12T20:00:00" \
 -d "mealMemo=
-        [{
-            "mealName": "닭가슴살",
-            "mealKcal": 300.0,
-            "mealCount": 1
-        }]" \
+    [{
+        "mealName": "닭가슴살",
+        "mealKcal": 300.0,
+        "mealCount": 1
+    }]"
 ```
 
 ##### Response
