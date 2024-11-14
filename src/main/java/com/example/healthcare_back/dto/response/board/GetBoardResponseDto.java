@@ -26,7 +26,7 @@ public class GetBoardResponseDto extends ResponseDto {
     private Integer boardNumber;
     private String boardTitle;
     private String userId;
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime boardUploadDate;
     private String boardContents;
     private String youtubeVideoLink;

@@ -543,22 +543,22 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -v -X POST "http://localhost:4000/api/v1/auth/sign-up" \
--d "profileImage=null" \
--d "name=홍길동" \
--d "userId=qwer1234" \
--d "nickname=뽀삐puppy12" \
--d "password=qwer1234" \
--d "telNumber=01011112222" \
--d "authNumber=1234" \
--d "joinPath=HOME" \
--d "height=180" \
--d "weight=80" \
--d "skeletalMuscleMass=34.5" \
--d "bodyFatMass=10.4" \
--d "deadlift=124" \
--d "benchPress=74" \
--d "squat=100" \
--d "personalGoal=이번달은 3대 측정 500 만들꺼야"
+-d "profileImage": "null" \
+-d "name": "홍길동" \
+-d "userId": "qwer1234" \
+-d "nickname": "뽀삐puppy12" \
+-d "password": "qwer1234" \
+-d "telNumber": "01011112222" \
+-d "authNumber": "1234" \
+-d "joinPath": "HOME" \
+-d "height": 180 \
+-d "weight": 80 \
+-d "skeletalMuscleMass": 34.5 \
+-d "bodyFatMass": 10.4 \
+-d "deadlift": 124 \
+-d "benchPress": 74 \
+-d "squat": 100 \
+-d "personalGoal": "이번달은 3대 측정 500 만들꺼야"
 ```
 
 ##### Response
@@ -3710,8 +3710,8 @@ curl -X POST "http://localhost:4000/api/v1/schedule/health-schedule" \
     가슴 -
     벤치프레스 12 3set,
     플라이 15 5set" \
--d "healthScheduleStart = 2023-11-10T08:00:00"\
--d "healthScheduleEnd = 2023-11-10T09:00:00 "\
+-d "healthScheduleStart = 2024.10.17 12:00"\
+-d "healthScheduleEnd = 2024.10.17 23:59 "\
 ```
 
 ##### Response

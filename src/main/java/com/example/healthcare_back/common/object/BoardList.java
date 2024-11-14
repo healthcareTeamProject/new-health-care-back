@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.healthcare_back.entity.board.BoardEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 
@@ -13,6 +14,7 @@ public class BoardList {
     private Integer boardNumber;
     private String boardTitle;
     private String userId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime boardUploadDate;
     private Integer boardViewCount;
 
