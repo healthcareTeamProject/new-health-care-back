@@ -27,6 +27,7 @@ import lombok.Setter;
 public class CustomerEntity {
 
     @Id 
+    @Column(name = "user_id")
     private String userId;
     private String name;
     private String nickname;

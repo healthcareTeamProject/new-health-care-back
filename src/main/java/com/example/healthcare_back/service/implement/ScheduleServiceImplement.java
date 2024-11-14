@@ -37,15 +37,10 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 public class ScheduleServiceImplement implements ScheduleService {
 
-    // 식단 상세 정보 저장소
     private final MealScheduleDetailRepository mealScheduleDetailRepository;
-    // 건강 일정 저장소
     private final HealthScheduleRepository healthScheduleRepository;
-    // 식단 일정 저장소
     private final MealScheduleRepository mealScheduleRepository;
-    // 고객 저장소
     private final CustomerRepository customerRepository;
-    // CSV 유틸리티 클래스
     private final CsvUtil csvUtil;
 
     // 특정 건강 일정 조회
@@ -75,7 +70,7 @@ public class ScheduleServiceImplement implements ScheduleService {
             // 사용자 존재 여부 확인
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
             if (customerEntity == null) {
-                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+                return ResponseDto.noPermission(); // 사용자 ID가 존재하지 않음을 알리는 응답
             }
 
             // 특정 사용자 ID로 건강 일정 목록 조회
@@ -120,10 +115,9 @@ public class ScheduleServiceImplement implements ScheduleService {
         
         try {
 
-            // 사용자 존재 여부 확인
             HealthScheduleEntity hScheduleEntity = healthScheduleRepository.findByHealthScheduleNumberAndUserId(healthScheduleNumber, userId);
             if (hScheduleEntity == null) {
-                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+                return ResponseDto.noPermission(); 
             }
 
             // healthScheduleNumber로 건강 일정 존재 여부 확인
@@ -154,7 +148,7 @@ public class ScheduleServiceImplement implements ScheduleService {
         // 사용자 존재 여부 확인
         HealthScheduleEntity hScheduleEntity = healthScheduleRepository.findByHealthScheduleNumberAndUserId(healthScheduleNumber, userId);
         if (hScheduleEntity == null) {
-            return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+            return ResponseDto.noPermission(); 
         }
 
         try {
@@ -198,7 +192,7 @@ public class ScheduleServiceImplement implements ScheduleService {
             // 사용자 존재 여부 확인
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
             if (customerEntity == null) {
-                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+                return ResponseDto.noPermission(); // 사용자 ID가 존재하지 않음을 알리는 응답
             }
 
 
@@ -263,7 +257,7 @@ public class ScheduleServiceImplement implements ScheduleService {
             // 사용자 존재 여부 확인
             MealScheduleEntity mScheduleEntity = mealScheduleRepository.findByMealScheduleNumberAndUserId(mealScheduleNumber, userId);
             if (mScheduleEntity == null) {
-                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+                return ResponseDto.noPermission(); // 사용자 ID가 존재하지 않음을 알리는 응답
             }
 
             // 스케줄 존재 여부 확인
@@ -307,7 +301,7 @@ public class ScheduleServiceImplement implements ScheduleService {
             // 사용자 존재 여부 확인
             MealScheduleEntity mealScheduleEntity = mealScheduleRepository.findByMealScheduleNumberAndUserId(mealScheduleNumber, userId);
             if (mealScheduleEntity == null) {
-                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
+                return ResponseDto.noPermission(); // 사용자 ID가 존재하지 않음을 알리는 응답
             }
 
             // 자식 엔티티들(세부 식품 정보) 삭제

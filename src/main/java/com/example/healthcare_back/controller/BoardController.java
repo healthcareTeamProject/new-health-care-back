@@ -143,9 +143,10 @@ public class BoardController {
     // 좋아요 추가/취소 (게시물)
     @PutMapping("/{boardNumber}/like")
     public ResponseEntity<? super ResponseDto> likeBoard(
-            @PathVariable("boardNumber") Integer boardNumber
+            @PathVariable("boardNumber") Integer boardNumber, 
+            @AuthenticationPrincipal String userId
     ) {
-        return boardService.putBoardLike(boardNumber);
+        return boardService.putBoardLike(boardNumber, userId);
     }
 
     // 조회수 증가 (게시물)
@@ -160,8 +161,9 @@ public class BoardController {
     @PutMapping("/{boardNumber}/comments/{commentNumber}/like")
     public ResponseEntity<? super ResponseDto> likeComment(
             @PathVariable("boardNumber") Integer boardNumber,
-            @PathVariable("commentNumber") Integer commentNumber
+            @PathVariable("commentNumber") Integer commentNumber, 
+            @AuthenticationPrincipal String userId
     ) {
-        return boardService.putCommentLike(commentNumber);
+        return boardService.putCommentLike(commentNumber, userId);
     }
 }

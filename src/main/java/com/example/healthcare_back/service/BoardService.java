@@ -52,12 +52,12 @@ public interface BoardService {
     ResponseEntity<? super ResponseDto> deleteComment(Integer boardNumber, Integer commentNumber, String userId);
 
     // 게시글 좋아요 누르기
-    ResponseEntity<? super ResponseDto> putBoardLike(Integer boardNumber);
+    ResponseEntity<? super ResponseDto> putBoardLike(Integer boardNumber, String userId);
 
     // 게시글 조회수 증가
     ResponseEntity<? super ResponseDto> increaseViewCount(Integer boardNumber);
 
     // 댓글 좋아요 누르기
-    ResponseEntity<? super ResponseDto> putCommentLike(Integer commentNumber);
+    ResponseEntity<? super ResponseDto> putCommentLike(Integer commentNumber, String userId);
 
 }

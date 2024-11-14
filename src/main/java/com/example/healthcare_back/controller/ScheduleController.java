@@ -143,7 +143,7 @@ public class ScheduleController {
         ResponseEntity<ResponseDto> response = scheduleService.deleteMealScheduleDetail(mealScheduleDetailNumber, userId);
         return response;
     }
-   
+
 }
 
 

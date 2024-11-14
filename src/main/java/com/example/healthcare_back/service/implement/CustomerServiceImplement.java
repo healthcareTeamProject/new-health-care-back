@@ -59,7 +59,7 @@ public class CustomerServiceImplement implements CustomerService{
         CustomerEntity customerEntity = null;
 
         if (!userId.equals(requestedUserId)) {
-            return ResponseDto.noExistUserId(); // 권한이 없다는 응답
+            return ResponseDto.noPermission(); // 권한이 없다는 응답
         }
 
         try {
@@ -82,7 +82,7 @@ public class CustomerServiceImplement implements CustomerService{
         
         // 요청한 userId와 인증된 userId가 다른 경우 권한 없음 응답
         if (!userId.equals(requestedUserId)) {
-            return ResponseDto.noExistUserId(); // 권한이 없다는 응답
+            return ResponseDto.noPermission(); // 권한이 없다는 응답
         }
     
         List<UserMuscleFatEntity> userMuscleFatEntities;
@@ -106,7 +106,7 @@ public class CustomerServiceImplement implements CustomerService{
 
         // 요청한 userId와 인증된 userId가 다른 경우 권한 없음 응답
         if (!userId.equals(requestedUserId)) {
-            return ResponseDto.noExistUserId(); // 권한이 없다는 응답
+            return ResponseDto.noPermission(); // 권한이 없다는 응답
         }
 
         List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities;
@@ -160,7 +160,7 @@ public class CustomerServiceImplement implements CustomerService{
 
         // 요청한 userId와 인증된 userId가 다른 경우 권한 없음 응답
         if (!userId.equals(requestedUserId)) {
-            return ResponseDto.noExistUserId(); // 권한이 없다는 응답
+            return ResponseDto.noPermission(); // 권한이 없다는 응답
         }
 
         try {
@@ -201,7 +201,7 @@ public class CustomerServiceImplement implements CustomerService{
 
         // 요청한 userId와 인증된 userId가 다른 경우 권한 없음 응답
         if (!userId.equals(requestedUserId)) {
-            return ResponseDto.noExistUserId(); // 권한이 없다는 응답
+            return ResponseDto.noPermission(); // 권한이 없다는 응답
         }
 
         try {
