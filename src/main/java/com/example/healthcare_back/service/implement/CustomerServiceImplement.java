@@ -11,6 +11,7 @@ import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserMuscleFatRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
+import com.example.healthcare_back.dto.response.customer.GetCustomerListResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetCustomerResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetSignInResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetUserMuscleFatListResponseDto;
@@ -52,23 +53,23 @@ public class CustomerServiceImplement implements CustomerService{
         return GetSignInResponseDto.success(customerEntity); // 성공적으로 조회 시 응답
     }
 
-    // 고객 정보 조회
+    // 가입된 고객 정보 조회
     @Override
-    public ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId) {
-       
-        CustomerEntity customerEntity;
+    public ResponseEntity<? super GetCustomerListResponseDto> getCustomerList() {
+
+        List<CustomerEntity> customerList;
+        List<GetCustomerResponseDto> customerResponseList = new ArrayList<>();
 
         try {
-            // 주어진 userId로 고객 조회
-            customerEntity = customerRepository.findByUserId(userId);
-            if (customerEntity == null) return ResponseDto.noExistUserId(); // 고객이 없을 경우
+            // 가입된 모든 고객 정보 조회
+            customerList = customerRepository.findAll();
 
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
         }
         
-        return GetCustomerResponseDto.success(customerEntity); // 성공적으로 조회 시 응답
+        return GetCustomerListResponseDto.success(customerResponseList); // 성공적으로 조회 시 응답
     }
 
     // 사용자 근육/지방 데이터 리스트 조회

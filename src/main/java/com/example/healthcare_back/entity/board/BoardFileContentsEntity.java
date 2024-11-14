@@ -22,9 +22,7 @@ public class BoardFileContentsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer boardFileNumber;
-    
     private Integer boardNumber;
-
     private String boardFileContents;
 
     public BoardFileContentsEntity(PostBoardRequestDto dto, Integer boardNumber) {

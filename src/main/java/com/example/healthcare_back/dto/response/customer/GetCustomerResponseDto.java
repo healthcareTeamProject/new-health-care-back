@@ -40,8 +40,8 @@ public class GetCustomerResponseDto extends ResponseDto {
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal bodyFatMass;
 
-    public GetCustomerResponseDto(CustomerEntity customerEntity) {
-        super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
+    public GetCustomerResponseDto(String code, String message, CustomerEntity customerEntity) {
+        super(code, message);
         this.userId = customerEntity.getUserId();
         this.name = customerEntity.getName();
         this.nickname = customerEntity.getNickname();
@@ -58,7 +58,7 @@ public class GetCustomerResponseDto extends ResponseDto {
     }
 
     public static ResponseEntity<GetCustomerResponseDto> success(CustomerEntity customerEntity) {
-        GetCustomerResponseDto responseBody = new GetCustomerResponseDto(customerEntity);
+        GetCustomerResponseDto responseBody = new GetCustomerResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, customerEntity);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 }

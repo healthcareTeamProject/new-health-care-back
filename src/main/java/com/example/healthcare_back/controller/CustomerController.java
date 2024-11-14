@@ -12,7 +12,7 @@ import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserMuscleFatRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchUserThreeMajorLiftRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
-import com.example.healthcare_back.dto.response.customer.GetCustomerResponseDto;
+import com.example.healthcare_back.dto.response.customer.GetCustomerListResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetSignInResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetUserMuscleFatListResponseDto;
 import com.example.healthcare_back.dto.response.customer.GetUserThreeMajorLiftListResponseDto;
@@ -39,10 +39,9 @@ public class CustomerController {
 
     // 고객의 기본 정보
     @GetMapping(value = {"", "/"})
-    public ResponseEntity<? super GetCustomerResponseDto> getCustomer(
-        @AuthenticationPrincipal String userId
-    ) {
-        return customerService.getCustomer(userId);
+    public ResponseEntity<? super GetCustomerListResponseDto> getCustomerList() {
+        ResponseEntity<? super GetCustomerListResponseDto> response = customerService.getCustomerList();
+        return response;
     }
 
     // 고객의 신체 정보 리스트

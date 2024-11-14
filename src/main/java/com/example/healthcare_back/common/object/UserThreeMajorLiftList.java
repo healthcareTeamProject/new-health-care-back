@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.example.healthcare_back.common.util.CustomBigDecimalSerializer;
 import com.example.healthcare_back.entity.customer.UserThreeMajorLiftEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class UserThreeMajorLiftList {
     private BigDecimal benchPress;
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal squat;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime userThreeMajorLiftDate;
 
     // UserThreeMajorLiftEntity 객체를 사용하여 UserThreeMajorLiftList 객체를 생성하는 생성자

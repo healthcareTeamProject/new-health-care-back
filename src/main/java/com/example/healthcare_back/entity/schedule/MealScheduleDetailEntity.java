@@ -2,6 +2,9 @@ package com.example.healthcare_back.entity.schedule;
 
 import java.math.BigDecimal;
 
+import com.example.healthcare_back.common.util.CustomBigDecimalSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +38,7 @@ public class MealScheduleDetailEntity {
     private String mealName; // 식품 이름
 
     @Column(nullable = false)
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal mealKcal; // 칼로리 정보
 
     @Column(nullable = false)
