@@ -1,7 +1,6 @@
 package com.example.healthcare_back.dto.request.schedule;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
@@ -19,10 +18,10 @@ public class PostMealScheduleRequestDto {
     private String mealTitle;
 
     @NotNull
-    private LocalDateTime mealScheduleStart;
+    private String mealScheduleStart;
 
     @NotNull
-    private LocalDateTime mealScheduleEnd;
+    private String mealScheduleEnd;
 
     @NotNull
     private List<MealDetail> mealMemo; // 변경된 부분: mealMemo를 List<MealDetail>로 수정

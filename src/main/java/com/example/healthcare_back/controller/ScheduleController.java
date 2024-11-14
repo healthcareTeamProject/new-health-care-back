@@ -65,18 +65,20 @@ public class ScheduleController {
     @PatchMapping("/health-schedule/{healthScheduleNumber}")
     public ResponseEntity<ResponseDto> patchHealthSchedule(
             @RequestBody @Valid PatchHealthScheduleRequestDto requestBody,
-            @PathVariable Integer healthScheduleNumber
+            @PathVariable Integer healthScheduleNumber,
+            @AuthenticationPrincipal String userId
     ) {
-        ResponseEntity<ResponseDto> response = scheduleService.patchHealthSchedule(requestBody, healthScheduleNumber);
+        ResponseEntity<ResponseDto> response = scheduleService.patchHealthSchedule(requestBody, healthScheduleNumber, userId);
         return response;
     }
 
     // 운동 일정 삭제
     @DeleteMapping("/health-schedule/{healthScheduleNumber}")
     public ResponseEntity<ResponseDto> deleteHealthSchedule(
-            @PathVariable Integer healthScheduleNumber
+            @PathVariable Integer healthScheduleNumber,
+            @AuthenticationPrincipal String userId
     ) {
-        ResponseEntity<ResponseDto> response = scheduleService.deleteHealthSchedule(healthScheduleNumber);
+        ResponseEntity<ResponseDto> response = scheduleService.deleteHealthSchedule(healthScheduleNumber, userId);
         return response;
     }
 
@@ -115,27 +117,30 @@ public class ScheduleController {
     @PatchMapping("/meal-schedule/{mealScheduleNumber}")
     public ResponseEntity<ResponseDto> patchMealSchedule(
             @RequestBody @Valid PatchMealScheduleRequestDto requestBody,
-            @PathVariable Integer mealScheduleNumber
+            @PathVariable Integer mealScheduleNumber,
+            @AuthenticationPrincipal String userId
     ) {
-        ResponseEntity<ResponseDto> response = scheduleService.patchMealSchedule(requestBody, mealScheduleNumber);
+        ResponseEntity<ResponseDto> response = scheduleService.patchMealSchedule(requestBody, mealScheduleNumber, userId);
         return response;
     }
 
     // 식단 일정 삭제
     @DeleteMapping("/meal-schedule/{mealScheduleNumber}")
     public ResponseEntity<ResponseDto> deleteMealSchedule(
-            @PathVariable Integer mealScheduleNumber
+            @PathVariable Integer mealScheduleNumber,
+            @AuthenticationPrincipal String userId
     ) {
-        ResponseEntity<ResponseDto> response = scheduleService.deleteMealSchedule(mealScheduleNumber);
+        ResponseEntity<ResponseDto> response = scheduleService.deleteMealSchedule(mealScheduleNumber, userId);
         return response;
     }
 
     // 식단 상세 일정 삭제
     @DeleteMapping("/meal-schedule-detail/{mealScheduleDetailNumber}")
     public ResponseEntity<ResponseDto> deleteMealScheduleDetail(
-            @PathVariable Integer mealScheduleDetailNumber
+            @PathVariable Integer mealScheduleDetailNumber,
+            @AuthenticationPrincipal String userId
     ) {
-        ResponseEntity<ResponseDto> response = scheduleService.deleteMealScheduleDetail(mealScheduleDetailNumber);
+        ResponseEntity<ResponseDto> response = scheduleService.deleteMealScheduleDetail(mealScheduleDetailNumber, userId);
         return response;
     }
    

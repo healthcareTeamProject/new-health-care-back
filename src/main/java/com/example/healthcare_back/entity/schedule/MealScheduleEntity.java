@@ -1,11 +1,8 @@
 package com.example.healthcare_back.entity.schedule;
 
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.healthcare_back.dto.request.schedule.PostMealScheduleRequestDto;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,12 +44,10 @@ public class MealScheduleEntity {
     private String mealMemo;
 
     @Column(nullable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime mealScheduleStart;
+    private String mealScheduleStart;
 
     @Column(nullable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime mealScheduleEnd;
+    private String mealScheduleEnd;
 
     // 연관된 식단 상세 일정 리스트. 부모 식단 일정이 삭제되면 자동으로 연관된 상세 일정도 삭제됨
     @OneToMany(mappedBy = "mealSchedule", cascade = CascadeType.REMOVE, orphanRemoval = true)

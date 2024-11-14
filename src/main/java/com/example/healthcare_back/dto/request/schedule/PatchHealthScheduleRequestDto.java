@@ -1,5 +1,4 @@
 package com.example.healthcare_back.dto.request.schedule;
-import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,8 +14,8 @@ public class PatchHealthScheduleRequestDto {
     @NotBlank
     private String healthTitle; // 수정할 운동 일정 내용
     @NotNull
-    private LocalDateTime healthScheduleStart; // 수정할 시작 날짜
+    private String healthScheduleStart; // 수정할 시작 날짜
     @NotNull
-    private LocalDateTime healthScheduleEnd; // 수정할 종료 날짜
+    private String healthScheduleEnd; // 수정할 종료 날짜
 
 }

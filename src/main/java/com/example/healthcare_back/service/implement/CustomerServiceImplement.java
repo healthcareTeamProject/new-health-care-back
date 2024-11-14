@@ -34,171 +34,190 @@ public class CustomerServiceImplement implements CustomerService{
     private final UserMuscleFatRepository userMuscleFatRepository;
     private final UserThreeMajorLiftRepository userThreeMajorLiftRepository;
 
-    // 사용자 로그인 정보 조회
     @Override
     public ResponseEntity<? super GetSignInResponseDto> getSignIn(String userId) {
         
-        CustomerEntity customerEntity;
+        CustomerEntity customerEntity = null;
 
         try {
-            // 주어진 userId로 고객 조회
+
             customerEntity = customerRepository.findByUserId(userId);
-            if (customerEntity == null) return ResponseDto.noExistUserId(); // 고객이 없을 경우
+            if (customerEntity == null) return ResponseDto.noExistUserId();
 
         } catch (Exception exception) {
             exception.printStackTrace();
-            return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
+            return ResponseDto.databaseError();
         }
 
-        return GetSignInResponseDto.success(customerEntity); // 성공적으로 조회 시 응답
+        return GetSignInResponseDto.success(customerEntity);
+        
     }
 
-    // 가입된 고객 정보 조회
+    
     @Override
-    public ResponseEntity<? super GetCustomerListResponseDto> getCustomerList() {
+    public ResponseEntity<? super GetCustomerResponseDto> getCustomer(String userId, String requestedUserId) {
+       
+        CustomerEntity customerEntity = null;
 
-        List<CustomerEntity> customerList;
-        List<GetCustomerResponseDto> customerResponseList = new ArrayList<>();
-
-        try {
-            // 가입된 모든 고객 정보 조회
-            customerList = customerRepository.findAll();
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
+        if (!userId.equals(requestedUserId)) {
+            return ResponseDto.noExistUserId(); // 권한이 없다는 응답
         }
-        
-        return GetCustomerListResponseDto.success(customerResponseList); // 성공적으로 조회 시 응답
-    }
-
-    // 사용자 근육/지방 데이터 리스트 조회
-    @Override
-    public ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList(String userId) {
-        
-        List<UserMuscleFatEntity> userMuscleFatEntities = new ArrayList<>();
 
         try {
-            // 주어진 userId로 사용자 근육/지방 데이터 조회
-            userMuscleFatEntities = userMuscleFatRepository.findByUserIdOrderByUserMuscleFatNumberDesc(userId);
             
-            // 데이터가 없을 경우
+            customerEntity = customerRepository.findByUserId(userId);
+            if (customerEntity == null) return ResponseDto.noExistUserId();
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+
+        }
+        
+        return GetCustomerResponseDto.success(customerEntity);
+
+    }
+
+    @Override
+    public ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList(String userId, String requestedUserId) {
+        
+        // 요청한 userId와 인증된 userId가 다른 경우 권한 없음 응답
+        if (!userId.equals(requestedUserId)) {
+            return ResponseDto.noExistUserId(); // 권한이 없다는 응답
+        }
+    
+        List<UserMuscleFatEntity> userMuscleFatEntities;
+    
+        try {
+            userMuscleFatEntities = userMuscleFatRepository.findByUserIdOrderByUserMuscleFatNumberAsc(requestedUserId);
             if (userMuscleFatEntities.isEmpty()) {
-                return ResponseDto.noExistUserMuscleFatInformation(); // 사용자 근육/지방 정보 없음 응답
+                userMuscleFatEntities = new ArrayList<>();
             }
 
         } catch (Exception exception) {
-            exception.printStackTrace(); // 오류 로그 출력
-            return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+    
+        return GetUserMuscleFatListResponseDto.success(userMuscleFatEntities);
+    }
+    
+    @Override
+    public ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLiftList(String userId, String requestedUserId) {
+
+        // 요청한 userId와 인증된 userId가 다른 경우 권한 없음 응답
+        if (!userId.equals(requestedUserId)) {
+            return ResponseDto.noExistUserId(); // 권한이 없다는 응답
         }
 
-        return GetUserMuscleFatListResponseDto.success(userMuscleFatEntities); // 성공적으로 조회 시 응답
-    }
-
-    // 사용자 3대 운동 기록 리스트 조회
-    @Override
-    public ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLiftList(String userId) {
-        
-        List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities = new ArrayList<>();
+        List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities;
 
         try {
-            // 주어진 userId로 사용자 3대 운동 데이터 조회
-            userThreeMajorLiftEntities = userThreeMajorLiftRepository.findByUserIdOrderByUserThreeMajorLiftNumberDesc(userId);
-
-            // 데이터가 없을 경우
+            // 추가 로깅과 예외 관리 기능
+            userThreeMajorLiftEntities = userThreeMajorLiftRepository.findByUserIdOrderByUserThreeMajorLiftNumberAsc(requestedUserId);
             if (userThreeMajorLiftEntities.isEmpty()) {
-                return ResponseDto.noExistUserThreeMajorLiftInformation(); // 사용자 3대 운동 정보 없음 응답
+                userThreeMajorLiftEntities = new ArrayList<>();
             }
 
         } catch (Exception exception) {
-            exception.printStackTrace(); // 오류 로그 출력
-            return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
+            exception.printStackTrace(); // 예외 로깅
+
+            return ResponseDto.databaseError();
         }
 
-        return GetUserThreeMajorLiftListResponseDto.success(userThreeMajorLiftEntities); // 성공적으로 조회 시 응답
+        return GetUserThreeMajorLiftListResponseDto.success(userThreeMajorLiftEntities);
     }
 
-    // 고객 정보 수정
     @Override
     public ResponseEntity<ResponseDto> patchCustomer(PatchCustomerRequestDto dto, String userId) {
-        
-        try {
-            // 주어진 userId로 고객 조회
-            CustomerEntity customerEntity = customerRepository.findByUserId(userId);
 
+        try {
+
+            // 사용자 존재 여부 확인
+            CustomerEntity customerEntity = customerRepository.findByUserId(userId);
             if (customerEntity == null) {
-                return ResponseDto.noExistUserId(); // 고객이 없을 경우 응답
+                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
             }
 
-            // 고객 정보 업데이트
             customerEntity.setName(dto.getName());
             customerEntity.setNickname(dto.getNickname());
             customerEntity.setProfileImage(dto.getProfileImage());
             customerEntity.setPersonalGoals(dto.getPersonalGoals());
             customerEntity.setHeight(dto.getHeight());
-            customerRepository.save(customerEntity); // 변경 사항 저장
+            customerRepository.save(customerEntity);
                 
         } catch (Exception exception) {
             exception.printStackTrace();
-            return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
+            return ResponseDto.databaseError();
         }
 
-        return ResponseDto.success(); // 성공 응답
+        return ResponseDto.success();
+
     }
 
-    // 사용자 근육/지방 정보 업데이트
+
     @Override
-    public ResponseEntity<ResponseDto> patchUserMuscleFatCustomer(PatchUserMuscleFatRequestDto dto, String userId) {
-        
+    public ResponseEntity<ResponseDto> patchUserMuscleFatCustomer(PatchUserMuscleFatRequestDto dto, String userId, String requestedUserId) {
+
+        // 요청한 userId와 인증된 userId가 다른 경우 권한 없음 응답
+        if (!userId.equals(requestedUserId)) {
+            return ResponseDto.noExistUserId(); // 권한이 없다는 응답
+        }
+
         try {
-            // 주어진 userId로 고객 조회
+
+            // 사용자 존재 여부 확인
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
-          
             if (customerEntity == null) {
-                return ResponseDto.noExistUserId(); // 고객이 없을 경우 응답
+                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
             }
 
-            // 고객의 근육/지방 정보 업데이트
             customerEntity.setWeight(dto.getWeight());
             customerEntity.setSkeletalMuscleMass(dto.getSkeletalMuscleMass());
             customerEntity.setBodyFatMass(dto.getBodyFatMass());
-            customerRepository.save(customerEntity); // 변경 사항 저장
+            customerRepository.save(customerEntity);
 
-            // 새로운 UserMuscleFatEntity 객체 생성 후 저장
+            // 새로운 UserMuscleFatEntity 객체 생성
             UserMuscleFatEntity newUserMuscleFat = new UserMuscleFatEntity();
             newUserMuscleFat.setUserId(userId); // 유저 ID 설정
             newUserMuscleFat.setWeight(dto.getWeight());
             newUserMuscleFat.setSkeletalMuscleMass(dto.getSkeletalMuscleMass());
             newUserMuscleFat.setBodyFatMass(dto.getBodyFatMass());
             newUserMuscleFat.setUserMuscleFatDate(LocalDateTime.now()); // 현재 날짜 설정
+            // 새로운 기록 저장
             userMuscleFatRepository.save(newUserMuscleFat);
 
         } catch (Exception exception) {
             exception.printStackTrace();
-            return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
+            return ResponseDto.databaseError();
         }
 
-        return ResponseDto.success(); // 성공 응답
+        return ResponseDto.success();
+
     }
 
-    // 사용자 3대 운동 정보 업데이트
+
     @Override
-    public ResponseEntity<ResponseDto> patchThreeMajorLiftCustomer(PatchUserThreeMajorLiftRequestDto dto, String userId) {
-        
+    public ResponseEntity<ResponseDto> patchThreeMajorLiftCustomer(PatchUserThreeMajorLiftRequestDto dto, String userId, String requestedUserId) {
+
+        // 요청한 userId와 인증된 userId가 다른 경우 권한 없음 응답
+        if (!userId.equals(requestedUserId)) {
+            return ResponseDto.noExistUserId(); // 권한이 없다는 응답
+        }
+
         try {
-            // 주어진 userId로 고객 조회
+
+            // 사용자 존재 여부 확인
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
             if (customerEntity == null) {
-                return ResponseDto.noExistUserId(); // 고객이 없을 경우 응답
+                return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
             }
 
-            // 고객의 3대 운동 정보 업데이트
             customerEntity.setDeadlift(dto.getDeadlift());
             customerEntity.setBenchPress(dto.getBenchPress());
             customerEntity.setSquat(dto.getSquat());
-            customerRepository.save(customerEntity); // 변경 사항 저장
+            customerRepository.save(customerEntity);
 
-            // 새로운 UserThreeMajorLiftEntity 객체 생성 후 저장
             UserThreeMajorLiftEntity newUserThreeMajorLift = new UserThreeMajorLiftEntity();
             newUserThreeMajorLift.setUserId(userId); // 유저 ID 설정
             newUserThreeMajorLift.setDeadlift(dto.getDeadlift());
@@ -207,11 +226,13 @@ public class CustomerServiceImplement implements CustomerService{
             newUserThreeMajorLift.setUserThreeMajorLiftDate(LocalDateTime.now()); // 현재 날짜 설정
             userThreeMajorLiftRepository.save(newUserThreeMajorLift);
 
+                
         } catch (Exception exception) {
             exception.printStackTrace();
-            return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
+            return ResponseDto.databaseError();
         }
 
-        return ResponseDto.success(); // 성공 응답
+        return ResponseDto.success();
     }
+
 }

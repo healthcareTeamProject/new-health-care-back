@@ -1569,7 +1569,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더  |    X     |
+| Authorization | Bearer 토큰 인증 헤더 |    X     |
 
 ###### Example
 
@@ -1583,38 +1583,38 @@ curl -X GET "http://localhost:4000/api/v1/board"
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
 
 ###### Response Body
 
 | name    |    type     |      description      | required |
 | ------- | :---------: | :-------------------: | :------: |
-| code    |   String    |       결과 코드        |    O     |
-| message |   String    | 결과 코드에 대한 설명   |    O     |
-| board   | BoardList[] |     게시글 리스트       |    O     |
+| code    |   String    |       결과 코드       |    O     |
+| message |   String    | 결과 코드에 대한 설명 |    O     |
+| board   | BoardList[] |     게시글 리스트     |    O     |
 
 **BoardList**
-| name              | type          | description        | required |
+| name | type | description | required |
 |-------------------|:-------------:|:------------------:|:--------:|
-| boardNumber       | Integer       | 게시물 번호         | O         |
-| boardTitle        | String        | 게시물 제목         | O         |
-| userId            | String        | 게시물 작성자 아이디 | O         |
-| boardUploadDate   | String        | 게시물 작성날짜     | O        |
-| boardContents     | String        | 게시물 내용         | O        |
-| youtubeVideoLink  | String        | 유튜브 비디오 링크   | X         |
-| boardFileContents | String        | 게시물 자료          | X        |
-| boardViewCount    | Integer       | 게시물 조회수         | O       |
-| boardLikeCount    | Integer       | 게시물 추천 수        | O       |
-| comment           | CommentList[] | 댓글 리스트           | O       |
+| boardNumber | Integer | 게시물 번호 | O |
+| boardTitle | String | 게시물 제목 | O |
+| userId | String | 게시물 작성자 아이디 | O |
+| boardUploadDate | String | 게시물 작성날짜 | O |
+| boardContents | String | 게시물 내용 | O |
+| youtubeVideoLink | String | 유튜브 비디오 링크 | X |
+| boardFileContents | String | 게시물 자료 | X |
+| boardViewCount | Integer | 게시물 조회수 | O |
+| boardLikeCount | Integer | 게시물 추천 수 | O |
+| comment | CommentList[] | 댓글 리스트 | O |
 
 **commentList**
-| name             | type    | description      | required |
+| name | type | description | required |
 |------------------|:-------:|:----------------:|:--------:|
-| commentNumber    | Integer | 댓글 번호         | O        |
-| commentContents  | String  | 댓글 내용         | O        |
-| userId           | String  | 댓글 사용자 아이디 | O        |
-| commentDate      | String  | 댓글 작성 날짜    | O         |
-| commentLikeCount | Integer | 댓글 추천수       | O         |
+| commentNumber | Integer | 댓글 번호 | O |
+| commentContents | String | 댓글 내용 | O |
+| userId | String | 댓글 사용자 아이디 | O |
+| commentDate | String | 댓글 작성 날짜 | O |
+| commentLikeCount | Integer | 댓글 추천수 | O |
 
 ###### Example
 
@@ -1710,7 +1710,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더  |    X     |
+| Authorization | Bearer 토큰 인증 헤더 |    X     |
 
 ###### Example
 
@@ -1725,33 +1725,33 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
 
 ###### Response Body
 
 | name              |     type      |      description      | required |
 | ----------------- | :-----------: | :-------------------: | :------: |
-| code              |    String     |       결과 코드        |    O     |
-| message           |    String     | 결과 코드에 대한 설명   |    O     |
-| boardNumber       |    Integer    |      게시물 번호        |    O     |
-| boardTitle        |    String     |      게시물 제목        |    O     |
-| userId            |    String     | 게시물 아이디(닉네임)   |    O     |
-| boardUploadDate   |    String     | 작성 게시물 생성 날짜   |    O     |
-| boardContents     |    String     |      게시물 내용       |    O     |
-| youtubeVideoLink  |    String     |  유튜브 비디오 링크    |    X     |
-| boardFileContents |    String     |      게시물 자료       |    X     |
-| boardViewCount    |    Integer    |        조회수          |    O     |
-| boardLikeCount    |    Integer    |    게시물 추천 수      |    O     |
-| comment           | CommentList[] |      댓글 리스트       |    O     |
+| code              |    String     |       결과 코드       |    O     |
+| message           |    String     | 결과 코드에 대한 설명 |    O     |
+| boardNumber       |    Integer    |      게시물 번호      |    O     |
+| boardTitle        |    String     |      게시물 제목      |    O     |
+| userId            |    String     | 게시물 아이디(닉네임) |    O     |
+| boardUploadDate   |    String     | 작성 게시물 생성 날짜 |    O     |
+| boardContents     |    String     |      게시물 내용      |    O     |
+| youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
+| boardFileContents |    String     |      게시물 자료      |    X     |
+| boardViewCount    |    Integer    |        조회수         |    O     |
+| boardLikeCount    |    Integer    |    게시물 추천 수     |    O     |
+| comment           | CommentList[] |      댓글 리스트      |    O     |
 
 **commentList**
-| name             | type    | description      | required |
+| name | type | description | required |
 |------------------|:-------:|:----------------:|:--------:|
-| commentNumber    | Integer | 댓글 번호         | O        |
-| commentContents  | String  | 댓글 내용         | O        |
-| userId           | String  | 댓글 사용자 아이디 | O        |
-| commentDate      | String  | 댓글 작성 날짜     | O        |
-| commentLikeCount | Integer | 댓글 추천수        | O        |
+| commentNumber | Integer | 댓글 번호 | O |
+| commentContents | String | 댓글 내용 | O |
+| userId | String | 댓글 사용자 아이디 | O |
+| commentDate | String | 댓글 작성 날짜 | O |
+| commentLikeCount | Integer | 댓글 추천수 | O |
 
 ###### Example
 
@@ -1852,7 +1852,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더  |    X     |
+| Authorization | Bearer 토큰 인증 헤더 |    X     |
 
 ###### Example
 
@@ -1867,24 +1867,24 @@ curl -X GET "http://localhost:4000/api/v1/board/1/comment-list" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
 
 ###### Response Body
 
-| name              |     type      |      description      | required |
-| ----------------- | :-----------: | :-------------------: | :------: |
-| code              |    String     |       결과 코드        |    O     |
-| message           |    String     | 결과 코드에 대한 설명   |    O     |
-| comment           | CommentList[] |      댓글 리스트       |    O     |
+| name    |     type      |      description      | required |
+| ------- | :-----------: | :-------------------: | :------: |
+| code    |    String     |       결과 코드       |    O     |
+| message |    String     | 결과 코드에 대한 설명 |    O     |
+| comment | CommentList[] |      댓글 리스트      |    O     |
 
 **commentList**
-| name              | type    | description      | required |
+| name | type | description | required |
 |-------------------|:-------:|:----------------:|:--------:|
-| commentNumber    | Integer | 댓글 번호         | O        |
-| commentContents  | String  | 댓글 내용         | O        |
-| userId            | String  | 댓글 사용자 아이디 | O        |
-| commentDate      | String  | 댓글 작성 날짜     | O         |
-| commentLikeCount | Integer | 댓글 추천수        | O        |
+| commentNumber | Integer | 댓글 번호 | O |
+| commentContents | String | 댓글 내용 | O |
+| userId | String | 댓글 사용자 아이디 | O |
+| commentDate | String | 댓글 작성 날짜 | O |
+| commentLikeCount | Integer | 댓글 추천수 | O |
 
 ###### Example
 
@@ -1964,7 +1964,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더  |    O     |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
 
 ###### Example
 
@@ -1979,33 +1979,33 @@ curl -X GET "http://localhost:4000/api/v1/board/user" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
 
 ###### Response Body
 
 | name              |     type      |      description      | required |
 | ----------------- | :-----------: | :-------------------: | :------: |
-| code              |    String     |       결과 코드        |    O     |
-| message           |    String     | 결과 코드에 대한 설명   |    O     |
-| boardNumber       |    Integer    |      게시물 번호       |    O     |
-| boardTitle        |    String     |      게시물 제목       |    O     |
-| userId            |    String     | 게시물 아이디(닉네임)   |    O     |
-| boardUploadDate   |    String     | 작성 게시물 생성 날짜   |    O     |
-| boardContents     |    String     |      게시물 내용       |    O     |
-| youtubeVideoLink  |    String     |  유튜브 비디오 링크     |    X     |
-| boardFileContents |    String     |      게시물 자료        |    X     |
-| boardViewCount    |    Integer    |        조회수          |    O     |
-| boardLikeCount    |    Integer    |    게시물 추천 수       |    O     |
-| comment           | CommentList[] |      댓글 리스트        |    O     |
+| code              |    String     |       결과 코드       |    O     |
+| message           |    String     | 결과 코드에 대한 설명 |    O     |
+| boardNumber       |    Integer    |      게시물 번호      |    O     |
+| boardTitle        |    String     |      게시물 제목      |    O     |
+| userId            |    String     | 게시물 아이디(닉네임) |    O     |
+| boardUploadDate   |    String     | 작성 게시물 생성 날짜 |    O     |
+| boardContents     |    String     |      게시물 내용      |    O     |
+| youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
+| boardFileContents |    String     |      게시물 자료      |    X     |
+| boardViewCount    |    Integer    |        조회수         |    O     |
+| boardLikeCount    |    Integer    |    게시물 추천 수     |    O     |
+| comment           | CommentList[] |      댓글 리스트      |    O     |
 
 **commentList**
-| name              | type    | description      | required |
+| name | type | description | required |
 |-------------------|:-------:|:----------------:|:--------:|
-| commentNumber    | Integer | 댓글 번호         | O        |
-| commentContents  | String  | 댓글 내용         | O        |
-| userId            | String  | 댓글 사용자 아이디 | O        |
-| commentDate      | String  | 댓글 작성 날짜     | O        |
-| commentLikeCount | Integer | 댓글 추천수       | O        |
+| commentNumber | Integer | 댓글 번호 | O |
+| commentContents | String | 댓글 내용 | O |
+| userId | String | 댓글 사용자 아이디 | O |
+| commentDate | String | 댓글 작성 날짜 | O |
+| commentLikeCount | Integer | 댓글 추천수 | O |
 
 ###### Example
 
@@ -2111,7 +2111,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더  |    X     |
+| Authorization | Bearer 토큰 인증 헤더 |    X     |
 
 ###### Example
 
@@ -2126,7 +2126,7 @@ curl -X GET "http://localhost:4000/api/v1/board/category/상체운동" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
 
 ###### Response Body
 
@@ -2146,13 +2146,13 @@ curl -X GET "http://localhost:4000/api/v1/board/category/상체운동" \
 | comment           | CommentList[] |      댓글 리스트      |    O     |
 
 **commentList**
-| name              | type    | description       | required |
+| name | type | description | required |
 |-------------------|:-------:|:-----------------:|:--------:|
-| commentNumber     | Integer | 댓글 번호          | O        |
-| commentContents   | String  | 댓글 내용          | O        |
-| userId            | String  | 댓글 사용자 아이디  | O        |
-| commentDate       | String  | 댓글 작성 날짜     | O         |
-| commentLikeCount  | Integer | 댓글 추천수        | O        |
+| commentNumber | Integer | 댓글 번호 | O |
+| commentContents | String | 댓글 내용 | O |
+| userId | String | 댓글 사용자 아이디 | O |
+| commentDate | String | 댓글 작성 날짜 | O |
+| commentLikeCount | Integer | 댓글 추천수 | O |
 
 ###### Example
 
@@ -2248,7 +2248,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더  |    X     |
+| Authorization | Bearer 토큰 인증 헤더 |    X     |
 
 ###### Example
 
@@ -2263,7 +2263,7 @@ curl -X GET "http://localhost:4000/api/v1/board/tag/운동" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
 
 ###### Response Body
 
@@ -2283,13 +2283,13 @@ curl -X GET "http://localhost:4000/api/v1/board/tag/운동" \
 | comment           | CommentList[] |      댓글 리스트      |    O     |
 
 **commentList**
-| name              | type    | description       | required |
+| name | type | description | required |
 |------------------ |:-------:|:-----------------:|:--------:|
-| commentNumber     | Integer | 댓글 번호          | O        |
-| commentContents   | String  | 댓글 내용          | O        |
-| userId            | String  | 댓글 사용자 아이디  | O        |
-| commentDate       | String  | 댓글 작성 날짜      | O        |
-| commentLikeCount  | Integer | 댓글 추천수        | O         |
+| commentNumber | Integer | 댓글 번호 | O |
+| commentContents | String | 댓글 내용 | O |
+| userId | String | 댓글 사용자 아이디 | O |
+| commentDate | String | 댓글 작성 날짜 | O |
+| commentLikeCount | Integer | 댓글 추천수 | O |
 
 ###### Example
 
@@ -3451,30 +3451,6 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-**응답 : 실패 (존재하지 않는 아이디)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "NI",
-  "message": "No exist user id."
-}
-```
-
-**응답 : 실패 (존재하지 않는 스케줄)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "NS",
-  "message": "No exist schedule."
-}
-```
-
 **응답 실패 (데이터 유효성 검사 실패)**
 
 ```bash
@@ -3624,30 +3600,6 @@ Content-Type: application/json;charset=UTF-8
         }
         ...
     ]
-}
-```
-
-**응답 : 실패 (존재하지 않는 아이디)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "NI",
-  "message": "No exist user id."
-}
-```
-
-**응답 : 실패 (존재하지 않는 스케줄)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "NS",
-  "message": "No exist schedule."
 }
 ```
 
@@ -3984,30 +3936,6 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-**응답 실패 (데이터 유효성 검사 실패)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "VF",
-  "message": "Validation failed."
-}
-```
-
-**응답 : 실패 (존재하지 않는 스케줄)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "NS",
-  "message": "No exist schedule."
-}
-```
-
 **응답 : 실패 (인증 실패)**
 
 ```bash
@@ -4110,30 +4038,6 @@ Content-Type: application/json;charset=UTF-8
       },
     "totalKcal": 320.0
   ]
-}
-```
-
-**응답 실패 (데이터 유효성 검사 실패)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "VF",
-  "message": "Validation failed."
-}
-```
-
-**응답 : 실패 (존재하지 않는 스케줄)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "NS",
-  "message": "No exist schedule."
 }
 ```
 

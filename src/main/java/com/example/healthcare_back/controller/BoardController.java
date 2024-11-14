@@ -134,8 +134,8 @@ public class BoardController {
     @DeleteMapping("/{boardNumber}/comments/{commentNumber}")
     public ResponseEntity<? super ResponseDto> deleteComment(
             @PathVariable("boardNumber") Integer boardNumber,
-            @PathVariable("commentNumber") Integer commentNumber,
-            @AuthenticationPrincipal String userId // 권한 확인을 위한 userId를 전달하는 경우
+            @PathVariable("commentNumber") Integer commentNumber, 
+            @AuthenticationPrincipal String userId// 권한 확인을 위한 userId를 전달하는 경우
     ) {
         return boardService.deleteComment(boardNumber, commentNumber, userId);
     }

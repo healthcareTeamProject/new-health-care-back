@@ -11,21 +11,19 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Getter;
-
 @Getter
 public class UserThreeMajorLiftList {
     
-    private Integer userThreeMajorLiftNumber;
+    private final Integer userThreeMajorLiftNumber;
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal deadlift;
+    private final BigDecimal deadlift;
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal benchPress;
+    private final BigDecimal benchPress;
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal squat;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime userThreeMajorLiftDate;
+    private final BigDecimal squat;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private final LocalDateTime userThreeMajorLiftDate;
 
-    // UserThreeMajorLiftEntity 객체를 사용하여 UserThreeMajorLiftList 객체를 생성하는 생성자
     public UserThreeMajorLiftList(UserThreeMajorLiftEntity userThreeMajorLiftEntity) {
         this.userThreeMajorLiftNumber = userThreeMajorLiftEntity.getUserThreeMajorLiftNumber();
         this.deadlift = userThreeMajorLiftEntity.getDeadlift();
@@ -34,7 +32,6 @@ public class UserThreeMajorLiftList {
         this.userThreeMajorLiftDate = userThreeMajorLiftEntity.getUserThreeMajorLiftDate();
     }
 
-    // UserThreeMajorLiftEntity 목록을 받아 UserThreeMajorLiftList 목록으로 변환하여 반환하는 메서드
     public static List<UserThreeMajorLiftList> getList(List<UserThreeMajorLiftEntity> userThreeMajorLiftEntities) {
         List<UserThreeMajorLiftList> userThreeMajorLiftList = new ArrayList<>();
         for (UserThreeMajorLiftEntity entity : userThreeMajorLiftEntities) {

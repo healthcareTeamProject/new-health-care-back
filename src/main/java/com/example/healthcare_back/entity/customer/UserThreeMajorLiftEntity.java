@@ -33,6 +33,7 @@ public class UserThreeMajorLiftEntity {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userThreeMajorLiftNumber;
+    @Column(nullable = false)
     private String userId;
     @Column(precision = 5, scale = 1)
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
@@ -43,7 +44,7 @@ public class UserThreeMajorLiftEntity {
     @Column(precision = 5, scale = 1)
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal squat;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime userThreeMajorLiftDate;
 
     public UserThreeMajorLiftEntity(SignUpRequestDto dto) {

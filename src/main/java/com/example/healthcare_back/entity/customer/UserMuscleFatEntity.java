@@ -33,6 +33,7 @@ public class UserMuscleFatEntity {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userMuscleFatNumber;
+    @Column(nullable = false)
     private String userId;
     @Column(precision = 5, scale = 1)
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
@@ -43,7 +44,7 @@ public class UserMuscleFatEntity {
     @Column(precision = 5, scale = 1)
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal bodyFatMass;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime userMuscleFatDate;
     
     public UserMuscleFatEntity(SignUpRequestDto dto) {
