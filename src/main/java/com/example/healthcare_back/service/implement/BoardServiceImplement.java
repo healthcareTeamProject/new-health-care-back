@@ -1,7 +1,9 @@
 package com.example.healthcare_back.service.implement;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -286,20 +288,26 @@ public class BoardServiceImplement implements BoardService {
     Integer boardNumber, String userId) {
 
         try {
-
             // 게시물 번호로 게시글 조회
             BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
-            if (boardEntity == null) return ResponseDto.noExistBoard(); // 게시물이 없는경우 처리
-
-            // 게시물 업로드
+            if (boardEntity == null) {
+                return ResponseDto.noExistBoard(); // 게시물이 없는 경우 처리
+            }
+    
+            // 작성자와 수정하려는 유저가 같은지 확인
+            if (!boardEntity.getUserId().equals(userId)) {
+                return ResponseDto.noPermission(); // 권한 없음 응답
+            }
+    
+            // 작성자가 맞다면 게시물 수정
             boardEntity.update(dto, boardNumber, userId);
-            boardRepository.save(boardEntity); // 게시물 수정
-
+            boardRepository.save(boardEntity);
+    
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
+    
         // 성공적인 응답
         return ResponseDto.success();
     }
@@ -336,27 +344,32 @@ public class BoardServiceImplement implements BoardService {
     Integer boardNumber, Integer commentNumber, String userId) {
 
         try {
-
-            // 각각의 번호와 연결된 게시글과 댓글 조회
+            // 게시글 번호로 게시글 조회
             BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
             if (boardEntity == null) {
                 return ResponseDto.noExistBoard();
             }
-
+    
+            // 댓글 번호로 댓글 조회
             CommentEntity commentEntity = commentRepository.findByCommentNumber(commentNumber);
             if (commentEntity == null) {
                 return ResponseDto.noExistComment();
             }
-
-            // 댓글 내용 수정
+    
+            // 작성자 검증: 댓글 작성자와 요청한 유저가 동일한지 확인
+            if (!commentEntity.getUserId().equals(userId)) {
+                return ResponseDto.noPermission(); // 권한 없음 응답
+            }
+    
+            // 작성자라면 댓글 내용 수정
             commentEntity.update(dto, boardNumber, commentNumber, userId);
             commentRepository.save(commentEntity);
-
+    
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
+    
         // 성공적인 응답
         return ResponseDto.success();
 
@@ -373,9 +386,15 @@ public class BoardServiceImplement implements BoardService {
                 return ResponseDto.noExistBoard();
             }
     
+            // 작성자와 요청한 유저가 동일한지 확인
+            if (!boardEntity.getUserId().equals(userId)) {
+                return ResponseDto.noPermission(); // 권한 없음 응답
+            }
+    
+            // 작성자라면 삭제 진행
             // board_health_map 테이블의 관련 데이터 삭제
             boardHealthMapRepository.deleteByBoardNumber(boardNumber);
-
+    
             // board_file_contents 테이블의 관련 데이터 삭제
             boardFileContentsRepository.deleteByBoardNumber(boardNumber);
     
@@ -400,55 +419,67 @@ public class BoardServiceImplement implements BoardService {
     Integer commentNumber, String userId) {
         
         try {
-
-            // 연관된 번호로 게시글과 댓글 조회
+            // 게시글 번호로 게시글 조회
             BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
             if (boardEntity == null) {
                 return ResponseDto.noExistBoard();
             }
-
+    
+            // 댓글 번호로 댓글 조회
             CommentEntity commentEntity = commentRepository.findByCommentNumber(commentNumber);
             if (commentEntity == null) {
                 return ResponseDto.noExistComment();
             }
-
-            // 댓글 삭제
+    
+            // 작성자 검증: 댓글 작성자와 요청한 유저가 동일한지 확인
+            if (!commentEntity.getUserId().equals(userId)) {
+                return ResponseDto.noPermission(); // 권한 없음 응답
+            }
+    
+            // 작성자일 경우에만 댓글 삭제
             commentRepository.delete(commentEntity);
-
+    
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
+    
         // 성공적인 응답
         return ResponseDto.success();
     }
 
+    private Map<String, Map<Integer, Boolean>> boardLikesCache = new HashMap<>();
+    private Map<String, Map<Integer, Boolean>> commentLikesCache = new HashMap<>();
+
     @Override
-    public ResponseEntity<? super ResponseDto> putBoardLike(Integer boardNumber) {
+    public ResponseEntity<? super ResponseDto> putBoardLike(Integer boardNumber, String userId) {
 
         try {
             BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
             if (boardEntity == null) {
-                // 게시글이 없으면 "게시글이 없습니다" 응답 반환
                 return ResponseDto.noExistBoard();
             }
-    
-            // 좋아요 개수만 증가/감소
-            if (boardEntity.getBoardLikeCount() > 0) {
-                boardEntity.decreaseLikeCount(); // 좋아요 취소
+
+            // 유저별 좋아요 상태 가져오기
+            Map<Integer, Boolean> userBoardLikes = boardLikesCache.getOrDefault(userId, new HashMap<>());
+
+            // 현재 유저가 이미 좋아요를 눌렀는지 확인
+            if (userBoardLikes.getOrDefault(boardNumber, false)) {
+                boardEntity.decreaseLikeCount();
+                userBoardLikes.put(boardNumber, false);
             } else {
-                boardEntity.increaseLikeCount(); // 좋아요 추가
+                boardEntity.increaseLikeCount();
+                userBoardLikes.put(boardNumber, true);
             }
-    
+
+            boardLikesCache.put(userId, userBoardLikes); // 캐시 갱신
             boardRepository.save(boardEntity);
-        } catch (Exception exception) {
-            exception.printStackTrace();
+
+            return ResponseDto.success();
+        } catch (Exception e) {
+            e.printStackTrace();
             return ResponseDto.databaseError();
         }
-
-        // 성공적인 응답
-        return ResponseDto.success();
     }
 
     @Override
@@ -473,28 +504,33 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    public ResponseEntity<? super ResponseDto> putCommentLike(Integer commentNumber) {
+    public ResponseEntity<? super ResponseDto> putCommentLike(Integer commentNumber, String userId) {
 
         try {
             CommentEntity commentEntity = commentRepository.findByCommentNumber(commentNumber);
             if (commentEntity == null) {
                 return ResponseDto.noExistComment();
             }
-    
-            // 좋아요 개수만 증가/감소
-            if (commentEntity.getCommentLikeCount() > 0) {
-                commentEntity.decreaseLikeCount(); // 좋아요 취소
+
+            // 유저별 댓글 좋아요 상태 가져오기
+            Map<Integer, Boolean> userCommentLikes = commentLikesCache.getOrDefault(userId, new HashMap<>());
+
+            // 현재 유저가 이미 좋아요를 눌렀는지 확인
+            if (userCommentLikes.getOrDefault(commentNumber, false)) {
+                commentEntity.decreaseLikeCount();
+                userCommentLikes.put(commentNumber, false);
             } else {
-                commentEntity.increaseLikeCount(); // 좋아요 추가
+                commentEntity.increaseLikeCount();
+                userCommentLikes.put(commentNumber, true);
             }
-    
+
+            commentLikesCache.put(userId, userCommentLikes); // 캐시 갱신
             commentRepository.save(commentEntity);
-        } catch (Exception exception) {
-            exception.printStackTrace();
+
+            return ResponseDto.success();
+        } catch (Exception e) {
+            e.printStackTrace();
             return ResponseDto.databaseError();
         }
-
-        // 성공적인 응답
-        return ResponseDto.success();
     }
 }
