@@ -3376,7 +3376,7 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 사용자는 요청 헤더에 Bearer 인증 토큰을 포함해서 요청하고 성공적으로 이루어지면 사용자가 작성한 운동 스케줄 리스트를 날짜별로 응답받습니다. 만약 존재하지 않는 스케줄일 경우 존재하지 않는 스케줄에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/health-shcedule-list**
+- end point : **/health-schedule-list**
 
 ##### Request
 
@@ -3389,7 +3389,7 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/customer/health-shcedule-list"
+curl -X GET "http://localhost:4000/api/v1/schedule/health-schedule-list"
 ```
 
 ##### Response
@@ -3406,12 +3406,12 @@ curl -X GET "http://localhost:4000/api/v1/customer/health-shcedule-list"
 | -------------- | :------------------: | :-------------------: | :------: |
 | code           |        String        |       결과 코드       |    O     |
 | message        |        String        | 결과 코드에 대한 설명 |    O     |
-| healthShcedule | healthShceduleList[] |  운동 스케줄 리스트   |    O     |
+| healthSchedule | healthScheduleList[] |  운동 스케줄 리스트   |    O     |
 
 **HealthShceduleList**  
 | name | type | description | required |
 | --------- | :-------------: | :-------------------: | :------: |
-| healthShceduleNumber | Integer | 사용자 운동 스케줄 번호 | O |
+| healthScheduleNumber | Integer | 사용자 운동 스케줄 번호 | O |
 | healthTitle | String | 운동 스케줄 제목 및 내용 | O |
 | healthScheduleStart | LocalDataTime | 운동 스케줄 시작일 | O |
 | healthScheduleEnd | LocalDataTime | 운동 스케줄 종료일 | O |
@@ -3446,6 +3446,7 @@ Content-Type: application/json;charset=UTF-8
       "healthScheduleStart": "2024-11-11T14:00:00",
       "healthScheduleEnd": "2024-11-11T15:00:00"
     }
+    ...
   ]
 }
 ```
@@ -3508,7 +3509,7 @@ Content-Type: application/json;charset=UTF-8
 사용자는 요청 헤더에 Bearer 인증 토큰을 포함해서 요청하고 성공적으로 이루어지면 사용자가 작성한 식단 스케줄 리스트를 날짜별로 응답받습니다. 만약 존재하지 않는 스케줄일 경우 존재하지 않는 스케줄에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/meal-shcedule-list**
+- end point : **/meal-schedule-list**
 
 ##### Request
 
@@ -3521,7 +3522,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/customer/meal-shcedule-list"
+curl -X GET "http://localhost:4000/api/v1/schedule/meal-schedule-list"
 ```
 
 ##### Response
@@ -3538,13 +3539,13 @@ curl -X GET "http://localhost:4000/api/v1/customer/meal-shcedule-list"
 | ------------ | :----------------: | :---------------------: | :------: |
 | code         |       String       |        결과 코드        |    O     |
 | message      |       String       |  결과 코드에 대한 설명  |    O     |
-| mealShcedule | mealShceduleList[] |   식단 스케줄 리스트    |    O     |
+| mealSchedule | mealScheduleList[] |   식단 스케줄 리스트    |    O     |
 | mealMemo     |   mealMemoList[]   | 일정 리스트(식품 정보 ) |    O     |
 
 **MealShceduleList**  
 | name | type | description | required |
 | --------- | :-------------: | :-------------------: | :------: |
-| mealShceduleNumber | Integer | 사용자 식단 스케줄 번호 | O |
+| mealScheduleNumber | Integer | 사용자 식단 스케줄 번호 | O |
 | mealTitle | String | 식단 스케줄 제목 | O |
 | mealMemo[] | mealMemoList[] | 식단 스케줄 내용 | O |
 | mealScheduleStart | LocalDataTime | 식단 스케줄 시작일 | O |
@@ -3553,7 +3554,7 @@ curl -X GET "http://localhost:4000/api/v1/customer/meal-shcedule-list"
 **MealMemoList**
 | name | type | description | required |
 | --------- | :-------------: | :-------------------: | :------: |
-| mealShceduleDetailNumber | Integer | 사용자 식품 정보 번호 | O |
+| mealScheduleDetailNumber | Integer | 사용자 식품 정보 번호 | O |
 | mealName | String | 식품 이름 | O |
 | mealKcal | String | 식품 칼로리 | O |
 | mealCount | Integer | 식품 개수 | O |
@@ -3621,6 +3622,7 @@ Content-Type: application/json;charset=UTF-8
             ],
             "totalKcal": 320.0
         }
+        ...
     ]
 }
 ```
@@ -3710,8 +3712,8 @@ curl -X POST "http://localhost:4000/api/v1/schedule/health-schedule" \
     가슴 -
     벤치프레스 12 3set,
     플라이 15 5set" \
--d "healthScheduleStart = 2024.10.17 12:00"\
--d "healthScheduleEnd = 2024.10.17 23:59 "\
+-d "healthScheduleStart = 2024-11-12T08:00:00"\
+-d "healthScheduleEnd = 2024-11-12T13:00:00"\
 ```
 
 ##### Response
@@ -3822,7 +3824,7 @@ Content-Type: application/json;charset=UTF-8
 **MealMemoList**
 | name | type | description | required |
 | --------- | :-------------: | :-------------------: | :------: |
-| mealShceduleDetailNumber | Integer | 사용자 식품 정보 번호 | O |
+| mealScheduleDetailNumber | Integer | 사용자 식품 정보 번호 | O |
 | mealName | String | 식품 이름 | O |
 | mealKcal | String | 식품 칼로리 | O |
 | mealCount | Integer | 식품 개수 | O |
@@ -3840,7 +3842,7 @@ curl -X POST "http://localhost:4000/api/v1/schedule/meal-schedule" \
       "mealName": "가마솥 수제 누룽지",
       "mealKcal": 360,
       "mealCount": 1
-      }]
+    }]
 ```
 
 ##### Response
@@ -4302,18 +4304,18 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name               |      type      |          description          | required |
-| ------------------ | :------------: | :---------------------------: | :------: |
-| mealScheduleNumber |    Integer     |       식단 스케줄 번호        |    O     |
-| mealTitle          |     String     |           일정 제목           |    O     |
-| mealMemo[]         | mealMemoList[] |     일정 내용(식품 정보)      |    O     |
-| scheduleStart      |     String     |  스케줄 등록을 위한 시작날짜  |    O     |
-| scheduleEnd        |     String     | 스케줄 등록을 위한 마지막날짜 |    O     |
+| name                    |      type      |          description          | required |
+| ----------------------- | :------------: | :---------------------------: | :------: |
+| mealScheduleNumber      |    Integer     |       식단 스케줄 번호        |    O     |
+| mealTitle               |     String     |           일정 제목           |    O     |
+| mealMemo[]              | mealMemoList[] |     일정 내용(식품 정보)      |    O     |
+| mealScheduleStart       |     String     |  스케줄 등록을 위한 시작날짜  |    O     |
+| mealScheduleEnd         |     String     | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 **MealMemoList**
 | name | type | description | required |
 | --------- | :-------------: | :-------------------: | :------: |
-| mealShceduleDetailNumber | Integer | 사용자 식품 정보 번호 | O |
+| mealScheduleDetailNumber | Integer | 사용자 식품 정보 번호 | O |
 | mealName | String | 식품 이름 | O |
 | mealKcal | String | 식품 칼로리 | O |
 | mealCount | Integer | 식품 개수 | O |
