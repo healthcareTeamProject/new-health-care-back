@@ -1,7 +1,6 @@
 package com.example.healthcare_back.dto.response.schedule;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +12,6 @@ import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.entity.schedule.MealScheduleDetailEntity;
 import com.example.healthcare_back.entity.schedule.MealScheduleEntity;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Getter;

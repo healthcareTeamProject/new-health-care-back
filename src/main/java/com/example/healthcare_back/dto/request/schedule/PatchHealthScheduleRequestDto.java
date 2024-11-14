@@ -1,5 +1,4 @@
 package com.example.healthcare_back.dto.request.schedule;
-import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

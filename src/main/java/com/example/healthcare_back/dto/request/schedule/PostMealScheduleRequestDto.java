@@ -1,7 +1,6 @@
 package com.example.healthcare_back.dto.request.schedule;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;

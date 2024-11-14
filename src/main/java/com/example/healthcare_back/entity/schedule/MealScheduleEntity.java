@@ -1,11 +1,8 @@
 package com.example.healthcare_back.entity.schedule;
 
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.healthcare_back.dto.request.schedule.PostMealScheduleRequestDto;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

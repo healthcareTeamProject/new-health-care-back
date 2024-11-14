@@ -1,7 +1,5 @@
 package com.example.healthcare_back.dto.response.schedule;
 
-import java.time.LocalDateTime;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -9,7 +7,6 @@ import com.example.healthcare_back.dto.response.ResponseCode;
 import com.example.healthcare_back.dto.response.ResponseDto;
 import com.example.healthcare_back.dto.response.ResponseMessage;
 import com.example.healthcare_back.entity.schedule.HealthScheduleEntity;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 

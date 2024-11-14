@@ -1,10 +1,7 @@
 package com.example.healthcare_back.entity.schedule;
 
-import java.time.LocalDateTime;
-
 import com.example.healthcare_back.dto.request.schedule.PatchHealthScheduleRequestDto;
 import com.example.healthcare_back.dto.request.schedule.PostHealthScheduleRequestDto;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
