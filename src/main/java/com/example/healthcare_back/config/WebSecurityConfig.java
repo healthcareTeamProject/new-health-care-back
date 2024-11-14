@@ -61,9 +61,6 @@ public class WebSecurityConfig {
                 // 특정 경로는 모든 사용자에게 허용 (예: 인증 관련 API, 파일 접근)
                 .requestMatchers("/api/v1/auth/**", "/oauth2/callback/*", "/file/*", "/").permitAll()
 
-                // 고객 조회 관련 GET 요청은 인증 없이 이용
-                .requestMatchers(HttpMethod.GET, "/api/v1/customer/**").permitAll()
-
                 // 게시글 조회 관련 GET 요청은 인증 없이 허용
                 .requestMatchers(HttpMethod.GET, "/api/v1/board/**").permitAll()
                 
