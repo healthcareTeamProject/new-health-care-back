@@ -12,5 +12,4 @@ public interface BoardHealthMapRepository extends JpaRepository<BoardHealthMapEn
 
     void deleteByBoardNumber(Integer boardNumber); // 게시물 번호와 연관된 지도 데이터 삭제
 
-
 }

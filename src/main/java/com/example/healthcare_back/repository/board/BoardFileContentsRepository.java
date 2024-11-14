@@ -12,5 +12,4 @@ public interface BoardFileContentsRepository extends JpaRepository<BoardFileCont
 
     void deleteByBoardNumber(Integer boardNumber); // 게시물 번호와 연관된 파일 데이터 삭제
 
-
 }
