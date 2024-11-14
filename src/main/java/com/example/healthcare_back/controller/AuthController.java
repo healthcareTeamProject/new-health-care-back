@@ -69,9 +69,7 @@ public class AuthController {
     ) {
         ResponseEntity<ResponseDto> response = authService.signUp(requestBody);
         return response;
-
     }
-
 
     // 로그인
     @PostMapping("/sign-in")

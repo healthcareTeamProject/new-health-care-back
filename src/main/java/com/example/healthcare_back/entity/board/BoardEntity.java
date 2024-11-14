@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.example.healthcare_back.dto.request.board.PatchBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,23 +29,15 @@ public class BoardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer boardNumber;
-
     private String boardTitle;
-
     private String userId;
-
     private String boardCategory;
-
     private String boardTag;
-
     private String boardContents;
-
     private String youtubeVideoLink;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime boardUploadDate;
-
     private Integer boardViewCount = 0;
-    
     private Integer boardLikeCount = 0;
 
     public BoardEntity(PostBoardRequestDto dto, String userId) {

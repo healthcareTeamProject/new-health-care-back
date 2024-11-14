@@ -2,8 +2,10 @@ package com.example.healthcare_back.entity.customer;
 
 import java.math.BigDecimal;
 
+import com.example.healthcare_back.common.util.CustomBigDecimalSerializer;
 import com.example.healthcare_back.dto.request.auth.SignUpRequestDto;
 import com.example.healthcare_back.dto.request.customer.PatchCustomerRequestDto;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,18 +38,25 @@ public class CustomerEntity {
     private String profileImage;
     private String personalGoals;
     @Column(precision = 5, scale = 1)
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal height;
     @Column(precision = 5, scale = 1)
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal deadlift;
     @Column(precision = 5, scale = 1)
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal benchPress;
     @Column(precision = 5, scale = 1)
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal squat;
     @Column(precision = 5, scale = 1)
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal weight;
     @Column(precision = 5, scale = 1)
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal skeletalMuscleMass;
     @Column(precision = 5, scale = 1)
+    @JsonSerialize(using = CustomBigDecimalSerializer.class)
     private BigDecimal bodyFatMass;
 
     public CustomerEntity(SignUpRequestDto dto) {

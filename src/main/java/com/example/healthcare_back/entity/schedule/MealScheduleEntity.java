@@ -41,7 +41,8 @@ public class MealScheduleEntity {
     private String mealTitle;
 
     @Column(nullable = false)
-    private String mealMemo; 
+    private String mealMemo;
+
     @Column(nullable = false)
     private String mealScheduleStart;
 

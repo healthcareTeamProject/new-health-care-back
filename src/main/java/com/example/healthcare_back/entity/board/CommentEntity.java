@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.example.healthcare_back.dto.request.board.PatchCommentRequestDto;
 import com.example.healthcare_back.dto.request.board.PostCommentRequestDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,15 +27,11 @@ public class CommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer commentNumber;
-
     private String userId;
-
     private Integer boardNumber;
-
     private String commentContents;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime commentDate;
-
     private Integer commentLikeCount = 0;
 
 

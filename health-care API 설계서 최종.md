@@ -738,7 +738,7 @@ User 모듈은 모두 인증이 필요합니다.
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/customer"
+curl -X GET "http://localhost:4000/api/v1/customer/sign-in"
 ```
 
 ##### Response
@@ -747,17 +747,17 @@ curl -X GET "http://localhost:4000/api/v1/customer"
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
 | name     |  type  |      description      | required |
 | -------- | :----: | :-------------------: | :------: |
-| code     | String |       결과 코드       |    O     |
-| message  | String | 결과 코드에 대한 설명 |    O     |
-| userId   | String |     사용자 아이디     |    O     |
-| name     | String |      사용자 이름      |    O     |
-| nickname | String |     사용자 닉네임     |    O     |
+| code     | String |       결과 코드        |    O     |
+| message  | String | 결과 코드에 대한 설명   |    O     |
+| userId   | String |     사용자 아이디      |    O     |
+| name     | String |      사용자 이름       |    O     |
+| nickname | String |     사용자 닉네임      |    O     |
 
 ###### Example
 
@@ -818,10 +818,10 @@ Content-Type: application/json;charset=UTF-8
 
 ##### 설명
 
-사용자는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 사용자 아이디를 포함하여 요청하고 성공적으로 이루어지면 사용자의 프로필 이미지, 이름, 닉네임, 키, 개인 목표를 응답받습니다. 만약 존재하지 않는 아이디일 경우 존재하지 않는 아이디에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
+사용자는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 요청을 받습니다. 요청이 성공적으로 이루어지면 가입된 사용자의 프로필 이미지, 이름, 닉네임, 키, 개인 목표를 응답받습니다. 만약 존재하지 않는 아이디일 경우 존재하지 않는 아이디에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/{userId}**
+- end point : **/**
 
 ##### Request
 
@@ -829,12 +829,12 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    O     |
+| Authorization | Bearer 토큰 인증 헤더 |    X     |
 
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
+curl -X GET "http://localhost:4000/api/v1/customer/"
 ```
 
 ##### Response
@@ -921,7 +921,7 @@ Content-Type: application/json;charset=UTF-8
 사용자는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 사용자 아이디를 포함하여 요청하고 성공적으로 이루어지면 사용자 신체정보 번호, 사용자의 몸무게, 골격근량, 체지방량, 사용자 신체 정보 등록 날짜를 응답받습니다. 만약 존재하지 않는 아이디일 경우 존재하지 않는 아이디에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/{userId}/user-muscle-fat-list**
+- end point : **/user-muscle-fat-list**
 
 ##### Request
 

@@ -9,18 +9,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-
 import com.example.healthcare_back.filter.JwtAuthenticationFilter;
 import com.example.healthcare_back.handler.OAuth2SuccessHandler;
 import com.example.healthcare_back.service.implement.OAuth2UserServiceImplement;
-
 
 import lombok.RequiredArgsConstructor;
 
@@ -63,7 +60,7 @@ public class WebSecurityConfig {
             .authorizeHttpRequests(request -> request
                 // 특정 경로는 모든 사용자에게 허용 (예: 인증 관련 API, 파일 접근)
                 .requestMatchers("/api/v1/auth/**", "/oauth2/callback/*", "/file/*", "/").permitAll()
-                
+
                 // 게시글 조회 관련 GET 요청은 인증 없이 허용
                 .requestMatchers(HttpMethod.GET, "/api/v1/board/**").permitAll()
                 
