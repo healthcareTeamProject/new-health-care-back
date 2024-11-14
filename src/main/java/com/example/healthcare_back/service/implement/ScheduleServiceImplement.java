@@ -56,9 +56,7 @@ public class ScheduleServiceImplement implements ScheduleService {
         try {
             // 특정 healthScheduleNumber와 userId로 건강 일정 조회
             healthScheduleEntity = healthScheduleRepository.findByHealthScheduleNumberAndUserId(healthScheduleNumber, userId);
-            if (healthScheduleEntity == null) {
-                return ResponseDto.noExistSchedule(); // 일정이 존재하지 않는 경우 응답
-            }
+            
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
@@ -70,14 +68,16 @@ public class ScheduleServiceImplement implements ScheduleService {
     // 사용자 건강 일정 목록 조회
     @Override
     public ResponseEntity<? super GetHealthScheduleListResponseDto> getHealthScheduleList(String userId) {
+
         List<HealthScheduleEntity> healthScheduleEntities = new ArrayList<>();
 
         try {
             // 특정 사용자 ID로 건강 일정 목록 조회
             healthScheduleEntities = healthScheduleRepository.findByUserIdOrderByHealthScheduleNumberDesc(userId);
             if (healthScheduleEntities.isEmpty()) {
-                return ResponseDto.noExistSchedule(); // 일정이 없는 경우 응답
+                healthScheduleEntities = new ArrayList<>();
             }
+            
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
@@ -155,9 +155,6 @@ public class ScheduleServiceImplement implements ScheduleService {
             // MealScheduleEntity 조회 및 존재 여부 확인
             MealScheduleEntity mealSchedule = mealScheduleRepository.findByMealScheduleNumberAndUserId(mealScheduleNumber, userId)
                     .orElse(null);
-            if (mealSchedule == null) {
-                return ResponseDto.noExistSchedule(); // 스케줄이 없을 경우 응답
-            }
 
             // 관련된 상세 식품 정보 조회
             List<MealScheduleDetailEntity> details = mealScheduleDetailRepository
@@ -181,7 +178,7 @@ public class ScheduleServiceImplement implements ScheduleService {
             mealScheduleEntities = mealScheduleRepository.findByUserIdOrderByMealScheduleNumberDesc(userId);
         
             if (mealScheduleEntities.isEmpty()) {
-                return ResponseDto.noExistSchedule(); // 일정이 없는 경우 응답
+                mealScheduleEntities = new ArrayList<>();
             }
         
             // 각 MealScheduleEntity에 대해 관련 MealScheduleDetailEntity를 조회하여 변환
