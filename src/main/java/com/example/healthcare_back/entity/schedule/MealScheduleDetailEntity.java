@@ -3,6 +3,7 @@ package com.example.healthcare_back.entity.schedule;
 import java.math.BigDecimal;
 
 import com.example.healthcare_back.common.util.CustomBigDecimalSerializer;
+import com.example.healthcare_back.dto.request.schedule.PostMealScheduleRequestDto;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jakarta.persistence.Column;
@@ -44,10 +45,11 @@ public class MealScheduleDetailEntity {
     @Column(nullable = false)
     private Integer mealCount; // 식품 개수
 
-    public MealScheduleDetailEntity(String mealName, BigDecimal mealKcal, Integer mealCount, MealScheduleEntity mealSchedule) {
-        this.mealName = mealName;
-        this.mealKcal = mealKcal;
-        this.mealCount = mealCount;
+    // 생성자
+    public MealScheduleDetailEntity(PostMealScheduleRequestDto.MealDetail dto, String mealName, BigDecimal mealKcal, Integer mealCount, MealScheduleEntity mealSchedule) {
+        this.mealName = dto.getMealName();
+        this.mealKcal = dto.getMealKcal();
+        this.mealCount = dto.getMealCount();
         this.mealSchedule = mealSchedule;
     }
     

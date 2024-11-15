@@ -1602,7 +1602,7 @@ curl -X GET "http://localhost:4000/api/v1/board"
 | boardUploadDate | String | 게시물 작성날짜 | O |
 | boardContents | String | 게시물 내용 | O |
 | youtubeVideoLink | String | 유튜브 비디오 링크 | X |
-| boardFileContents | String | 게시물 자료 | X |
+| boardFileContents | boardFileContentsList[] | 게시물 파일 리스트 | X |
 | boardViewCount | Integer | 게시물 조회수 | O |
 | boardLikeCount | Integer | 게시물 추천 수 | O |
 | comment | CommentList[] | 댓글 리스트 | O |
@@ -1615,6 +1615,12 @@ curl -X GET "http://localhost:4000/api/v1/board"
 | userId | String | 댓글 사용자 아이디 | O |
 | commentDate | String | 댓글 작성 날짜 | O |
 | commentLikeCount | Integer | 댓글 추천수 | O |
+
+**boardFileContentsList**
+| name | type | description | required |
+|------------------|:-------:|:----------------:|:--------:|
+| boardFileNumber | Integer | 파일 번호 | O |
+| boardFileContents | String | 파일 내용 | O |
 
 ###### Example
 
@@ -1637,7 +1643,6 @@ Content-Type: application/json;charset=UTF-8
       "boardUploadDate": "2024-11-13T14:17:07",
       "boardContents": "오늘 하체랑 엉덩이가 터질것같다",
       "youtubeVideoLink": null,
-      "boardFileContents": null,
       "boardViewCount": 10,
       "boardLikeCount": 10,
       "commentList": [
@@ -1647,9 +1652,17 @@ Content-Type: application/json;charset=UTF-8
           "userId": "zxcv1234",
           "commentDate": "2024-11-13T14:17:54",
           "commentLikeCount": 1
-        }
+        },
         ...
       ]
+      "boardFileContents": [
+        {
+          "boardFileNumber": 1,
+          "boardFileContents": "abc.jpg"
+        },
+        ...
+      ]
+      ...
     },
     ...
   ]
@@ -1739,7 +1752,7 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 | boardUploadDate   |    String     | 작성 게시물 생성 날짜 |    O     |
 | boardContents     |    String     |      게시물 내용      |    O     |
 | youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
-| boardFileContents |    String     |      게시물 자료      |    X     |
+| boardFileContents | BoardFileContentsList[] |  게시물 파일 리스트  |    X     |
 | boardViewCount    |    Integer    |        조회수         |    O     |
 | boardLikeCount    |    Integer    |    게시물 추천 수     |    O     |
 | comment           | CommentList[] |      댓글 리스트      |    O     |
@@ -1752,6 +1765,12 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 | userId | String | 댓글 사용자 아이디 | O |
 | commentDate | String | 댓글 작성 날짜 | O |
 | commentLikeCount | Integer | 댓글 추천수 | O |
+
+**boardFileContentsList**
+| name | type | description | required |
+|------------------|:-------:|:----------------:|:--------:|
+| boardFileNumber | Integer | 파일 번호 | O |
+| boardFileContents | String | 파일 내용 | O |
 
 ###### Example
 
@@ -1770,7 +1789,6 @@ Content-Type: application/json;charset=UTF-8
   "boardUploadDate": "2024-11-13T14:17:13",
   "boardContents": "오늘 하체랑 엉덩이가 터질것같다"
   "youtubeVideoLink": null,
-  "boardFileContents": null,
   "boardViewCount": 10,
   "boardLikeCount": 10,
   "commentList": [
@@ -1780,7 +1798,14 @@ Content-Type: application/json;charset=UTF-8
       "userId": "zxcv1234",
       "commentDate": "2024-11-13T14:19:27",
       "commentLikeCount": 1
-    }
+    },
+    ...
+  ]
+  "boardFileContents": [
+    {
+      "boardFileNumber": 1,
+      "boardFileContents": "abc.jpg"
+    },
     ...
   ]
 }
@@ -1993,7 +2018,7 @@ curl -X GET "http://localhost:4000/api/v1/board/user" \
 | boardUploadDate   |    String     | 작성 게시물 생성 날짜 |    O     |
 | boardContents     |    String     |      게시물 내용      |    O     |
 | youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
-| boardFileContents |    String     |      게시물 자료      |    X     |
+| boardFileContents | BoardFileContentsList[] |  게시물 파일 리스트  |    X     |
 | boardViewCount    |    Integer    |        조회수         |    O     |
 | boardLikeCount    |    Integer    |    게시물 추천 수     |    O     |
 | comment           | CommentList[] |      댓글 리스트      |    O     |
@@ -2007,6 +2032,12 @@ curl -X GET "http://localhost:4000/api/v1/board/user" \
 | commentDate | String | 댓글 작성 날짜 | O |
 | commentLikeCount | Integer | 댓글 추천수 | O |
 
+**boardFileContentsList**
+| name | type | description | required |
+|------------------|:-------:|:----------------:|:--------:|
+| boardFileNumber | Integer | 파일 번호 | O |
+| boardFileContents | String | 파일 내용 | O |
+
 ###### Example
 
 **응답 성공**
@@ -2016,31 +2047,39 @@ HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 
 {
-    "code": "SU",
-    "message": "Success.",
-    "boardList": [
-      {
-        "code": "SU",
-        "message": "Success.",
-        "boardNumber": 1,
-        "boardTitle": "오늘은 다이어트 20일차",
-        "userId": "뽀보이strong1",
-        "boardUploadDate": "2024-11-13T14:17:07",
-        "boardContents": "오늘 하체랑 엉덩이가 터질것같다",
-        "youtubeVideoLink": null,
-        "boardFileContents": null,
-        "boardViewCount": 10,
-        "boardLikeCount": 10,
-        "commentList": [
-            {
-              "commentNumber": 1,
-              "commentContents": "하체운동 어떻게 하시나요?",
-              "userId": "zxcv1234",
-              "commentDate": "2024-11-13T14:17:54",
-              "commentLikeCount": 1,
-            },
-            ...
-      }
+  "code": "SU",
+  "message": "Success.",
+  "boardList": [
+    {
+      "code": "SU",
+      "message": "Success.",
+      "boardNumber": 1,
+      "boardTitle": "오늘은 다이어트 20일차",
+      "userId": "뽀보이strong1",
+      "boardUploadDate": "2024-11-13T14:17:07",
+      "boardContents": "오늘 하체랑 엉덩이가 터질것같다",
+      "youtubeVideoLink": null,
+      "boardViewCount": 10,
+      "boardLikeCount": 10,
+      "commentList": [
+          {
+            "commentNumber": 1,
+            "commentContents": "하체운동 어떻게 하시나요?",
+            "userId": "zxcv1234",
+            "commentDate": "2024-11-13T14:17:54",
+            "commentLikeCount": 1,
+          },
+          ...
+        ]
+        "boardFileContents": [
+          {
+            "boardFileNumber": 1,
+            "boardFileContents": "abc.jpg"
+          },
+          ...
+        ]
+    },
+    ...
   ]
 }
 ```
@@ -2140,7 +2179,7 @@ curl -X GET "http://localhost:4000/api/v1/board/category/상체운동" \
 | boardUploadDate   |    String     | 작성 게시물 생성 날짜 |    O     |
 | boardContents     |    String     |      게시물 내용      |    O     |
 | youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
-| boardFileContents |    String     |      게시물 자료      |    X     |
+| boardFileContents | boardFileContentsList[] | 게시물 자료 |    X     |
 | boardViewCount    |    Integer    |        조회수         |    O     |
 | boardLikeCount    |    Integer    |    게시물 추천 수     |    O     |
 | comment           | CommentList[] |      댓글 리스트      |    O     |
@@ -2154,6 +2193,12 @@ curl -X GET "http://localhost:4000/api/v1/board/category/상체운동" \
 | commentDate | String | 댓글 작성 날짜 | O |
 | commentLikeCount | Integer | 댓글 추천수 | O |
 
+**boardFileContentsList**
+| name | type | description | required |
+|------------------|:-------:|:----------------:|:--------:|
+| boardFileNumber | Integer | 파일 번호 | O |
+| boardFileContents | String | 파일 내용 | O |
+
 ###### Example
 
 **응답 성공**
@@ -2163,9 +2208,9 @@ HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 
 {
-    "code": "SU",
-    "message": "Success.",
-    "boardCategoryList": [
+  "code": "SU",
+  "message": "Success.",
+  "boardCategoryList": [
         {
             "code": "SU",
             "message": "Success.",
@@ -2175,22 +2220,28 @@ Content-Type: application/json;charset=UTF-8
             "boardUploadDate": "2024-11-13T14:17:13",
             "boardContents": "오늘은 상체운동을 했다.",
             "youtubeVideoLink": null,
-            "boardFileContents": null,
             "boardViewCount": 0,
             "boardLikeCount": 0,
             "commentList": [
               {
-                    "commentNumber": 13,
-                    "commentContents": "너무 도움됬어요 감사함욤",
-                    "userId": "qwer1234",
-                    "commentDate": "2024-11-13T14:18:02",
-                    "commentLikeCount": 0
-                }
-                ...
+                "commentNumber": 13,
+                "commentContents": "너무 도움됬어요 감사함욤",
+                "userId": "qwer1234",
+                "commentDate": "2024-11-13T14:18:02",
+                "commentLikeCount": 0
+              },
+              ...
+            ]
+            "boardFileContents": [
+              {
+                "boardFileNumber": 1,
+                "boardFileContents": "abc.jpg"
+              },
+              ...
             ]
         },
+        ...
     ]
-    ...
 }
 ```
 
@@ -2277,7 +2328,7 @@ curl -X GET "http://localhost:4000/api/v1/board/tag/운동" \
 | boardUploadDate   |    String     | 작성 게시물 생성 날짜 |    O     |
 | boardContents     |    String     |      게시물 내용      |    O     |
 | youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
-| boardFileContents |    String     |      게시물 자료      |    X     |
+| boardFileContents | boardFileContentsList[] | 게시물 파일 리스트 |    X     |
 | boardViewCount    |    Integer    |        조회수         |    O     |
 | boardLikeCount    |    Integer    |    게시물 추천 수     |    O     |
 | comment           | CommentList[] |      댓글 리스트      |    O     |
@@ -2291,6 +2342,12 @@ curl -X GET "http://localhost:4000/api/v1/board/tag/운동" \
 | commentDate | String | 댓글 작성 날짜 | O |
 | commentLikeCount | Integer | 댓글 추천수 | O |
 
+**boardFileContentsList**
+| name | type | description | required |
+|------------------|:-------:|:----------------:|:--------:|
+| boardFileNumber | Integer | 파일 번호 | O |
+| boardFileContents | String | 파일 내용 | O |
+
 ###### Example
 
 **응답 성공**
@@ -2300,34 +2357,40 @@ HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 
 {
-    "code": "SU",
-    "message": "Success.",
-    "boardTagList": [
+  "code": "SU",
+  "message": "Success.",
+  "boardTagList": [
         {
-            "code": "SU",
-            "message": "Success.",
-            "boardNumber": 8,
-            "boardTitle": "오늘은 다이어트 20일차",
-            "userId": "qwer1234",
-            "boardUploadDate": "2024-11-13T14:17:13",
-            "boardContents": "오늘은 상체운동을 했다.",
-            "youtubeVideoLink": null,
-            "boardFileContents": null,
-            "boardViewCount": 0,
-            "boardLikeCount": 0,
-            "commentList": [
-              {
-                  "commentNumber": 13,
-                  "commentContents": "너무 도움됬어요 감사함욤",
-                  "userId": "qwer1234",
-                  "commentDate": "2024-11-13T14:18:02",
-                  "commentLikeCount": 0
-              }
-              ...
-            ]
+          "code": "SU",
+          "message": "Success.",
+          "boardNumber": 8,
+          "boardTitle": "오늘은 다이어트 20일차",
+          "userId": "qwer1234",
+          "boardUploadDate": "2024-11-13T14:17:13",
+          "boardContents": "오늘은 상체운동을 했다.",
+          "youtubeVideoLink": null,
+          "boardViewCount": 0,
+          "boardLikeCount": 0,
+          "commentList": [
+            {
+              "commentNumber": 13,
+              "commentContents": "너무 도움됬어요 감사함욤",
+              "userId": "qwer1234",
+              "commentDate": "2024-11-13T14:18:02",
+              "commentLikeCount": 0
+            },
+            ...
+          ]
+          "boardFileContents": [
+            {
+              "boardFileNumber": 1,
+              "boardFileContents": "abc.jpg"
+            },
+            ...
+          ]
         },
+        ...
     ]
-    ...
 }
 ```
 
