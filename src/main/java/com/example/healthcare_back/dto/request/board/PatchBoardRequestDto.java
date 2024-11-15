@@ -12,20 +12,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PatchBoardRequestDto {
-    
     private String boardTitle;
-    
     private String boardCategory;
-    
     private String boardTag;
-    
     private String boardContents;
-    
     private String youtubeVideoLink;
-    
     private String boardFileContents;
-    
     private BigDecimal mapLat;
-    
     private BigDecimal mapLng;
 }

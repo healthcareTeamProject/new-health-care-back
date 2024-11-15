@@ -10,6 +10,5 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PostCommentRequestDto {
-    
     private String commentContents;
 }

@@ -10,7 +10,5 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PatchCommentRequestDto {
-    
     private String commentContents;
-
 }

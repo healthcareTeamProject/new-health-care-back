@@ -11,11 +11,11 @@ import lombok.Getter;
 @Getter
 public class GetMealDetailResponseDto {
 
-    private Integer mealScheduleDetailNumber;
-    private String mealName;
+    private final Integer mealScheduleDetailNumber;
+    private final String mealName;
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal mealKcal;
-    private Integer mealCount;
+    private final BigDecimal mealKcal;
+    private final Integer mealCount;
 
     public GetMealDetailResponseDto(MealScheduleDetailEntity detailEntity) {
         this.mealScheduleDetailNumber = detailEntity.getMealScheduleDetailNumber();

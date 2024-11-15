@@ -14,7 +14,7 @@ import lombok.Getter;
 @Getter
 public class GetBoardCategoryResponseDto extends ResponseDto {
 
-    private List<GetBoardResponseDto> boardCategoryList;
+    private final List<GetBoardResponseDto> boardCategoryList;
 
     private GetBoardCategoryResponseDto(List<GetBoardResponseDto> boardResponseList) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

@@ -13,17 +13,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PostBoardRequestDto {
-    
     private String boardTitle;
-    
     private String boardCategory;
-    
     private String boardTag;
-    
     private String boardContents;
-    
     private String youtubeVideoLink;
-    
     private String boardFileContents;
     @Column(precision = 9, scale = 6)
     private BigDecimal mapLat;

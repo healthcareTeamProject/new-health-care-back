@@ -19,26 +19,26 @@ import lombok.Getter;
 @Getter
 public class GetCustomerResponseDto extends ResponseDto {
 
-    private String userId;
-    private String name;
-    private String nickname;
-    private String telNumber;
-    private String profileImage;
-    private String personalGoals;
+    private final String userId;
+    private final String name;
+    private final String nickname;
+    private final String telNumber;
+    private final String profileImage;
+    private final String personalGoals;
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal height;
+    private final BigDecimal height;
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal deadlift;
+    private final BigDecimal deadlift;
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal benchPress;
+    private final BigDecimal benchPress;
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal squat;
+    private final BigDecimal squat;
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal weight;
+    private final BigDecimal weight;
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal skeletalMuscleMass;
+    private final BigDecimal skeletalMuscleMass;
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal bodyFatMass;
+    private final BigDecimal bodyFatMass;
 
     public GetCustomerResponseDto(String code, String message, CustomerEntity customerEntity) {
         super(code, message);

@@ -13,10 +13,10 @@ import lombok.Getter;
 @Getter
 public class CustomOAuth2User implements OAuth2User {
 
-    private String name;
-    private Map<String, Object> attributes;
-    private Collection<? extends GrantedAuthority> authorities;
-    private boolean existed;
+    private final String name;
+    private final Map<String, Object> attributes;
+    private final Collection<? extends GrantedAuthority> authorities;
+    private final boolean existed;
 
     public CustomOAuth2User(String userId, Map<String, Object> attributes, boolean existed) {
         this.name = userId;
