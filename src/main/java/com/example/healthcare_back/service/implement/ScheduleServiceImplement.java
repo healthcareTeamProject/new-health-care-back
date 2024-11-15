@@ -14,6 +14,7 @@ import com.example.healthcare_back.common.object.MealScheduleList;
 import com.example.healthcare_back.common.util.CsvUtil;
 import com.example.healthcare_back.dto.request.schedule.PatchHealthScheduleRequestDto;
 import com.example.healthcare_back.dto.request.schedule.PatchMealScheduleRequestDto;
+import com.example.healthcare_back.dto.request.schedule.PatchMealScheduleRequestDto.MealDetail;
 import com.example.healthcare_back.dto.request.schedule.PostHealthScheduleRequestDto;
 import com.example.healthcare_back.dto.request.schedule.PostMealScheduleRequestDto;
 import com.example.healthcare_back.dto.response.ResponseDto;
@@ -236,7 +237,7 @@ public class ScheduleServiceImplement implements ScheduleService {
             mealScheduleRepository.save(mealScheduleEntity);
         
             // 각 상세 식품 정보 저장
-            for (PostMealScheduleRequestDto.MealDetail detail : dto.getMealMemo()) {
+            for (PostMealScheduleRequestDto detail : dto.getMealMemo()) {
                 MealScheduleDetailEntity detailEntity = new MealScheduleDetailEntity(
                     detail.getMealName(), detail.getMealKcal(), detail.getMealCount(), mealScheduleEntity
                 );
@@ -278,7 +279,7 @@ public class ScheduleServiceImplement implements ScheduleService {
             // 기존 세부 식품 정보 삭제 후 새로 저장
             mealScheduleDetailRepository.deleteByMealSchedule(mealScheduleEntity);
         
-            for (PatchMealScheduleRequestDto.MealDetail detail : dto.getMealMemo()) {
+            for (PatchMealScheduleRequestDto detail : dto.getMealMemo()) {
                 MealScheduleDetailEntity detailEntity = new MealScheduleDetailEntity(
                     detail.getMealName(), detail.getMealKcal(), detail.getMealCount(), mealScheduleEntity
                 );
