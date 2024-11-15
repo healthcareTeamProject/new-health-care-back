@@ -1,8 +1,5 @@
 package com.example.healthcare_back.service;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.http.ResponseEntity;
 
 // import java.util.List;
@@ -33,8 +30,6 @@ public interface ScheduleService {
     ResponseEntity<ResponseDto> patchMealSchedule(PatchMealScheduleRequestDto dto, Integer mealScheduleNumber, String userId);
     ResponseEntity<ResponseDto> deleteMealSchedule(Integer mealScheduleNumber, String userId);
     ResponseEntity<ResponseDto> deleteMealScheduleDetail(Integer mealScheduleDetailNumber, String userId);
-
-    ResponseEntity<List<Map<String, Object>>> getAllSchedulesForCalendar(String userId);
     
 }
     

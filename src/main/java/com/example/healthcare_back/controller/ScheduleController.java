@@ -1,8 +1,5 @@
 package com.example.healthcare_back.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,12 +31,6 @@ import lombok.RequiredArgsConstructor;
 public class ScheduleController {
     
     private final ScheduleService scheduleService;
-
-    // FullCalendar에 맞춘 전체 일정 조회 API
-    @GetMapping("/calendar-events")
-    public ResponseEntity<List<Map<String, Object>>> getAllSchedulesForCalendar(@AuthenticationPrincipal String userId) {
-        return scheduleService.getAllSchedulesForCalendar(userId);
-    }
 
     // 운동 일정 상세 조회
     @GetMapping("/health-schedule/{healthScheduleNumber}")
