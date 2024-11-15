@@ -93,18 +93,24 @@ public class MealScheduleServiceImplement implements MealScheduleService{
     // 새로운 식단 일정 생성
     @Override
     public ResponseEntity<ResponseDto> postMealSchedule(PostMealScheduleRequestDto dto, String userId) {
-        try {
 
+        try {
             // 사용자 존재 여부 확인
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
             if (customerEntity == null) {
                 return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
             }
-
+    
+            // 해당 날짜의 식단 일정 개수 확인
+            Integer scheduleCount = mealScheduleRepository.countByMealScheduleStartAndUserId(dto.getMealScheduleStart(), userId);
+            if (scheduleCount >= 3) {
+                return ResponseDto.scheduleLimitExceeded();
+            }
+    
             // 메인 식단 일정 생성
             MealScheduleEntity mealScheduleEntity = new MealScheduleEntity(dto, userId);
             mealScheduleRepository.save(mealScheduleEntity);
-        
+    
             // 각 상세 식품 정보 저장
             for (PostMealScheduleRequestDto.MealDetail detail : dto.getMealMemo()) {
                 MealScheduleDetailEntity detailEntity = new MealScheduleDetailEntity(
@@ -112,12 +118,12 @@ public class MealScheduleServiceImplement implements MealScheduleService{
                 );
                 mealScheduleDetailRepository.save(detailEntity);
             }
-        
+    
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
         }
-        
+    
         return ResponseDto.success(); // 성공 응답
     }
 

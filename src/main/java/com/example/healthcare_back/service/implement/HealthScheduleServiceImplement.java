@@ -75,22 +75,29 @@ public class HealthScheduleServiceImplement implements HealthScheduleService {
     // 새로운 건강 일정 생성
     @Override
     public ResponseEntity<ResponseDto> postHealthSchedule(PostHealthScheduleRequestDto dto, String userId) {
+
         try {
-            
             // 사용자 존재 여부 확인
             CustomerEntity customerEntity = customerRepository.findByUserId(userId);
             if (customerEntity == null) {
                 return ResponseDto.noExistUserId(); // 사용자 ID가 존재하지 않음을 알리는 응답
             }
-
+    
+            // 해당 날짜의 건강 일정 개수 확인
+            Integer scheduleCount = healthScheduleRepository.countByHealthScheduleStartAndUserId(dto.getHealthScheduleStart(), userId);
+            if (scheduleCount >= 3) {
+                return ResponseDto.scheduleLimitExceeded();
+            }
+    
+            // 건강 일정 저장
             HealthScheduleEntity healthScheduleEntity = new HealthScheduleEntity(dto, userId);
-            healthScheduleRepository.save(healthScheduleEntity); // 건강 일정 저장
-
+            healthScheduleRepository.save(healthScheduleEntity);
+    
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
         }
-
+    
         return ResponseDto.success(); // 성공 응답
     }
 
