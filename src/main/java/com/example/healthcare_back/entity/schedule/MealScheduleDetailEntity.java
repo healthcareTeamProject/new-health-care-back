@@ -46,21 +46,15 @@ public class MealScheduleDetailEntity {
     @Column(nullable = false)
     private Integer mealCount; // 식품 개수
 
-    // 생성자
-    public MealScheduleDetailEntity(PostMealScheduleRequestDto.MealDetail detail, String mealName, BigDecimal mealKcal, Integer mealCount, MealScheduleEntity mealSchedule) {
-        this.mealName = detail.getMealName();
-        this.mealKcal = detail.getMealKcal();
-        this.mealCount = detail.getMealCount();
+    // DTO를 사용하는 기존 생성자
+    public MealScheduleDetailEntity(PostMealScheduleRequestDto.MealDetail dto, MealScheduleEntity mealSchedule) {
+        this.mealName = dto.getMealName();
+        this.mealKcal = dto.getMealKcal();
+        this.mealCount = dto.getMealCount();
         this.mealSchedule = mealSchedule;
     }
 
-    public MealScheduleDetailEntity(PatchMealScheduleRequestDto.MealDetail detail, String mealName, BigDecimal mealKcal, Integer mealCount, MealScheduleEntity mealSchedule) {
-        this.mealName = detail.getMealName();
-        this.mealKcal = detail.getMealKcal();
-        this.mealCount = detail.getMealCount();
-        this.mealSchedule = mealSchedule;
-    }
-
+    // 값 기반의 새로운 생성자 추가
     public MealScheduleDetailEntity(String mealName, BigDecimal mealKcal, Integer mealCount, MealScheduleEntity mealSchedule) {
         this.mealName = mealName;
         this.mealKcal = mealKcal;
@@ -68,3 +62,4 @@ public class MealScheduleDetailEntity {
         this.mealSchedule = mealSchedule;
     }
 }
+

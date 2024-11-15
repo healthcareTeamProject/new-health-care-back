@@ -93,6 +93,7 @@ public class MealScheduleServiceImplement implements MealScheduleService{
     // 새로운 식단 일정 생성
     @Override
     public ResponseEntity<ResponseDto> postMealSchedule(PostMealScheduleRequestDto dto, String userId) {
+
         try {
 
             // 사용자 존재 여부 확인

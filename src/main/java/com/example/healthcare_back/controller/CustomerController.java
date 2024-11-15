@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +41,7 @@ public class CustomerController {
     // 고객의 기본 정보를 가져옵니다.
     @GetMapping("/{userId}")
     public ResponseEntity<? super GetCustomerResponseDto> getCustomer(
-        @AuthenticationPrincipal String userId,
+        @PathVariable("userId") String userId,
         @AuthenticationPrincipal String requestedUserId
     ) {
         return customerService.getCustomer(userId, requestedUserId);
@@ -49,7 +50,7 @@ public class CustomerController {
     // 고객의 신체 정보 리스트를 가져옵니다.
     @GetMapping("/{userId}/user-muscle-fat-list")
     public ResponseEntity<? super GetUserMuscleFatListResponseDto> getUserMuscleFatList(
-        @AuthenticationPrincipal String userId,
+        @PathVariable("userId") String userId,
         @AuthenticationPrincipal String requestedUserId
     ) {
         ResponseEntity<? super GetUserMuscleFatListResponseDto> response = customerService.getUserMuscleFatList(userId, requestedUserId);
@@ -59,7 +60,7 @@ public class CustomerController {
     // 고객의 3대 측정 정보 리스트를 가져옵니다.
     @GetMapping("/{userId}/user-three-major-lift-list")
     public ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> getUserThreeMajorLift(
-        @AuthenticationPrincipal String userId,
+        @PathVariable("userId") String userId,
         @AuthenticationPrincipal String requestedUserId
     ) {
         ResponseEntity<? super GetUserThreeMajorLiftListResponseDto> response = customerService.getUserThreeMajorLiftList(userId, requestedUserId);
@@ -80,7 +81,7 @@ public class CustomerController {
     @PatchMapping("/{userId}/user-muscle-fat")
         public ResponseEntity<ResponseDto> patchUserMuscleFatCustomer(
         @RequestBody @Valid PatchUserMuscleFatRequestDto requestBody,
-        @AuthenticationPrincipal String userId,
+        @PathVariable("userId") String userId,
         @AuthenticationPrincipal String requestedUserId
         
     ) {
@@ -92,7 +93,7 @@ public class CustomerController {
     @PatchMapping("/{userId}/user-three-major-lift")
     public ResponseEntity<ResponseDto> patchThreeMajorLiftCustomer(
         @RequestBody @Valid PatchUserThreeMajorLiftRequestDto requestBody,
-        @AuthenticationPrincipal String userId,
+        @PathVariable("userId") String userId,
         @AuthenticationPrincipal String requestedUserId
     ) {
         ResponseEntity<ResponseDto> response = customerService.patchThreeMajorLiftCustomer(requestBody, userId, requestedUserId);
