@@ -3,6 +3,7 @@ package com.example.healthcare_back.entity.schedule;
 import java.math.BigDecimal;
 
 import com.example.healthcare_back.common.util.CustomBigDecimalSerializer;
+import com.example.healthcare_back.dto.request.schedule.PatchMealScheduleRequestDto;
 import com.example.healthcare_back.dto.request.schedule.PostMealScheduleRequestDto;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 

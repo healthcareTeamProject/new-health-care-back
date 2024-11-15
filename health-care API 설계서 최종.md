@@ -818,10 +818,10 @@ Content-Type: application/json;charset=UTF-8
 
 ##### 설명
 
-사용자는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 요청을 받습니다. 요청이 성공적으로 이루어지면 가입된 사용자의 프로필 이미지, 이름, 닉네임, 키, 개인 목표를 응답받습니다. 만약 존재하지 않는 아이디일 경우 존재하지 않는 아이디에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
+사용자는 요청 헤더에 Bearer 인증 토큰을 포함하여 요청하고 요청이 성공적으로 이루어지면 가입된 사용자의 프로필 이미지, 이름, 닉네임, 키, 개인 목표를 응답받습니다. 만약 존재하지 않는 아이디일 경우 존재하지 않는 아이디에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/**
+- end point : **/{userId}**
 
 ##### Request
 
@@ -829,12 +829,12 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    X     |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
 
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/customer/"
+curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 ```
 
 ##### Response
@@ -851,11 +851,19 @@ curl -X GET "http://localhost:4000/api/v1/customer/"
 | ------------ | :--------: | :-------------------: | :------: |
 | code         |   String   |       결과 코드       |    O     |
 | message      |   String   | 결과 코드에 대한 설명 |    O     |
-| profileImage |   String   | 사용자 프로필 이미지  |    X     |
+| userId       |   String   |      사용자 아이디      |    O     |
 | name         |   String   |      사용자 이름      |    O     |
 | nickname     |   String   |     사용자 닉네임     |    O     |
-| height       | BigDecimal |      사용자의 키      |    O     |
-| personalGoal |   String   |   사용자의 개인목표   |    X     |
+| telNumber     |   String   |     사용자 전화번호     |    O     |
+| profileImage |   String   | 사용자 프로필 이미지  |    X     |
+| personalGoals|   String   |   사용자 개인목표   |    X     |
+| height       | BigDecimal |     사용자 키      |    O     |
+| deadlift     | BigDecimal |  사용자 데드리프트 기록  |    X     |
+| benchPress   | BigDecimal |  사용자 벤치프레스 기록  |    X     |
+| squat        | BigDecimal |  사용자 스쿼트 기록  |    X     |
+| weight       | BigDecimal | 사용자 체중  |    O     |
+| skeletalMuscleMass |   BigDecimal   |   사용자 골격근량   |    X     |
+| bodyFatMass |   BigDecimal   |   사용자 체지방량   |    X     |
 
 ###### Example
 
@@ -866,13 +874,21 @@ HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 
 {
-  "code": "SU",
-  "message": "Success.",
-  "profileImage": null,
-  "name": "홍길동" ,
-  "nickname": "뛰라노사우르스",
-  "height": 180,
-  "personalGoal": "건강을 위하여";
+    "code": "SU",
+    "message": "Success.",
+    "userId": "qwer123456",
+    "name": "헬스장인",
+    "nickname": "뛰는라이언",
+    "telNumber": "01011112222",
+    "profileImage": null,
+    "personalGoals": "건강을 위하여",
+    "height": 180,
+    "deadlift": 120.5,
+    "benchPress": 110,
+    "squat": 100,
+    "weight": 70.9,
+    "skeletalMuscleMass": 34.5,
+    "bodyFatMass": 10.4
 }
 ```
 
@@ -921,7 +937,7 @@ Content-Type: application/json;charset=UTF-8
 사용자는 요청 헤더에 Bearer 인증 토큰을 포함하고 URL에 사용자 아이디를 포함하여 요청하고 성공적으로 이루어지면 사용자 신체정보 번호, 사용자의 몸무게, 골격근량, 체지방량, 사용자 신체 정보 등록 날짜를 응답받습니다. 만약 존재하지 않는 아이디일 경우 존재하지 않는 아이디에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/user-muscle-fat-list**
+- end point : **/{userId}/user-muscle-fat-list**
 
 ##### Request
 
@@ -961,7 +977,7 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-muscle-fat-list
 | weight | BigDecimal | 몸무게 | O |
 | skeletalMuscleMass | BigDecimal | 골격근량 | X |
 | bodyFatMass | BigDecimal | 체지방량 | X |
-| userMuscleFatDate | String | 사용자 신체 정보 등록 날짜 | O |
+| userMuscleFatDate | LocalDateTime | 사용자 신체 정보 등록 날짜 | O |
 
 ###### Example
 
@@ -981,10 +997,10 @@ Content-Type: application/json;charset=UTF-8
             "weight": 70.5,
             "skeletalMuscleMass": 30.5,
             "bodyFatMass": 10.3,
-            "userMuscleFatDate": "2024-11-04T09:39:27"
+            "userMuscleFatDate": "2024-11-04"
         },
         ...
-    ]
+  ]
 }
 ```
 
@@ -1062,7 +1078,7 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-three-major-lif
 | -------------- | :--------------: | :-------------------: | :------: |
 | code           |      String      |       결과 코드       |    O     |
 | message        |      String      | 결과 코드에 대한 설명 |    O     |
-| threeMajorLift | threeMajorLift[] | 3대 측정 정보 리스트  |    O     |
+| threeMajorLift | threeMajorLiftList[] | 3대 측정 정보 리스트  |    O     |
 
 **ThreeMajorLift**
 | name | type | description | required |
@@ -1072,7 +1088,7 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-three-major-lif
 | deadlift | BigDecimal | 데드리프트(kg) | X |
 | benchPress | BigDecimal | 벤치프레스(kg) | X |
 | squat | BigDecimal | 스쿼트 | X |
-| userThreeMajorLiftDate | String | 사용자 3대 측정 등록 날짜 | O |
+| userThreeMajorLiftDate | LocalDateTime | 사용자 3대 측정 등록 날짜 | O |
 
 ###### Example
 
@@ -1092,7 +1108,7 @@ Content-Type: application/json;charset=UTF-8
             "deadlift": 100.0,
             "benchPress": 100.0,
             "squat": 100.0,
-            "userThreeMajorLiftDate": "2024-11-04T09:39:32"
+            "userThreeMajorLiftDate": "2024-11-04"
         },
         ...
     ]
@@ -1583,7 +1599,7 @@ curl -X GET "http://localhost:4000/api/v1/board"
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O    |
 
 ###### Response Body
 
@@ -1599,7 +1615,7 @@ curl -X GET "http://localhost:4000/api/v1/board"
 | boardNumber | Integer | 게시물 번호 | O |
 | boardTitle | String | 게시물 제목 | O |
 | userId | String | 게시물 작성자 아이디 | O |
-| boardUploadDate | String | 게시물 작성날짜 | O |
+| boardUploadDate | LocalDateTime | 게시물 작성날짜 | O |
 | boardContents | String | 게시물 내용 | O |
 | youtubeVideoLink | String | 유튜브 비디오 링크 | X |
 | boardFileContents | boardFileContentsList[] | 게시물 파일 리스트 | X |
@@ -1613,7 +1629,7 @@ curl -X GET "http://localhost:4000/api/v1/board"
 | commentNumber | Integer | 댓글 번호 | O |
 | commentContents | String | 댓글 내용 | O |
 | userId | String | 댓글 사용자 아이디 | O |
-| commentDate | String | 댓글 작성 날짜 | O |
+| commentDate | LocalDateTime | 댓글 작성 날짜 | O |
 | commentLikeCount | Integer | 댓글 추천수 | O |
 
 **boardFileContentsList**
@@ -1640,21 +1656,9 @@ Content-Type: application/json;charset=UTF-8
       "boardNumber": 1,
       "boardTitle": "오늘은 다이어트 20일차",
       "userId": "뽀보이strong1",
-      "boardUploadDate": "2024-11-13T14:17:07",
+      "boardUploadDate": "2024-11-13 17:10",
       "boardContents": "오늘 하체랑 엉덩이가 터질것같다",
-      "youtubeVideoLink": null,
-      "boardViewCount": 10,
-      "boardLikeCount": 10,
-      "commentList": [
-        {
-          "commentNumber": 1,
-          "commentContents": "하체운동 어떻게 하시나요?",
-          "userId": "zxcv1234",
-          "commentDate": "2024-11-13T14:17:54",
-          "commentLikeCount": 1
-        },
-        ...
-      ]
+      "youtubeVideoLink": "null",
       "boardFileContents": [
         {
           "boardFileNumber": 1,
@@ -1662,7 +1666,18 @@ Content-Type: application/json;charset=UTF-8
         },
         ...
       ]
-      ...
+      "boardViewCount": 10,
+      "boardLikeCount": 10,
+      "commentList": [
+        {
+          "commentNumber": 1,
+          "commentContents": "하체운동 어떻게 하시나요?",
+          "userId": "zxcv1234",
+          "commentDate": "2024-11-13 14:17",
+          "commentLikeCount": 1
+        },
+        ...
+      ]
     },
     ...
   ]
@@ -1711,7 +1726,7 @@ Content-Type: application/json;charset=UTF-8
 
 ##### 설명
 
-클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. Bearer 인증 토큰과 URL에 게시물 번호를 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물과 댓글 상세 페이지를 응답받습니다.
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. URL에 게시물 번호를 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물과 댓글 상세 페이지를 응답받습니다.
 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
@@ -1728,8 +1743,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/board/1" \
--h "Authorization=Bearer XXXX"
+curl -X GET "http://localhost:4000/api/v1/board/1"
 ```
 
 ##### Response
@@ -1749,7 +1763,7 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 | boardNumber       |    Integer    |      게시물 번호      |    O     |
 | boardTitle        |    String     |      게시물 제목      |    O     |
 | userId            |    String     | 게시물 아이디(닉네임) |    O     |
-| boardUploadDate   |    String     | 작성 게시물 생성 날짜 |    O     |
+| boardUploadDate   | LocalDateTime | 작성 게시물 생성 날짜 |    O     |
 | boardContents     |    String     |      게시물 내용      |    O     |
 | youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
 | boardFileContents | BoardFileContentsList[] |  게시물 파일 리스트  |    X     |
@@ -1763,7 +1777,7 @@ curl -X GET "http://localhost:4000/api/v1/board/1" \
 | commentNumber | Integer | 댓글 번호 | O |
 | commentContents | String | 댓글 내용 | O |
 | userId | String | 댓글 사용자 아이디 | O |
-| commentDate | String | 댓글 작성 날짜 | O |
+| commentDate | LocalDateTime | 댓글 작성 날짜 | O |
 | commentLikeCount | Integer | 댓글 추천수 | O |
 
 **boardFileContentsList**
@@ -1786,9 +1800,16 @@ Content-Type: application/json;charset=UTF-8
   "boardNumber": 1,
   "boardTitle": "오늘은 다이어트 94일차",
   "userId": "뽀보이strong1",
-  "boardUploadDate": "2024-11-13T14:17:13",
+  "boardUploadDate": "2024-11-13 17:10",
   "boardContents": "오늘 하체랑 엉덩이가 터질것같다"
-  "youtubeVideoLink": null,
+  "youtubeVideoLink": "null",
+  "boardFileContents": [
+    {
+      "boardFileNumber": 1,
+      "boardFileContents": "abc.jpg"
+    },
+    ...
+  ]
   "boardViewCount": 10,
   "boardLikeCount": 10,
   "commentList": [
@@ -1798,13 +1819,6 @@ Content-Type: application/json;charset=UTF-8
       "userId": "zxcv1234",
       "commentDate": "2024-11-13T14:19:27",
       "commentLikeCount": 1
-    },
-    ...
-  ]
-  "boardFileContents": [
-    {
-      "boardFileNumber": 1,
-      "boardFileContents": "abc.jpg"
     },
     ...
   ]
@@ -1865,7 +1879,7 @@ Content-Type: application/json;charset=UTF-8
 
 ##### 설명
 
-클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. Bearer 인증 토큰과 URL에 게시물 번호와 comment-list를 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물과 댓글 상세 페이지를 응답받습니다.
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. 클라이언트는 URL에 게시물 번호와 comment-list를 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물과 댓글 상세 페이지를 응답받습니다.
 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
@@ -1882,8 +1896,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/board/1/comment-list" \
--h "Authorization=Bearer XXXX"
+curl -X GET "http://localhost:4000/api/v1/board/1/comment-list"
 ```
 
 ##### Response
@@ -1908,7 +1921,7 @@ curl -X GET "http://localhost:4000/api/v1/board/1/comment-list" \
 | commentNumber | Integer | 댓글 번호 | O |
 | commentContents | String | 댓글 내용 | O |
 | userId | String | 댓글 사용자 아이디 | O |
-| commentDate | String | 댓글 작성 날짜 | O |
+| commentDate | LocalDateTime | 댓글 작성 날짜 | O |
 | commentLikeCount | Integer | 댓글 추천수 | O |
 
 ###### Example
@@ -1927,7 +1940,7 @@ Content-Type: application/json;charset=UTF-8
       "commentNumber": 1,
       "commentContents": "하체운동 어떻게 하시나요?",
       "userId": "zxcv1234",
-      "commentDate": "2024-10-18T13:03:27"
+      "commentDate": "2024-10-18 17:10"
       "commentLikeCount": 1
     },
     ...
@@ -2015,7 +2028,7 @@ curl -X GET "http://localhost:4000/api/v1/board/user" \
 | boardNumber       |    Integer    |      게시물 번호      |    O     |
 | boardTitle        |    String     |      게시물 제목      |    O     |
 | userId            |    String     | 게시물 아이디(닉네임) |    O     |
-| boardUploadDate   |    String     | 작성 게시물 생성 날짜 |    O     |
+| boardUploadDate   | LocalDateTime | 작성 게시물 생성 날짜 |    O     |
 | boardContents     |    String     |      게시물 내용      |    O     |
 | youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
 | boardFileContents | BoardFileContentsList[] |  게시물 파일 리스트  |    X     |
@@ -2029,7 +2042,7 @@ curl -X GET "http://localhost:4000/api/v1/board/user" \
 | commentNumber | Integer | 댓글 번호 | O |
 | commentContents | String | 댓글 내용 | O |
 | userId | String | 댓글 사용자 아이디 | O |
-| commentDate | String | 댓글 작성 날짜 | O |
+| commentDate | LocalDateTime | 댓글 작성 날짜 | O |
 | commentLikeCount | Integer | 댓글 추천수 | O |
 
 **boardFileContentsList**
@@ -2056,9 +2069,16 @@ Content-Type: application/json;charset=UTF-8
       "boardNumber": 1,
       "boardTitle": "오늘은 다이어트 20일차",
       "userId": "뽀보이strong1",
-      "boardUploadDate": "2024-11-13T14:17:07",
+      "boardUploadDate": "2024-11-13 17:10",
       "boardContents": "오늘 하체랑 엉덩이가 터질것같다",
-      "youtubeVideoLink": null,
+      "youtubeVideoLink": "null",
+      "boardFileContents": [
+          {
+            "boardFileNumber": 1,
+            "boardFileContents": "abc.jpg"
+          },
+          ...
+      ]
       "boardViewCount": 10,
       "boardLikeCount": 10,
       "commentList": [
@@ -2066,18 +2086,11 @@ Content-Type: application/json;charset=UTF-8
             "commentNumber": 1,
             "commentContents": "하체운동 어떻게 하시나요?",
             "userId": "zxcv1234",
-            "commentDate": "2024-11-13T14:17:54",
+            "commentDate": "2024-11-13 14:17",
             "commentLikeCount": 1,
           },
           ...
-        ]
-        "boardFileContents": [
-          {
-            "boardFileNumber": 1,
-            "boardFileContents": "abc.jpg"
-          },
-          ...
-        ]
+      ]
     },
     ...
   ]
@@ -2138,7 +2151,7 @@ Content-Type: application/json;charset=UTF-8
 
 ##### 설명
 
-클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. Bearer 인증 토큰과 URL에 게시물 번호나 게시물 번호 뒤에 comment-list를 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물과 댓글 상세 페이지를 응답받습니다.
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. 클라이언트는  URL에 category와 찾을 카테고리명을 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물과 댓글 상세 페이지를 응답받습니다.
 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
@@ -2155,8 +2168,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/board/category/상체운동" \
--h "Authorization=Bearer XXXX"
+curl -X GET "http://localhost:4000/api/v1/board/category/상체운동"
 ```
 
 ##### Response
@@ -2176,7 +2188,7 @@ curl -X GET "http://localhost:4000/api/v1/board/category/상체운동" \
 | boardNumber       |    Integer    |      게시물 번호      |    O     |
 | boardTitle        |    String     |      게시물 제목      |    O     |
 | userId            |    String     | 게시물 아이디(닉네임) |    O     |
-| boardUploadDate   |    String     | 작성 게시물 생성 날짜 |    O     |
+| boardUploadDate   | LocalDateTime | 작성 게시물 생성 날짜 |    O     |
 | boardContents     |    String     |      게시물 내용      |    O     |
 | youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
 | boardFileContents | boardFileContentsList[] | 게시물 자료 |    X     |
@@ -2190,7 +2202,7 @@ curl -X GET "http://localhost:4000/api/v1/board/category/상체운동" \
 | commentNumber | Integer | 댓글 번호 | O |
 | commentContents | String | 댓글 내용 | O |
 | userId | String | 댓글 사용자 아이디 | O |
-| commentDate | String | 댓글 작성 날짜 | O |
+| commentDate | LocalDateTime | 댓글 작성 날짜 | O |
 | commentLikeCount | Integer | 댓글 추천수 | O |
 
 **boardFileContentsList**
@@ -2219,7 +2231,14 @@ Content-Type: application/json;charset=UTF-8
             "userId": "qwer1234",
             "boardUploadDate": "2024-11-13T14:17:13",
             "boardContents": "오늘은 상체운동을 했다.",
-            "youtubeVideoLink": null,
+            "youtubeVideoLink": "null",
+            "boardFileContents": [
+              {
+                "boardFileNumber": 1,
+                "boardFileContents": "abc.jpg"
+              },
+              ...
+            ]
             "boardViewCount": 0,
             "boardLikeCount": 0,
             "commentList": [
@@ -2229,13 +2248,6 @@ Content-Type: application/json;charset=UTF-8
                 "userId": "qwer1234",
                 "commentDate": "2024-11-13T14:18:02",
                 "commentLikeCount": 0
-              },
-              ...
-            ]
-            "boardFileContents": [
-              {
-                "boardFileNumber": 1,
-                "boardFileContents": "abc.jpg"
               },
               ...
             ]
@@ -2287,7 +2299,7 @@ Content-Type: application/json;charset=UTF-8
 
 ##### 설명
 
-클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. Bearer 인증 토큰과 URL에 게시물 번호나 게시물 번호 뒤에 comment-list를 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물과 댓글 상세 페이지를 응답받습니다.
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. 클라이언트는 URL에 tag와 찾을 태그명을 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물과 댓글 상세 페이지를 응답받습니다.
 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
@@ -2305,7 +2317,6 @@ Content-Type: application/json;charset=UTF-8
 
 ```bash
 curl -X GET "http://localhost:4000/api/v1/board/tag/운동" \
--h "Authorization": "Bearer XXXX"
 ```
 
 ##### Response
@@ -2325,7 +2336,7 @@ curl -X GET "http://localhost:4000/api/v1/board/tag/운동" \
 | boardNumber       |    Integer    |      게시물 번호      |    O     |
 | boardTitle        |    String     |      게시물 제목      |    O     |
 | userId            |    String     | 게시물 아이디(닉네임) |    O     |
-| boardUploadDate   |    String     | 작성 게시물 생성 날짜 |    O     |
+| boardUploadDate   | LocalDateTime | 작성 게시물 생성 날짜 |    O     |
 | boardContents     |    String     |      게시물 내용      |    O     |
 | youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
 | boardFileContents | boardFileContentsList[] | 게시물 파일 리스트 |    X     |
@@ -2339,7 +2350,7 @@ curl -X GET "http://localhost:4000/api/v1/board/tag/운동" \
 | commentNumber | Integer | 댓글 번호 | O |
 | commentContents | String | 댓글 내용 | O |
 | userId | String | 댓글 사용자 아이디 | O |
-| commentDate | String | 댓글 작성 날짜 | O |
+| commentDate | LocalDateTime | 댓글 작성 날짜 | O |
 | commentLikeCount | Integer | 댓글 추천수 | O |
 
 **boardFileContentsList**
@@ -2366,9 +2377,9 @@ Content-Type: application/json;charset=UTF-8
           "boardNumber": 8,
           "boardTitle": "오늘은 다이어트 20일차",
           "userId": "qwer1234",
-          "boardUploadDate": "2024-11-13T14:17:13",
+          "boardUploadDate": "2024-11-13 14:17",
           "boardContents": "오늘은 상체운동을 했다.",
-          "youtubeVideoLink": null,
+          "youtubeVideoLink": "null",
           "boardViewCount": 0,
           "boardLikeCount": 0,
           "commentList": [
@@ -2376,7 +2387,7 @@ Content-Type: application/json;charset=UTF-8
               "commentNumber": 13,
               "commentContents": "너무 도움됬어요 감사함욤",
               "userId": "qwer1234",
-              "commentDate": "2024-11-13T14:18:02",
+              "commentDate": "2024-11-13 14:18",
               "commentLikeCount": 0
             },
             ...
