@@ -3,8 +3,6 @@ package com.example.healthcare_back.repository.schedule;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.healthcare_back.entity.schedule.MealScheduleEntity;
@@ -14,7 +12,4 @@ public interface MealScheduleRepository extends JpaRepository<MealScheduleEntity
     List<MealScheduleEntity> findByUserIdOrderByMealScheduleNumberDesc(String userId);
     MealScheduleEntity findByMealScheduleNumberAndUserId(Integer mealScheduleNumber, String userId);
     MealScheduleEntity findByMealScheduleNumber(Integer mealScheduleNumber);
-
-    @Query("SELECT COUNT(m) FROM mealSchedule m WHERE m.mealScheduleStart = :date AND m.userId = :userId")
-    Integer countByMealScheduleStartAndUserId(@Param("date") String date, @Param("userId") String userId);
 }
