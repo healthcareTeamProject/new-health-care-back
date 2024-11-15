@@ -102,7 +102,7 @@ public class HealthScheduleServiceImplement implements HealthScheduleService {
 
             HealthScheduleEntity hScheduleEntity = healthScheduleRepository.findByHealthScheduleNumberAndUserId(healthScheduleNumber, userId);
             if (hScheduleEntity == null) {
-                return ResponseDto.noPermission(); 
+                return ResponseDto.noPermission();
             }
 
             // healthScheduleNumber로 건강 일정 존재 여부 확인
@@ -133,7 +133,7 @@ public class HealthScheduleServiceImplement implements HealthScheduleService {
         // 사용자 존재 여부 확인
         HealthScheduleEntity hScheduleEntity = healthScheduleRepository.findByHealthScheduleNumberAndUserId(healthScheduleNumber, userId);
         if (hScheduleEntity == null) {
-            return ResponseDto.noPermission(); 
+            return ResponseDto.noPermission();
         }
 
         try {

@@ -9,7 +9,6 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.example.healthcare_back.entity.schedule.MealScheduleDetailEntity;
-
 @Component
 public class CsvUtil {
 
@@ -46,7 +45,7 @@ public class CsvUtil {
 
                     // MealScheduleDetailEntity 객체 생성
                     MealScheduleDetailEntity detail = new MealScheduleDetailEntity(
-                        null, mealName, mealKcal, 1, null
+                        mealName, mealKcal, 1, null
                     );
                     // 생성된 객체를 목록에 추가
                     allMealDetails.add(detail);
