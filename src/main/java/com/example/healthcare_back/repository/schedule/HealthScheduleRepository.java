@@ -9,10 +9,8 @@ import com.example.healthcare_back.entity.schedule.HealthScheduleEntity;
 
 @Repository
 public interface HealthScheduleRepository extends JpaRepository<HealthScheduleEntity, Integer> {
-    
     List<HealthScheduleEntity> findByUserIdOrderByHealthScheduleNumberDesc(String userId);
     List<HealthScheduleEntity> findByHealthScheduleNumber(Integer healthScheduleNumber);
     List<HealthScheduleEntity> deleteByHealthScheduleNumber(Integer healthScheduleNumber);
     HealthScheduleEntity findByHealthScheduleNumberAndUserId(Integer healthScheduleNumber, String userId);
-
 }

@@ -14,7 +14,7 @@ import lombok.Getter;
 @Getter
 public class GetCustomerListResponseDto extends ResponseDto {
 
-    private List<GetCustomerResponseDto> customerList;
+    private final List<GetCustomerResponseDto> customerList;
 
     private GetCustomerListResponseDto(List<GetCustomerResponseDto> customerResponseList) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

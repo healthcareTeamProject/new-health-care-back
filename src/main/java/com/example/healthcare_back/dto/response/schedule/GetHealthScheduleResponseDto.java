@@ -13,10 +13,10 @@ import lombok.Getter;
 @Getter
 public class GetHealthScheduleResponseDto extends ResponseDto {
     
-    private Integer healthScheduleNumber;
-    private String healthTitle;
-    private String healthScheduleStart;
-    private String healthScheduleEnd;
+    private final Integer healthScheduleNumber;
+    private final String healthTitle;
+    private final String healthScheduleStart;
+    private final String healthScheduleEnd;
 
     // HealthScheduleEntity를 받아 필드 초기화하는 생성자
     public GetHealthScheduleResponseDto(HealthScheduleEntity healthScheduleEntity) {

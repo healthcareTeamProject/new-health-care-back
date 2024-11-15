@@ -10,10 +10,10 @@ import lombok.Getter;
 @Getter
 public class HealthScheduleList {
 
-    private Integer healthScheduleNumber;
-    private String healthTitle;
-    private String healthScheduleStart;
-    private String healthScheduleEnd;
+    private final Integer healthScheduleNumber;
+    private final String healthTitle;
+    private final String healthScheduleStart;
+    private final String healthScheduleEnd;
 
     // HealthScheduleEntity 객체를 이용하여 HealthScheduleList 객체를 생성하는 생성자
     public HealthScheduleList(HealthScheduleEntity healthScheduleEntity) {

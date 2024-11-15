@@ -19,13 +19,13 @@ import lombok.Getter;
 @Getter
 public class GetMealScheduleResponseDto extends ResponseDto {
     
-    private Integer mealScheduleNumber;
-    private String mealTitle;
-    private String mealScheduleStart;
-    private String mealScheduleEnd;
-    private List<GetMealDetailResponseDto> mealMemo;  // mealMemo를 List<GetMealDetailResponseDto> 타입으로 유지
+    private final Integer mealScheduleNumber;
+    private final String mealTitle;
+    private final String mealScheduleStart;
+    private final String mealScheduleEnd;
+    private final List<GetMealDetailResponseDto> mealMemo;  // mealMemo를 List<GetMealDetailResponseDto> 타입으로 유지
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal totalKcal;  // 각 항목별 칼로리 리스트로 변경
+    private final BigDecimal totalKcal;  // 각 항목별 칼로리 리스트로 변경
 
     public GetMealScheduleResponseDto(MealScheduleEntity mealSchedule, List<MealScheduleDetailEntity> detailEntities) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

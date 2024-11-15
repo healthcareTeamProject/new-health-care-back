@@ -45,7 +45,7 @@ public class HealthScheduleEntity {
         this.healthScheduleEnd = dto.getHealthScheduleEnd();
     }
 
-    public HealthScheduleEntity (PatchHealthScheduleRequestDto dto, Integer healthScheduleNumber) {
+    public void update (PatchHealthScheduleRequestDto dto, Integer healthScheduleNumber) {
         this.healthScheduleNumber = healthScheduleNumber;
         this.healthTitle = dto.getHealthTitle();
         this.healthScheduleStart = dto.getHealthScheduleStart();

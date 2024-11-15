@@ -9,9 +9,7 @@ import com.example.healthcare_back.entity.schedule.MealScheduleEntity;
 
 @Repository
 public interface MealScheduleRepository extends JpaRepository<MealScheduleEntity, Integer> {
-
     List<MealScheduleEntity> findByUserIdOrderByMealScheduleNumberDesc(String userId);
     MealScheduleEntity findByMealScheduleNumberAndUserId(Integer mealScheduleNumber, String userId);
     MealScheduleEntity findByMealScheduleNumber(Integer mealScheduleNumber);
-
 }

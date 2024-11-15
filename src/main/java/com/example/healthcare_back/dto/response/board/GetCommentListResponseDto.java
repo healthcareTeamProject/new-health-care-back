@@ -18,7 +18,7 @@ import lombok.Getter;
 @Getter
 public class GetCommentListResponseDto extends ResponseDto {
     
-    private List<CommentList> commentList;
+    private final List<CommentList> commentList;
 
     private GetCommentListResponseDto(List<CommentEntity> resultSets) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);

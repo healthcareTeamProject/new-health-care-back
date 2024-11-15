@@ -14,15 +14,13 @@ import lombok.Getter;
 @Getter
 public class SignInResponseDto extends ResponseDto {
     
-    private String accessToken;
-    private Integer expiration;
+    private final String accessToken;
+    private final Integer expiration;
 
     private SignInResponseDto(String accessToken) {
-        
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
         this.accessToken = accessToken;
         this.expiration = 10 * 60 * 60;
-
     }
 
     public static ResponseEntity<SignInResponseDto> success(String accessToken) {

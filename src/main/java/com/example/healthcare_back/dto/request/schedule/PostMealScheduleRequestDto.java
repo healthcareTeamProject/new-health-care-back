@@ -16,27 +16,20 @@ public class PostMealScheduleRequestDto {
 
     @NotBlank
     private String mealTitle;
-
-    @NotNull
+    @NotBlank
     private String mealScheduleStart;
-
-    @NotNull
+    @NotBlank
     private String mealScheduleEnd;
-
     @NotNull
     private List<MealDetail> mealMemo; // 변경된 부분: mealMemo를 List<MealDetail>로 수정
-
     @Getter
     @Setter
     public static class MealDetail {
         @NotBlank
         private String mealName;
-        
         @NotNull
         private BigDecimal mealKcal;
-        
         @NotNull
         private Integer mealCount;
     }
-
 }

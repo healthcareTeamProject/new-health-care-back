@@ -11,13 +11,13 @@ import lombok.Getter;
 
 @Getter
 public class BoardCategoryList {
-    private String boardCategory;
-    private Integer boardNumber;
-    private String boardTitle;
-    private String userId;
+    private final String boardCategory;
+    private final Integer boardNumber;
+    private final String boardTitle;
+    private final String userId;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime boardUploadDate;
-    private Integer boardViewCount;
+    private final LocalDateTime boardUploadDate;
+    private final Integer boardViewCount;
 
     public BoardCategoryList(BoardEntity resultSet) {
         this.boardCategory = resultSet.getBoardCategory();
