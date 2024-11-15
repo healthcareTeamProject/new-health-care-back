@@ -14,13 +14,13 @@ import java.util.List;
 @Getter
 public class GetMealScheduleListResponseDto extends ResponseDto{
 
-    private final List<MealScheduleList> mealScheduleLists;
+    private final List<MealScheduleList> mealSchedulelist;
 
     // 생성자: MealScheduleList 리스트를 받아 성공 코드와 메시지를 설정하고,
-    // mealScheduleLists 필드에 할당
-    public GetMealScheduleListResponseDto(List<MealScheduleList> mealScheduleLists) {
+    // mealSchedulelist 필드에 할당
+    public GetMealScheduleListResponseDto(List<MealScheduleList> mealSchedulelist) {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
-        this.mealScheduleLists = mealScheduleLists;
+        this.mealSchedulelist = mealSchedulelist;
     }
     
     // 정적 메서드: 성공적인 요청에 대한 ResponseEntity 객체를 생성하여 반환

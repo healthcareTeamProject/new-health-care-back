@@ -25,11 +25,11 @@ public class HealthScheduleList {
     
     // HealthScheduleEntity 목록을 받아 HealthScheduleList 목록으로 변환하여 반환하는 메서드
     public static List<HealthScheduleList> getList(List<HealthScheduleEntity> healthScheduleEntities) {
-        List<HealthScheduleList> healthScheduleLists = new ArrayList<>();
+        List<HealthScheduleList> healthSchedulelist = new ArrayList<>();
         for (HealthScheduleEntity entity : healthScheduleEntities) {
-            healthScheduleLists.add(new HealthScheduleList(entity));
+            healthSchedulelist.add(new HealthScheduleList(entity));
         }
-        return healthScheduleLists; 
+        return healthSchedulelist; 
     }
     
 }

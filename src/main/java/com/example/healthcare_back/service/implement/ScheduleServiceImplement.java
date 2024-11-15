@@ -1,7 +1,9 @@
 package com.example.healthcare_back.service.implement;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -204,13 +206,13 @@ public class ScheduleServiceImplement implements ScheduleService {
             }
         
             // 각 MealScheduleEntity에 대해 관련 MealScheduleDetailEntity를 조회하여 변환
-            List<MealScheduleList> mealScheduleLists = mealScheduleEntities.stream().map(schedule -> {
+            List<MealScheduleList> mealScheduleList = mealScheduleEntities.stream().map(schedule -> {
                 List<MealScheduleDetailEntity> details = mealScheduleDetailRepository
                         .findByMealSchedule_MealScheduleNumber(schedule.getMealScheduleNumber());
                 return new MealScheduleList(schedule, details);
             }).collect(Collectors.toList());
         
-            return GetMealScheduleListResponseDto.success(mealScheduleLists); // 성공적으로 조회 시 응답
+            return GetMealScheduleListResponseDto.success(mealScheduleList); // 성공적으로 조회 시 응답
         
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -359,4 +361,6 @@ public class ScheduleServiceImplement implements ScheduleService {
             return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
         }
     }
+
+    
 }
