@@ -46,7 +46,7 @@ public class CsvUtil {
 
                     // MealScheduleDetailEntity 객체 생성
                     MealScheduleDetailEntity detail = new MealScheduleDetailEntity(
-                        mealName, mealKcal, 1, null
+                        null, mealName, mealKcal, 1, null
                     );
                     // 생성된 객체를 목록에 추가
                     allMealDetails.add(detail);

@@ -108,7 +108,7 @@ public class MealScheduleServiceImplement implements MealScheduleService{
             // 각 상세 식품 정보 저장
             for (PostMealScheduleRequestDto.MealDetail detail : dto.getMealMemo()) {
                 MealScheduleDetailEntity detailEntity = new MealScheduleDetailEntity(
-                    detail.getMealName(), detail.getMealKcal(), detail.getMealCount(), mealScheduleEntity
+                    detail, detail.getMealName(), detail.getMealKcal(), detail.getMealCount(), mealScheduleEntity
                 );
                 mealScheduleDetailRepository.save(detailEntity);
             }
@@ -150,7 +150,7 @@ public class MealScheduleServiceImplement implements MealScheduleService{
         
             for (PatchMealScheduleRequestDto.MealDetail detail : dto.getMealMemo()) {
                 MealScheduleDetailEntity detailEntity = new MealScheduleDetailEntity(
-                    detail.getMealName(), detail.getMealKcal(), detail.getMealCount(), mealScheduleEntity
+                    detail, detail.getMealName(), detail.getMealKcal(), detail.getMealCount(), mealScheduleEntity
                 );
                 mealScheduleDetailRepository.save(detailEntity);
             }
