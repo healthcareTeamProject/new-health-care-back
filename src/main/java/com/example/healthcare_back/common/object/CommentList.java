@@ -13,12 +13,12 @@ import lombok.Getter;
 
 @Getter
 public class CommentList {
-    private Integer commentNumber;
-    private String commentContents;
-    private String userId;
+    private final Integer commentNumber;
+    private final String commentContents;
+    private final String userId;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime commentDate;
-    private Integer commentLikeCount;
+    private final LocalDateTime commentDate;
+    private final Integer commentLikeCount;
 
     public CommentList(CommentEntity commentEntity) {
         this.commentNumber = commentEntity.getCommentNumber();

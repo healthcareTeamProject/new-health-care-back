@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.example.healthcare_back.common.object.BoardFileContentsList;
 import com.example.healthcare_back.common.object.CommentList;
 import com.example.healthcare_back.dto.response.ResponseCode;
 import com.example.healthcare_back.dto.response.ResponseDto;
@@ -23,20 +24,20 @@ import lombok.Getter;
 
 @Getter
 public class GetBoardResponseDto extends ResponseDto {
-    private Integer boardNumber;
-    private String boardTitle;
-    private String userId;
+    private final Integer boardNumber;
+    private final String boardTitle;
+    private final String userId;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime boardUploadDate;
-    private String boardContents;
-    private String youtubeVideoLink;
-    private String boardFileContents;
-    private Integer boardViewCount;
-    private Integer boardLikeCount;
-    private List<CommentList> commentList; // 수정: List<CommentList>로 변경
+    private final LocalDateTime boardUploadDate;
+    private final String boardContents;
+    private final String youtubeVideoLink;
+    private final List<BoardFileContentsList> boardFileContentsList;
+    private final Integer boardViewCount;
+    private final Integer boardLikeCount;
+    private final List<CommentList> commentList; // 수정: List<CommentList>로 변경
 
     // 생성자 수정
-    public GetBoardResponseDto(String code, String message, BoardEntity boardEntity, BoardFileContentsEntity boardFileContentsEntity, List<CommentEntity> commentEntities) {
+    public GetBoardResponseDto(String code, String message, BoardEntity boardEntity, List<BoardFileContentsEntity> boardFileContentsEntities, List<CommentEntity> commentEntities) {
         super(code, message);
 
         this.boardNumber = boardEntity.getBoardNumber();
@@ -45,9 +46,15 @@ public class GetBoardResponseDto extends ResponseDto {
         this.boardUploadDate = boardEntity.getBoardUploadDate();
         this.boardContents = boardEntity.getBoardContents();
         this.youtubeVideoLink = boardEntity.getYoutubeVideoLink();
-        this.boardFileContents = boardFileContentsEntity != null ? boardFileContentsEntity.getBoardFileContents() : null;
         this.boardViewCount = boardEntity.getBoardViewCount();
         this.boardLikeCount = boardEntity.getBoardLikeCount();
+
+        // boardFileContentsList 초기화
+        this.boardFileContentsList = boardFileContentsEntities != null && !boardFileContentsEntities.isEmpty()
+                ? boardFileContentsEntities.stream()
+                    .map(boardFileContents -> new BoardFileContentsList(boardFileContents)) // BoardFileContentsEntity를 BoardFileContentsList로 변환
+                    .collect(Collectors.toList())
+                : new ArrayList<>(); // BoardFileContentsEntities가 null 또는 비어있는 경우 빈 리스트 반환
 
         // commentList 초기화
         this.commentList = commentEntities != null && !commentEntities.isEmpty()
@@ -57,8 +64,8 @@ public class GetBoardResponseDto extends ResponseDto {
                 : new ArrayList<>(); // commentEntities가 null 또는 비어있는 경우 빈 리스트 반환
     }
 
-    public static ResponseEntity<GetBoardResponseDto> success(BoardEntity boardEntity, BoardFileContentsEntity boardFileContentsEntity, List<CommentEntity> commentEntities) {
-        GetBoardResponseDto responseBody = new GetBoardResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, boardEntity, boardFileContentsEntity, commentEntities);
+    public static ResponseEntity<GetBoardResponseDto> success(BoardEntity boardEntity, List<BoardFileContentsEntity> boardFileContentsEntities, List<CommentEntity> commentEntities) {
+        GetBoardResponseDto responseBody = new GetBoardResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, boardEntity, boardFileContentsEntities, commentEntities);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 

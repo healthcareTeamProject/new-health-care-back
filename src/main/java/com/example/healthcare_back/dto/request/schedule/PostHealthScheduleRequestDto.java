@@ -1,7 +1,6 @@
 package com.example.healthcare_back.dto.request.schedule;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,9 +11,9 @@ public class PostHealthScheduleRequestDto {
 
     @NotBlank
     private String healthTitle;
-    @NotNull
+    @NotBlank
     private String healthScheduleStart;
-    @NotNull
+    @NotBlank
     private String healthScheduleEnd;
 
 }

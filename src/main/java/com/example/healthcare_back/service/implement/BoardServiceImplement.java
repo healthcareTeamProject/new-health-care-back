@@ -88,7 +88,7 @@ public class BoardServiceImplement implements BoardService {
     public ResponseEntity<? super GetBoardResponseDto> getBoard(Integer boardNumber) {
 
         BoardEntity boardEntity;
-        BoardFileContentsEntity boardFileContentsEntity = null;
+        List<BoardFileContentsEntity> boardFileContentsEntities;
         List<CommentEntity> commentEntities;
         
         try {
@@ -104,13 +104,19 @@ public class BoardServiceImplement implements BoardService {
                 commentEntities = new ArrayList<>();  // 댓글이 없을 때 빈 리스트 반환
             }
 
+            // 파일을 파일 번호 순서로 조회, 없으면 빈 리스트로 초기화
+            boardFileContentsEntities = boardFileContentsRepository.findByBoardNumberOrderByBoardFileNumberAsc(boardNumber);
+            if (boardFileContentsEntities == null) {
+                boardFileContentsEntities = new ArrayList<>();  // 파일이 없을 때 빈 리스트 반환
+            }
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
 
         // 성공적인 응답
-        return GetBoardResponseDto.success(boardEntity, boardFileContentsEntity, commentEntities);
+        return GetBoardResponseDto.success(boardEntity, boardFileContentsEntities, commentEntities);
 
     }
 

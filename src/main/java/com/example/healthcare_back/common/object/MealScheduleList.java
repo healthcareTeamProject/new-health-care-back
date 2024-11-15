@@ -15,13 +15,13 @@ import lombok.Getter;
 @Getter
 public class MealScheduleList {
 
-    private Integer mealScheduleNumber;
-    private String mealTitle;
-    private String mealScheduleStart;
-    private String mealScheduleEnd;
-    private List<GetMealDetailResponseDto> mealMemo; // mealDetails 대신 mealMemo로 변경
+    private final Integer mealScheduleNumber;
+    private final String mealTitle;
+    private final String mealScheduleStart;
+    private final String mealScheduleEnd;
+    private final List<GetMealDetailResponseDto> mealMemo; // mealDetails 대신 mealMemo로 변경
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal totalKcal;  // 전체 칼로리 합계 필드 추가
+    private final BigDecimal totalKcal;  // 전체 칼로리 합계 필드 추가
 
     // MealScheduleEntity와 List<MealScheduleDetailEntity>를 매개변수로 받는 생성자
     public MealScheduleList(MealScheduleEntity mealScheduleEntity, List<MealScheduleDetailEntity> detailEntities) {

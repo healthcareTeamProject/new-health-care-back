@@ -12,14 +12,14 @@ import lombok.Getter;
 
 @Getter
 public class Customer {
-    private String userId;
-    private String name;
-    private String nickname;
-    private String telNumber;
-    private String profileImage;
-    private String personalGoals;
+    private final String userId;
+    private final String name;
+    private final String nickname;
+    private final String telNumber;
+    private final String profileImage;
+    private final String personalGoals;
     @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    private BigDecimal height;
+    private final BigDecimal height;
 
     private Customer(CustomerEntity customerEntity) {
         this.userId = customerEntity.getUserId();
