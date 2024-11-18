@@ -55,20 +55,26 @@ public class BoardServiceImplement implements BoardService {
             // 최신순으로 모든 게시물 조회
             boardList = boardRepository.findAllByOrderByBoardUploadDateDesc();
         
-            // 각 게시물에 대한 댓글 리스트 조회 (최신순) 및 응답 생성
+            // 각 게시물에 대한 댓글, 첨부파일 리스트 조회 (최신순) 및 응답 생성
             for (BoardEntity boardEntity : boardList) {
                 List<CommentEntity> comments = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardEntity.getBoardNumber());
+                List<BoardFileContentsEntity> boardFileContents = boardFileContentsRepository.findByBoardNumberOrderByBoardFileNumberAsc(boardEntity.getBoardNumber());
 
                 // 댓글이 없으면 빈 리스트로 설정
                 if (comments == null) {
                     comments = new ArrayList<>();
                 }
 
+                // 파일이 없을 때 빈 리스트 반환
+                if (boardFileContents == null) {
+                boardFileContents = new ArrayList<>();
+                }
+
                 GetBoardResponseDto boardResponse = new GetBoardResponseDto(
                         ResponseCode.SUCCESS,
                         ResponseMessage.SUCCESS,
                         boardEntity,
-                        null, // boardFileContentsEntity가 없으면 null
+                        boardFileContents, // boardFileContentsEntity가 없으면 null
                         comments
                 );
                 boardResponseList.add(boardResponse);
@@ -136,14 +142,15 @@ public class BoardServiceImplement implements BoardService {
             // 특정 사용자가 작성한 모든 게시물을 최신순으로 조회
             boardList = boardRepository.findByUserIdOrderByBoardUploadDateDesc(userId);
 
-            // 각 게시물에 대한 댓글 리스트 조회 및 응답 생성
+            // 각 게시물에 대한 댓글, 파일 리스트 조회 및 응답 생성
             for (BoardEntity boardEntity : boardList) {
                 List<CommentEntity> comments = commentRepository.findByBoardNumber(boardEntity.getBoardNumber());
+                List<BoardFileContentsEntity> boardFileContents = boardFileContentsRepository.findByBoardNumberOrderByBoardFileNumberAsc(boardEntity.getBoardNumber());
                 GetBoardResponseDto boardResponse = new GetBoardResponseDto(
-                        ResponseCode.SUCCESS, 
-                        ResponseMessage.SUCCESS, 
-                        boardEntity, 
-                        null, // boardFileContentsEntity가 없으면 null
+                        ResponseCode.SUCCESS,
+                        ResponseMessage.SUCCESS,
+                        boardEntity,
+                        boardFileContents,
                         comments
                 );
                 boardResponseList.add(boardResponse);
@@ -189,20 +196,26 @@ public class BoardServiceImplement implements BoardService {
             // 카테고리별 최신순으로 게시물 조회
             boardList = boardRepository.findByBoardCategoryOrderByBoardUploadDateDesc(boardCategory);
         
-            // 각 게시물에 대한 댓글 리스트 조회 (최신순) 및 응답 생성
+            // 각 게시물에 대한 댓글, 첨부파일 리스트 조회 (최신순) 및 응답 생성
             for (BoardEntity boardEntity : boardList) {
                 List<CommentEntity> comments = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardEntity.getBoardNumber());
+                List<BoardFileContentsEntity> boardFileContents = boardFileContentsRepository.findByBoardNumberOrderByBoardFileNumberAsc(boardEntity.getBoardNumber());
 
                 // 댓글이 없으면 빈 리스트로 설정
                 if (comments == null) {
                     comments = new ArrayList<>();
                 }
 
+                // 파일이 없을 때 빈 리스트 반환
+                if (boardFileContents == null) {
+                boardFileContents = new ArrayList<>();
+                }
+
                 GetBoardResponseDto boardResponse = new GetBoardResponseDto(
                         ResponseCode.SUCCESS,
                         ResponseMessage.SUCCESS,
                         boardEntity,
-                        null, // boardFileContentsEntity가 없으면 null
+                        boardFileContents,
                         comments
                 );
                 boardResponseList.add(boardResponse);
@@ -228,20 +241,26 @@ public class BoardServiceImplement implements BoardService {
             // 최신순으로 모든 게시물 조회
             boardList = boardRepository.findByBoardTagOrderByBoardUploadDateDesc(boardTag);
         
-            // 각 게시물에 대한 댓글 리스트 조회 (최신순) 및 응답 생성
+            // 각 게시물에 대한 댓글, 첨부파일 리스트 조회 (최신순) 및 응답 생성
             for (BoardEntity boardEntity : boardList) {
                 List<CommentEntity> comments = commentRepository.findByBoardNumberOrderByCommentDateDesc(boardEntity.getBoardNumber());
+                List<BoardFileContentsEntity> boardFileContents = boardFileContentsRepository.findByBoardNumberOrderByBoardFileNumberAsc(boardEntity.getBoardNumber());
 
                 // 댓글이 없으면 빈 리스트로 설정
                 if (comments == null) {
                     comments = new ArrayList<>();
                 }
 
+                // 파일이 없을 때 빈 리스트 반환
+                if (boardFileContents == null) {
+                boardFileContents = new ArrayList<>();
+                }
+
                 GetBoardResponseDto boardTagResponse = new GetBoardResponseDto(
                         ResponseCode.SUCCESS,
                         ResponseMessage.SUCCESS,
                         boardEntity,
-                        null, // boardFileContentsEntity가 없으면 null
+                        boardFileContents,
                         comments
                 );
                 boardResponseList.add(boardTagResponse);
@@ -258,6 +277,7 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<? super ResponseDto> postBoard(PostBoardRequestDto dto, 
     String userId) {
 
@@ -266,14 +286,19 @@ public class BoardServiceImplement implements BoardService {
             boolean existedUser = customerRepository.existsByUserId(userId);
             if (!existedUser) return ResponseDto.noExistUserId();
             
-            BoardEntity boardEntity = new BoardEntity(dto, userId);
-            boardRepository.save(boardEntity);
+            BoardEntity boardEntities = new BoardEntity(dto, userId);
+            boardRepository.save(boardEntities);
 
-            String boardFileContents = dto.getBoardFileContents();
-            Integer boardNumber = boardEntity.getBoardNumber();
-            if (boardFileContents != null) {
-                BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(dto, boardNumber);
-                boardFileContentsRepository.save(boardFileContentsEntity);
+            // 해당하는 게시물 번호에 파일 저장
+            Integer boardNumber = boardEntities.getBoardNumber();
+
+            // 파일 업로드 리스트
+            List<String> boardFileContentsList = dto.getBoardFileContentsList();
+            if (boardFileContentsList != null && !boardFileContentsList.isEmpty()) {
+                    for (String boardFileContents : boardFileContentsList) {
+                        BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(boardFileContents, boardNumber);
+                        boardFileContentsRepository.save(boardFileContentsEntity);
+                }
             }
 
             BoardHealthMapEntity boardHealthMapEntity = new BoardHealthMapEntity(dto, boardNumber);
@@ -295,19 +320,29 @@ public class BoardServiceImplement implements BoardService {
 
         try {
             // 게시물 번호로 게시글 조회
-            BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
-            if (boardEntity == null) {
+            BoardEntity boardEntities = boardRepository.findByBoardNumber(boardNumber);
+            if (boardEntities == null) {
                 return ResponseDto.noExistBoard(); // 게시물이 없는 경우 처리
             }
     
             // 작성자와 수정하려는 유저가 같은지 확인
-            if (!boardEntity.getUserId().equals(userId)) {
+            if (!boardEntities.getUserId().equals(userId)) {
                 return ResponseDto.noPermission(); // 권한 없음 응답
             }
     
             // 작성자가 맞다면 게시물 수정
-            boardEntity.update(dto, boardNumber, userId);
-            boardRepository.save(boardEntity);
+            boardEntities.update(dto, boardNumber, userId);
+            boardRepository.save(boardEntities);
+
+            // 파일 리스트 수정
+            List<String> boardFileContentsList = dto.getBoardFileContentsList();
+            boardFileContentsRepository.deleteByBoardNumber(boardNumber);
+            if (boardFileContentsList != null && !boardFileContentsList.isEmpty()) {
+                    for (String boardFileContents : boardFileContentsList) {
+                        BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(boardFileContents, boardNumber);
+                        boardFileContentsRepository.save(boardFileContentsEntity);
+                }
+            }
     
         } catch (Exception exception) {
             exception.printStackTrace();

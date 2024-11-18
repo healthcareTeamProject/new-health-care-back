@@ -2380,6 +2380,13 @@ Content-Type: application/json;charset=UTF-8
           "boardUploadDate": "2024-11-13 14:17",
           "boardContents": "오늘은 상체운동을 했다.",
           "youtubeVideoLink": "null",
+          "boardFileContents": [
+            {
+              "boardFileNumber": 1,
+              "boardFileContents": "abc.jpg"
+            },
+            ...
+          ]
           "boardViewCount": 0,
           "boardLikeCount": 0,
           "commentList": [
@@ -2392,16 +2399,9 @@ Content-Type: application/json;charset=UTF-8
             },
             ...
           ]
-          "boardFileContents": [
-            {
-              "boardFileNumber": 1,
-              "boardFileContents": "abc.jpg"
-            },
-            ...
-          ]
         },
         ...
-    ]
+  ]
 }
 ```
 

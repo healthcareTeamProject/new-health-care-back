@@ -1,6 +1,7 @@
 package com.example.healthcare_back.dto.request.board;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import lombok.Getter;
@@ -18,10 +19,19 @@ public class PostBoardRequestDto {
     private String boardTag;
     private String boardContents;
     private String youtubeVideoLink;
-    private String boardFileContents;
     @Column(precision = 9, scale = 6)
     private BigDecimal mapLat;
     @Column(precision = 9, scale = 6)
     private BigDecimal mapLng;
+
+    private List<String> boardFileContentsList;
+
+    public List<String> getBoardFileContentsList() {
+        return boardFileContentsList;
+    }
+
+    public void setBoardFileContentsList(List<String> boardFileContentsList) {
+        this.boardFileContentsList = boardFileContentsList;
+    }
 }
 
