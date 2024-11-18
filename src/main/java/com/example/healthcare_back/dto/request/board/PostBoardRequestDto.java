@@ -35,4 +35,3 @@ public class PostBoardRequestDto {
         this.boardFileContentsList = boardFileContentsList;
     }
 }
-

@@ -23,7 +23,6 @@ public class PatchBoardRequestDto {
     private BigDecimal mapLat;
     @Column(precision = 9, scale = 6)
     private BigDecimal mapLng;
-    private List<String> boardFileContents;
 
     private List<String> boardFileContentsList;
 
@@ -34,5 +33,4 @@ public class PatchBoardRequestDto {
     public void setBoardFileContents(List<String> boardFileContentsList) {
         this.boardFileContentsList = boardFileContentsList;
     }
-
 }
