@@ -277,7 +277,6 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    @Transactional
     public ResponseEntity<? super ResponseDto> postBoard(PostBoardRequestDto dto, 
     String userId) {
 
@@ -292,11 +291,13 @@ public class BoardServiceImplement implements BoardService {
             // 해당하는 게시물 번호에 파일 저장
             Integer boardNumber = boardEntities.getBoardNumber();
 
-            // 파일 업로드 리스트
-            List<String> boardFileContentsList = dto.getBoardFileContentsList();
+            // 파일 업로드
+            List<String> boardFileContentsList = dto.getBoardFileContents();
+            
+
             if (boardFileContentsList != null && !boardFileContentsList.isEmpty()) {
                     for (String boardFileContents : boardFileContentsList) {
-                        BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(boardFileContents, boardNumber);
+                        BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(boardNumber, boardFileContents);
                         boardFileContentsRepository.save(boardFileContentsEntity);
                 }
             }
@@ -335,11 +336,12 @@ public class BoardServiceImplement implements BoardService {
             boardRepository.save(boardEntities);
 
             // 파일 리스트 수정
-            List<String> boardFileContentsList = dto.getBoardFileContentsList();
+            List<String> boardFileContentsList = dto.getBoardFileContents();
             boardFileContentsRepository.deleteByBoardNumber(boardNumber);
+
             if (boardFileContentsList != null && !boardFileContentsList.isEmpty()) {
                     for (String boardFileContents : boardFileContentsList) {
-                        BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(boardFileContents, boardNumber);
+                        BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(boardNumber, boardFileContents);
                         boardFileContentsRepository.save(boardFileContentsEntity);
                 }
             }
