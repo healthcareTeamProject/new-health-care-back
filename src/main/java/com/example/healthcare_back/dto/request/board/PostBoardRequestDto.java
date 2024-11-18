@@ -24,4 +24,14 @@ public class PostBoardRequestDto {
     @Column(precision = 9, scale = 6)
     private BigDecimal mapLng;
     private List<String> boardFileContents;
+
+    private List<String> boardFileContentsList;
+
+    public List<String> getBoardFileContentsList() {
+        return boardFileContentsList;
+    }
+
+    public void setBoardFileContents(List<String> boardFileContentsList) {
+        this.boardFileContentsList = boardFileContentsList;
+    }
 }
