@@ -20,9 +20,9 @@ public class PatchBoardRequestDto {
     private String boardContents;
     private String youtubeVideoLink;
     @Column(precision = 9, scale = 6)
-    private BigDecimal mapLat;
+    private BigDecimal Lat;
     @Column(precision = 9, scale = 6)
-    private BigDecimal mapLng;
+    private BigDecimal Lng;
 
     private List<String> boardFileContentsList;
 
