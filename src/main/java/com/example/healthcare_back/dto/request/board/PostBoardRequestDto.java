@@ -25,4 +25,3 @@ public class PostBoardRequestDto {
     private BigDecimal mapLng;
     private List<String> boardFileContents;
 }
-
