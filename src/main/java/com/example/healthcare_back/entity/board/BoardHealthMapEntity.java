@@ -24,21 +24,21 @@ public class BoardHealthMapEntity {
     private Integer boardNumber;
 
     @Column(precision = 6, scale = 9)
-    private BigDecimal Lat;
+    private BigDecimal mapLat;
 
     @Column(precision = 6, scale = 9)
-    private BigDecimal Lng;
+    private BigDecimal mapLng;
 
     public BoardHealthMapEntity(PostBoardRequestDto dto, Integer boardNumber) {
         this.boardNumber = boardNumber;
-        this.Lat = dto.getLat();
-        this.Lng = dto.getLng();
+        this.mapLat = dto.getMapLat();
+        this.mapLng = dto.getMapLng();
     }
 
     public BoardHealthMapEntity(PatchBoardRequestDto dto, Integer boardNumber) {
         this.boardNumber = boardNumber;
-        this.Lat = dto.getLat();
-        this.Lng = dto.getLng();
+        this.mapLat = dto.getMapLat();
+        this.mapLng = dto.getMapLng();
     }
 
 }

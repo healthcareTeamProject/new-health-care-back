@@ -5,7 +5,6 @@ import java.util.List;
 import com.example.healthcare_back.dto.request.board.PatchBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;
 
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,23 +25,21 @@ public class BoardFileContentsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer boardFileNumber;
     private Integer boardNumber;
-
-    @Convert(converter = ListToStringConverter.class)
     private List<String> boardFileContents;
 
     public BoardFileContentsEntity(PostBoardRequestDto dto, Integer boardNumber) {
         this.boardNumber = boardNumber;
-        this.boardFileContents = dto.getBoardFileContentsList();
+        this.boardFileContents = dto.getBoardFileContents();
     }
 
     public BoardFileContentsEntity(PatchBoardRequestDto dto, Integer boardNumber) {
         this.boardNumber = boardNumber;
-        this.boardFileContents = dto.getBoardFileContentsList();
+        this.boardFileContents = dto.getBoardFileContents();
     }
 
     // 일반 생성자 생성
-    public BoardFileContentsEntity(String boardFileContent, Integer boardNumber) {
+    public BoardFileContentsEntity(Integer boardNumber, String boardFileContents) {
         this.boardNumber = boardNumber;
-        this.boardFileContents = List.of(boardFileContent); // 리스트 생성자
+        this.boardFileContents = List.of(boardFileContents);
     }
 }

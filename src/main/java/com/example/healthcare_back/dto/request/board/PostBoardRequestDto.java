@@ -20,18 +20,9 @@ public class PostBoardRequestDto {
     private String boardContents;
     private String youtubeVideoLink;
     @Column(precision = 9, scale = 6)
-    private BigDecimal Lat;
+    private BigDecimal mapLat;
     @Column(precision = 9, scale = 6)
-    private BigDecimal Lng;
-
-    private List<String> boardFileContentsList;
-
-    public List<String> getBoardFileContentsList() {
-        return boardFileContentsList;
-    }
-
-    public void setBoardFileContentsList(List<String> boardFileContentsList) {
-        this.boardFileContentsList = boardFileContentsList;
-    }
+    private BigDecimal mapLng;
+    private List<String> boardFileContents;
 }
 
