@@ -25,4 +25,14 @@ public class PatchBoardRequestDto {
     private BigDecimal mapLng;
     private List<String> boardFileContents;
 
+    private List<String> boardFileContentsList;
+
+    public List<String> getBoardFileContentsList() {
+        return boardFileContentsList;
+    }
+
+    public void setBoardFileContents(List<String> boardFileContentsList) {
+        this.boardFileContentsList = boardFileContentsList;
+    }
+
 }
