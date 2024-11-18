@@ -2,7 +2,7 @@ package com.example.healthcare_back.repository.resultSet;
 
 import java.time.LocalDateTime;
 
-public interface BoardTagResultSet {
+public interface BoardTagListResultSet {
     String getBoardTag();
     Integer getBoardNumber();
     String getBoardTitle();

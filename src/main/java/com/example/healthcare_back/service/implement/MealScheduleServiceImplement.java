@@ -93,6 +93,7 @@ public class MealScheduleServiceImplement implements MealScheduleService{
     // 새로운 식단 일정 생성
     @Override
     public ResponseEntity<ResponseDto> postMealSchedule(PostMealScheduleRequestDto dto, String userId) {
+
         try {
 
             // 사용자 존재 여부 확인
@@ -108,7 +109,7 @@ public class MealScheduleServiceImplement implements MealScheduleService{
             // 각 상세 식품 정보 저장
             for (PostMealScheduleRequestDto.MealDetail detail : dto.getMealMemo()) {
                 MealScheduleDetailEntity detailEntity = new MealScheduleDetailEntity(
-                    detail, detail.getMealName(), detail.getMealKcal(), detail.getMealCount(), mealScheduleEntity
+                    detail.getMealName(), detail.getMealKcal(), detail.getMealCount(), mealScheduleEntity
                 );
                 mealScheduleDetailRepository.save(detailEntity);
             }
@@ -150,7 +151,7 @@ public class MealScheduleServiceImplement implements MealScheduleService{
         
             for (PatchMealScheduleRequestDto.MealDetail detail : dto.getMealMemo()) {
                 MealScheduleDetailEntity detailEntity = new MealScheduleDetailEntity(
-                    detail, detail.getMealName(), detail.getMealKcal(), detail.getMealCount(), mealScheduleEntity
+                    detail.getMealName(), detail.getMealKcal(), detail.getMealCount(), mealScheduleEntity
                 );
                 mealScheduleDetailRepository.save(detailEntity);
             }
