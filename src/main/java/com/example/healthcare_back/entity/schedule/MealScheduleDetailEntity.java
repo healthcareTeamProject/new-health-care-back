@@ -61,5 +61,20 @@ public class MealScheduleDetailEntity {
         this.mealCount = mealCount;
         this.mealSchedule = mealSchedule;
     }
-}
 
+    // PostMealScheduleRequestDto 생성자 추가
+    public MealScheduleDetailEntity(PostMealScheduleRequestDto.MealDetail dto, String mealName, BigDecimal mealKcal, Integer mealCount, MealScheduleEntity mealSchedule) {
+        this.mealName = mealName;
+        this.mealKcal = mealKcal;
+        this.mealCount = mealCount;
+        this.mealSchedule = mealSchedule;
+    }
+
+    // PatchMealScheduleRequestDto 생성자 추가
+    public MealScheduleDetailEntity(PatchMealScheduleRequestDto.MealDetail dto, String mealName, BigDecimal mealKcal, Integer mealCount, MealScheduleEntity mealSchedule) {
+        this.mealName = mealName;
+        this.mealKcal = mealKcal;
+        this.mealCount = mealCount;
+        this.mealSchedule = mealSchedule;
+    }
+}
