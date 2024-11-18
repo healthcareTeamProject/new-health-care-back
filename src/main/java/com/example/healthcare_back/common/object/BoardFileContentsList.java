@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 public class BoardFileContentsList {
     private final Integer boardFileNumber;
-    private final String boardFileContents;
+    private final List<String> boardFileContents;
 
     public BoardFileContentsList(BoardFileContentsEntity boardFileContentsEntity) {
         this.boardFileNumber = boardFileContentsEntity.getBoardFileNumber();
