@@ -37,24 +37,30 @@ public class MealScheduleController {
 
     @PostMapping("/search")
     public ResponseEntity<List<Map<String, Object>>> searchFood(@RequestBody Map<String, String> requestBody) {
-        String keyword = requestBody.get("keyword");
+        // 클라이언트가 POST 요청으로 검색어를 전달하는 메서드
+        String keyword = requestBody.get("keyword"); // 요청 본문에서 'keyword' 값 추출
         if (keyword == null || keyword.trim().isEmpty()) {
-            return ResponseEntity.badRequest().body(new ArrayList<>()); // 400 Bad Request
+            // 검색어가 없거나 빈 문자열일 경우 400 Bad Request 응답 반환
+            return ResponseEntity.badRequest().body(new ArrayList<>());
         }
+        // CSV 파일에서 검색어를 기반으로 데이터를 필터링
         List<Map<String, Object>> searchResults = csvUtil.searchFoodData(keyword);
-        return ResponseEntity.ok(searchResults);
+        return ResponseEntity.ok(searchResults); // 200 OK와 함께 검색 결과 반환
     }
     
     @GetMapping("/food-data")
     public ResponseEntity<List<Map<String, Object>>> getFoodData() {
         try {
+            // CSV 파일에서 모든 식품 데이터를 가져오는 메서드
             List<Map<String, Object>> foodData = csvUtil.importFoodDataAsMap();
-            return ResponseEntity.ok(foodData);
+            return ResponseEntity.ok(foodData); // 200 OK와 함께 데이터를 반환
         } catch (Exception e) {
+            // 데이터 로드 중 예외가 발생할 경우 스택 트레이스 출력 및 500 Internal Server Error 반환
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
 
     // 식단 일정 상세 조회
     @GetMapping("/{mealScheduleNumber}")

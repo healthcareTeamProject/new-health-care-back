@@ -18,12 +18,12 @@ import com.example.healthcare_back.entity.schedule.MealScheduleDetailEntity;
 
 @Component
 public class CsvUtil {
-    private final CsvFileProperties csvFileProperties;
-    private final ResourceLoader resourceLoader;
+    private final CsvFileProperties csvFileProperties; // CSV 파일 경로 및 설정을 관리하는 프로퍼티 클래스
+    private final ResourceLoader resourceLoader; // 리소스 파일 로딩을 위한 Spring 제공 도구
 
     public CsvUtil(CsvFileProperties csvFileProperties, ResourceLoader resourceLoader) {
-        this.csvFileProperties = csvFileProperties;
-        this.resourceLoader = resourceLoader;
+        this.csvFileProperties = csvFileProperties; // CSV 파일 설정 주입
+        this.resourceLoader = resourceLoader; // 리소스 로더 주입
     }
 
     /**
@@ -32,6 +32,7 @@ public class CsvUtil {
      */
     public List<Map<String, Object>> importFoodDataAsMap() {
         List<Map<String, Object>> foodDataList = new ArrayList<>();
+        // 설정 파일에서 지정된 모든 CSV 파일 경로를 순회
         for (String filePath : csvFileProperties.getMealDataCsvPaths()) {
             System.out.println("Attempting to read file: " + filePath);
             try {
@@ -44,28 +45,28 @@ public class CsvUtil {
                          .forEach(line -> {
                              try {
                                  System.out.println("Reading line: " + line);
-                                 String[] data = line.split(",");
-                                 if (data.length < 2) {
+                                 String[] data = line.split(","); // CSV 데이터를 콤마로 분리
+                                 if (data.length < 2) { // 데이터가 부족할 경우 처리 중단
                                      System.out.println("Invalid line: " + line);
                                      return;
                                  }
                                  Map<String, Object> foodData = new HashMap<>();
-                                 foodData.put("mealName", data[0].trim());
-                                 foodData.put("mealKcal", new BigDecimal(data[1].trim()));
-                                 foodDataList.add(foodData);
-                             } catch (Exception e) {
+                                 foodData.put("mealName", data[0].trim()); // 첫 번째 값: 식사 이름
+                                 foodData.put("mealKcal", new BigDecimal(data[1].trim())); // 두 번째 값: 칼로리
+                                 foodDataList.add(foodData); // 결과 리스트에 추가
+                             } catch (Exception e) { // 라인 처리 중 오류 발생 시 로깅
                                  System.out.println("Error processing line: " + line);
                                  e.printStackTrace();
                              }
                          });
                 }
-            } catch (Exception exception) {
+            } catch (Exception exception) { // 파일 읽기 실패 시 로깅
                 System.out.println("Error processing file: " + exception.getMessage());
                 exception.printStackTrace();
             }
         }
         System.out.println("Parsed Food Data: " + foodDataList);
-        return foodDataList;
+        return foodDataList; // 읽어온 데이터 반환
     }
 
     /**
@@ -74,6 +75,7 @@ public class CsvUtil {
      */
     public List<MealScheduleDetailEntity> importMealDataFromCsv() {
         List<MealScheduleDetailEntity> allMealDetails = new ArrayList<>();
+        // 설정 파일에서 지정된 모든 CSV 파일 경로를 순회
         for (String filePath : csvFileProperties.getMealDataCsvPaths()) {
             System.out.println("Attempting to read file: " + filePath);
             try {
@@ -86,31 +88,31 @@ public class CsvUtil {
                          .forEach(line -> {
                              try {
                                  System.out.println("Reading line: " + line);
-                                 String[] data = line.split(",");
-                                 if (data.length < 2) {
+                                 String[] data = line.split(","); // CSV 데이터를 콤마로 분리
+                                 if (data.length < 2) { // 데이터가 부족할 경우 처리 중단
                                      System.out.println("Invalid line: " + line);
                                      return;
                                  }
-                                 String mealName = data[0].trim();
-                                 BigDecimal mealKcal = new BigDecimal(data[1].trim());
+                                 String mealName = data[0].trim(); // 식사 이름
+                                 BigDecimal mealKcal = new BigDecimal(data[1].trim()); // 칼로리
 
                                  MealScheduleDetailEntity detail = new MealScheduleDetailEntity(
-                                         mealName, mealKcal, 1, null
+                                         mealName, mealKcal, 1, null // 엔티티 생성
                                  );
-                                 allMealDetails.add(detail);
-                             } catch (Exception e) {
+                                 allMealDetails.add(detail); // 결과 리스트에 추가
+                             } catch (Exception e) { // 라인 처리 중 오류 발생 시 로깅
                                  System.out.println("Error processing line: " + line);
                                  e.printStackTrace();
                              }
                          });
                 }
-            } catch (Exception exception) {
+            } catch (Exception exception) { // 파일 읽기 실패 시 로깅
                 System.out.println("Error processing file: " + exception.getMessage());
                 exception.printStackTrace();
             }
         }
         System.out.println("Parsed Meal Details: " + allMealDetails);
-        return allMealDetails;
+        return allMealDetails; // 읽어온 데이터 반환
     }
 
     /**
@@ -120,6 +122,7 @@ public class CsvUtil {
      */
     public List<Map<String, Object>> searchFoodData(String keyword) {
         List<Map<String, Object>> searchResults = new ArrayList<>();
+        // 설정 파일에서 지정된 모든 CSV 파일 경로를 순회
         for (String filePath : csvFileProperties.getMealDataCsvPaths()) {
             System.out.println("Attempting to read file for search: " + filePath);
             try {
@@ -131,30 +134,30 @@ public class CsvUtil {
                     lines.skip(1) // 첫 번째 행(헤더) 건너뛰기
                          .forEach(line -> {
                              try {
-                                 String[] data = line.split(",");
-                                 if (data.length < 2) {
+                                 String[] data = line.split(","); // CSV 데이터를 콤마로 분리
+                                 if (data.length < 2) { // 데이터가 부족할 경우 처리 중단
                                      System.out.println("Invalid line during search: " + line);
                                      return;
                                  }
-                                 String mealName = data[0].trim();
+                                 String mealName = data[0].trim(); // 식사 이름
                                  if (mealName.contains(keyword)) { // 검색어 포함 여부 확인
                                      Map<String, Object> foodData = new HashMap<>();
-                                     foodData.put("mealName", mealName);
-                                     foodData.put("mealKcal", new BigDecimal(data[1].trim()));
-                                     searchResults.add(foodData);
+                                     foodData.put("mealName", mealName); // 식사 이름
+                                     foodData.put("mealKcal", new BigDecimal(data[1].trim())); // 칼로리
+                                     searchResults.add(foodData); // 결과 리스트에 추가
                                  }
-                             } catch (Exception e) {
+                             } catch (Exception e) { // 라인 처리 중 오류 발생 시 로깅
                                  System.out.println("Error processing line during search: " + line);
                                  e.printStackTrace();
                              }
                          });
                 }
-            } catch (Exception exception) {
+            } catch (Exception exception) { // 파일 읽기 실패 시 로깅
                 System.out.println("Error processing file for search: " + exception.getMessage());
                 exception.printStackTrace();
             }
         }
         System.out.println("Search Results: " + searchResults);
-        return searchResults;
+        return searchResults; // 검색 결과 반환
     }
 }
