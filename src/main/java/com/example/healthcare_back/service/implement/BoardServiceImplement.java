@@ -282,26 +282,20 @@ public class BoardServiceImplement implements BoardService {
 
         try {
 
+            // 유저 일치 여부 확인
             boolean existedUser = customerRepository.existsByUserId(userId);
             if (!existedUser) return ResponseDto.noExistUserId();
             
+            // 게시물 생성
             BoardEntity boardEntities = new BoardEntity(dto, userId);
             boardRepository.save(boardEntities);
 
             // 해당하는 게시물 번호에 파일 저장
             Integer boardNumber = boardEntities.getBoardNumber();
+            BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(dto, boardNumber);
+            boardFileContentsRepository.save(boardFileContentsEntity);
 
-            // 파일 업로드
-            List<String> boardFileContentsList = dto.getBoardFileContents();
-            
-
-            if (boardFileContentsList != null && !boardFileContentsList.isEmpty()) {
-                    for (String boardFileContents : boardFileContentsList) {
-                        BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(boardNumber, boardFileContents);
-                        boardFileContentsRepository.save(boardFileContentsEntity);
-                }
-            }
-
+            // 게시물 지도 위치정보 저장
             BoardHealthMapEntity boardHealthMapEntity = new BoardHealthMapEntity(dto, boardNumber);
             boardHealthMapRepository.save(boardHealthMapEntity);
 
@@ -319,37 +313,26 @@ public class BoardServiceImplement implements BoardService {
     public ResponseEntity<ResponseDto> patchBoard(PatchBoardRequestDto dto, 
     Integer boardNumber, String userId) {
 
-        // try {
-        //     // 게시물 번호로 게시글 조회
-        //     BoardEntity boardEntities = boardRepository.findByBoardNumber(boardNumber);
-        //     if (boardEntities == null) {
-        //         return ResponseDto.noExistBoard(); // 게시물이 없는 경우 처리
-        //     }
+        try {
+            // 게시물 번호로 게시글 조회
+            BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
+            if (boardEntity == null) {
+                return ResponseDto.noExistBoard(); // 게시물이 없는 경우 처리
+            }
     
-        //     // 작성자와 수정하려는 유저가 같은지 확인
-        //     if (!boardEntities.getUserId().equals(userId)) {
-        //         return ResponseDto.noPermission(); // 권한 없음 응답
-        //     }
+            // 작성자와 수정하려는 유저가 같은지 확인
+            if (!boardEntity.getUserId().equals(userId)) {
+                return ResponseDto.noPermission(); // 권한 없음 응답
+            }
     
-        //     // 작성자가 맞다면 게시물 수정
-        //     boardEntities.update(dto, boardNumber, userId);
-        //     boardRepository.save(boardEntities);
+            // 작성자가 맞다면 게시물 수정
+            boardEntity.update(dto, boardNumber, userId);
+            boardRepository.save(boardEntity);
 
-        //     // 파일 리스트 수정
-        //     List<String> boardFileContentsList = dto.getBoardFileContents();
-        //     boardFileContentsRepository.deleteByBoardNumber(boardNumber);
-
-        //     if (boardFileContentsList != null && !boardFileContentsList.isEmpty()) {
-        //             for (String boardFileContents : boardFileContentsList) {
-        //                 BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(boardNumber, boardFileContents);
-        //                 boardFileContentsRepository.save(boardFileContentsEntity);
-        //         }
-        //     }
-    
-        // } catch (Exception exception) {
-        //     exception.printStackTrace();
-        //     return ResponseDto.databaseError();
-        // }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
     
         // 성공적인 응답
         return ResponseDto.success();

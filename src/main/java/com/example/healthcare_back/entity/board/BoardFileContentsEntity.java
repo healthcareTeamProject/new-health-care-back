@@ -1,7 +1,5 @@
 package com.example.healthcare_back.entity.board;
 
-import java.util.List;
-
 import com.example.healthcare_back.dto.request.board.PatchBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;
 
@@ -25,7 +23,7 @@ public class BoardFileContentsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer boardFileNumber;
     private Integer boardNumber;
-    private List<String> boardFileContents;
+    private String boardFileContents;
 
     public BoardFileContentsEntity(PostBoardRequestDto dto, Integer boardNumber) {
         this.boardNumber = boardNumber;
@@ -40,6 +38,6 @@ public class BoardFileContentsEntity {
     // 일반 생성자 생성
     public BoardFileContentsEntity(Integer boardNumber, String boardFileContents) {
         this.boardNumber = boardNumber;
-        this.boardFileContents = List.of(boardFileContents);
+        this.boardFileContents = boardFileContents;
     }
 }
