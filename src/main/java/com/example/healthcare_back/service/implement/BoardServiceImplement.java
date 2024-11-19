@@ -290,10 +290,17 @@ public class BoardServiceImplement implements BoardService {
             BoardEntity boardEntities = new BoardEntity(dto, userId);
             boardRepository.save(boardEntities);
 
-            // 해당하는 게시물 번호에 파일 저장
+            // 해당하는 게시물 번호에 가져오기
             Integer boardNumber = boardEntities.getBoardNumber();
-            BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(dto, boardNumber);
-            boardFileContentsRepository.save(boardFileContentsEntity);
+
+            // 파일 내용 저장 (여러 개의 파일 내용 처리)
+            List<String> boardFileContentsList = dto.getBoardFileContents();
+            if (boardFileContentsList != null && !boardFileContentsList.isEmpty()) {
+            for (String boardFileContents : boardFileContentsList) {
+                BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(boardNumber, boardFileContents);
+                boardFileContentsRepository.save(boardFileContentsEntity);
+            }
+        }
 
             // 게시물 지도 위치정보 저장
             BoardHealthMapEntity boardHealthMapEntity = new BoardHealthMapEntity(dto, boardNumber);
@@ -310,6 +317,7 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<ResponseDto> patchBoard(PatchBoardRequestDto dto, 
     Integer boardNumber, String userId) {
 
@@ -328,6 +336,18 @@ public class BoardServiceImplement implements BoardService {
             // 작성자가 맞다면 게시물 수정
             boardEntity.update(dto, boardNumber, userId);
             boardRepository.save(boardEntity);
+
+            // 기존 파일 내용 삭제
+            boardFileContentsRepository.deleteByBoardNumber(boardNumber);
+        
+            // 새로운 파일 내용 저장
+            List<String> boardFileContentsList = dto.getBoardFileContents();
+            if (boardFileContentsList != null && !boardFileContentsList.isEmpty()) {
+                for (String boardFileContents : boardFileContentsList) {
+                    BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(boardNumber, boardFileContents);
+                    boardFileContentsRepository.save(boardFileContentsEntity);
+                }
+            }
 
         } catch (Exception exception) {
             exception.printStackTrace();
