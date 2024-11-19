@@ -113,7 +113,7 @@ public class MealScheduleController {
     }
 
     // 식단 상세 일정 삭제
-    @DeleteMapping("//meal-schedule-detail/{mealScheduleDetailNumber}")
+    @DeleteMapping("/{mealScheduleNumber}/meal-schedule-detail/{mealScheduleDetailNumber}")
     public ResponseEntity<ResponseDto> deleteMealScheduleDetail(
             @PathVariable("mealScheduleDetailNumber") Integer mealScheduleDetailNumber,
             @AuthenticationPrincipal String userId

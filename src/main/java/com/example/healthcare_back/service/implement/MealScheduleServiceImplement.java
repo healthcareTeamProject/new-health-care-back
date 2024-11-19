@@ -1,10 +1,13 @@
 package com.example.healthcare_back.service.implement;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -232,5 +235,5 @@ public class MealScheduleServiceImplement implements MealScheduleService{
             return ResponseDto.databaseError(); // 데이터베이스 오류 시 응답
         }
     }
-    
+
 }

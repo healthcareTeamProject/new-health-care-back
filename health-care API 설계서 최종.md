@@ -747,17 +747,17 @@ curl -X GET "http://localhost:4000/api/v1/customer/sign-in"
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
 
 ###### Response Body
 
 | name     |  type  |      description      | required |
 | -------- | :----: | :-------------------: | :------: |
-| code     | String |       결과 코드        |    O     |
-| message  | String | 결과 코드에 대한 설명   |    O     |
-| userId   | String |     사용자 아이디      |    O     |
-| name     | String |      사용자 이름       |    O     |
-| nickname | String |     사용자 닉네임      |    O     |
+| code     | String |       결과 코드       |    O     |
+| message  | String | 결과 코드에 대한 설명 |    O     |
+| userId   | String |     사용자 아이디     |    O     |
+| name     | String |      사용자 이름      |    O     |
+| nickname | String |     사용자 닉네임     |    O     |
 
 ###### Example
 
@@ -847,23 +847,23 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234"
 
 ###### Response Body
 
-| name         |    type    |      description      | required |
-| ------------ | :--------: | :-------------------: | :------: |
-| code         |   String   |       결과 코드       |    O     |
-| message      |   String   | 결과 코드에 대한 설명 |    O     |
-| userId       |   String   |      사용자 아이디      |    O     |
-| name         |   String   |      사용자 이름      |    O     |
-| nickname     |   String   |     사용자 닉네임     |    O     |
-| telNumber     |   String   |     사용자 전화번호     |    O     |
-| profileImage |   String   | 사용자 프로필 이미지  |    X     |
-| personalGoals|   String   |   사용자 개인목표   |    X     |
-| height       | BigDecimal |     사용자 키      |    O     |
-| deadlift     | BigDecimal |  사용자 데드리프트 기록  |    X     |
-| benchPress   | BigDecimal |  사용자 벤치프레스 기록  |    X     |
-| squat        | BigDecimal |  사용자 스쿼트 기록  |    X     |
-| weight       | BigDecimal | 사용자 체중  |    O     |
-| skeletalMuscleMass |   BigDecimal   |   사용자 골격근량   |    X     |
-| bodyFatMass |   BigDecimal   |   사용자 체지방량   |    X     |
+| name               |    type    |      description       | required |
+| ------------------ | :--------: | :--------------------: | :------: |
+| code               |   String   |       결과 코드        |    O     |
+| message            |   String   | 결과 코드에 대한 설명  |    O     |
+| userId             |   String   |     사용자 아이디      |    O     |
+| name               |   String   |      사용자 이름       |    O     |
+| nickname           |   String   |     사용자 닉네임      |    O     |
+| telNumber          |   String   |    사용자 전화번호     |    O     |
+| profileImage       |   String   |  사용자 프로필 이미지  |    X     |
+| personalGoals      |   String   |    사용자 개인목표     |    X     |
+| height             | BigDecimal |       사용자 키        |    O     |
+| deadlift           | BigDecimal | 사용자 데드리프트 기록 |    X     |
+| benchPress         | BigDecimal | 사용자 벤치프레스 기록 |    X     |
+| squat              | BigDecimal |   사용자 스쿼트 기록   |    X     |
+| weight             | BigDecimal |      사용자 체중       |    O     |
+| skeletalMuscleMass | BigDecimal |    사용자 골격근량     |    X     |
+| bodyFatMass        | BigDecimal |    사용자 체지방량     |    X     |
 
 ###### Example
 
@@ -1074,10 +1074,10 @@ curl -X GET "http://localhost:4000/api/v1/customer/qwer1234/user-three-major-lif
 
 ###### Response Body
 
-| name           |       type       |      description      | required |
-| -------------- | :--------------: | :-------------------: | :------: |
-| code           |      String      |       결과 코드       |    O     |
-| message        |      String      | 결과 코드에 대한 설명 |    O     |
+| name           |         type         |      description      | required |
+| -------------- | :------------------: | :-------------------: | :------: |
+| code           |        String        |       결과 코드       |    O     |
+| message        |        String        | 결과 코드에 대한 설명 |    O     |
 | threeMajorLift | threeMajorLiftList[] | 3대 측정 정보 리스트  |    O     |
 
 **ThreeMajorLift**
@@ -1599,7 +1599,7 @@ curl -X GET "http://localhost:4000/api/v1/board"
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O    |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
 
 ###### Response Body
 
@@ -1756,20 +1756,20 @@ curl -X GET "http://localhost:4000/api/v1/board/1"
 
 ###### Response Body
 
-| name              |     type      |      description      | required |
-| ----------------- | :-----------: | :-------------------: | :------: |
-| code              |    String     |       결과 코드       |    O     |
-| message           |    String     | 결과 코드에 대한 설명 |    O     |
-| boardNumber       |    Integer    |      게시물 번호      |    O     |
-| boardTitle        |    String     |      게시물 제목      |    O     |
-| userId            |    String     | 게시물 아이디(닉네임) |    O     |
-| boardUploadDate   | LocalDateTime | 작성 게시물 생성 날짜 |    O     |
-| boardContents     |    String     |      게시물 내용      |    O     |
-| youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
-| boardFileContents | BoardFileContentsList[] |  게시물 파일 리스트  |    X     |
-| boardViewCount    |    Integer    |        조회수         |    O     |
-| boardLikeCount    |    Integer    |    게시물 추천 수     |    O     |
-| comment           | CommentList[] |      댓글 리스트      |    O     |
+| name              |          type           |      description      | required |
+| ----------------- | :---------------------: | :-------------------: | :------: |
+| code              |         String          |       결과 코드       |    O     |
+| message           |         String          | 결과 코드에 대한 설명 |    O     |
+| boardNumber       |         Integer         |      게시물 번호      |    O     |
+| boardTitle        |         String          |      게시물 제목      |    O     |
+| userId            |         String          | 게시물 아이디(닉네임) |    O     |
+| boardUploadDate   |      LocalDateTime      | 작성 게시물 생성 날짜 |    O     |
+| boardContents     |         String          |      게시물 내용      |    O     |
+| youtubeVideoLink  |         String          |  유튜브 비디오 링크   |    X     |
+| boardFileContents | BoardFileContentsList[] |  게시물 파일 리스트   |    X     |
+| boardViewCount    |         Integer         |        조회수         |    O     |
+| boardLikeCount    |         Integer         |    게시물 추천 수     |    O     |
+| comment           |      CommentList[]      |      댓글 리스트      |    O     |
 
 **commentList**
 | name | type | description | required |
@@ -2021,20 +2021,20 @@ curl -X GET "http://localhost:4000/api/v1/board/user" \
 
 ###### Response Body
 
-| name              |     type      |      description      | required |
-| ----------------- | :-----------: | :-------------------: | :------: |
-| code              |    String     |       결과 코드       |    O     |
-| message           |    String     | 결과 코드에 대한 설명 |    O     |
-| boardNumber       |    Integer    |      게시물 번호      |    O     |
-| boardTitle        |    String     |      게시물 제목      |    O     |
-| userId            |    String     | 게시물 아이디(닉네임) |    O     |
-| boardUploadDate   | LocalDateTime | 작성 게시물 생성 날짜 |    O     |
-| boardContents     |    String     |      게시물 내용      |    O     |
-| youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
-| boardFileContents | BoardFileContentsList[] |  게시물 파일 리스트  |    X     |
-| boardViewCount    |    Integer    |        조회수         |    O     |
-| boardLikeCount    |    Integer    |    게시물 추천 수     |    O     |
-| comment           | CommentList[] |      댓글 리스트      |    O     |
+| name              |          type           |      description      | required |
+| ----------------- | :---------------------: | :-------------------: | :------: |
+| code              |         String          |       결과 코드       |    O     |
+| message           |         String          | 결과 코드에 대한 설명 |    O     |
+| boardNumber       |         Integer         |      게시물 번호      |    O     |
+| boardTitle        |         String          |      게시물 제목      |    O     |
+| userId            |         String          | 게시물 아이디(닉네임) |    O     |
+| boardUploadDate   |      LocalDateTime      | 작성 게시물 생성 날짜 |    O     |
+| boardContents     |         String          |      게시물 내용      |    O     |
+| youtubeVideoLink  |         String          |  유튜브 비디오 링크   |    X     |
+| boardFileContents | BoardFileContentsList[] |  게시물 파일 리스트   |    X     |
+| boardViewCount    |         Integer         |        조회수         |    O     |
+| boardLikeCount    |         Integer         |    게시물 추천 수     |    O     |
+| comment           |      CommentList[]      |      댓글 리스트      |    O     |
 
 **commentList**
 | name | type | description | required |
@@ -2151,7 +2151,7 @@ Content-Type: application/json;charset=UTF-8
 
 ##### 설명
 
-클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. 클라이언트는  URL에 category와 찾을 카테고리명을 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물과 댓글 상세 페이지를 응답받습니다.
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하지 않아도 응답을 받습니다. 클라이언트는 URL에 category와 찾을 카테고리명을 포함하고 요청하여 조회가 성공적으로 이루어지면 로그인한 게시물과 댓글 상세 페이지를 응답받습니다.
 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
@@ -2181,20 +2181,20 @@ curl -X GET "http://localhost:4000/api/v1/board/category/상체운동"
 
 ###### Response Body
 
-| name              |     type      |      description      | required |
-| ----------------- | :-----------: | :-------------------: | :------: |
-| code              |    String     |       결과 코드       |    O     |
-| message           |    String     | 결과 코드에 대한 설명 |    O     |
-| boardNumber       |    Integer    |      게시물 번호      |    O     |
-| boardTitle        |    String     |      게시물 제목      |    O     |
-| userId            |    String     | 게시물 아이디(닉네임) |    O     |
-| boardUploadDate   | LocalDateTime | 작성 게시물 생성 날짜 |    O     |
-| boardContents     |    String     |      게시물 내용      |    O     |
-| youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
-| boardFileContents | boardFileContentsList[] | 게시물 자료 |    X     |
-| boardViewCount    |    Integer    |        조회수         |    O     |
-| boardLikeCount    |    Integer    |    게시물 추천 수     |    O     |
-| comment           | CommentList[] |      댓글 리스트      |    O     |
+| name              |          type           |      description      | required |
+| ----------------- | :---------------------: | :-------------------: | :------: |
+| code              |         String          |       결과 코드       |    O     |
+| message           |         String          | 결과 코드에 대한 설명 |    O     |
+| boardNumber       |         Integer         |      게시물 번호      |    O     |
+| boardTitle        |         String          |      게시물 제목      |    O     |
+| userId            |         String          | 게시물 아이디(닉네임) |    O     |
+| boardUploadDate   |      LocalDateTime      | 작성 게시물 생성 날짜 |    O     |
+| boardContents     |         String          |      게시물 내용      |    O     |
+| youtubeVideoLink  |         String          |  유튜브 비디오 링크   |    X     |
+| boardFileContents | boardFileContentsList[] |      게시물 자료      |    X     |
+| boardViewCount    |         Integer         |        조회수         |    O     |
+| boardLikeCount    |         Integer         |    게시물 추천 수     |    O     |
+| comment           |      CommentList[]      |      댓글 리스트      |    O     |
 
 **commentList**
 | name | type | description | required |
@@ -2329,20 +2329,20 @@ curl -X GET "http://localhost:4000/api/v1/board/tag/운동" \
 
 ###### Response Body
 
-| name              |     type      |      description      | required |
-| ----------------- | :-----------: | :-------------------: | :------: |
-| code              |    String     |       결과 코드       |    O     |
-| message           |    String     | 결과 코드에 대한 설명 |    O     |
-| boardNumber       |    Integer    |      게시물 번호      |    O     |
-| boardTitle        |    String     |      게시물 제목      |    O     |
-| userId            |    String     | 게시물 아이디(닉네임) |    O     |
-| boardUploadDate   | LocalDateTime | 작성 게시물 생성 날짜 |    O     |
-| boardContents     |    String     |      게시물 내용      |    O     |
-| youtubeVideoLink  |    String     |  유튜브 비디오 링크   |    X     |
-| boardFileContents | boardFileContentsList[] | 게시물 파일 리스트 |    X     |
-| boardViewCount    |    Integer    |        조회수         |    O     |
-| boardLikeCount    |    Integer    |    게시물 추천 수     |    O     |
-| comment           | CommentList[] |      댓글 리스트      |    O     |
+| name              |          type           |      description      | required |
+| ----------------- | :---------------------: | :-------------------: | :------: |
+| code              |         String          |       결과 코드       |    O     |
+| message           |         String          | 결과 코드에 대한 설명 |    O     |
+| boardNumber       |         Integer         |      게시물 번호      |    O     |
+| boardTitle        |         String          |      게시물 제목      |    O     |
+| userId            |         String          | 게시물 아이디(닉네임) |    O     |
+| boardUploadDate   |      LocalDateTime      | 작성 게시물 생성 날짜 |    O     |
+| boardContents     |         String          |      게시물 내용      |    O     |
+| youtubeVideoLink  |         String          |  유튜브 비디오 링크   |    X     |
+| boardFileContents | boardFileContentsList[] |  게시물 파일 리스트   |    X     |
+| boardViewCount    |         Integer         |        조회수         |    O     |
+| boardLikeCount    |         Integer         |    게시물 추천 수     |    O     |
+| comment           |      CommentList[]      |      댓글 리스트      |    O     |
 
 **commentList**
 | name | type | description | required |
@@ -3439,7 +3439,9 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 운동 및 식단의 스케줄이 작성되어있는 달력을 볼 수 있습니다.  
 스케줄표의 일정 등록 및 수정은 인증이 필요합니다.
 
-##### 스케줄: - url : /api/v1/schedule
+##### 운동 스케줄: - url : /api/v1/health-schedule
+
+##### 식단 스케줄: - url : /api/v1/meal-schedule
 
 ---
 
@@ -3450,7 +3452,7 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 사용자는 요청 헤더에 Bearer 인증 토큰을 포함해서 요청하고 성공적으로 이루어지면 사용자가 작성한 운동 스케줄 리스트를 날짜별로 응답받습니다. 만약 존재하지 않는 스케줄일 경우 존재하지 않는 스케줄에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/health-schedule-list**
+- end point : **/**
 
 ##### Request
 
@@ -3463,7 +3465,7 @@ Healthcare 서비스의 스케줄표와 관련된 REST API 모듈입니다.
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/schedule/health-schedule-list"
+curl -X GET "http://localhost:4000/api/v1/health-schedule"
 ```
 
 ##### Response
@@ -3559,7 +3561,7 @@ Content-Type: application/json;charset=UTF-8
 사용자는 요청 헤더에 Bearer 인증 토큰을 포함해서 요청하고 성공적으로 이루어지면 사용자가 작성한 식단 스케줄 리스트를 날짜별로 응답받습니다. 만약 존재하지 않는 스케줄일 경우 존재하지 않는 스케줄에 대한 응답을 받습니다. 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/meal-schedule-list**
+- end point : **/**
 
 ##### Request
 
@@ -3572,7 +3574,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/schedule/meal-schedule-list"
+curl -X GET "http://localhost:4000/api/v1/meal-schedule"
 ```
 
 ##### Response
@@ -3704,14 +3706,156 @@ Content-Type: application/json;charset=UTF-8
 
 ---
 
+#### - 식품 정보 리스트
+
+##### 설명
+
+사용자는 요청 헤더에 Bearer 인증 토큰을 포함해서 요청하고 작성 및 수정 할때 식품에 대한 정보(식품 이름, 식품 칼로리)를 성공적으로 보여주면 성공에 대한 응답을 받습니다. 만약 식품 정보가 보여지지 않을 경우 서버 에러가 발생할 수 있습니다.
+
+- method : **GET**
+- end point : **/food-data**
+
+##### Request
+
+###### Header
+
+| name          |      description      | required |
+| ------------- | :-------------------: | :------: |
+| Authorization | Bearer 토큰 인증 헤더 |    O     |
+
+###### Example
+
+```bash
+curl -X GET "http://localhost:4000/api/v1/meal-schedule/food-data"
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name     |  type  | description | required |
+| -------- | :----: | :---------: | :------: |
+| mealName | String |  식품 이름  |    O     |
+| mealKcal | String | 식품 칼로리 |    O     |
+
+###### Example
+
+**응답 성공**
+
+```bash
+ [
+    {
+        "mealKcal": 137,
+        "mealName": "국밥_돼지머리"
+    },
+    {
+        "mealKcal": 75,
+        "mealName": "국밥_순대국밥"
+    },
+    {
+        "mealKcal": 52,
+        "mealName": "국밥_콩나물"
+    },
+    {
+        "mealKcal": 166,
+        "mealName": "기장밥"
+    },
+    ....
+ ]
+```
+
+**응답 실패**
+
+```bash
+[]
+```
+
+---
+
+#### - 식품 정보 검색
+
+##### 설명
+
+사용자는 요청 헤더에 Bearer 인증 토큰을 포함해서 요청하고 키워드를 검색해 키워드가 포함이 된 식품 정보들을 성공적으로 보여주면 성공에 대한 응답을 받습니다. 만약 잘못된 키워드를 검색할 시 빈 목록을 보여줍니다.
+
+- method : **POST**
+- end point : **/search**
+
+##### Request
+
+###### Header
+
+| name          |      description      |  required   |
+| ------------- | :-------------------: | :---------: | --- |
+| Authorization | Bearer 토큰 인증 헤더 |      O      |
+| mealName      |        String         |  식품 이름  | O   |
+| mealKcal      |        String         | 식품 칼로리 | O   |
+
+###### Example
+
+```bash
+curl -X POST "http://localhost:4000/api/v1/meal-schedule/search"
+-h "Authorization=Bearer XXXX" \
+-d "keyword=국밥" \
+```
+
+##### Response
+
+###### Header
+
+| name         |                       description                        | required |
+| ------------ | :------------------------------------------------------: | :------: |
+| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+
+###### Response Body
+
+| name | type | description | required |
+| ---- | :--: | :---------: | :------: |
+
+###### Example
+
+**응답 성공**
+
+```bash
+ [
+    {
+        "mealKcal": 137,
+        "mealName": "국밥_돼지머리"
+    },
+    {
+        "mealKcal": 75,
+        "mealName": "국밥_순대국밥"
+    },
+    {
+        "mealKcal": 52,
+        "mealName": "국밥_콩나물"
+    },
+    ....
+ ]
+```
+
+**응답 실패**
+
+```bash
+[]
+```
+
+---
+
 #### - 운동 스케줄표 일정 등록
 
 ##### 설명
 
-클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜를 클릭하여 운동 스케줄을 작성 후 등록합니다. 등록이 된다면 성공에 대한 응답을 받습니다. 등록이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜를 클릭하여 운동 스케줄을 작성 후 등록합니다. 등록이 된다면 성공에 대한 응답을 받습니다. 등록이 되지 않는다면 네트워크 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **POST**
-- end point : **/health-schedule**
+- end point : **/**
 
 ##### Request
 
@@ -3732,7 +3876,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X POST "http://localhost:4000/api/v1/schedule/health-schedule" \
+curl -X POST "http://localhost:4000/api/v1/health-schedule" \
 -h "Authorization=Bearer XXXX" \
 -d "healthTitle=
     가슴 -
@@ -3771,42 +3915,6 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 
-**응답 실패 (데이터 유효성 검사 실패)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "VF",
-  "message": "Validation failed."
-}
-```
-
-**응답 : 실패 (존재하지 않는 유저)**
-
-```bash
-HTTP/1.1 400 Bad Request
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "NI",
-  "message": "No exist user id."
-}
-```
-
-**응답 : 실패 (인증 실패)**
-
-```bash
-HTTP/1.1 401 Unauthorized
-Content-Type: application/json;charset=UTF-8
-
-{
-  "code": "AF",
-  "message": "Authentication fail."
-}
-```
-
 **응답 실패 (데이터베이스 에러)**
 
 ```bash
@@ -3825,10 +3933,10 @@ Content-Type: application/json;charset=UTF-8
 
 ##### 설명
 
-클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜를 클릭하여 식단 스케줄을 작성 후 등록합니다. 등록이 된다면 성공에 대한 응답을 받습니다. 등록이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다. 식품에 대한 정보는 외부 API를 받아와 사용합니다.
+클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜를 클릭하여 식단 스케줄을 작성 후 등록합니다. 등록이 된다면 성공에 대한 응답을 받습니다. 등록이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다. 식품에 대한 정보는 CSV를 받아와 사용합니다.
 
 - method : **POST**
-- end point : **/meal-schedule**
+- end point : **/**
 
 ##### Request
 
@@ -3858,7 +3966,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X POST "http://localhost:4000/api/v1/schedule/meal-schedule" \
+curl -X POST "http://localhost:4000/api/v1/meal-schedule" \
 -h "Authorization=Bearer XXXX" \
 -d "mealTitle=아침" \
 -d "mealScheduleStart=2024-11-12T08:00:00" \
@@ -3957,7 +4065,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 외부 API의 달력을 불러와 운동 스케줄을 확인할 수 있습니다. 스케줄의 상세 확인이 된다면 성공에 대한 응답을 받습니다. 스케줄의 확인이 되지 않는다면 존재하지 않는 스케줄, 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/health-schedule/{healthScheduleNumber}**
+- end point : **/{healthScheduleNumber}**
 
 ##### Request
 
@@ -3970,7 +4078,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/schedule/health-schedule/1"
+curl -X GET "http://localhost:4000/api/v1/health-schedule/1"
 ```
 
 ##### Response
@@ -4043,7 +4151,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 외부 API의 달력을 불러와 식단 스케줄을 확인할 수 있습니다. 스케줄의 상세 확인이 된다면 성공에 대한 응답을 받습니다. 스케줄의 확인이 되지 않는다면 존재하지 않는 스케줄, 네트워크 에러, 서버 에러, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **GET**
-- end point : **/meal-schedule/{mealScheduleNumber}**
+- end point : **/{mealScheduleNumber}**
 
 ##### Request
 
@@ -4056,7 +4164,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/schedule/meal-schedule/1"
+curl -X GET "http://localhost:4000/api/v1/meal-schedule/1"
 ```
 
 ##### Response
@@ -4148,7 +4256,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜에 등록이 된 운동 스케줄을 클릭하여 수정이 된다면 성공에 대한 응답을 받습니다. 수정이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
 
 - method : **PATCH**
-- end point : **/health-schedule/{healthScheduleNumber}**
+- end point : **/{healthScheduleNumber}**
 
 ##### Request
 
@@ -4170,7 +4278,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X PATCH "http://localhost:4000/api/v1/schedule/health-schedule/1" \
+curl -X PATCH "http://localhost:4000/api/v1/health-schedule/1" \
 -h "Authorization=Bearer XXXX" \
 -d "healthTitle=
     가슴 -
@@ -4270,7 +4378,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 달력의 날짜에 등록이 된 식단 스케줄을 클릭하여 수정이 된다면 성공에 대한 응답을 받습니다. 수정이 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다. 식품에 대한 정보는 외부 API를 받아와 사용합니다.
 
 - method : **PATCH**
-- end point : **/meal-schedule/{mealScheduleNumber}**
+- end point : **/{mealScheduleNumber}**
 
 ##### Request
 
@@ -4282,13 +4390,13 @@ Content-Type: application/json;charset=UTF-8
 
 ###### Request Body
 
-| name                    |      type      |          description          | required |
-| ----------------------- | :------------: | :---------------------------: | :------: |
-| mealScheduleNumber      |    Integer     |       식단 스케줄 번호        |    O     |
-| mealTitle               |     String     |           일정 제목           |    O     |
-| mealMemo[]              | mealMemoList[] |     일정 내용(식품 정보)      |    O     |
-| mealScheduleStart       |     String     |  스케줄 등록을 위한 시작날짜  |    O     |
-| mealScheduleEnd         |     String     | 스케줄 등록을 위한 마지막날짜 |    O     |
+| name               |      type      |          description          | required |
+| ------------------ | :------------: | :---------------------------: | :------: |
+| mealScheduleNumber |    Integer     |       식단 스케줄 번호        |    O     |
+| mealTitle          |     String     |           일정 제목           |    O     |
+| mealMemo[]         | mealMemoList[] |     일정 내용(식품 정보)      |    O     |
+| mealScheduleStart  |     String     |  스케줄 등록을 위한 시작날짜  |    O     |
+| mealScheduleEnd    |     String     | 스케줄 등록을 위한 마지막날짜 |    O     |
 
 **MealMemoList**
 | name | type | description | required |
@@ -4301,7 +4409,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X PATCH "http://localhost:4000/api/v1/schedule/meal-schedule/1" \
+curl -X PATCH "http://localhost:4000/api/v1/meal-schedule/1" \
 -h "Authorization=Bearer XXXX" \
 -d "mealTitle=아침" \
 -d "mealScheduleStart=2024-11-12T19:00:00" \
@@ -4400,7 +4508,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 운동 스케줄의 번호를 포함하고 일정을 삭제합니다. 삭제가 된다면 성공에 대한 응답을 받습니다. 삭제가 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
 
 - method : **DELETE**
-- end point : **/health-schedule/{healthScheduleNumber}**
+- end point : **/{healthScheduleNumber}**
 
 ##### Request
 
@@ -4413,7 +4521,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/schedule/health-schedule/1" \
+curl -X GET "http://localhost:4000/api/v1/health-schedule/1" \
 -h "Authorization=Bearer XXXX"
 ```
 
@@ -4503,7 +4611,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 식단 스케줄의 번호를 포함하고 일정을 삭제합니다. 삭제가 된다면 성공에 대한 응답을 받습니다. 삭제가 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
 
 - method : **DELETE**
-- end point : **/meal-schedule/{mealScheduleNumber}**
+- end point : **/{mealScheduleNumber}**
 
 ##### Request
 
@@ -4516,7 +4624,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/schedule/meal-schedule/1" \
+curl -X GET "http://localhost:4000/api/v1/meal-schedule/1" \
 -h "Authorization=Bearer XXXX"
 ```
 
@@ -4606,7 +4714,7 @@ Content-Type: application/json;charset=UTF-8
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고 식단 스케줄의 상세 일정 번호를 포함하고 일정을 삭제합니다. 삭제가 된다면 성공에 대한 응답을 받습니다. 삭제가 되지 않는다면 네트워크 에러, 서버 에러가 발생할 수 있습니다.
 
 - method : **DELETE**
-- end point : **/meal-schedule-detail/{mealScheduleDetailNumber}**
+- end point : **/{mealScheduleNumber}/meal-schedule-detail/{mealScheduleDetailNumber}**
 
 ##### Request
 
@@ -4619,7 +4727,7 @@ Content-Type: application/json;charset=UTF-8
 ###### Example
 
 ```bash
-curl -X GET "http://localhost:4000/api/v1/schedule/meal-schedule-detail/1" \
+curl -X GET "http://localhost:4000/api/v1/meal-schedule/1/meal-schedule-detail/1" \
 -h "Authorization=Bearer XXXX"
 ```
 
