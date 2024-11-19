@@ -30,10 +30,10 @@ public class BoardFileContentsEntity {
         this.boardFileContents = dto.getBoardFileContents();
     }
 
-    // public BoardFileContentsEntity(PatchBoardRequestDto dto, Integer boardNumber) {
-    //     this.boardNumber = boardNumber;
-    //     this.boardFileContents = dto.getBoardFileContents();
-    // }
+    public BoardFileContentsEntity(PatchBoardRequestDto dto, Integer boardNumber) {
+        this.boardNumber = boardNumber;
+        this.boardFileContents = dto.getBoardFileContents();
+    }
 
     // 일반 생성자 생성
     public BoardFileContentsEntity(Integer boardNumber, String boardFileContents) {
