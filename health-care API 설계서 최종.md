@@ -1585,7 +1585,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    X     |
+| Authorization | Bearer 토큰 인증 헤더  |    X     |
 
 ###### Example
 
@@ -1599,44 +1599,44 @@ curl -X GET "http://localhost:4000/api/v1/board"
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
 | name    |    type     |      description      | required |
 | ------- | :---------: | :-------------------: | :------: |
-| code    |   String    |       결과 코드       |    O     |
-| message |   String    | 결과 코드에 대한 설명 |    O     |
-| board   | BoardList[] |     게시글 리스트     |    O     |
+| code    |   String    |       결과 코드        |    O     |
+| message |   String    | 결과 코드에 대한 설명   |    O     |
+| board   | BoardList[] |     게시글 리스트      |    O     |
 
 **BoardList**
-| name | type | description | required |
-|-------------------|:-------------:|:------------------:|:--------:|
-| boardNumber | Integer | 게시물 번호 | O |
-| boardTitle | String | 게시물 제목 | O |
-| userId | String | 게시물 작성자 아이디 | O |
-| boardUploadDate | LocalDateTime | 게시물 작성날짜 | O |
-| boardContents | String | 게시물 내용 | O |
-| youtubeVideoLink | String | 유튜브 비디오 링크 | X |
-| boardFileContents | boardFileContentsList[] | 게시물 파일 리스트 | X |
-| boardViewCount | Integer | 게시물 조회수 | O |
-| boardLikeCount | Integer | 게시물 추천 수 | O |
-| comment | CommentList[] | 댓글 리스트 | O |
+| name              | type                        | description        | required |
+|-------------------|:---------------------------:|:------------------:|:--------:|
+| boardNumber       |           Integer           | 게시물 번호         |    O     |
+| boardTitle        |           String            | 게시물 제목         |    O     |
+| userId            |           String            | 게시물 작성자 아이디 |    O     |
+| boardUploadDate   |        LocalDateTime        | 게시물 작성날짜      |    O     |
+| boardContents     |           String            | 게시물 내용          |    O     |
+| youtubeVideoLink  |           String            | 유튜브 비디오 링크   |     X     |
+| boardFileContents |     boardFileContentsList[] | 게시물 파일 리스트   |     X     |
+| boardViewCount    |           Integer           | 게시물 조회수        |     O     |
+| boardLikeCount    |           Integer           | 게시물 추천 수       |     O     |
+| comment           |        CommentList[]        | 댓글 리스트          |     O     |
 
 **commentList**
-| name | type | description | required |
-|------------------|:-------:|:----------------:|:--------:|
-| commentNumber | Integer | 댓글 번호 | O |
-| commentContents | String | 댓글 내용 | O |
-| userId | String | 댓글 사용자 아이디 | O |
-| commentDate | LocalDateTime | 댓글 작성 날짜 | O |
-| commentLikeCount | Integer | 댓글 추천수 | O |
+| name             | type          | description      | required |
+|------------------|:-------------:|:----------------:|:--------:|
+| commentNumber    | Integer       | 댓글 번호         | O        |
+| commentContents  | String        | 댓글 내용         | O        |
+| userId           | String        | 댓글 사용자 아이디 | O        |
+| commentDate      | LocalDateTime | 댓글 작성 날짜    | O         |
+| commentLikeCount | Integer       | 댓글 추천수       | O         |
 
 **boardFileContentsList**
-| name | type | description | required |
-|------------------|:-------:|:----------------:|:--------:|
-| boardFileNumber | Integer | 파일 번호 | O |
-| boardFileContents | String | 파일 내용 | O |
+| name              | type    | description | required |
+|-------------------|:-------:|:-----------:|:--------:|
+| boardFileNumber   | Integer | 파일 번호    | O        |
+| boardFileContents | String  | 파일 내용    | O        |
 
 ###### Example
 
@@ -1738,7 +1738,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    X     |
+| Authorization | Bearer 토큰 인증 헤더  |    X     |
 
 ###### Example
 
@@ -1752,7 +1752,7 @@ curl -X GET "http://localhost:4000/api/v1/board/1"
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
@@ -1772,19 +1772,19 @@ curl -X GET "http://localhost:4000/api/v1/board/1"
 | comment           |      CommentList[]      |      댓글 리스트      |    O     |
 
 **commentList**
-| name | type | description | required |
-|------------------|:-------:|:----------------:|:--------:|
-| commentNumber | Integer | 댓글 번호 | O |
-| commentContents | String | 댓글 내용 | O |
-| userId | String | 댓글 사용자 아이디 | O |
-| commentDate | LocalDateTime | 댓글 작성 날짜 | O |
-| commentLikeCount | Integer | 댓글 추천수 | O |
+| name             | type          | description      | required |
+|------------------|:-------------:|:----------------:|:--------:|
+| commentNumber    | Integer       | 댓글 번호         | O        |
+| commentContents  | String        | 댓글 내용         | O        |
+| userId           | String        | 댓글 사용자 아이디 | O        |
+| commentDate      | LocalDateTime | 댓글 작성 날짜    | O         |
+| commentLikeCount | Integer       | 댓글 추천수       | O         |
 
 **boardFileContentsList**
-| name | type | description | required |
-|------------------|:-------:|:----------------:|:--------:|
-| boardFileNumber | Integer | 파일 번호 | O |
-| boardFileContents | String | 파일 내용 | O |
+| name              | type    | description | required |
+|-------------------|:-------:|:-----------:|:--------:|
+| boardFileNumber   | Integer | 파일 번호    | O        |
+| boardFileContents | String  | 파일 내용    | O        |
 
 ###### Example
 
@@ -1891,7 +1891,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    X     |
+| Authorization | Bearer 토큰 인증 헤더  |    X     |
 
 ###### Example
 
@@ -1905,24 +1905,24 @@ curl -X GET "http://localhost:4000/api/v1/board/1/comment-list"
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
 | name    |     type      |      description      | required |
 | ------- | :-----------: | :-------------------: | :------: |
-| code    |    String     |       결과 코드       |    O     |
-| message |    String     | 결과 코드에 대한 설명 |    O     |
-| comment | CommentList[] |      댓글 리스트      |    O     |
+| code    |    String     |       결과 코드        |    O     |
+| message |    String     | 결과 코드에 대한 설명   |    O     |
+| comment | CommentList[] |      댓글 리스트       |    O     |
 
 **commentList**
-| name | type | description | required |
-|-------------------|:-------:|:----------------:|:--------:|
-| commentNumber | Integer | 댓글 번호 | O |
-| commentContents | String | 댓글 내용 | O |
-| userId | String | 댓글 사용자 아이디 | O |
-| commentDate | LocalDateTime | 댓글 작성 날짜 | O |
-| commentLikeCount | Integer | 댓글 추천수 | O |
+| name             | type          | description      | required |
+|------------------|:-------------:|:----------------:|:--------:|
+| commentNumber    | Integer       | 댓글 번호         | O        |
+| commentContents  | String        | 댓글 내용         | O        |
+| userId           | String        | 댓글 사용자 아이디 | O        |
+| commentDate      | LocalDateTime | 댓글 작성 날짜     | O        |
+| commentLikeCount | Integer       | 댓글 추천수        | O        |
 
 ###### Example
 
@@ -2002,7 +2002,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    O     |
+| Authorization | Bearer 토큰 인증 헤더  |    O     |
 
 ###### Example
 
@@ -2017,39 +2017,39 @@ curl -X GET "http://localhost:4000/api/v1/board/user" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
 | name              |          type           |      description      | required |
 | ----------------- | :---------------------: | :-------------------: | :------: |
-| code              |         String          |       결과 코드       |    O     |
-| message           |         String          | 결과 코드에 대한 설명 |    O     |
-| boardNumber       |         Integer         |      게시물 번호      |    O     |
-| boardTitle        |         String          |      게시물 제목      |    O     |
-| userId            |         String          | 게시물 아이디(닉네임) |    O     |
-| boardUploadDate   |      LocalDateTime      | 작성 게시물 생성 날짜 |    O     |
+| code              |         String          |       결과 코드        |    O     |
+| message           |         String          | 결과 코드에 대한 설명   |    O     |
+| boardNumber       |         Integer         |      게시물 번호       |    O     |
+| boardTitle        |         String          |      게시물 제목       |    O     |
+| userId            |         String          | 게시물 아이디(닉네임)  |    O     |
+| boardUploadDate   |      LocalDateTime      | 작성 게시물 생성 날짜  |    O     |
 | boardContents     |         String          |      게시물 내용      |    O     |
 | youtubeVideoLink  |         String          |  유튜브 비디오 링크   |    X     |
 | boardFileContents | BoardFileContentsList[] |  게시물 파일 리스트   |    X     |
-| boardViewCount    |         Integer         |        조회수         |    O     |
+| boardViewCount    |         Integer         |        조회수        |    O     |
 | boardLikeCount    |         Integer         |    게시물 추천 수     |    O     |
 | comment           |      CommentList[]      |      댓글 리스트      |    O     |
 
 **commentList**
-| name | type | description | required |
-|-------------------|:-------:|:----------------:|:--------:|
-| commentNumber | Integer | 댓글 번호 | O |
-| commentContents | String | 댓글 내용 | O |
-| userId | String | 댓글 사용자 아이디 | O |
-| commentDate | LocalDateTime | 댓글 작성 날짜 | O |
-| commentLikeCount | Integer | 댓글 추천수 | O |
+| name              | type          | description      | required |
+|-------------------|:-------------:|:----------------:|:--------:|
+| commentNumber     | Integer       | 댓글 번호         | O        |
+| commentContents   | String        | 댓글 내용         | O        |
+| userId            | String        | 댓글 사용자 아이디 | O        |
+| commentDate       | LocalDateTime | 댓글 작성 날짜     | O        |
+| commentLikeCount  | Integer       | 댓글 추천수        | O        |
 
 **boardFileContentsList**
-| name | type | description | required |
-|------------------|:-------:|:----------------:|:--------:|
-| boardFileNumber | Integer | 파일 번호 | O |
-| boardFileContents | String | 파일 내용 | O |
+| name              | type    | description | required |
+|-------------------|:-------:|:-----------:|:--------:|
+| boardFileNumber   | Integer | 파일 번호    | O        |
+| boardFileContents | String  | 파일 내용    | O        |
 
 ###### Example
 
@@ -2163,7 +2163,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    X     |
+| Authorization | Bearer 토큰 인증 헤더  |    X     |
 
 ###### Example
 
@@ -2177,39 +2177,39 @@ curl -X GET "http://localhost:4000/api/v1/board/category/상체운동"
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
 | name              |          type           |      description      | required |
 | ----------------- | :---------------------: | :-------------------: | :------: |
-| code              |         String          |       결과 코드       |    O     |
-| message           |         String          | 결과 코드에 대한 설명 |    O     |
-| boardNumber       |         Integer         |      게시물 번호      |    O     |
-| boardTitle        |         String          |      게시물 제목      |    O     |
-| userId            |         String          | 게시물 아이디(닉네임) |    O     |
-| boardUploadDate   |      LocalDateTime      | 작성 게시물 생성 날짜 |    O     |
-| boardContents     |         String          |      게시물 내용      |    O     |
-| youtubeVideoLink  |         String          |  유튜브 비디오 링크   |    X     |
-| boardFileContents | boardFileContentsList[] |      게시물 자료      |    X     |
-| boardViewCount    |         Integer         |        조회수         |    O     |
-| boardLikeCount    |         Integer         |    게시물 추천 수     |    O     |
-| comment           |      CommentList[]      |      댓글 리스트      |    O     |
+| code              |         String          |       결과 코드        |    O     |
+| message           |         String          | 결과 코드에 대한 설명   |    O     |
+| boardNumber       |         Integer         |      게시물 번호       |    O     |
+| boardTitle        |         String          |      게시물 제목       |    O     |
+| userId            |         String          | 게시물 아이디(닉네임)   |    O     |
+| boardUploadDate   |      LocalDateTime      | 작성 게시물 생성 날짜   |    O     |
+| boardContents     |         String          |      게시물 내용       |    O     |
+| youtubeVideoLink  |         String          |  유튜브 비디오 링크     |    X     |
+| boardFileContents | boardFileContentsList[] |      게시물 자료       |    X     |
+| boardViewCount    |         Integer         |        조회수          |    O     |
+| boardLikeCount    |         Integer         |    게시물 추천 수       |    O     |
+| comment           |      CommentList[]      |      댓글 리스트        |    O     |
 
 **commentList**
-| name | type | description | required |
-|-------------------|:-------:|:-----------------:|:--------:|
-| commentNumber | Integer | 댓글 번호 | O |
-| commentContents | String | 댓글 내용 | O |
-| userId | String | 댓글 사용자 아이디 | O |
-| commentDate | LocalDateTime | 댓글 작성 날짜 | O |
-| commentLikeCount | Integer | 댓글 추천수 | O |
+| name             | type          | description       | required |
+|------------------|:-------------:|:-----------------:|:--------:|
+| commentNumber    | Integer       | 댓글 번호          | O        |
+| commentContents  | String        | 댓글 내용          | O        |
+| userId           | String        | 댓글 사용자 아이디  | O        |
+| commentDate      | LocalDateTime | 댓글 작성 날짜      | O        |
+| commentLikeCount | Integer       | 댓글 추천수         | O        |
 
 **boardFileContentsList**
-| name | type | description | required |
-|------------------|:-------:|:----------------:|:--------:|
-| boardFileNumber | Integer | 파일 번호 | O |
-| boardFileContents | String | 파일 내용 | O |
+| name              | type    | description | required |
+|-------------------|:-------:|:-----------:|:--------:|
+| boardFileNumber   | Integer | 파일 번호    | O        |
+| boardFileContents | String  | 파일 내용    | O        |
 
 ###### Example
 
@@ -2311,7 +2311,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    X     |
+| Authorization | Bearer 토큰 인증 헤더  |    X     |
 
 ###### Example
 
@@ -2325,7 +2325,7 @@ curl -X GET "http://localhost:4000/api/v1/board/tag/운동" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
@@ -2345,19 +2345,19 @@ curl -X GET "http://localhost:4000/api/v1/board/tag/운동" \
 | comment           |      CommentList[]      |      댓글 리스트      |    O     |
 
 **commentList**
-| name | type | description | required |
-|------------------ |:-------:|:-----------------:|:--------:|
-| commentNumber | Integer | 댓글 번호 | O |
-| commentContents | String | 댓글 내용 | O |
-| userId | String | 댓글 사용자 아이디 | O |
-| commentDate | LocalDateTime | 댓글 작성 날짜 | O |
-| commentLikeCount | Integer | 댓글 추천수 | O |
+| name              | type          | description       | required |
+|------------------ |:-------------:|:-----------------:|:--------:|
+| commentNumber     | Integer       | 댓글 번호          | O        |
+| commentContents   | String        | 댓글 내용          | O        |
+| userId            | String        | 댓글 작성자 아이디  | O        |
+| commentDate       | LocalDateTime | 댓글 작성 날짜     | O        |
+| commentLikeCount  | Integer       | 댓글 추천수        | O        |
 
 **boardFileContentsList**
-| name | type | description | required |
-|------------------|:-------:|:----------------:|:--------:|
-| boardFileNumber | Integer | 파일 번호 | O |
-| boardFileContents | String | 파일 내용 | O |
+| name              | type    | description | required |
+|-------------------|:-------:|:-----------:|:--------:|
+| boardFileNumber   | Integer | 파일 번호    | O        |
+| boardFileContents | String  | 파일 내용    | O        |
 
 ###### Example
 
@@ -2470,7 +2470,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    O     |
+| Authorization | Bearer 토큰 인증 헤더  |    O     |
 
 ###### Request Body
 
@@ -2508,14 +2508,14 @@ curl -v -X POST "http://localhost:4000/api/v1/board" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
 | name    |  type  |      description      | required |
 | ------- | :----: | :-------------------: | :------: |
-| code    | String |       결과 코드       |    O     |
-| message | String | 결과 코드에 대한 설명 |    O     |
+| code    | String |       결과 코드        |    O     |
+| message | String | 결과 코드에 대한 설명   |    O     |
 
 ###### Example
 
@@ -2599,7 +2599,7 @@ URL에 게시물 번호를 포함하고 게시물 번호, 게시물 제목, 게�
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    O     |
+| Authorization | Bearer 토큰 인증 헤더  |    O     |
 
 ###### Request Body
 
@@ -2609,8 +2609,8 @@ URL에 게시물 번호를 포함하고 게시물 번호, 게시물 제목, 게�
 | boardCategory     |   String   |  게시물 카테고리  |    O     |
 | boardTag          |   String   |    게시물 태그    |    O     |
 | boardContents     |   String   |    게시물 내용    |    O     |
-| youtubeVideoLink  |   String   | 유튜브비디오 링크 |    X     |
-| boardFileContents |   String   |    게시물 자료    |    X     |
+| youtubeVideoLink  |   String   | 유튜브비디오 링크  |    X     |
+| boardFileContents |   String   |    게시물 자료     |    X     |
 | mapLat            | BigDecimal |       위도        |    X     |
 | mapLng            | BigDecimal |       경도        |    X     |
 
@@ -2634,14 +2634,14 @@ curl -v -X PATCH "http://localhost:4000/api/v1/boardNumber/1" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ##### Response Body
 
 | name    |  type  |      description      | required |
 | ------- | :----: | :-------------------: | :------: |
-| code    | String |       결과 코드       |    O     |
-| message | String | 결과 코드에 대한 설명 |    O     |
+| code    | String |       결과 코드        |    O     |
+| message | String | 결과 코드에 대한 설명   |    O     |
 
 ###### Example
 
@@ -2724,7 +2724,7 @@ URL에 게시물 번호를 포함하고 게시물 삭제가 성공적으로 이�
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    O     |
+| Authorization | Bearer 토큰 인증 헤더  |    O     |
 
 ###### Example
 
@@ -2737,14 +2737,14 @@ curl -v -X DELETE "http://localhost:4000/api/v1/board/1" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
 | name    |  type  |      description      | required |
 | ------- | :----: | :-------------------: | :------: |
-| code    | String |       결과 코드       |    O     |
-| message | String | 결과 코드에 대한 설명 |    O     |
+| code    | String |       결과 코드        |    O     |
+| message | String | 결과 코드에 대한 설명   |    O     |
 
 ###### Example
 
@@ -2825,13 +2825,13 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    O     |
+| Authorization | Bearer 토큰 인증 헤더  |    O     |
 
 ###### Request Body
 
 | name            |  type  | description | required |
 | --------------- | :----: | :---------: | :------: |
-| commentContents | String |  댓글 내용  |    O     |
+| commentContents | String |  댓글 내용   |    O     |
 
 ###### Example
 
@@ -2847,14 +2847,14 @@ curl -v -X POST "http://localhost:4000/api/v1/board/3" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
 | name    |  type  |      description      | required |
 | ------- | :----: | :-------------------: | :------: |
-| code    | String |       결과 코드       |    O     |
-| message | String | 결과 코드에 대한 설명 |    O     |
+| code    | String |       결과 코드        |    O     |
+| message | String | 결과 코드에 대한 설명   |    O     |
 
 ###### Example
 
@@ -2933,13 +2933,13 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    O     |
+| Authorization | Bearer 토큰 인증 헤더  |    O     |
 
 ###### Request Body
 
 | name            |  type  | description | required |
 | --------------- | :----: | :---------: | :------: |
-| commentContents | String |  댓글 내용  |    O     |
+| commentContents | String |  댓글 내용   |    O     |
 
 ###### Example
 
@@ -2955,14 +2955,14 @@ curl -v -X PATCH "http://localhost:4000/api/v1/comment/1" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
 | name    |  type  |      description      | required |
 | ------- | :----: | :-------------------: | :------: |
-| code    | String |       결과 코드       |    O     |
-| message | String | 결과 코드에 대한 설명 |    O     |
+| code    | String |       결과 코드        |    O     |
+| message | String | 결과 코드에 대한 설명   |    O     |
 
 ###### Example
 
@@ -3043,7 +3043,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    O     |
+| Authorization | Bearer 토큰 인증 헤더  |    O     |
 
 ```bash
 curl -v -X DELETE "http://localhost:4000/api/v1/comment/1" \
@@ -3056,14 +3056,14 @@ curl -v -X DELETE "http://localhost:4000/api/v1/comment/1" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
 | name    |  type  |      description      | required |
 | ------- | :----: | :-------------------: | :------: |
-| code    | String |       결과 코드       |    O     |
-| message | String | 결과 코드에 대한 설명 |    O     |
+| code    | String |       결과 코드        |    O     |
+| message | String | 결과 코드에 대한 설명   |    O     |
 
 ###### Example
 
@@ -3144,7 +3144,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    O     |
+| Authorization | Bearer 토큰 인증 헤더  |    O     |
 
 ```bash
 curl -v -X PUT "http://localhost:4000/api/v1/board/1/like" \
@@ -3157,14 +3157,14 @@ curl -v -X PUT "http://localhost:4000/api/v1/board/1/like" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
 | name    |  type  |      description      | required |
 | ------- | :----: | :-------------------: | :------: |
-| code    | String |       결과 코드       |    O     |
-| message | String | 결과 코드에 대한 설명 |    O     |
+| code    | String |       결과 코드        |    O     |
+| message | String | 결과 코드에 대한 설명   |    O     |
 
 ###### Example
 
@@ -3245,7 +3245,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    O     |
+| Authorization | Bearer 토큰 인증 헤더  |    O     |
 
 ```bash
 curl -v -X PUT "http://localhost:4000/api/v1/board/1/view" \
@@ -3258,14 +3258,14 @@ curl -v -X PUT "http://localhost:4000/api/v1/board/1/view" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
 | name    |  type  |      description      | required |
 | ------- | :----: | :-------------------: | :------: |
-| code    | String |       결과 코드       |    O     |
-| message | String | 결과 코드에 대한 설명 |    O     |
+| code    | String |       결과 코드        |    O     |
+| message | String | 결과 코드에 대한 설명   |    O     |
 
 ###### Example
 
@@ -3346,7 +3346,7 @@ Content-Type: application/json;charset=UTF-8
 
 | name          |      description      | required |
 | ------------- | :-------------------: | :------: |
-| Authorization | Bearer 토큰 인증 헤더 |    O     |
+| Authorization | Bearer 토큰 인증 헤더  |    O     |
 
 ```bash
 curl -v -X PUT "http://localhost:4000/api/v1/board/1/like" \
@@ -3359,14 +3359,14 @@ curl -v -X PUT "http://localhost:4000/api/v1/board/1/like" \
 
 | name         |                       description                        | required |
 | ------------ | :------------------------------------------------------: | :------: |
-| Content-Type | 반환되는 Response Body의 Content type (application/json) |    O     |
+| Content-Type | 반환되는 Response Body의 Content type (application/json)  |    O     |
 
 ###### Response Body
 
 | name    |  type  |      description      | required |
 | ------- | :----: | :-------------------: | :------: |
-| code    | String |       결과 코드       |    O     |
-| message | String | 결과 코드에 대한 설명 |    O     |
+| code    | String |       결과 코드        |    O     |
+| message | String | 결과 코드에 대한 설명   |    O     |
 
 ###### Example
 
