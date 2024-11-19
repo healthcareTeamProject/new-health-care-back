@@ -1,8 +1,12 @@
 package com.example.healthcare_back.dto.request.board;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import com.example.healthcare_back.entity.board.StringListConverter;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,5 +26,6 @@ public class PatchBoardRequestDto {
     private BigDecimal mapLat;
     @Column(precision = 9, scale = 6)
     private BigDecimal mapLng;
-    private String boardFileContents;
+    @Convert(converter = StringListConverter.class)
+    private List<String> boardFileContents;
 }

@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.healthcare_back.entity.board.BoardFileContentsEntity;
+import com.example.healthcare_back.entity.board.StringListConverter;
 
+import jakarta.persistence.Convert;
 import lombok.Getter;
 
 @Getter
 public class BoardFileContentsList {
     private final Integer boardFileNumber;
-    private final String boardFileContents;
+    @Convert(converter = StringListConverter.class)
+    private final List<String> boardFileContents;
 
     public BoardFileContentsList(BoardFileContentsEntity boardFileContentsEntity) {
         this.boardFileNumber = boardFileContentsEntity.getBoardFileNumber();

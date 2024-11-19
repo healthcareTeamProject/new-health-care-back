@@ -1,8 +1,11 @@
 package com.example.healthcare_back.entity.board;
 
+import java.util.List;
+
 import com.example.healthcare_back.dto.request.board.PatchBoardRequestDto;
 import com.example.healthcare_back.dto.request.board.PostBoardRequestDto;
 
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +26,8 @@ public class BoardFileContentsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer boardFileNumber;
     private Integer boardNumber;
-    private String boardFileContents;
+    @Convert(converter = StringListConverter.class)
+    private List<String> boardFileContents;
 
     public BoardFileContentsEntity(PostBoardRequestDto dto, Integer boardNumber) {
         this.boardNumber = boardNumber;
@@ -38,6 +42,6 @@ public class BoardFileContentsEntity {
     // 일반 생성자 생성
     public BoardFileContentsEntity(Integer boardNumber, String boardFileContents) {
         this.boardNumber = boardNumber;
-        this.boardFileContents = boardFileContents;
+        this.boardFileContents = List.of(boardFileContents);
     }
 }
