@@ -1618,7 +1618,7 @@ curl -X GET "http://localhost:4000/api/v1/board"
 | boardUploadDate   |        LocalDateTime        | 게시물 작성날짜      |    O     |
 | boardContents     |           String            | 게시물 내용          |    O     |
 | youtubeVideoLink  |           String            | 유튜브 비디오 링크   |     X     |
-| boardFileContents |     boardFileContentsList[] | 게시물 파일 리스트   |     X     |
+| boardFileContents |     boardFileContents[]     | 게시물 파일 리스트   |     X     |
 | boardViewCount    |           Integer           | 게시물 조회수        |     O     |
 | boardLikeCount    |           Integer           | 게시물 추천 수       |     O     |
 | comment           |        CommentList[]        | 댓글 리스트          |     O     |
@@ -1632,7 +1632,7 @@ curl -X GET "http://localhost:4000/api/v1/board"
 | commentDate      | LocalDateTime | 댓글 작성 날짜    | O         |
 | commentLikeCount | Integer       | 댓글 추천수       | O         |
 
-**boardFileContentsList**
+**boardFileContents**
 | name              | type    | description | required |
 |-------------------|:-------:|:-----------:|:--------:|
 | boardFileNumber   | Integer | 파일 번호    | O        |
@@ -1662,7 +1662,9 @@ Content-Type: application/json;charset=UTF-8
       "boardFileContents": [
         {
           "boardFileNumber": 1,
-          "boardFileContents": "abc.jpg"
+          "boardFileContents": [
+                "abc.jpg"
+          ]
         },
         ...
       ]
@@ -1766,7 +1768,7 @@ curl -X GET "http://localhost:4000/api/v1/board/1"
 | boardUploadDate   |      LocalDateTime      | 작성 게시물 생성 날짜 |    O     |
 | boardContents     |         String          |      게시물 내용      |    O     |
 | youtubeVideoLink  |         String          |  유튜브 비디오 링크   |    X     |
-| boardFileContents | BoardFileContentsList[] |  게시물 파일 리스트   |    X     |
+| boardFileContents |     BoardFileContents[] |  게시물 파일 리스트   |    X     |
 | boardViewCount    |         Integer         |        조회수         |    O     |
 | boardLikeCount    |         Integer         |    게시물 추천 수     |    O     |
 | comment           |      CommentList[]      |      댓글 리스트      |    O     |
@@ -1780,7 +1782,7 @@ curl -X GET "http://localhost:4000/api/v1/board/1"
 | commentDate      | LocalDateTime | 댓글 작성 날짜    | O         |
 | commentLikeCount | Integer       | 댓글 추천수       | O         |
 
-**boardFileContentsList**
+**boardFileContents**
 | name              | type    | description | required |
 |-------------------|:-------:|:-----------:|:--------:|
 | boardFileNumber   | Integer | 파일 번호    | O        |
@@ -1806,7 +1808,9 @@ Content-Type: application/json;charset=UTF-8
   "boardFileContents": [
     {
       "boardFileNumber": 1,
-      "boardFileContents": "abc.jpg"
+      "boardFileContents": [
+          "abc.jpg"
+      ]
     },
     ...
   ]
@@ -2031,7 +2035,7 @@ curl -X GET "http://localhost:4000/api/v1/board/user" \
 | boardUploadDate   |      LocalDateTime      | 작성 게시물 생성 날짜  |    O     |
 | boardContents     |         String          |      게시물 내용      |    O     |
 | youtubeVideoLink  |         String          |  유튜브 비디오 링크   |    X     |
-| boardFileContents | BoardFileContentsList[] |  게시물 파일 리스트   |    X     |
+| boardFileContents |    BoardFileContents[]  |  게시물 파일 리스트   |    X     |
 | boardViewCount    |         Integer         |        조회수        |    O     |
 | boardLikeCount    |         Integer         |    게시물 추천 수     |    O     |
 | comment           |      CommentList[]      |      댓글 리스트      |    O     |
@@ -2045,7 +2049,7 @@ curl -X GET "http://localhost:4000/api/v1/board/user" \
 | commentDate       | LocalDateTime | 댓글 작성 날짜     | O        |
 | commentLikeCount  | Integer       | 댓글 추천수        | O        |
 
-**boardFileContentsList**
+**boardFileContents**
 | name              | type    | description | required |
 |-------------------|:-------:|:-----------:|:--------:|
 | boardFileNumber   | Integer | 파일 번호    | O        |
@@ -2075,7 +2079,9 @@ Content-Type: application/json;charset=UTF-8
       "boardFileContents": [
           {
             "boardFileNumber": 1,
-            "boardFileContents": "abc.jpg"
+            "boardFileContents": [
+                "abc.jpg"
+            ]
           },
           ...
       ]
@@ -2191,7 +2197,7 @@ curl -X GET "http://localhost:4000/api/v1/board/category/상체운동"
 | boardUploadDate   |      LocalDateTime      | 작성 게시물 생성 날짜   |    O     |
 | boardContents     |         String          |      게시물 내용       |    O     |
 | youtubeVideoLink  |         String          |  유튜브 비디오 링크     |    X     |
-| boardFileContents | boardFileContentsList[] |      게시물 자료       |    X     |
+| boardFileContents |  boardFileContents[]    |      게시물 자료       |    X     |
 | boardViewCount    |         Integer         |        조회수          |    O     |
 | boardLikeCount    |         Integer         |    게시물 추천 수       |    O     |
 | comment           |      CommentList[]      |      댓글 리스트        |    O     |
@@ -2205,7 +2211,7 @@ curl -X GET "http://localhost:4000/api/v1/board/category/상체운동"
 | commentDate      | LocalDateTime | 댓글 작성 날짜      | O        |
 | commentLikeCount | Integer       | 댓글 추천수         | O        |
 
-**boardFileContentsList**
+**boardFileContents**
 | name              | type    | description | required |
 |-------------------|:-------:|:-----------:|:--------:|
 | boardFileNumber   | Integer | 파일 번호    | O        |
@@ -2229,13 +2235,15 @@ Content-Type: application/json;charset=UTF-8
             "boardNumber": 8,
             "boardTitle": "오늘은 다이어트 20일차",
             "userId": "qwer1234",
-            "boardUploadDate": "2024-11-13T14:17:13",
+            "boardUploadDate": "2024-11-13 14:17",
             "boardContents": "오늘은 상체운동을 했다.",
             "youtubeVideoLink": "null",
             "boardFileContents": [
               {
                 "boardFileNumber": 1,
-                "boardFileContents": "abc.jpg"
+                "boardFileContents": [
+                    "abc.jpg"
+                ]
               },
               ...
             ]
@@ -2339,7 +2347,7 @@ curl -X GET "http://localhost:4000/api/v1/board/tag/운동" \
 | boardUploadDate   |      LocalDateTime      | 작성 게시물 생성 날짜 |    O     |
 | boardContents     |         String          |      게시물 내용      |    O     |
 | youtubeVideoLink  |         String          |  유튜브 비디오 링크   |    X     |
-| boardFileContents | boardFileContentsList[] |  게시물 파일 리스트   |    X     |
+| boardFileContents |    boardFileContents[]  |  게시물 파일 리스트   |    X     |
 | boardViewCount    |         Integer         |        조회수         |    O     |
 | boardLikeCount    |         Integer         |    게시물 추천 수     |    O     |
 | comment           |      CommentList[]      |      댓글 리스트      |    O     |
@@ -2353,7 +2361,7 @@ curl -X GET "http://localhost:4000/api/v1/board/tag/운동" \
 | commentDate       | LocalDateTime | 댓글 작성 날짜     | O        |
 | commentLikeCount  | Integer       | 댓글 추천수        | O        |
 
-**boardFileContentsList**
+**boardFileContents**
 | name              | type    | description | required |
 |-------------------|:-------:|:-----------:|:--------:|
 | boardFileNumber   | Integer | 파일 번호    | O        |
@@ -2383,7 +2391,9 @@ Content-Type: application/json;charset=UTF-8
           "boardFileContents": [
             {
               "boardFileNumber": 1,
-              "boardFileContents": "abc.jpg"
+              "boardFileContents": [
+                  "abc.jpg"
+              ]
             },
             ...
           ]
@@ -2497,7 +2507,7 @@ curl -v -X POST "http://localhost:4000/api/v1/board" \
 -d "boardTag": "운동", \
 -d "boardContents": "오늘은 상체운동을 했다." \
 -d "youtubeVideoLink": "null", \
--d "boardFileContents" "null", \
+-d "boardFileContents": "null", \
 -d "mapLat": "37.5691", \
 -d "mapLng": "126.9786"
 ```
@@ -2587,7 +2597,7 @@ Content-Type: application/json;charset=UTF-8
 
 클라이언트는 요청 헤더에 Bearer 인증 토큰을 포함하고
 URL에 게시물 번호를 포함하고 게시물 번호, 게시물 제목, 게시물 닉네임, 작성 게시물 생성 날짜, 게시물 내용, 유튜브 비디오 링크,
-게시물 파일 번호, 지도 경도, 위도를 입력하여 요청하고 게시물 수정이 성공적으로 이루어지면 성공에 대한 응답을 받습니다.
+게시물 파일 번호, 지도 경도, 위도를 입력하여 요청하고 게시물 수정이 성공적으로 이루어지면 성공에 대한 응답을 받습니다. 헬스장 지도는 헬스장 카테고리를 선택했을 때만 나타납니다.
 네트워크 에러, 서버 에러, 인증 실패, 데이터베이스 에러가 발생할 수 있습니다.
 
 - method : **PATCH**

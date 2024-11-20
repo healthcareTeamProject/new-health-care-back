@@ -299,12 +299,14 @@ public class BoardServiceImplement implements BoardService {
             for (String boardFileContents : boardFileContentsList) {
                 BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(boardNumber, boardFileContents);
                 boardFileContentsRepository.save(boardFileContentsEntity);
+                }
             }
-        }
 
-            // 게시물 지도 위치정보 저장
-            BoardHealthMapEntity boardHealthMapEntity = new BoardHealthMapEntity(dto, boardNumber);
-            boardHealthMapRepository.save(boardHealthMapEntity);
+            // 카테고리가 "헬스장"일 때만 지도 위치정보 저장
+            if ("헬스장".equals(dto.getBoardCategory())) {
+                BoardHealthMapEntity boardHealthMapEntity = new BoardHealthMapEntity(dto, boardNumber);
+                boardHealthMapRepository.save(boardHealthMapEntity);
+            }
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -347,6 +349,12 @@ public class BoardServiceImplement implements BoardService {
                     BoardFileContentsEntity boardFileContentsEntity = new BoardFileContentsEntity(boardNumber, boardFileContents);
                     boardFileContentsRepository.save(boardFileContentsEntity);
                 }
+            }
+
+            // 헬스장 카테고리일 때만 지도 위치정보 저장
+            if ("헬스장".equals(dto.getBoardCategory())) {
+                BoardHealthMapEntity boardHealthMapEntity = new BoardHealthMapEntity(dto, boardNumber);
+                boardHealthMapRepository.save(boardHealthMapEntity);
             }
 
         } catch (Exception exception) {
