@@ -351,6 +351,9 @@ public class BoardServiceImplement implements BoardService {
                 }
             }
 
+            // 기존 지도 내용 삭제
+            boardHealthMapRepository.deleteByBoardNumber(boardNumber);
+
             // 헬스장 카테고리일 때만 지도 위치정보 저장
             if ("헬스장".equals(dto.getBoardCategory())) {
                 BoardHealthMapEntity boardHealthMapEntity = new BoardHealthMapEntity(dto, boardNumber);
